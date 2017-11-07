@@ -1,0 +1,12 @@
+{ "columns":2,
+ "image":"MAP\/Zelda\/img\/DungeonDoorVer.png",
+ "imageheight":96,
+ "imagewidth":40,
+ "margin":0,
+ "name":"DungeonDoorVer",
+ "spacing":0,
+ "tilecount":6,
+ "tileheight":32,
+ "tilewidth":20,
+ "type":"tileset"
+}

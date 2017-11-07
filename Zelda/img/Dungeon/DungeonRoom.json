@@ -1,0 +1,12 @@
+{ "columns":1,
+ "image":"MAP\/Zelda\/img\/TileSetDungeon1.png",
+ "imageheight":192,
+ "imagewidth":291,
+ "margin":0,
+ "name":"TileSetDungeon1",
+ "spacing":0,
+ "tilecount":1,
+ "tileheight":192,
+ "tilewidth":291,
+ "type":"tileset"
+}

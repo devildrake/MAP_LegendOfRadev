@@ -1,0 +1,12 @@
+{ "columns":6,
+ "image":"DungeonGround.png",
+ "imageheight":48,
+ "imagewidth":96,
+ "margin":0,
+ "name":"DungeonGround",
+ "spacing":0,
+ "tilecount":18,
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset"
+}
