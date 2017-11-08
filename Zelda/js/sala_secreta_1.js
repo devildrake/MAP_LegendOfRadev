@@ -1,6 +1,11 @@
 var zelda = zelda || {};
 //16X11 tiles
 zelda.sala_secreta_1 = {
+	init:function(){
+		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+		this.scale.setGameSize(512/2,480/2);
+	},
+	
     preload:function(){
         //this.game.stage.backgroundColor = "#ff0000";
         this.game.stage.backgroundColor = "#black";
@@ -13,9 +18,11 @@ zelda.sala_secreta_1 = {
     },
     
     create:function(){
+		this.allElements[];
         this.map = this.game.add.tilemap("sala1");
         this.map.addTilesetImage("secret_tile");
         this.map.createLayer("Rocas");
+		this.allElements.push(this.map);
         
         //fuego y animacion de este
         this.fire = [];
