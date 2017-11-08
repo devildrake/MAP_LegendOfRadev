@@ -10,7 +10,7 @@ zelda.sala_secreta_1 = {
         //this.game.stage.backgroundColor = "#ff0000";
         this.game.stage.backgroundColor = "#black";
         this.load.tilemap("sala1", "json/Sala_Secreta.json", null, Phaser.Tilemap.TILED_JSON);
-        this.load.image("secret_tile", "img/secret_tile.png");
+        this.load.image("secret_tile", "img/tilesets/secret_tile.png");
         this.load.spritesheet("fuego", "img/fuego.png",17,15);
         this.load.spritesheet("npc", "img/oldman.png",16,16);
         this.load.image("pocion","img/pocion_vida.png");
