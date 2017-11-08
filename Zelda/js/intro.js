@@ -64,6 +64,8 @@ zelda.intro = {
             this.fader.alpha+=0.05;
             else
             change = true;
+            this.background.kill();
+            this.cascada.kill();
         }
         //Ha de estarse 4 segundos quieto arriba
         if(change){
