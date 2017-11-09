@@ -8,6 +8,12 @@ var LinkObject = {
     lookingDown: false,
     lookingLeft: false,
     
+    //Un booleano para gestionar si ha recibido daño
+    hurt: false,
+    
+    //Un booleano para gestionar si se ha llamado al método que pone hurt en false
+    calledNotHurt:false,
+    
     //Un booleano para gestionar si esta atacando
     attacking: false,
     
@@ -53,6 +59,9 @@ zelda.overworld = {
 		this.Link.animations.add("movingDown", [0,1], 5, true);
         this.Link.animations.add("movingUp", [2], 5, true);
         this.Link.animations.add("movingSideWays", [3,4],5,true);
+		this.Link.animations.add("movingDownHurt", [14,15], 5, true);
+        this.Link.animations.add("movingUpHurt", [16], 5, true);
+        this.Link.animations.add("movingSideWaysHurt", [17,18],5,true);        
         
         this.game.physics.arcade.enable(this.Link);
             
@@ -61,23 +70,39 @@ zelda.overworld = {
     update:function(){
         
         //Se reinicia la velocidad a 0 a cada frame           
-        this.Link.body.velocity.setTo(0);
+        this.Link.body.velocity.setTo(0);        
         
         //La barra espaciadora pone attacking en true
         if(this.space.isDown){
             LinkObject.attacking = true;
+            LinkObject.hurt = true;
+        }
+        
+        if(LinkObject.hurt&&!LinkObject.calledNotHurt){
+            this.game.time.events.add(Phaser.Timer.SECOND * 0.5,this.NotHurt , this);
+            LinkObject.calledNotHurt = true;
         }
         
         //Comportamiento si attacking es false, es el movimiento con las flechas 
         if(!LinkObject.attacking){
             if(this.cursors.left.isDown){
                 this.Link.body.velocity.x = -gameOptions.linkSpeed;
-                this.Link.animations.play("movingSideWays");
+                
+                if(LinkObject.hurt)
+                    this.Link.animations.play("movingSideWaysHurt");
+                else
+                    this.Link.animations.play("movingSideWays");
+                
                 this.Link.scale.x = -1;
                 LinkObject.ResetLooking();
                 LinkObject.lookingLeft = true;
             }else if(this.cursors.right.isDown){
-                this.Link.animations.play("movingSideWays");
+                
+                if(LinkObject.hurt)
+                    this.Link.animations.play("movingSideWaysHurt");
+                else
+                    this.Link.animations.play("movingSideWays");
+                
                 this.Link.scale.setTo(1);
                 this.Link.body.velocity.x = gameOptions.linkSpeed;
                 LinkObject.ResetLooking();
@@ -88,14 +113,24 @@ zelda.overworld = {
                     this.game.time.events.add(Phaser.Timer.SECOND * 0.15,this.switchLinkScale , this);
                 }
                 this.Link.body.velocity.y = -gameOptions.linkSpeed;
-                this.Link.animations.play('movingUp');
+                
+                if(LinkObject.hurt)
+                    this.Link.animations.play("movingUpHurt");
+                else
+                    this.Link.animations.play('movingUp');
+                
                 LinkObject.ResetLooking();
                 LinkObject.lookingUp = true;
 
             }else if(this.cursors.down.isDown){
                 this.Link.scale.setTo(1);
                 this.Link.body.velocity.y = gameOptions.linkSpeed;
-                this.Link.animations.play('movingDown');
+                
+                if(LinkObject.hurt)
+                    this.Link.animations.play("movingDownHurt");
+                else
+                    this.Link.animations.play('movingDown');
+                
                 LinkObject.ResetLooking();
                 LinkObject.lookingDown = true;
             }
@@ -103,11 +138,21 @@ zelda.overworld = {
                 if(LinkObject.lookingUp){
                     this.Link.animations.stop();
                 }else if(LinkObject.lookingLeft){
-                    this.Link.animations.stop();
+                    this.Link.scale.x = -1;
+                    if(LinkObject.hurt)
+                        this.Link.frame = 14;
+                    else 
+                        this.Link.frame = 4;
                 }else if(LinkObject.lookingDown){
-                    this.Link.animations.stop();
+                    if(LinkObject.hurt)
+                        this.Link.frame = 14;
+                    else    
+                        this.Link.frame = 0;
                 }else{
-                    this.Link.animations.stop();
+                    if(LinkObject.hurt)
+                        this.Link.frame = 18;
+                    else 
+                        this.Link.frame = 4;
                 }
             }
         }
@@ -115,15 +160,31 @@ zelda.overworld = {
         else if(!LinkObject.calledNotAttack){
             if(LinkObject.lookingDown){
                 this.Link.scale.setTo(1);
-                this.Link.frame = 9;
+                
+                if(LinkObject.hurt)
+                    this.Link.frame = 23;
+                else    
+                    this.Link.frame = 9;
+                
             }else if(LinkObject.lookingUp){
                 this.Link.scale.setTo(1);
-                this.Link.frame = 10;
+                
+                if(LinkObject.hurt)
+                    this.Link.frame = 24;
+                else
+                    this.Link.frame = 10;
+                
             }else if(LinkObject.lookingLeft){
                 this.Link.scale.x = -1;
-                this.Link.frame = 11;
+                if(LinkObject.hurt)
+                    this.Link.frame = 25;
+                else
+                    this.Link.frame = 11;
             }else{this.Link.scale.setTo(1);
-                this.Link.frame = 11;
+                if(LinkObject.hurt)
+                    this.Link.frame = 25;
+                else
+                    this.Link.frame = 11;
             }
             
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5,this.makeLinkNotAttack , this);
@@ -135,14 +196,26 @@ zelda.overworld = {
         //Comportamiento si ya se ha hecho el invoke al método que pone attacking en false pero aun no se ha llamado a dicho método
         else{
             if(LinkObject.lookingDown){
-                this.Link.frame = 9;
+                if(LinkObject.hurt)
+                    this.Link.frame = 23;
+                else
+                    this.Link.frame = 9;
             }else if(LinkObject.lookingUp){
                 this.Link.scale.setTo(1);
-                this.Link.frame = 10;
+                if(LinkObject.hurt)
+                    this.Link.frame = 24;
+                else
+                    this.Link.frame = 10;
             }else if(LinkObject.lookingLeft){
-                this.Link.frame = 11;
+                if(LinkObject.hurt)
+                    this.Link.frame = 25;
+                else
+                    this.Link.frame = 11;
             }else{
-                this.Link.frame = 11;
+                if(LinkObject.hurt)
+                    this.Link.frame = 25;
+                else
+                    this.Link.frame = 11;
             }
         }
     },
@@ -174,5 +247,10 @@ zelda.overworld = {
             this.Link.scale.setTo(1);
             this.Link.frame = 4;
         }
+    },
+    
+    NotHurt:function(){
+    LinkObject.calledNotHurt = false;
+    LinkObject.hurt = false;
     }
 }
