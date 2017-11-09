@@ -77,7 +77,7 @@ zelda.intro = {
                 this.game.time.events.add(Phaser.Timer.SECOND * 4, this.moveAgain, this);
             }
             
-            if(this.allTreasures.position.y<-600*2){
+            if(this.allTreasures.position.y<-596*2){
                 mustScroll = false;
                 this.game.time.events.add(Phaser.Timer.SECOND * 2, this.changeScene, this);
 
@@ -91,6 +91,7 @@ zelda.intro = {
     },
     
     changeScene:function(){
+        this.introMusic.stop();
         zelda.game.state.start("overworld");    
     }
 
