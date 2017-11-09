@@ -18,7 +18,7 @@ zelda.sala_secreta_1 = {
     },
     
     create:function(){
-		this.allElements[];
+		this.allElements=[];
         this.map = this.game.add.tilemap("sala1");
         this.map.addTilesetImage("secret_tile");
         this.map.createLayer("Rocas");

@@ -62,24 +62,25 @@ zelda.intro = {
             this.fader.alpha+=0.05;
             else
             change = true;
-            this.background.kill();
-            this.cascada.kill();
         }
         //Ha de estarse 4 segundos quieto arriba
         if(change){
             if(mustScroll){
+                this.background.kill();
+                this.cascada.kill();
             	this.storyText.position.y-=2.5;
                 this.allTreasures.position.y-=2.5;
             }
             
             if(this.storyText.position.y==0){
 				mustScroll = false;
-                this.game.time.events.add(Phaser.Timer.SECOND * 1, this.moveAgain, this);
+                this.game.time.events.add(Phaser.Timer.SECOND * 4, this.moveAgain, this);
             }
             
             if(this.allTreasures.position.y<-600*2){
                 mustScroll = false;
-                
+                this.game.time.events.add(Phaser.Timer.SECOND * 2, this.changeScene, this);
+
                 //CAMBIO DE ESCENA A ESCENA DE SELECCON DE PARTIDA
             } 
         }
@@ -87,5 +88,10 @@ zelda.intro = {
 	
 	moveAgain:function(){
         mustScroll = true;
+    },
+    
+    changeScene:function(){
+        zelda.game.state.start("overworld");    
     }
+
 };
