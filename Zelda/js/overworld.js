@@ -1,36 +1,5 @@
 var zelda = zelda || {}
 
-//Objeto que existe para manejar los booleanos de comportamiento de las animaciones de link, pretendia hacer que las animaciones tambien formaran parte de este objeto y así poder usarlo siempre que quisieramos
-//Pero al parecer no es posible tener un sprite dentro de un objeto o por lo menosno lo se hacer
-var LinkObject = {
-    //Tiene 3 bools para saber a donde esta y estaba mirando para el tema orientación
-    lookingUp: false,
-    lookingDown: false,
-    lookingLeft: false,
-    
-    //Un booleano para gestionar si ha recibido daño
-    hurt: false,
-    
-    //Un booleano para gestionar si se ha llamado al método que pone hurt en false
-    calledNotHurt:false,
-    
-    //Un booleano para gestionar si esta atacando
-    attacking: false,
-    
-    //Este booleano evita que se hagan multiples llamadas al método que niega attacking
-    calledNotAttack:false,
-    
-    //Este booleano sirve para animar el andar hacia arriba de Link, SE PUEDE SUSTITUIR POR UN SPRITESHEET QUE TENGA AMBOS FRAMES HACIA ARRIBA
-    switched:false,
-    
-    //Método para Reiniciar los booleanos de looking
-    ResetLooking:function(){
-        this.lookingUp = false;
-        this.lookingDown = false;
-        this.lookingLeft = false;
-    },
-}
-
 zelda.overworld = {
     preload:function(){
         this.load.tilemap("map", "json/MapaZeldaOverWorld16x11.json", null, Phaser.Tilemap.TILED_JSON);
@@ -74,82 +43,82 @@ zelda.overworld = {
         
         //La barra espaciadora pone attacking en true
         if(this.space.isDown){
-            LinkObject.attacking = true;
-            LinkObject.hurt = true;
+            zelda.LinkObject.attacking = true;
+            zelda.LinkObject.hurt = true;
         }
         
-        if(LinkObject.hurt&&!LinkObject.calledNotHurt){
+        if(zelda.LinkObject.hurt&&!zelda.LinkObject.calledNotHurt){
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5,this.NotHurt , this);
-            LinkObject.calledNotHurt = true;
+            zelda.LinkObject.calledNotHurt = true;
         }
         
         //Comportamiento si attacking es false, es el movimiento con las flechas 
-        if(!LinkObject.attacking){
+        if(!zelda.LinkObject.attacking){
             if(this.cursors.left.isDown){
-                this.Link.body.velocity.x = -gameOptions.linkSpeed;
+                this.Link.body.velocity.x = -zelda.gameOptions.linkSpeed;
                 
-                if(LinkObject.hurt)
+                if(zelda.LinkObject.hurt)
                     this.Link.animations.play("movingSideWaysHurt");
                 else
                     this.Link.animations.play("movingSideWays");
                 
                 this.Link.scale.x = -1;
-                LinkObject.ResetLooking();
-                LinkObject.lookingLeft = true;
+                zelda.LinkObject.ResetLooking();
+                zelda.LinkObject.lookingLeft = true;
             }else if(this.cursors.right.isDown){
                 
-                if(LinkObject.hurt)
+                if(zelda.LinkObject.hurt)
                     this.Link.animations.play("movingSideWaysHurt");
                 else
                     this.Link.animations.play("movingSideWays");
                 
                 this.Link.scale.setTo(1);
-                this.Link.body.velocity.x = gameOptions.linkSpeed;
-                LinkObject.ResetLooking();
+                this.Link.body.velocity.x = zelda.gameOptions.linkSpeed;
+                zelda.LinkObject.ResetLooking();
 
             }else if(this.cursors.up.isDown){
-                if(!LinkObject.switched){
-                    LinkObject.switched = true;
+                if(!zelda.LinkObject.switched){
+                    zelda.LinkObject.switched = true;
                     this.game.time.events.add(Phaser.Timer.SECOND * 0.15,this.switchLinkScale , this);
                 }
-                this.Link.body.velocity.y = -gameOptions.linkSpeed;
+                this.Link.body.velocity.y = -zelda.zelda.gameOptions.linkSpeed;
                 
-                if(LinkObject.hurt)
+                if(zelda.LinkObject.hurt)
                     this.Link.animations.play("movingUpHurt");
                 else
                     this.Link.animations.play('movingUp');
                 
-                LinkObject.ResetLooking();
-                LinkObject.lookingUp = true;
+                zelda.LinkObject.ResetLooking();
+                zelda.LinkObject.lookingUp = true;
 
             }else if(this.cursors.down.isDown){
                 this.Link.scale.setTo(1);
-                this.Link.body.velocity.y = gameOptions.linkSpeed;
+                this.Link.body.velocity.y = zelda.gameOptions.linkSpeed;
                 
-                if(LinkObject.hurt)
+                if(zelda.LinkObject.hurt)
                     this.Link.animations.play("movingDownHurt");
                 else
                     this.Link.animations.play('movingDown');
                 
-                LinkObject.ResetLooking();
-                LinkObject.lookingDown = true;
+                zelda.LinkObject.ResetLooking();
+                zelda.LinkObject.lookingDown = true;
             }
             else {
-                if(LinkObject.lookingUp){
+                if(zelda.LinkObject.lookingUp){
                     this.Link.animations.stop();
-                }else if(LinkObject.lookingLeft){
+                }else if(zelda.LinkObject.lookingLeft){
                     this.Link.scale.x = -1;
-                    if(LinkObject.hurt)
+                    if(zelda.LinkObject.hurt)
                         this.Link.frame = 14;
                     else 
                         this.Link.frame = 4;
-                }else if(LinkObject.lookingDown){
-                    if(LinkObject.hurt)
+                }else if(zelda.LinkObject.lookingDown){
+                    if(zelda.LinkObject.hurt)
                         this.Link.frame = 14;
                     else    
                         this.Link.frame = 0;
                 }else{
-                    if(LinkObject.hurt)
+                    if(zelda.LinkObject.hurt)
                         this.Link.frame = 18;
                     else 
                         this.Link.frame = 4;
@@ -157,62 +126,61 @@ zelda.overworld = {
             }
         }
         //Comportamiento si aun no se ha hecho invoke al método que pone attacking en false
-        else if(!LinkObject.calledNotAttack){
-            if(LinkObject.lookingDown){
+        else if(!zelda.LinkObject.calledNotAttack){
+            if(zelda.LinkObject.lookingDown){
                 this.Link.scale.setTo(1);
                 
-                if(LinkObject.hurt)
+                if(zelda.LinkObject.hurt)
                     this.Link.frame = 23;
                 else    
                     this.Link.frame = 9;
                 
-            }else if(LinkObject.lookingUp){
+            }else if(zelda.LinkObject.lookingUp){
                 this.Link.scale.setTo(1);
                 
-                if(LinkObject.hurt)
+                if(zelda.LinkObject.hurt)
                     this.Link.frame = 24;
                 else
                     this.Link.frame = 10;
                 
-            }else if(LinkObject.lookingLeft){
+            }else if(zelda.LinkObject.lookingLeft){
                 this.Link.scale.x = -1;
-                if(LinkObject.hurt)
+                if(zelda.LinkObject.hurt)
                     this.Link.frame = 25;
                 else
                     this.Link.frame = 11;
             }else{this.Link.scale.setTo(1);
-                if(LinkObject.hurt)
+                if(zelda.LinkObject.hurt)
                     this.Link.frame = 25;
                 else
                     this.Link.frame = 11;
             }
             
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5,this.makeLinkNotAttack , this);
-            LinkObject.calledNotAttack = true;
-            console.log(LinkObject.attacking);
+            zelda.LinkObject.calledNotAttack = true;
             
             
         }
         //Comportamiento si ya se ha hecho el invoke al método que pone attacking en false pero aun no se ha llamado a dicho método
         else{
-            if(LinkObject.lookingDown){
-                if(LinkObject.hurt)
+            if(zelda.LinkObject.lookingDown){
+                if(zelda.LinkObject.hurt)
                     this.Link.frame = 23;
                 else
                     this.Link.frame = 9;
-            }else if(LinkObject.lookingUp){
+            }else if(zelda.LinkObject.lookingUp){
                 this.Link.scale.setTo(1);
-                if(LinkObject.hurt)
+                if(zelda.LinkObject.hurt)
                     this.Link.frame = 24;
                 else
                     this.Link.frame = 10;
-            }else if(LinkObject.lookingLeft){
-                if(LinkObject.hurt)
+            }else if(zelda.LinkObject.lookingLeft){
+                if(zelda.LinkObject.hurt)
                     this.Link.frame = 25;
                 else
                     this.Link.frame = 11;
             }else{
-                if(LinkObject.hurt)
+                if(zelda.LinkObject.hurt)
                     this.Link.frame = 25;
                 else
                     this.Link.frame = 11;
@@ -227,20 +195,22 @@ zelda.overworld = {
         else{
             this.Link.scale.x = -1;
         }        
-        LinkObject.switched = false;
+        zelda.LinkObject.switched = false;
     },
     
     //Método para hacer que attacking sea false, a este se le hace invoke y sirve tambien para poner los frames de movimiento después de que pare de atacar utilizando loos booleanos looking
     makeLinkNotAttack:function(){
-    LinkObject.attacking = false;
-    LinkObject.calledNotAttack = false;
-        if(LinkObject.lookingDown){
+        
+        zelda.LinkObject.attacking = false;
+        zelda.LinkObject.calledNotAttack = false;
+        
+        if(zelda.LinkObject.lookingDown){
             this.Link.scale.setTo(1);
             this.Link.frame = 0;
-        }else  if(LinkObject.lookingUp){
+        }else  if(zelda.LinkObject.lookingUp){
             this.Link.scale.setTo(1);
             this.Link.frame = 2;
-        }else if(LinkObject.lookingLeft){
+        }else if(zelda.LinkObject.lookingLeft){
             this.Link.scale.x=-1;
             this.Link.frame = 4;
         }else{
@@ -250,7 +220,9 @@ zelda.overworld = {
     },
     
     NotHurt:function(){
-    LinkObject.calledNotHurt = false;
-    LinkObject.hurt = false;
+        
+        zelda.LinkObject.calledNotHurt = false;
+        zelda.LinkObject.hurt = false;
+        
     }
 }
