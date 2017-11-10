@@ -73,4 +73,4 @@ zelda.game.state.add("secret_room_G", zelda.sala_secreta_G);
 zelda.game.state.add("overworld", zelda.overworld);
 
 //Escena que se pinta
-zelda.game.state.start("secret_room_K");
+zelda.game.state.start("secret_room_G");

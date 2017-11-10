@@ -12,8 +12,9 @@ zelda.sala_secreta_G = {
         this.load.tilemap("sala", "json/Sala_Secreta.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("secret_tile", "img/tilesets/secret_tile.png");
         this.load.spritesheet("fuego", "img/fuego.png",17,15);
-        this.load.spritesheet("npc", "img/oldwoman.png",16, 16);
+        this.load.spritesheet("npc", "img/orcO.png",16, 16);
         //-------------------------------------------
+		this.load.image("rupia", "img/rupia.png");
 	},
 	
 	create:function(){
@@ -32,9 +33,12 @@ zelda.sala_secreta_G = {
         }
 		
 		//npc
-		this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
+		this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc",3);
 		this.npc.anchor.setTo(.5,0);
 		//-------------------------------------------
+		
+		this.moneda = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"rupia");
+		this.moneda.anchor.setTo(.5,0);
 	},
 	
 	update:function(){
