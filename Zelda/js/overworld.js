@@ -21,13 +21,24 @@ zelda.overworld = {
         this.cursors = this.game.input.keyboard.createCursorKeys();
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-
         this.loadArrow();
         
         this.sword = this.game.add.sprite(0,0,"Sword");
         this.sword.anchor.setTo(0.5);
+        this.sword.kill();
+        this.sword.Alive = false;
         
         this.game.physics.arcade.enable(this.sword);
+
+        this.projectile = this.game.add.sprite(0,0,"Sword");
+        this.projectile.anchor.setTo(0.5);
+        this.projectile.kill();
+        this.projectile.Alive = false;
+        this.projectile.outOfBoundsKill = true;
+        this.projectile.checkWorldBounds = true;
+        this.projectile.events.onOutOfBounds.add(function notAlive(){this.projectile.Alive = false;}, this);
+        
+        this.game.physics.arcade.enable(this.projectile);
 
         //Spritesheet de Link, con sus animaciones de movimiento (LAS DE ATAQUE SON FRAMES QUIETOS) al que se aplican las físicas
         this.Link = this.game.add.sprite(0,0, "Link");
@@ -50,7 +61,7 @@ zelda.overworld = {
         this.Link.body.velocity.setTo(0);        
         
         //La barra espaciadora pone attacking en true
-        if(this.space.isDown){
+        if(this.space.isDown&&this.space.downDuration(1)){
             if(!zelda.LinkObject.attacking){
                 if(zelda.LinkObject.currentHearts==zelda.LinkObject.maxHearts){
                     if(zelda.LinkObject.lookingDown){
@@ -260,53 +271,38 @@ zelda.overworld = {
 	},
 		
 	createArrow:function(sth){        
-        if(this.arrows.children[0]!=undefined){
-            if(!this.arrows.children[0].Alive){
-                this.arrows.children[0].Alive = true;
-                this.arrows.children[0].reset(this.Link.x, this.Link.y);
-                        //IZQUIERDA ABAJO DERECA ARRIBA
-        if(sth==0){
-		this.arrows.children[0].body.velocity.y = 200;
-        this.arrows.children[0].frame = 1;
-        }
-        else if (sth==1){
-        this.arrows.children[0].body.velocity.y = -200;
-        this.arrows.children[0].frame = 3;
-
-        }
-        else if (sth==2){
-        this.arrows.children[0].body.velocity.x = -200;
-            this.arrows.children[0].frame = 0;
-        }
-        else{
-        this.arrows.children[0].body.velocity.x = 200;
-            this.arrows.children[0].frame = 2;
-        }
+        if(!this.projectile.Alive){
+        this.projectile.reset(this.Link.x, this.Link.y);
+            this.projectile.Alive = true;
+            
+            if(sth==0){
+            this.projectile.body.velocity.y = 200;
+            this.projectile.frame = 1;
+            this.projectile.scale.y = 1;
+            this.projectile.scale.x = 1;
             }
-        }else{
-            var arrow = new zelda.arrowPrefab(this.game,this.Link.x, this.Link.y);
-            arrow.Alive = true;
-			this.arrows.add(arrow);
-                    //IZQUIERDA ABAJO DERECA ARRIBA
-        if(sth==0){
-		arrow.body.velocity.y = 200;
-        arrow.frame = 1;
-        }
-        else if (sth==1){
-        arrow.body.velocity.y = -200;
-        arrow.frame = 3;
+            else if (sth==1){
+            this.projectile.body.velocity.y = -200;
+            this.projectile.frame = 1;
+            this.projectile.scale.y=-1;
+            this.projectile.scale.x = 1;
+
+            }
+            else if (sth==2){
+            this.projectile.body.velocity.x = -200;
+            this.projectile.frame = 0;
+            this.projectile.scale.x = 1 ;
+            this.projectile.scale.y = 1 ;  
+            }
+            else{
+            this.projectile.body.velocity.x = 200;
+            this.projectile.frame = 0;
+            this.projectile.scale.x=-1;
+            this.projectile.scale.y = 1;  
+            }
+
 
         }
-        else if (sth==2){
-        arrow.body.velocity.x = -200;
-            arrow.frame = 0;
-        }
-        else{
-        arrow.body.velocity.x = 200;
-            arrow.frame = 2;
-        }
-        }
-
         
 	},
     
@@ -326,7 +322,7 @@ zelda.overworld = {
 
                 this.sword.frame = 1;
                 this.sword.Alive = true;
-                this.sword.scale.y=-1;
+                this.sword.scale.y= -1;
                 this.sword.scale.x = 1;
                 this.sword.reset(this.Link.position.x,this.Link.position.y-16);
 
@@ -337,7 +333,7 @@ zelda.overworld = {
 
                 this.sword.frame = 0;
                 this.sword.Alive = true;
-                this.sword.scale.x= 1 ;
+                this.sword.scale.x = 1 ;
                 this.sword.scale.y = 1 ;  
                 this.sword.reset(this.Link.position.x-16,this.Link.position.y);
                     
@@ -345,7 +341,7 @@ zelda.overworld = {
                 else{
                 this.sword.frame = 0;
                 this.sword.Alive = true;
-                this.sword.scale.x=-1;
+                this.sword.scale.x= -1;
                 this.sword.scale.y = 1;  
                 this.sword.reset(this.Link.position.x+16,this.Link.position.y);
 
