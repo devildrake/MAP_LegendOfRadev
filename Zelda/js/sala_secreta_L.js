@@ -13,6 +13,10 @@ zelda.sala_secreta_L = {
         this.load.spritesheet("fuego", "img/fuego.png",17,15);
         this.load.spritesheet("npc", "img/shopkeeper.png",16, 16);
         //-------------------------------------------
+		
+		this.load.image("escudo", "img/escudo.png");
+		this.load.image("comida", "img/comida.png");
+		this.load.image("corazon", "img/corazon.png");
 	},
 	
 	create:function(){
@@ -29,10 +33,18 @@ zelda.sala_secreta_L = {
             this.fire[i].animations.add("idle",[0,1],6,true);
             this.fire[i].animations.play("idle");
         }
-		//-------------------------------------------
 		
+		//npc
 		this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
 		this.npc.anchor.setTo(.5,0);
+		//-------------------------------------------
+		
+		//items
+		this.escudo = this.game.add.sprite(zelda.secretLayout.item1X, zelda.secretLayout.itemY,"escudo");
+		this.comida = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"comida");
+		this.comida.anchor.setTo(.5,0);
+		this.corazon = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "corazon");
+		
 	},
 	
 	update:function(){
