@@ -6,6 +6,20 @@ zelda.gameOptions = {
     linkSpeed:200
 }
 
+//objeto para colocar los elementos del layout de las salas secretas
+zelda.secretLayout = {
+    fireX1: 4*16,
+    fireY: 4*16,
+    fireX2: 11*16,
+    item1X: 5*16,
+    item2X: 8*16,
+    item3X: 10*16,
+    itemY: 6*16
+};
+zelda.secretLayout.fireX1 = 4*16;
+zelda.secretLayout.fireY = 4*16;
+zelda.secretLayout.fireX2 = 11*16;
+
 
 //Objeto que existe para manejar los booleanos de comportamiento de las animaciones de link, pretendia hacer que las animaciones tambien formaran parte de este objeto y así poder usarlo siempre que quisieramos
 //Pero al parecer no es posible tener un sprite dentro de un objeto o por lo menosno lo se hacer
@@ -46,6 +60,7 @@ zelda.game = new Phaser.Game(zelda.gameOptions.gameWidth,zelda.gameOptions.gameH
 zelda.game.state.add("main", zelda.intro);
 zelda.game.state.add("secret_room_A", zelda.sala_secreta_A);
 zelda.game.state.add("secret_room_D", zelda.sala_secreta_D);
+zelda.game.state.add("secret_room_M", zelda.sala_secreta_M);
 zelda.game.state.add("overworld", zelda.overworld);
 //zelda.game.state.start("secret_room_D");
-zelda.game.state.start("secret_room_D");
+zelda.game.state.start("secret_room_M");

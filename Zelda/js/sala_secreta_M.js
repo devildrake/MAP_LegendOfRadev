@@ -1,6 +1,6 @@
 var zelda = zelda || {}
 
-zelda.sala_secreta_D = {
+zelda.sala_secreta_M = {
     init:function(){
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.scale.setGameSize(zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight/2);
@@ -13,18 +13,23 @@ zelda.sala_secreta_D = {
         this.load.image("secret_tile", "img/tilesets/secret_tile.png");
         //-------------------------------------------
         this.load.spritesheet("fuego", "img/fuego.png",17,15);
-        this.load.spritesheet("npc", "img/oldman.png",16, 16);
+        this.load.spritesheet("npc", "img/shopkeeper.png",16, 16);
+        this.load.image("escudo", "img/escudo.png");
+        this.load.image("llave", "img/llave.png");
+        this.load.image("vela", "img/vela.png");
     },
     
     create:function(){
+        //--------Pintado del layout base------------
         this.map = this.game.add.tilemap("sala");
         this.map.addTilesetImage("secret_tile");
         this.map.createLayer("Rocas");
+        //-------------------------------------------
         
         //fuego y animacion de este
         this.fire = [];
-        this.fire.push(this.game.add.sprite(5*16,4*16,"fuego",0));
-        this.fire.push(this.game.add.sprite(10*16,4*16,"fuego",0));
+        this.fire.push(this.game.add.sprite(zelda.secretLayout.fireX1,zelda.secretLayout.fireY,"fuego",0));
+        this.fire.push(this.game.add.sprite(zelda.secretLayout.fireX2,zelda.secretLayout.fireY,"fuego",0));
         for(var i in this.fire){
             this.fire[i].animations.add("idle",[0,1],6,true);
             this.fire[i].animations.play("idle");
@@ -33,6 +38,12 @@ zelda.sala_secreta_D = {
         //npc
         this.npc = this.game.add.sprite(8*16, 4*16, "npc", 0);
         this.npc.anchor.setTo(.5,0);
+        
+        //objetos
+        this.escudo = this.game.add.sprite(zelda.secretLayout.item1X, zelda.secretLayout.itemY, "escudo");
+        this.llave = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY, "llave");
+        this.llave.anchor.setTo(.5,0);
+        this.vela = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "vela");
     },
     
     update:function(){
