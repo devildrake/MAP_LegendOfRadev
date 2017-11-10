@@ -48,4 +48,4 @@ zelda.game.state.add("secret_room_A", zelda.sala_secreta_A);
 zelda.game.state.add("secret_room_D", zelda.sala_secreta_D);
 zelda.game.state.add("overworld", zelda.overworld);
 //zelda.game.state.start("secret_room_D");
-zelda.game.state.start("secret_room_D");
+zelda.game.state.start("overworld");

@@ -24,6 +24,11 @@ zelda.overworld = {
 
         this.loadArrow();
         
+        this.sword = this.game.add.sprite(0,0,"Sword");
+        this.sword.anchor.setTo(0.5);
+        
+        this.game.physics.arcade.enable(this.sword);
+
         //Spritesheet de Link, con sus animaciones de movimiento (LAS DE ATAQUE SON FRAMES QUIETOS) al que se aplican las físicas
         this.Link = this.game.add.sprite(0,0, "Link");
         this.Link.scale.setTo(1);
@@ -226,8 +231,8 @@ zelda.overworld = {
         zelda.LinkObject.attacking = false;
         zelda.LinkObject.calledNotAttack = false;
         
-        this.swords.children[0].kill();
-        this.swords.children[0].Alive = false;
+        this.sword.kill();
+        this.sword.Alive = false;
         
         if(zelda.LinkObject.lookingDown){
             this.Link.scale.setTo(1);
@@ -252,8 +257,6 @@ zelda.overworld = {
     },	loadArrow:function(){
 		this.arrows = this.add.group();
 		this.arrows.enableBody = true;
-        this.swords = this.add.group();
-        this.swords.enableBody = true;
 	},
 		
 	createArrow:function(sth){        
@@ -308,74 +311,48 @@ zelda.overworld = {
 	},
     
     createSword:function(){
-        if(this.swords.children[0]==undefined){
-            //down
-
-            //console.log("SwordYall");
+        if(!this.sword.isAlive){
             if(this.Link.frame ==9||this.Link.frame==23){
-                var sword = new zelda.swordPrefab(this.game, this.Link.x, this.Link.y+16,0,0);
-                sword.frame = 1;
-                this.swords.add(sword);
-                            this.swords.children[0].Alive = true;
 
-                //console.log("SwordDOWN");
-
+                this.sword.frame = 1;
+                this.sword.Alive = true;
+                this.sword.scale.y = 1;
+                this.sword.scale.x = 1;
+                this.sword.reset(this.Link.position.x,this.Link.position.y+16);
             }
             // up
             else if(this.Link.frame == 10 || this.Link.frame==24){
-                var sword = new zelda.swordPrefab(this.game, this.Link.x, this.Link.y-16,1,0);
-                sword.frame = 1;
-                sword.scale.y=-1;
-                this.swords.add(sword);
-                //console.log("SwordUP");
+
+
+                this.sword.frame = 1;
+                this.sword.Alive = true;
+                this.sword.scale.y=-1;
+                this.sword.scale.x = 1;
+                this.sword.reset(this.Link.position.x,this.Link.position.y-16);
 
             }
 
             else if(this.Link.frame == 11||this.Link.frame==25){
-                if(zelda.LinkObject.lookingLeft){
-                var sword = new zelda.swordPrefab(this.game, this.Link.x-16, this.Link.y,2,0);
-                    sword.frame = 0;
-                    sword.scale.x=1;
-                this.swords.add(sword);
+                if(zelda.LinkObject.lookingLeft){                    
+
+                this.sword.frame = 0;
+                this.sword.Alive = true;
+                this.sword.scale.x= 1 ;
+                this.sword.scale.y = 1 ;  
+                this.sword.reset(this.Link.position.x-16,this.Link.position.y);
+                    
             }
                 else{
-                    var sword = new zelda.swordPrefab(this.game, this.Link.x+16, this.Link.y,3,0);
-                    this.swords.add(sword);
-                    sword.frame = 0;
-                    sword.scale.x=-1;
-                }
-            }
-        }else if(!this.swords.children[0].Alive){
-            if(this.Link.frame ==9||this.Link.frame==23){
-                this.swords.children[0].reset(this.Link.x, this.Link.y+16,0,0);
-                this.swords.children[0].frame = 1;
-                this.swords.children[0].scale.y = 1;
-                                console.log("Payload Down");
+                this.sword.frame = 0;
+                this.sword.Alive = true;
+                this.sword.scale.x=-1;
+                this.sword.scale.y = 1;  
+                this.sword.reset(this.Link.position.x+16,this.Link.position.y);
 
-            }
-            // up
-            else if(this.Link.frame == 10 || this.Link.frame==24){
-                  this.swords.children[0].reset(this.Link.x, this.Link.y-16,1,0);
-                this.swords.children[0].frame = 1;
-                this.swords.children[0].scale.y=-1;
-                //console.log("SwordUP");
-                console.log("Payload Up");
-            }
-
-            else if(this.Link.frame == 11||this.Link.frame==25){
-                if(zelda.LinkObject.lookingLeft){
-                  this.swords.children[0].reset(this.Link.x-16, this.Link.y,2,0);
-                    this.swords.children[0].frame = 0;
-                    this.swords.children[0].scale.x=1;
-                }
-                else{
-                      this.swords.children[0].reset(this.Link.x+16, this.Link.y,3,0);
-                    this.swords.children[0].frame = 0;
-                    this.swords.children[0].scale.x=-1;
                 }
             }
-            this.swords.children[0].Alive = true;
+        
+        
         }
     }
-
 }
