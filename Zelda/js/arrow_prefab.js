@@ -5,6 +5,7 @@ zelda.arrowPrefab = function(game,x,y){
 	this.anchor.setTo(.5);
 	this.checkWorldBounds = true;
 	this.outOfBoundsKill = true;
+    this.events.onOutOfBounds.add(function notAlive(){this.Alive = false;}, this);
 };
 
 zelda.arrowPrefab.prototype = Object.create(Phaser.Sprite.prototype);

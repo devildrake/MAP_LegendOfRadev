@@ -10,6 +10,9 @@ zelda.gameOptions = {
 //Objeto que existe para manejar los booleanos de comportamiento de las animaciones de link, pretendia hacer que las animaciones tambien formaran parte de este objeto y así poder usarlo siempre que quisieramos
 //Pero al parecer no es posible tener un sprite dentro de un objeto o por lo menosno lo se hacer
 zelda.LinkObject = {
+    maxHearts: 3,
+    currentHearts: 3,
+    
     //Tiene 3 bools para saber a donde esta y estaba mirando para el tema orientación
     lookingUp: false,
     lookingDown: false,
@@ -44,4 +47,5 @@ zelda.game.state.add("main", zelda.intro);
 zelda.game.state.add("secret_room_1", zelda.sala_secreta_1);
 zelda.game.state.add("secret_room_2", zelda.sala_secreta_2);
 zelda.game.state.add("overworld", zelda.overworld);
-zelda.game.state.start("secret_room_2");
+//zelda.game.state.start("secret_room_2");
+zelda.game.state.start("overworld");

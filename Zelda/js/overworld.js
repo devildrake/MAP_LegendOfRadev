@@ -48,18 +48,22 @@ zelda.overworld = {
         //La barra espaciadora pone attacking en true
         if(this.space.isDown){
             if(!zelda.LinkObject.attacking){
-                if(zelda.LinkObject.lookingDown){
-                this.createArrow(0);
-                }
-                else if(zelda.LinkObject.lookingUp){
-                    this.createArrow(1);
-                }else if(zelda.LinkObject.lookingLeft){
-                    this.createArrow(2);
-                }else {
-                    this.createArrow(3);
+                if(zelda.LinkObject.currentHearts==zelda.LinkObject.maxHearts){
+                    if(zelda.LinkObject.lookingDown){
+                    this.createArrow(0);
+                    }
+                    else if(zelda.LinkObject.lookingUp){
+                        this.createArrow(1);
+                    }else if(zelda.LinkObject.lookingLeft){
+                        this.createArrow(2);
+                    }else {
+                        this.createArrow(3);
+                    }
                 }
             }
             zelda.LinkObject.attacking = true;
+            
+            //LINEA QUE HAY QUE BORRAR
             zelda.LinkObject.hurt = true;
 
         }
@@ -247,19 +251,35 @@ zelda.overworld = {
 
 	},
 		
-	createArrow:function(sth){
-        if(this.arrows.length==0){
-		var arrow = this.arrows.getFirstExists(false);
-		if(!arrow){
-			arrow = new zelda.arrowPrefab(this.game,this.Link.x, this.Link.y);
-			this.arrows.add(arrow);
-                                    console.log(this.arrows.length);
-
-		}else{
-			arrow.reset(this.Link.x, this.Link.y);
-		
+	createArrow:function(sth){        
+        if(this.arrows.children[0]!=undefined){
+            if(!this.arrows.children[0].Alive){
+                this.arrows.children[0].Alive = true;
+                this.arrows.children[0].reset(this.Link.x, this.Link.y);
+                        //IZQUIERDA ABAJO DERECA ARRIBA
+        if(sth==0){
+		this.arrows.children[0].body.velocity.y = 200;
+        this.arrows.children[0].frame = 1;
         }
-        //IZQUIERDA ABAJO DERECA ARRIBA
+        else if (sth==1){
+        this.arrows.children[0].body.velocity.y = -200;
+        this.arrows.children[0].frame = 3;
+
+        }
+        else if (sth==2){
+        this.arrows.children[0].body.velocity.x = -200;
+            this.arrows.children[0].frame = 0;
+        }
+        else{
+        this.arrows.children[0].body.velocity.x = 200;
+            this.arrows.children[0].frame = 2;
+        }
+            }
+        }else{
+            var arrow = new zelda.arrowPrefab(this.game,this.Link.x, this.Link.y);
+            arrow.Alive = true;
+			this.arrows.add(arrow);
+                    //IZQUIERDA ABAJO DERECA ARRIBA
         if(sth==0){
 		arrow.body.velocity.y = 200;
         arrow.frame = 1;
@@ -278,5 +298,7 @@ zelda.overworld = {
             arrow.frame = 2;
         }
         }
+
+        
 	},
 }
