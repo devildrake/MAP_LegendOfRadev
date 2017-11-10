@@ -19,10 +19,7 @@ zelda.overworld = {
         
         //Inputs, flechas para andar y Space para atacar por ahora
         this.cursors = this.game.input.keyboard.createCursorKeys();
-        this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-
-        this.loadArrow();
-        
+        this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);        
         this.sword = this.game.add.sprite(0,0,"Sword");
         this.sword.anchor.setTo(0.5);
         this.sword.kill();
@@ -65,14 +62,14 @@ zelda.overworld = {
             if(!zelda.LinkObject.attacking){
                 if(zelda.LinkObject.currentHearts==zelda.LinkObject.maxHearts){
                     if(zelda.LinkObject.lookingDown){
-                    this.createArrow(0);
+                    this.createProjectile(0);
                     }
                     else if(zelda.LinkObject.lookingUp){
-                        this.createArrow(1);
+                        this.createProjectile(1);
                     }else if(zelda.LinkObject.lookingLeft){
-                        this.createArrow(2);
+                        this.createProjectile(2);
                     }else {
-                        this.createArrow(3);
+                        this.createProjectile(3);
                     }
                 }
             }
@@ -265,12 +262,9 @@ zelda.overworld = {
         zelda.LinkObject.calledNotHurt = false;
         zelda.LinkObject.hurt = false;
         
-    },	loadArrow:function(){
-		this.arrows = this.add.group();
-		this.arrows.enableBody = true;
-	},
-		
-	createArrow:function(sth){        
+    },	
+    
+	createProjectile:function(sth){        
         if(!this.projectile.Alive){
         this.projectile.reset(this.Link.x, this.Link.y);
             this.projectile.Alive = true;
