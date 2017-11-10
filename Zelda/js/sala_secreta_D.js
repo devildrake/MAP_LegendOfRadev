@@ -1,6 +1,6 @@
 var zelda = zelda || {}
 
-zelda.sala_secreta_2 = {
+zelda.sala_secreta_D = {
     init:function(){
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.scale.setGameSize(512/2,480/2);
