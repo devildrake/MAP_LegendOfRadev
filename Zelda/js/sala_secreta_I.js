@@ -1,6 +1,6 @@
 var zelda = zelda || {}
 
-zelda.sala_secreta_M = {
+zelda.sala_secreta_I = {
     init:function(){
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.scale.setGameSize(zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight/2);
@@ -8,16 +8,14 @@ zelda.sala_secreta_M = {
     
     preload:function(){
         this.game.stage.backgroundColor = "#black";
-        //----------Elementos del layaut base------------
+        //----------Tiles del layaut base------------
         this.load.tilemap("sala", "json/Sala_Secreta.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("secret_tile", "img/tilesets/secret_tile.png");
         this.load.spritesheet("fuego", "img/fuego.png",17,15);
-        this.load.spritesheet("npc", "img/shopkeeper.png",16, 16);
+        this.load.spritesheet("npc", "img/orcO.png",16, 16);
         //-------------------------------------------
         
-        this.load.image("escudo", "img/escudo.png");
-        this.load.image("llave", "img/llave.png");
-        this.load.image("vela", "img/vela.png");
+        this.load.image("rupia", "img/rupia.png");
     },
     
     create:function(){
@@ -37,14 +35,12 @@ zelda.sala_secreta_M = {
         }
         
         //npc
-        this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc", 0);
+        this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc", 3);
         this.npc.anchor.setTo(.5,0);
         
-        //objetos
-        this.escudo = this.game.add.sprite(zelda.secretLayout.item1X, zelda.secretLayout.itemY, "escudo");
-        this.llave = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY, "llave");
-        this.llave.anchor.setTo(.5,0);
-        this.vela = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "vela");
+        //items
+        this.rupia = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY, "rupia");
+        this.rupia.anchor.setTo(.5,0);
     },
     
     update:function(){
