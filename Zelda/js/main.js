@@ -11,9 +11,14 @@ zelda.secretLayout = {
     fireX1: 4*16,
     fireY: 4*16,
     fireX2: 11*16,
+	//usar estos cuando hay 3 objetos
     item1X: 5*16,
     item2X: 8*16,
     item3X: 10*16,
+	//usar estos cuando hay 2 objetos
+	item2_1X: 5*16,
+	item2_2X: 10*16,
+	//la Y siempre es la misma
     itemY: 6*16,
     npcX: 8*16,
     npcY: 4*16
@@ -61,7 +66,8 @@ zelda.game.state.add("secret_room_D", zelda.sala_secreta_D);
 zelda.game.state.add("secret_room_M", zelda.sala_secreta_M);
 zelda.game.state.add("secret_room_I", zelda.sala_secreta_I);
 zelda.game.state.add("secret_room_L", zelda.sala_secreta_L);
+zelda.game.state.add("secret_room_E", zelda.sala_secreta_E);
 zelda.game.state.add("overworld", zelda.overworld);
 
 //Escena que se pinta
-zelda.game.state.start("secret_room_L");
+zelda.game.state.start("secret_room_E");
