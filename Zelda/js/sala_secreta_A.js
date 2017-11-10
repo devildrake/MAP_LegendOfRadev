@@ -1,6 +1,6 @@
 var zelda = zelda || {};
 //16X11 tiles
-zelda.sala_secreta_1 = {
+zelda.sala_secreta_A = {
 	init:function(){
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.scale.setGameSize(512/2,480/2);
