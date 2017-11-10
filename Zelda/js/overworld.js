@@ -5,6 +5,8 @@ zelda.overworld = {
         this.load.tilemap("map", "json/MapaZeldaOverWorld16x11.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("OverWorldTileSheetBien16x16", "img/tilesets/OverWorldTileSheetBien16x16.png");
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16);
+        this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
+        this.load.spritesheet("Sword","img/Swords.png",16,16);
     },
 
     create:function(){
@@ -20,6 +22,8 @@ zelda.overworld = {
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 
+        this.loadArrow();
+        
         //Spritesheet de Link, con sus animaciones de movimiento (LAS DE ATAQUE SON FRAMES QUIETOS) al que se aplican las físicas
         this.Link = this.game.add.sprite(0,0, "Link");
         this.Link.scale.setTo(1);
@@ -43,8 +47,21 @@ zelda.overworld = {
         
         //La barra espaciadora pone attacking en true
         if(this.space.isDown){
+            if(!zelda.LinkObject.attacking){
+                if(zelda.LinkObject.lookingDown){
+                this.createArrow(0);
+                }
+                else if(zelda.LinkObject.lookingUp){
+                    this.createArrow(1);
+                }else if(zelda.LinkObject.lookingLeft){
+                    this.createArrow(2);
+                }else {
+                    this.createArrow(3);
+                }
+            }
             zelda.LinkObject.attacking = true;
             zelda.LinkObject.hurt = true;
+
         }
         
         if(zelda.LinkObject.hurt&&!zelda.LinkObject.calledNotHurt){
@@ -81,7 +98,7 @@ zelda.overworld = {
                     zelda.LinkObject.switched = true;
                     this.game.time.events.add(Phaser.Timer.SECOND * 0.15,this.switchLinkScale , this);
                 }
-                this.Link.body.velocity.y = -zelda.zelda.gameOptions.linkSpeed;
+                this.Link.body.velocity.y = -zelda.gameOptions.linkSpeed;
                 
                 if(zelda.LinkObject.hurt)
                     this.Link.animations.play("movingUpHurt");
@@ -224,5 +241,42 @@ zelda.overworld = {
         zelda.LinkObject.calledNotHurt = false;
         zelda.LinkObject.hurt = false;
         
-    }
+    },	loadArrow:function(){
+		this.arrows = this.add.group();
+		this.arrows.enableBody = true;
+
+	},
+		
+	createArrow:function(sth){
+        if(this.arrows.length==0){
+		var arrow = this.arrows.getFirstExists(false);
+		if(!arrow){
+			arrow = new zelda.arrowPrefab(this.game,this.Link.x, this.Link.y);
+			this.arrows.add(arrow);
+                                    console.log(this.arrows.length);
+
+		}else{
+			arrow.reset(this.Link.x, this.Link.y);
+		
+        }
+        //IZQUIERDA ABAJO DERECA ARRIBA
+        if(sth==0){
+		arrow.body.velocity.y = 200;
+        arrow.frame = 1;
+        }
+        else if (sth==1){
+        arrow.body.velocity.y = -200;
+        arrow.frame = 3;
+
+        }
+        else if (sth==2){
+        arrow.body.velocity.x = -200;
+            arrow.frame = 0;
+        }
+        else{
+        arrow.body.velocity.x = 200;
+            arrow.frame = 2;
+        }
+        }
+	},
 }
