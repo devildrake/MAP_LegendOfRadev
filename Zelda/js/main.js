@@ -18,10 +18,6 @@ zelda.secretLayout = {
     npcX: 8*16,
     npcY: 4*16
 };
-zelda.secretLayout.fireX1 = 4*16;
-zelda.secretLayout.fireY = 4*16;
-zelda.secretLayout.fireX2 = 11*16;
-
 
 //Objeto que existe para manejar los booleanos de comportamiento de las animaciones de link, pretendia hacer que las animaciones tambien formaran parte de este objeto y así poder usarlo siempre que quisieramos
 //Pero al parecer no es posible tener un sprite dentro de un objeto o por lo menosno lo se hacer
@@ -63,8 +59,9 @@ zelda.game.state.add("main", zelda.intro);
 zelda.game.state.add("secret_room_A", zelda.sala_secreta_A);
 zelda.game.state.add("secret_room_D", zelda.sala_secreta_D);
 zelda.game.state.add("secret_room_M", zelda.sala_secreta_M);
-zelda.game.state.add("secret_room_I", zelda.sala_secreta_I)
+zelda.game.state.add("secret_room_I", zelda.sala_secreta_I);
+zelda.game.state.add("secret_room_L", zelda.sala_secreta_L);
 zelda.game.state.add("overworld", zelda.overworld);
 
 //Escena que se pinta
-zelda.game.state.start("overworld");
+zelda.game.state.start("secret_room_L");
