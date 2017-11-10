@@ -67,7 +67,10 @@ zelda.game.state.add("secret_room_M", zelda.sala_secreta_M);
 zelda.game.state.add("secret_room_I", zelda.sala_secreta_I);
 zelda.game.state.add("secret_room_L", zelda.sala_secreta_L);
 zelda.game.state.add("secret_room_E", zelda.sala_secreta_E);
+zelda.game.state.add("secret_room_H", zelda.sala_secreta_H);
+zelda.game.state.add("secret_room_K", zelda.sala_secreta_K);
+zelda.game.state.add("secret_room_G", zelda.sala_secreta_G);
 zelda.game.state.add("overworld", zelda.overworld);
 
 //Escena que se pinta
-zelda.game.state.start("secret_room_E");
+zelda.game.state.start("secret_room_H");
