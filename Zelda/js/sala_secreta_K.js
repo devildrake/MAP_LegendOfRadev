@@ -12,8 +12,11 @@ zelda.sala_secreta_K = {
         this.load.tilemap("sala", "json/Sala_Secreta.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("secret_tile", "img/tilesets/secret_tile.png");
         this.load.spritesheet("fuego", "img/fuego.png",17,15);
-        this.load.spritesheet("npc", "img/oldwoman.png",16, 16);
+        this.load.spritesheet("npc", "img/shopkeeper.png",16, 16);
         //-------------------------------------------
+		this.load.spritesheet("flecha", "img/arrow.png",16,16);
+		this.load.image("escudo", "img/escudo.png");
+		this.load.image("bomba", "img/bomba.png");
 	},
 	
 	create:function(){
@@ -35,6 +38,12 @@ zelda.sala_secreta_K = {
 		this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
 		this.npc.anchor.setTo(.5,0);
 		//-------------------------------------------
+		
+		//items
+		this.escudo = this.game.add.sprite(zelda.secretLayout.item1X, zelda.secretLayout.itemY, "escudo");
+		this.bomba = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"bomba");
+		this.bomba.anchor.setTo(.5,0);
+		this.flecha = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "flecha",3);
 	},
 	
 	update:function(){
