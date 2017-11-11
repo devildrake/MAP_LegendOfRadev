@@ -1,0 +1,12 @@
+{ "columns":1,
+ "image":"Dungeon1NoFloor.png",
+ "imageheight":1008,
+ "imagewidth":1536,
+ "margin":0,
+ "name":"Dungeon1NoFloor",
+ "spacing":0,
+ "tilecount":1,
+ "tileheight":1008,
+ "tilewidth":1536,
+ "type":"tileset"
+}

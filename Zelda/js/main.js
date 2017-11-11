@@ -71,6 +71,7 @@ zelda.game.state.add("secret_room_H", zelda.sala_secreta_H);
 zelda.game.state.add("secret_room_K", zelda.sala_secreta_K);
 zelda.game.state.add("secret_room_G", zelda.sala_secreta_G);
 zelda.game.state.add("overworld", zelda.overworld);
+zelda.game.state.add("dungeon", zelda.dungeon);
 
 //Escena que se pinta
-zelda.game.state.start("overworld");
+zelda.game.state.start("dungeon");
