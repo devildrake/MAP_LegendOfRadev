@@ -50,6 +50,9 @@ zelda.overworld = {
         this.Link.animations.add("movingSideWaysHurt", [17,18],5,true);        
         
         this.game.physics.arcade.enable(this.Link);
+        
+        //Camara
+        this.camera.follow(this.Link, Phaser.Camera.FOLLOW_PLATFORMER);
             
     },
     
