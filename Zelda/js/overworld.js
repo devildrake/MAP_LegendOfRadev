@@ -1,6 +1,12 @@
 var zelda = zelda || {}
 
 zelda.overworld = {
+    init:function(){
+        this.game.world.setBounds(0,0,112*16,55*16);
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.scale.setGameSize(zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight/2);
+    },
+    
     preload:function(){
         this.load.tilemap("map", "json/MapaZeldaOverWorld16x11.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("OverWorldTileSheetBien16x16", "img/tilesets/OverWorldTileSheetBien16x16.png");
@@ -195,7 +201,7 @@ zelda.overworld = {
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5,this.makeLinkNotAttack , this);
             zelda.LinkObject.calledNotAttack = true;
             
-                                                this.createSword();
+            this.createSword();
 
         }
         //Comportamiento si ya se ha hecho el invoke al método que pone attacking en false pero aun no se ha llamado a dicho método
@@ -222,7 +228,7 @@ zelda.overworld = {
                 else
                     this.Link.frame = 11;
             }
-                                                this.createSword();
+            this.createSword();
         }
     },
     

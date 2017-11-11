@@ -74,4 +74,4 @@ zelda.game.state.add("overworld", zelda.overworld);
 zelda.game.state.add("dungeon", zelda.dungeon);
 
 //Escena que se pinta
-zelda.game.state.start("dungeon");
+zelda.game.state.start("overworld");
