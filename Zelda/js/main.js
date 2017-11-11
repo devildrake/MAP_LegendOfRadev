@@ -58,6 +58,71 @@ zelda.LinkObject = {
     },
 }
 
+zelda.Inventory={
+    
+    bombs: 0,
+    keys:0,
+    rupies:0,
+    ring:false,
+    stairs:false,
+    ObjectB:"nothing",
+    
+    //el [0] sera el boomerang
+    //el [1] sera las bombas
+    //el [2] sera el arco
+    //el [3] sera la vela
+    //el [4] sera la poti vida(roja)
+    //el [5] sera la poti azul(??)
+    objects:[0,0,0,0,0,0],
+
+    GetObject:function(nameObject){
+        
+        if(nameObject==1){
+            rupies+=1;
+        }
+        else if(nameObject==2){
+            bombs+=1;
+        }
+        else if(nameObject==3){
+            keys+=1;
+        }
+        else if(nameObject==4){
+            ring=true;
+        }
+        else if(nameObject==5){
+            stairs=true;
+        }
+        else if(nameObject==6){
+            objects[0]=1;
+        }
+        else if(nameObject==7){
+             objects[1]=1;
+        }
+         else if(nameObject==8){
+             objects[2]=1;
+        }
+         else if(nameObject==9){
+             objects[3]=1;
+        }
+        else if(nameObject==10){
+             objects[4]=1;
+        }
+        else if(nameObject==11){
+             objects[5]=1;
+        }
+    
+},
+    
+    LoadSave:function(){
+        
+        
+        
+    },
+    
+    
+    
+}
+
 
 zelda.game = new Phaser.Game(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight,Phaser.AUTO, null, this, false, false);
 zelda.game.state.add("main", zelda.intro);
