@@ -3,7 +3,7 @@ var zelda = zelda || {};
 zelda.gameOptions = {
 	gameWidth:16*16,
 	gameHeight:11*16,
-    linkSpeed:400
+    linkSpeed:100
 }
 
 //objeto para colocar los elementos del layout de las salas secretas
@@ -119,14 +119,8 @@ zelda.Inventory={
         
         
         
-    },
-    
-    
-    
+    }, 
 }
-
-//activar las fisicas a todo el proyecto
-
 
 zelda.game = new Phaser.Game(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight,Phaser.AUTO, null, this, false, false);
 zelda.game.state.add("main", zelda.intro);

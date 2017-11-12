@@ -21,7 +21,8 @@ zelda.overworld = {
         
         ///Ya se crean las dos capas, Obstacles y ground
         this.map.createLayer("Ground");
-        this.map.createLayer("Obstacles");
+        this.obstacles = this.map.createLayer("Obstacles");
+        this.map.setCollisionBetween(1,99,true,"Obstacles");
         
         //Inputs, flechas para andar y Space para atacar por ahora
         this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -44,10 +45,9 @@ zelda.overworld = {
         this.game.physics.arcade.enable(this.projectile);
 
         //Spritesheet de Link, con sus animaciones de movimiento (LAS DE ATAQUE SON FRAMES QUIETOS) al que se aplican las físicas
-        this.Link = this.game.add.sprite(0,0, "Link");
+        this.Link = this.game.add.sprite(2*16*16+8*16, 4*11*16 + 8*16, "Link");
         this.Link.scale.setTo(1);
-        this.Link.anchor.x = 0.5;
-        this.Link.anchor.y = 0.5;
+        this.Link.anchor.setTo(.5);
 		this.Link.animations.add("movingDown", [0,1], 5, true);
         this.Link.animations.add("movingUp", [2], 5, true);
         this.Link.animations.add("movingSideWays", [3,4],5,true);
@@ -64,7 +64,9 @@ zelda.overworld = {
     
     update:function(){
         //Se reinicia la velocidad a 0 a cada frame           
-        this.Link.body.velocity.setTo(0);        
+        this.Link.body.velocity.setTo(0);
+        
+        this.game.physics.arcade.collide(this.Link,this.obstacles);
         
         //La barra espaciadora pone attacking en true
         if(this.space.isDown&&this.space.downDuration(1)){
