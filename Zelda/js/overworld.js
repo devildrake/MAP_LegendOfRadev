@@ -58,10 +58,10 @@ zelda.overworld = {
         this.Link.animations.add("movingSideWaysHurt", [17,18],5,true);        
         
         this.game.physics.arcade.enable(this.Link);
-        this.Link.collideCameraBounds = true;
         
         //Camara
         this.game.camera.focusOn(this.Link);
+        this.game.camera.follow(this.Link);
         this.SetCamera();
     },
     
@@ -242,16 +242,32 @@ zelda.overworld = {
 			zelda.game.camera.y -= zelda.game.camera.height;
 			zelda.overworld.SetCameraBounds();
 		});
-		this.game.physics.arcade.collide(this.Link,this.cameraBot);
-        this.game.physics.arcade.collide(this.Link,this.cameraRight);
-        this.game.physics.arcade.collide(this.Link,this.cameraLeft);
+		this.game.physics.arcade.collide(this.Link,this.cameraBot, function(){
+            zelda.game.camera.y += zelda.game.camera.height;
+			zelda.overworld.SetCameraBounds();
+        });
+        this.game.physics.arcade.collide(this.Link,this.cameraRight,function(){
+            zelda.game.camera.y += zelda.game.camera.width;
+			zelda.overworld.SetCameraBounds();
+        });
+        this.game.physics.arcade.collide(this.Link,this.cameraLeft,function(){
+            zelda.game.camera.y -= zelda.game.camera.width;
+			zelda.overworld.SetCameraBounds();
+        });
     },
     
     SetCameraBounds:function(){
-        this.cameraTop.body.position = new Phaser.Point(this.camera.x-100, this.camera.y); 
-		this.cameraBot.body.position = new Phaser.Point(this.camera.x, this.camera.y + this.camera.height);
-		this.cameraRight.body.position = new Phaser.Point(this.camera.x+this.camera.width, this.camera.y);
-		this.cameraLeft.body.position = new Phaser.Point(this.camera.x, this.camera.y)
+        this.cameraTop.body.position.x = this.camera.x;
+        this.cameraTop.body.position.y = this.camera.y;
+        
+		this.cameraBot.body.position.x = this.camera.x;
+        this.cameraBot.body.position.y = this.camera.y + this.camera.height;
+        
+        this.cameraRight.body.position.x = this.camera.x + this.camera.width;
+		this.cameraRight.body.position.y = this.camera.y;
+        
+        this.cameraLeft.body.position.x = this.camera.x;
+		this.cameraLeft.body.position.y = this.camera.y;
 	},
     
     SetCamera:function(){
