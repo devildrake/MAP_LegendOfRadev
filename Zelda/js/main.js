@@ -126,6 +126,7 @@ zelda.Inventory={
 
 zelda.game = new Phaser.Game(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight,Phaser.AUTO, null, this, false, false);
 zelda.game.state.add("main", zelda.intro);
+zelda.game.state.add("sword_room", zelda.sala_espada);
 zelda.game.state.add("secret_room_A", zelda.sala_secreta_A);
 zelda.game.state.add("secret_room_D", zelda.sala_secreta_D);
 zelda.game.state.add("secret_room_M", zelda.sala_secreta_M);
@@ -139,4 +140,4 @@ zelda.game.state.add("overworld", zelda.overworld);
 zelda.game.state.add("dungeon", zelda.dungeon);
 
 //Escena que se pinta
-zelda.game.state.start("overworld");
+zelda.game.state.start("sword_room");
