@@ -4,7 +4,7 @@ zelda.overworld = {
     init:function(){
         this.game.world.setBounds(0,0,112*16,55*16);
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.scale.setGameSize(zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight/2);
+        this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
     },
     
     preload:function(){

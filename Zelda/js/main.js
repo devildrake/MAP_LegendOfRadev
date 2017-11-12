@@ -1,9 +1,9 @@
 var zelda = zelda || {};
 
 zelda.gameOptions = {
-	gameWidth:512,
-	gameHeight:480,
-    linkSpeed:200
+	gameWidth:16*16,
+	gameHeight:11*16,
+    linkSpeed:400
 }
 
 //objeto para colocar los elementos del layout de las salas secretas
@@ -21,10 +21,12 @@ zelda.secretLayout = {
 	//la Y siempre es la misma
     itemY: 6*16,
     npcX: 8*16,
+    //la Y para todos los objetos
     npcY: 4*16
 };
 
-//Objeto que existe para manejar los booleanos de comportamiento de las animaciones de link, pretendia hacer que las animaciones tambien formaran parte de este objeto y así poder usarlo siempre que quisieramos
+//Objeto que existe para manejar los booleanos de comportamiento de las animaciones de link, pretendia hacer que
+//las animaciones tambien formaran parte de este objeto y así poder usarlo siempre que quisieramos
 //Pero al parecer no es posible tener un sprite dentro de un objeto o por lo menosno lo se hacer
 zelda.LinkObject = {
     maxHearts: 3,
@@ -78,37 +80,37 @@ zelda.Inventory={
     GetObject:function(nameObject){
         
         if(nameObject==1){
-            rupies+=1;
+            this.rupies+=1;
         }
         else if(nameObject==2){
-            bombs+=1;
+            this.bombs+=1;
         }
         else if(nameObject==3){
-            keys+=1;
+            this.keys+=1;
         }
         else if(nameObject==4){
-            ring=true;
+            this.ring=true;
         }
         else if(nameObject==5){
-            stairs=true;
+            this.stairs=true;
         }
         else if(nameObject==6){
-            objects[0]=1;
+            this.objects[0]=1;
         }
         else if(nameObject==7){
-             objects[1]=1;
+             this.objects[1]=1;
         }
          else if(nameObject==8){
-             objects[2]=1;
+             this.objects[2]=1;
         }
          else if(nameObject==9){
-             objects[3]=1;
+             this.objects[3]=1;
         }
         else if(nameObject==10){
-             objects[4]=1;
+             this.objects[4]=1;
         }
         else if(nameObject==11){
-             objects[5]=1;
+            this.objects[5]=1;
         }
     
 },
@@ -122,6 +124,8 @@ zelda.Inventory={
     
     
 }
+
+//activar las fisicas a todo el proyecto
 
 
 zelda.game = new Phaser.Game(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight,Phaser.AUTO, null, this, false, false);
@@ -140,4 +144,4 @@ zelda.game.state.add("overworld", zelda.overworld);
 zelda.game.state.add("dungeon", zelda.dungeon);
 
 //Escena que se pinta
-zelda.game.state.start("sword_room");
+zelda.game.state.start("overworld");
