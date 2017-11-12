@@ -13,6 +13,8 @@ zelda.overworld = {
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16);
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
+        this.load.image("camaraHorizontal", "img/camara_horizontal.png");
+        this.load.image("camaraVertical", "img/camara_vertical.png");
     },
 
     create:function(){
@@ -56,10 +58,11 @@ zelda.overworld = {
         this.Link.animations.add("movingSideWaysHurt", [17,18],5,true);        
         
         this.game.physics.arcade.enable(this.Link);
+        this.Link.collideCameraBounds = true;
         
         //Camara
-        this.camera.follow(this.Link, Phaser.Camera.FOLLOW_PLATFORMER);
-            
+        this.game.camera.focusOn(this.Link);
+        this.SetCamera();
     },
     
     update:function(){
@@ -67,6 +70,7 @@ zelda.overworld = {
         this.Link.body.velocity.setTo(0);
         
         this.game.physics.arcade.collide(this.Link,this.obstacles);
+        
         
         //La barra espaciadora pone attacking en true
         if(this.space.isDown&&this.space.downDuration(1)){
@@ -232,6 +236,46 @@ zelda.overworld = {
             }
             this.createSword();
         }
+        
+        //FUNCIONAMIENTO DEL CAMBIO DE CAMARA
+		this.game.physics.arcade.collide(this.Link,this.cameraTop, function(){
+			zelda.game.camera.y -= zelda.game.camera.height;
+			zelda.overworld.SetCameraBounds();
+		});
+		this.game.physics.arcade.collide(this.Link,this.cameraBot);
+        this.game.physics.arcade.collide(this.Link,this.cameraRight);
+        this.game.physics.arcade.collide(this.Link,this.cameraLeft);
+    },
+    
+    SetCameraBounds:function(){
+        this.cameraTop.body.position = new Phaser.Point(this.camera.x-100, this.camera.y); 
+		this.cameraBot.body.position = new Phaser.Point(this.camera.x, this.camera.y + this.camera.height);
+		this.cameraRight.body.position = new Phaser.Point(this.camera.x+this.camera.width, this.camera.y);
+		this.cameraLeft.body.position = new Phaser.Point(this.camera.x, this.camera.y)
+	},
+    
+    SetCamera:function(){
+        this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y, "camaraHorizontal");
+        this.cameraTop.anchor.setTo(0,1); 
+        this.game.physics.arcade.enable(this.cameraTop);
+        //this.cameraTop.fixedToCamera = true;
+        this.cameraTop.body.immovable = true;
+        
+        this.cameraBot = this.game.add.sprite(this.camera.x, this.camera.y+this.camera.height, "camaraHorizontal");
+        this.game.physics.arcade.enable(this.cameraBot);
+        //this.cameraBot.fixedToCamera = true;
+        this.cameraBot.body.immovable = true;
+        
+        this.cameraRight = this.game.add.sprite(this.camera.x+this.camera.width, this.camera.y, "camaraVertical");
+        this.game.physics.arcade.enable(this.cameraRight);
+        //this.cameraRight.fixedToCamera = true;
+        this.cameraRight.body.immovable = true;
+        
+        this.cameraLeft = this.game.add.sprite(this.camera.x, this.camera.y, "camaraVertical");
+        this.cameraLeft.anchor.setTo(1,0);
+        this.game.physics.arcade.enable(this.cameraLeft);
+        //this.cameraRight.fixedToCamera = true;
+        this.cameraLeft.body.immovable = true;
     },
     
     //Método para animar el andar hacia arriba
