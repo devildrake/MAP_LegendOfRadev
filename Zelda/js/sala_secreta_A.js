@@ -2,8 +2,9 @@ var zelda = zelda || {};
 //16X11 tiles
 zelda.sala_secreta_A = {
 	init:function(){
+		this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		this.scale.setGameSize(zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight/2);
+		this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 	},
 	
     preload:function(){
@@ -17,6 +18,7 @@ zelda.sala_secreta_A = {
         this.load.spritesheet("npc", "img/oldman.png",16,16);
         this.load.image("pocion","img/pocion_vida.png");
         this.load.image("corazon","img/slot_corazon.png");
+		this.load.image("inventario", "img/inventario.png");
     },
     
     create:function(){
@@ -43,10 +45,13 @@ zelda.sala_secreta_A = {
         this.corazon = this.game.add.sprite(6*16, 6*16,"corazon");
         this.pocion = this.game.add.sprite(9*16, 6*16, "pocion");
 		
-		 this.game.camera.y -= 47;
+		this.game.camera.y -= 47;
+		
+		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
+        this.inventario.fixedToCamera = true;
     },
     
     update:function(){
-        
+        zelda.gameOptions.GoToOverworld();
     }
 };

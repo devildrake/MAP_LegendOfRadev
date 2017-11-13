@@ -86,6 +86,14 @@ zelda.overworld = {
 		this.game.physics.arcade.enable(this.trigger_E);
 		this.trigger_D_2 = this.game.add.sprite(3*16*16+2*16, 3*11*16+6*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_D_2);
+		this.trigger_M_2 = this.game.add.sprite(3*16*16+6*16, 2*11*16+5*16, "trigger");
+		this.game.physics.arcade.enable(this.trigger_M_2);
+		this.trigger_I_2 = this.game.add.sprite(4*16*16+9*16, 4*11*16 + 5*16, "trigger");
+		this.game.physics.arcade.enable(this.trigger_I_2);
+		this.trigger_A = this.game.add.sprite(4*16*16+5*16, 16*11+3*16, "trigger");
+		this.game.physics.arcade.enable(this.trigger_A);
+		this.trigger_H = this.game.add.sprite(5*16*16+6*16,5*16, "trigger");
+		this.game.physics.arcade.enable(this.trigger_A);
     },
     
     update:function(){
@@ -334,7 +342,32 @@ zelda.overworld = {
 			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
             zelda.game.state.start("secret_room_D");
-		});		
+		});
+		
+		this.game.physics.arcade.overlap(this.Link, this.trigger_M_2, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+            zelda.game.state.start("secret_room_M");
+		});
+		
+		this.game.physics.arcade.overlap(this.Link, this.trigger_I_2, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+            zelda.game.state.start("secret_room_I");
+		});
+		
+		this.game.physics.arcade.overlap(this.Link, this.trigger_A, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+            zelda.game.state.start("secret_room_I");
+		});
+		
+		this.game.physics.arcade.overlap(this.Link, this.trigger_H, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+            zelda.game.state.start("secret_room_H");
+		});
+		
         
         //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
