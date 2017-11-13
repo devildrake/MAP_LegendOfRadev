@@ -42,6 +42,8 @@ zelda.sala_secreta_A = {
         //objetos
         this.corazon = this.game.add.sprite(6*16, 6*16,"corazon");
         this.pocion = this.game.add.sprite(9*16, 6*16, "pocion");
+		
+		 this.game.camera.y -= 47;
     },
     
     update:function(){

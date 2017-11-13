@@ -44,6 +44,8 @@ zelda.sala_secreta_E = {
 		this.vida = this.game.add.sprite(zelda.secretLayout.item2_1X,zelda.secretLayout.itemY,"mana");
 		this.mana = this.game.add.sprite(zelda.secretLayout.item2_2X,zelda.secretLayout.itemY,"vida");
 		
+		 this.game.camera.y -= 47;
+		
 		this.papel = this.game.add.sprite(zelda.secretLayout.npcX+16, zelda.secretLayout.npcY, "papel");
 		this.papel.anchor.setTo(.5,0);
 	},

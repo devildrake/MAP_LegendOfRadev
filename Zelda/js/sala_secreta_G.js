@@ -39,6 +39,8 @@ zelda.sala_secreta_G = {
 		
 		this.moneda = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"rupia");
 		this.moneda.anchor.setTo(.5,0);
+		
+		 this.game.camera.y -= 47;
 	},
 	
 	update:function(){

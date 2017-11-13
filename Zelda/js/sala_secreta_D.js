@@ -36,6 +36,8 @@ zelda.sala_secreta_D = {
         this.npc = this.game.add.sprite(8*16, 4*16, "npc", 0);
         this.npc.anchor.setTo(.5,0);
 		
+		 this.game.camera.y -= 47;
+		
 		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
     },

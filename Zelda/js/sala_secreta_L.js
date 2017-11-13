@@ -2,8 +2,9 @@ var zelda = zelda || {}
 
 zelda.sala_secreta_L = {
 	init:function(){
+		this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		this.scale.setGameSize(zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight/2);
+		this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 	},
 	preload:function(){
 		this.game.stage.backgroundColor = "#black";
@@ -17,6 +18,7 @@ zelda.sala_secreta_L = {
 		this.load.image("escudo", "img/escudo.png");
 		this.load.image("comida", "img/comida.png");
 		this.load.image("corazon", "img/corazon.png");
+		this.load.image("inventario", "img/inventario.png");
 	},
 	
 	create:function(){
@@ -45,9 +47,13 @@ zelda.sala_secreta_L = {
 		this.comida.anchor.setTo(.5,0);
 		this.corazon = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "corazon");
 		
+		this.game.camera.y -= 47;
+		
+		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
+        this.inventario.fixedToCamera = true;
 	},
 	
 	update:function(){
-		
+		zelda.gameOptions.GoToOverworld();
 	}
 }

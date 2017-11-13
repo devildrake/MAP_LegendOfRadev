@@ -44,6 +44,8 @@ zelda.sala_secreta_K = {
 		this.bomba = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"bomba");
 		this.bomba.anchor.setTo(.5,0);
 		this.flecha = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "flecha",3);
+		
+		this.game.camera.y -= 47;
 	},
 	
 	update:function(){

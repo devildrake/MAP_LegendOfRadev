@@ -75,7 +75,13 @@ zelda.overworld = {
         this.trigger_espada = this.game.add.sprite(2*16*16 + 4*16, 4*11*16 + 16, "trigger");
         this.game.physics.arcade.enable(this.trigger_espada);
         this.trigger_D = this.game.add.sprite(16*16+6*16, 4*11*16 + 16, "trigger");
-        this.game.physics.arcade.enagle(this.trigger_D);
+        this.game.physics.arcade.enable(this.trigger_D);
+		this.trigger_M = this.game.add.sprite(16*16+7*16, 3*11*16+16, "trigger");
+		this.game.physics.arcade.enable(this.trigger_M);
+		this.trigger_I = this.game.add.sprite(16*16+10*16, 2*11*16 + 6*16, "trigger");
+		this.game.physics.arcade.enable(this.trigger_I);
+		this.trigger_L = this.game.add.sprite(16*16+9*16, 11*16+7*16, "trigger");
+		this.game.physics.arcade.enable(this.trigger_L);
     },
     
     update:function(){
@@ -296,6 +302,24 @@ zelda.overworld = {
             zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
             zelda.game.state.start("secret_room_D");
         });
+		
+		this.game.physics.arcade.overlap(this.Link, this.trigger_M, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+            zelda.game.state.start("secret_room_M");
+		});
+		
+		this.game.physics.arcade.overlap(this.Link, this.trigger_I, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+            zelda.game.state.start("secret_room_I");
+		});
+		
+		this.game.physics.arcade.overlap(this.Link, this.trigger_L, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x - 16;
+            zelda.game.state.start("secret_room_L");
+		});
+		
         
         //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
