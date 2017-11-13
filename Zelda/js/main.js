@@ -1,8 +1,8 @@
 var zelda = zelda || {};
 
 zelda.gameOptions = {
-	gameWidth:16*16,
-	gameHeight:11*16,
+	gameWidth:16*16, //256
+	gameHeight:11*16 + 47,//176 + 47 = 223
     linkSpeed:100
 }
 

@@ -15,6 +15,7 @@ zelda.overworld = {
         this.load.spritesheet("Sword","img/Swords.png",16,16);
         this.load.image("camaraHorizontal", "img/camara_horizontal.png");
         this.load.image("camaraVertical", "img/camara_vertical.png");
+        this.load.image("inventario", "img/inventario.png")
     },
 
     create:function(){
@@ -63,6 +64,10 @@ zelda.overworld = {
         this.game.camera.focusOn(this.Link);
         //this.game.camera.follow(this.Link);
         this.SetCamera();
+        
+        //INVENTARIO POR ENCIMA DE TODO LO DEMÁS
+        this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
+        this.inventario.fixedToCamera = true;
     },
     
     update:function(){
@@ -239,20 +244,19 @@ zelda.overworld = {
         
         //FUNCIONAMIENTO DEL CAMBIO DE CAMARA
 		this.game.physics.arcade.collide(this.Link,this.cameraTop, function(){
-			zelda.game.camera.y -= zelda.game.camera.height;
-            
-            zelda.overworld.cameraTop.body.position.y -= zelda.overworld.camera.height;
-            zelda.overworld.cameraBot.body.position.y -= zelda.overworld.camera.height;
-            zelda.overworld.cameraLeft.body.position.y -= zelda.overworld.camera.height;
-            zelda.overworld.cameraRight.body.position.y -= zelda.overworld.camera.height;
+			zelda.game.camera.y -= zelda.game.camera.height - 47;
+            zelda.overworld.cameraTop.body.position.y -= zelda.overworld.camera.height-47;
+            zelda.overworld.cameraBot.body.position.y -= zelda.overworld.camera.height-47;
+            zelda.overworld.cameraLeft.body.position.y -= zelda.overworld.camera.height-47;
+            zelda.overworld.cameraRight.body.position.y -= zelda.overworld.camera.height-47;
             zelda.overworld.Link.body.position.y -= 20;
 		});
 		this.game.physics.arcade.collide(this.Link,this.cameraBot, function(){
             zelda.game.camera.y += zelda.game.camera.height;
-			zelda.overworld.cameraTop.body.position.y += zelda.overworld.camera.height;
-            zelda.overworld.cameraBot.body.position.y += zelda.overworld.camera.height;
-            zelda.overworld.cameraLeft.body.position.y += zelda.overworld.camera.height;
-            zelda.overworld.cameraRight.body.position.y += zelda.overworld.camera.height;
+			zelda.overworld.cameraTop.body.position.y += zelda.overworld.camera.height-47;
+            zelda.overworld.cameraBot.body.position.y += zelda.overworld.camera.height-47;
+            zelda.overworld.cameraLeft.body.position.y += zelda.overworld.camera.height-47;
+            zelda.overworld.cameraRight.body.position.y += zelda.overworld.camera.height-47;
             zelda.overworld.Link.body.position.y += 20;
         });
         this.game.physics.arcade.collide(this.Link,this.cameraRight,function(){
@@ -271,24 +275,27 @@ zelda.overworld = {
             zelda.overworld.cameraLeft.body.position.x -= zelda.overworld.camera.width;
             zelda.overworld.Link.body.position.x -= 20;
         });
+    }, 
+    //======================FINAL DEL UPDATE===========================
+    /*
+    ScrollCameraTop:function(){
+        for(var i = 0; i<this.camera.height; i += this.camera.height/100){
+            this.camera.position. -= this.camera.height/100;
+        }
+        //.Link.body.position.y -= 20;
+    },
+    */
+    
+    ScrollInventario(var upOrDown){
+        if(upOrDown == "down"){
+            while(this.inventario.x < 0){
+                this.inventario.x += 0.1;
+            }
+        }
     },
     
-    SetCameraBounds:function(){
-        this.cameraTop.body.position.x = this.camera.x;
-        this.cameraTop.body.position.y = this.camera.y;
-        
-		this.cameraBot.body.position.x = this.camera.x;
-        this.cameraBot.body.position.y = this.camera.y + this.camera.height;
-        
-        this.cameraRight.body.position.x = this.camera.x + this.camera.width;
-		this.cameraRight.body.position.y = this.camera.y;
-        
-        this.cameraLeft.body.position.x = this.camera.x;
-		this.cameraLeft.body.position.y = this.camera.y;
-	},
-    
     SetCamera:function(){
-        this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y, "camaraHorizontal");
+        this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y + 47, "camaraHorizontal");
         this.cameraTop.anchor.setTo(0,1); 
         this.game.physics.arcade.enable(this.cameraTop);
         //this.cameraTop.fixedToCamera = true;
