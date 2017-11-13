@@ -84,6 +84,8 @@ zelda.overworld = {
 		this.game.physics.arcade.enable(this.trigger_L);
 		this.trigger_E = this.game.add.sprite(3*16*16+4*16, 4*11*16+6*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_E);
+		this.trigger_D_2 = this.game.add.sprite(3*16*16+2*16, 3*11*16+6*16, "trigger");
+		this.game.physics.arcade.enable(this.trigger_D_2);
     },
     
     update:function(){
@@ -328,6 +330,11 @@ zelda.overworld = {
             zelda.game.state.start("secret_room_E");
 		});
 		
+		this.game.physics.arcade.overlap(this.Link, this.trigger_D_2, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+            zelda.game.state.start("secret_room_D");
+		});		
         
         //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
