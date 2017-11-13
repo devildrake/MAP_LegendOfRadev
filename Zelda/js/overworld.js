@@ -15,7 +15,9 @@ zelda.overworld = {
         this.load.spritesheet("Sword","img/Swords.png",16,16);
         this.load.image("camaraHorizontal", "img/camara_horizontal.png");
         this.load.image("camaraVertical", "img/camara_vertical.png");
-        this.load.image("inventario", "img/inventario.png")
+        this.load.image("inventario", "img/inventario.png");
+        this.load.image("trigger", "img/trigger_salas_color.png");
+        //this.load.image("trigger", "img/trigger_salas.png");
     },
 
     create:function(){
@@ -48,7 +50,7 @@ zelda.overworld = {
         this.game.physics.arcade.enable(this.projectile);
 
         //Spritesheet de Link, con sus animaciones de movimiento (LAS DE ATAQUE SON FRAMES QUIETOS) al que se aplican las físicas
-        this.Link = this.game.add.sprite(2*16*16+8*16, 4*11*16 + 8*16, "Link");
+        this.Link = this.game.add.sprite(zelda.LinkObject.lastPositionX, zelda.LinkObject.lastPositionY, "Link");
         this.Link.scale.setTo(1);
         this.Link.anchor.setTo(.5);
 		this.Link.animations.add("movingDown", [0,1], 5, true);
@@ -68,6 +70,12 @@ zelda.overworld = {
         //INVENTARIO POR ENCIMA DE TODO LO DEMÁS
         this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
+        
+        //TRIGGERS PARA SALAS SECRETAS
+        this.trigger_espada = this.game.add.sprite(2*16*16 + 4*16, 4*11*16 + 16, "trigger");
+        this.game.physics.arcade.enable(this.trigger_espada);
+        this.trigger_D = this.game.add.sprite(16*16+6*16, 4*11*16 + 16, "trigger");
+        this.game.physics.arcade.enagle(this.trigger_D);
     },
     
     update:function(){
@@ -275,6 +283,31 @@ zelda.overworld = {
             zelda.overworld.cameraLeft.body.position.x -= zelda.overworld.camera.width;
             zelda.overworld.Link.body.position.x -= 20;
         });
+        
+        //TRIGGERS PARA CAMBIOS DE PANTALLA
+        this.game.physics.arcade.overlap(this.Link, this.trigger_espada, function(){
+            zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+            zelda.game.state.start("sword_room");
+        });
+        
+        this.game.physics.arcade.overlap(this.Link, this.trigger_D, function(){
+            zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+            zelda.game.state.start("secret_room_D");
+        });
+        
+        //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
+            zelda.game.camera.y -= 10;
+        }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.S)){
+            zelda.game.camera.y +=10;
+        }
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.D)){
+            zelda.game.camera.x += 10;
+        }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.A)){
+            zelda.game.camera.x -= 10;
+        }
     }, 
     //======================FINAL DEL UPDATE===========================
     /*
@@ -285,7 +318,7 @@ zelda.overworld = {
         //.Link.body.position.y -= 20;
     },
     */
-    
+    /*
     ScrollInventario(var upOrDown){
         if(upOrDown == "down"){
             while(this.inventario.x < 0){
@@ -293,7 +326,7 @@ zelda.overworld = {
             }
         }
     },
-    
+    */
     SetCamera:function(){
         this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y + 47, "camaraHorizontal");
         this.cameraTop.anchor.setTo(0,1); 

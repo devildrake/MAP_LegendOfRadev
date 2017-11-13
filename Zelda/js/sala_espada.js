@@ -2,8 +2,10 @@ var zelda = zelda || {}
 
 zelda.sala_espada = {
     init:function(){
+        this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		this.scale.setGameSize(zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight/2);
+		this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
+        
 	},
     
     preload:function(){
@@ -15,6 +17,7 @@ zelda.sala_espada = {
         this.load.spritesheet("npc", "img/oldman.png",16, 16);
         //-------------------------------------------
         this.load.spritesheet("sword", "img/Swords.png", 16,16);
+        this.load.image("inventario", "img/inventario.png");
     },
     
     create:function(){
@@ -41,9 +44,14 @@ zelda.sala_espada = {
         this.sword = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY+8, "sword", 1);
         this.sword.anchor.setTo(.5);
         this.sword.scale.setTo(1,-1);
+        
+        this.game.camera.y -= 47;
+        
+        this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
+        this.inventario.fixedToCamera = true;
     },
     
     update:function(){
-        
+       zelda.gameOptions.GoToOverworld();
     }
 }

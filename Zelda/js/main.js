@@ -3,7 +3,14 @@ var zelda = zelda || {};
 zelda.gameOptions = {
 	gameWidth:16*16, //256
 	gameHeight:11*16 + 47,//176 + 47 = 223
-    linkSpeed:100
+    linkSpeed:100,
+	
+	GoToOverworld:function(){
+		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
+            zelda.game.state.start("overworld");
+        }
+	}
+	
 }
 
 //objeto para colocar los elementos del layout de las salas secretas
@@ -31,6 +38,9 @@ zelda.secretLayout = {
 zelda.LinkObject = {
     maxHearts: 3,
     currentHearts: 3,
+    
+    lastPositionX: 2*16*16+8*16,
+    lastPositionY: 4*11*16 + 8*16,
     
     //Tiene 3 bools para saber a donde esta y estaba mirando para el tema orientación
     lookingUp: false,
@@ -120,7 +130,11 @@ zelda.Inventory={
         
         
     }, 
+	
+	
 }
+
+
 
 zelda.game = new Phaser.Game(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight,Phaser.AUTO, null, this, false, false);
 zelda.game.state.add("main", zelda.intro);
@@ -138,4 +152,5 @@ zelda.game.state.add("overworld", zelda.overworld);
 zelda.game.state.add("dungeon", zelda.dungeon);
 
 //Escena que se pinta
-zelda.game.state.start("overworld");
+//zelda.game.state.start("overworld");
+zelda.game.state.start("secret_room_D");
