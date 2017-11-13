@@ -2,8 +2,9 @@ var zelda = zelda || {}
 
 zelda.sala_secreta_K = {
 	init:function(){
+		this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		this.scale.setGameSize(zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight/2);
+		this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 	},
 	
 	preload:function(){
@@ -17,6 +18,7 @@ zelda.sala_secreta_K = {
 		this.load.spritesheet("flecha", "img/arrow.png",16,16);
 		this.load.image("escudo", "img/escudo.png");
 		this.load.image("bomba", "img/bomba.png");
+		this.load.image("inventario", "img/inventario.png");
 	},
 	
 	create:function(){
@@ -46,9 +48,12 @@ zelda.sala_secreta_K = {
 		this.flecha = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "flecha",3);
 		
 		this.game.camera.y -= 47;
+		
+		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
+        this.inventario.fixedToCamera = true;
 	},
 	
 	update:function(){
-		
+		zelda.gameOptions.GoToOverworld();
 	}
 }
