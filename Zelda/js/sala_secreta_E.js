@@ -2,8 +2,9 @@ var zelda = zelda || {}
 
 zelda.sala_secreta_E = {
 	init:function(){
+		this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		this.scale.setGameSize(zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight/2);
+		this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 	},
 	
 	preload:function(){
@@ -18,6 +19,7 @@ zelda.sala_secreta_E = {
 		this.load.image("vida","img/pocion_vida.png");
 		this.load.image("mana", "img/pocion_azul.png");
 		this.load.image("papel", "img/objeto_azul.png");
+		this.load.image("inventario", "img/inventario.png");
 	},
 	
 	create:function(){
@@ -44,13 +46,16 @@ zelda.sala_secreta_E = {
 		this.vida = this.game.add.sprite(zelda.secretLayout.item2_1X,zelda.secretLayout.itemY,"mana");
 		this.mana = this.game.add.sprite(zelda.secretLayout.item2_2X,zelda.secretLayout.itemY,"vida");
 		
-		 this.game.camera.y -= 47;
-		
 		this.papel = this.game.add.sprite(zelda.secretLayout.npcX+16, zelda.secretLayout.npcY, "papel");
 		this.papel.anchor.setTo(.5,0);
+		
+		this.game.camera.y -= 47;
+		
+		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
+        this.inventario.fixedToCamera = true;
 	},
 	
 	update:function(){
-		
+		zelda.gameOptions.GoToOverworld();
 	}
 }

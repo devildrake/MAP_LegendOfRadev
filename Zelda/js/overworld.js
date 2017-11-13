@@ -82,6 +82,8 @@ zelda.overworld = {
 		this.game.physics.arcade.enable(this.trigger_I);
 		this.trigger_L = this.game.add.sprite(16*16+9*16, 11*16+7*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_L);
+		this.trigger_E = this.game.add.sprite(3*16*16+4*16, 4*11*16+6*16, "trigger");
+		this.game.physics.arcade.enable(this.trigger_E);
     },
     
     update:function(){
@@ -318,6 +320,12 @@ zelda.overworld = {
 		this.game.physics.arcade.overlap(this.Link, this.trigger_L, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x - 16;
             zelda.game.state.start("secret_room_L");
+		});
+		
+		this.game.physics.arcade.overlap(this.Link, this.trigger_E, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+            zelda.game.state.start("secret_room_E");
 		});
 		
         
