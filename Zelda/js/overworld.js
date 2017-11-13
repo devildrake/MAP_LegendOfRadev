@@ -61,7 +61,7 @@ zelda.overworld = {
         
         //Camara
         this.game.camera.focusOn(this.Link);
-        this.game.camera.follow(this.Link);
+        //this.game.camera.follow(this.Link);
         this.SetCamera();
     },
     
@@ -240,19 +240,36 @@ zelda.overworld = {
         //FUNCIONAMIENTO DEL CAMBIO DE CAMARA
 		this.game.physics.arcade.collide(this.Link,this.cameraTop, function(){
 			zelda.game.camera.y -= zelda.game.camera.height;
-			zelda.overworld.SetCameraBounds();
+            
+            zelda.overworld.cameraTop.body.position.y -= zelda.overworld.camera.height;
+            zelda.overworld.cameraBot.body.position.y -= zelda.overworld.camera.height;
+            zelda.overworld.cameraLeft.body.position.y -= zelda.overworld.camera.height;
+            zelda.overworld.cameraRight.body.position.y -= zelda.overworld.camera.height;
+            zelda.overworld.Link.body.position.y -= 20;
 		});
 		this.game.physics.arcade.collide(this.Link,this.cameraBot, function(){
             zelda.game.camera.y += zelda.game.camera.height;
-			zelda.overworld.SetCameraBounds();
+			zelda.overworld.cameraTop.body.position.y += zelda.overworld.camera.height;
+            zelda.overworld.cameraBot.body.position.y += zelda.overworld.camera.height;
+            zelda.overworld.cameraLeft.body.position.y += zelda.overworld.camera.height;
+            zelda.overworld.cameraRight.body.position.y += zelda.overworld.camera.height;
+            zelda.overworld.Link.body.position.y += 20;
         });
         this.game.physics.arcade.collide(this.Link,this.cameraRight,function(){
-            zelda.game.camera.y += zelda.game.camera.width;
-			zelda.overworld.SetCameraBounds();
+            zelda.game.camera.x += zelda.game.camera.width;
+			zelda.overworld.cameraTop.body.position.x += zelda.overworld.camera.width;
+            zelda.overworld.cameraBot.body.position.x += zelda.overworld.camera.width;
+            zelda.overworld.cameraRight.body.position.x += zelda.overworld.camera.width;
+            zelda.overworld.cameraLeft.body.position.x += zelda.overworld.camera.width;
+            zelda.overworld.Link.body.x += 20;
         });
         this.game.physics.arcade.collide(this.Link,this.cameraLeft,function(){
-            zelda.game.camera.y -= zelda.game.camera.width;
-			zelda.overworld.SetCameraBounds();
+            zelda.game.camera.x -= zelda.game.camera.width;
+			zelda.overworld.cameraTop.body.position.x -= zelda.overworld.camera.width;
+            zelda.overworld.cameraBot.body.position.x -= zelda.overworld.camera.width;
+            zelda.overworld.cameraRight.body.position.x -= zelda.overworld.camera.width;
+            zelda.overworld.cameraLeft.body.position.x -= zelda.overworld.camera.width;
+            zelda.overworld.Link.body.position.x -= 20;
         });
     },
     
