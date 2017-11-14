@@ -27,8 +27,9 @@ zelda.intro = {
 		this.background.scale.setTo(1);
 		this.background.animations.add("onward", [0,1,2,3,2,1,0], 2.5, true);
 
-		this.cascada = this.game.add.sprite(160,365,"cascada");
-		this.cascada.scale.setTo(1);
+		//this.cascada = this.game.add.sprite(160,365,"cascada");
+        this.cascada = this.game.add.sprite(80,182,"cascada");
+        this.cascada.scale.setTo(1);
 		this.cascada.animations.add("go", [0,1,2,3], 30, true); 
 
 
