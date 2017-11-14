@@ -2,13 +2,13 @@ var zelda = zelda || {}
 
 zelda.overworld = {
     init:function(){
-        this.game.world.setBounds(0,0,112*16,55*16);
+        this.game.world.setBounds(0,0,112*16,60*16);
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
     },
     
     preload:function(){
-        this.load.tilemap("map", "json/MapaZeldaOverWorld16x11.json", null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap("map", "json/MapaZeldaOverWorld16x11ConOffset.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("OverWorldTileSheetBien16x16", "img/tilesets/OverWorldTileSheetBien16x16.png");
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16);
         this.load.image("LinkCollider","img/Link/LinkCollider.png");
@@ -28,7 +28,11 @@ zelda.overworld = {
         ///Ya se crean las dos capas, Obstacles y ground
         this.map.createLayer("Ground");
         this.obstacles = this.map.createLayer("Obstacles");
-        this.map.setCollisionBetween(1,99,true,"Obstacles");
+        
+        //this.obstacles.fixedToCamera = false; this.obstacles.scrollFactorX = 0; this.obstacles.scrollFactorY = 5*16; this.obstacles.position.set(0,5*16);
+        
+        
+        this.map.setCollisionBetween(1,144,true,"Obstacles");
         
         //Inputs, flechas para andar y Space para atacar por ahora
         this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -42,20 +46,21 @@ zelda.overworld = {
 
         this.projectile = this.game.add.sprite(0,0,"Sword");
         this.projectile.anchor.setTo(0.5);
-        this.projectile.kill();
         this.projectile.Alive = false;
+        this.projectile.kill();
+        
         this.projectile.outOfBoundsKill = true;
         this.projectile.checkWorldBounds = true;
         this.projectile.events.onOutOfBounds.add(function notAlive(){this.projectile.Alive = false;}, this);
         
         this.game.physics.arcade.enable(this.projectile);
 
-        this.LinkCollider = this.game.add.sprite(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY,"LinkCollider");
+        this.LinkCollider = this.game.add.sprite(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY+16,"LinkCollider");
         this.LinkCollider.anchor.setTo(0.5,0);
         this.LinkCollider.scale.setTo(1);
         
         //Spritesheet de Link, con sus animaciones de movimiento (LAS DE ATAQUE SON FRAMES QUIETOS) al que se aplican las físicas
-        this.Link = this.game.add.sprite(zelda.LinkObject.lastPositionX, zelda.LinkObject.lastPositionY, "Link");
+        this.Link = this.game.add.sprite(zelda.LinkObject.lastPositionX, zelda.LinkObject.lastPositionY+16, "Link");
         this.Link.scale.setTo(1);
         this.Link.anchor.setTo(.5);
 		this.Link.animations.add("movingDown", [0,1], 5, true);
@@ -78,37 +83,37 @@ zelda.overworld = {
         this.inventario.fixedToCamera = true;
         
         //TRIGGERS PARA SALAS SECRETAS
-        this.trigger_espada = this.game.add.sprite(2*16*16 + 4*16, 4*11*16 + 16, "trigger");
+        this.trigger_espada = this.game.add.sprite(2*16*16 + 4*16, 4*11*16 + 16 +5*16, "trigger");
         this.game.physics.arcade.enable(this.trigger_espada);
-        this.trigger_D = this.game.add.sprite(16*16+6*16, 4*11*16 + 16, "trigger");
+        this.trigger_D = this.game.add.sprite(16*16+6*16, 4*11*16 + 16+5*16, "trigger");
         this.game.physics.arcade.enable(this.trigger_D);
-		this.trigger_M = this.game.add.sprite(16*16+7*16, 3*11*16+16, "trigger");
+		this.trigger_M = this.game.add.sprite(16*16+7*16, 3*11*16+16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_M);
-		this.trigger_I = this.game.add.sprite(16*16+10*16, 2*11*16 + 6*16, "trigger");
+		this.trigger_I = this.game.add.sprite(16*16+10*16, 2*11*16 + 6*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_I);
-		this.trigger_L = this.game.add.sprite(16*16+9*16, 11*16+7*16, "trigger");
+		this.trigger_L = this.game.add.sprite(16*16+9*16, 11*16+7*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_L);
-		this.trigger_E = this.game.add.sprite(3*16*16+4*16, 4*11*16+6*16, "trigger");
+		this.trigger_E = this.game.add.sprite(3*16*16+4*16, 4*11*16+6*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_E);
-		this.trigger_D_2 = this.game.add.sprite(3*16*16+2*16, 3*11*16+6*16, "trigger");
+		this.trigger_D_2 = this.game.add.sprite(3*16*16+2*16, 3*11*16+6*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_D_2);
-		this.trigger_M_2 = this.game.add.sprite(3*16*16+6*16, 2*11*16+5*16, "trigger");
+		this.trigger_M_2 = this.game.add.sprite(3*16*16+6*16, 2*11*16+5*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_M_2);
-		this.trigger_I_2 = this.game.add.sprite(4*16*16+9*16, 4*11*16 + 5*16, "trigger");
+		this.trigger_I_2 = this.game.add.sprite(4*16*16+9*16, 4*11*16 + 5*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_I_2);
-		this.trigger_A = this.game.add.sprite(4*16*16+5*16, 16*11+3*16, "trigger");
+		this.trigger_A = this.game.add.sprite(4*16*16+5*16, 16*11+3*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_A);
-		this.trigger_H = this.game.add.sprite(5*16*16+6*16,5*16, "trigger");
+		this.trigger_H = this.game.add.sprite(5*16*16+6*16,5*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_A);
-		this.trigger_G = this.game.add.sprite(5*16*16+12*16, 3*16*11+6*16, "trigger");
+		this.trigger_G = this.game.add.sprite(5*16*16+12*16, 3*16*11+6*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_G);
-		this.trigger_K = this.game.add.sprite(5*16*16+11*16, 16*11+1*16, "trigger");
+		this.trigger_K = this.game.add.sprite(5*16*16+11*16, 16*11+1*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_K);
-		this.trigger_I_2 = this.game.add.sprite(6*16*16+2*16, 2*11*16+6*16, "trigger");
+		this.trigger_I_2 = this.game.add.sprite(6*16*16+2*16, 2*11*16+6*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_I_2);
-		this.trigger_A_2 = this.game.add.sprite(6*16*16+9*16, 4*11*16 + 1*16, "trigger");
+		this.trigger_A_2 = this.game.add.sprite(6*16*16+9*16, 4*11*16 + 1*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_A_2);
-		this.trigger_K_2 = this.game.add.sprite(6*16*16+11*16, 16*11+2*16, "trigger");
+		this.trigger_K_2 = this.game.add.sprite(6*16*16+11*16, 16*11+2*16+5*16    , "trigger");
 		this.game.physics.arcade.enable(this.trigger_K_2);
     },
     
@@ -302,7 +307,7 @@ zelda.overworld = {
             zelda.overworld.LinkCollider.body.y-=20;
 		});
 		this.game.physics.arcade.collide(this.LinkCollider,this.cameraBot, function(){
-            zelda.game.camera.y += zelda.game.camera.height;
+            zelda.game.camera.y += zelda.game.camera.height -47;
 			zelda.overworld.cameraTop.body.position.y += zelda.overworld.camera.height-47;
             zelda.overworld.cameraBot.body.position.y += zelda.overworld.camera.height-47;
             zelda.overworld.cameraLeft.body.position.y += zelda.overworld.camera.height-47;
@@ -332,6 +337,23 @@ zelda.overworld = {
 
         });
         
+        this.game.physics.arcade.overlap(this.projectile,this.cameraBot,function(){
+        zelda.overworld.projectile.Alive = false;
+        zelda.overworld.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.projectile,this.cameraLeft,function(){
+        zelda.overworld.projectile.Alive = false;
+        zelda.overworld.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.projectile,this.cameraTop,function(){
+        zelda.overworld.projectile.Alive = false;
+        zelda.overworld.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.projectile,this.cameraRight,function(){
+        zelda.overworld.projectile.Alive = false;
+        zelda.overworld.projectile.kill();    
+        });
+
         //TRIGGERS PARA CAMBIOS DE PANTALLA
         this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_espada, function(){
             zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
@@ -528,7 +550,7 @@ zelda.overworld = {
     
 	createProjectile:function(sth){        
         if(!this.projectile.Alive){
-        this.projectile.reset(this.Link.x, this.Link.y);
+        this.projectile.reset(this.Link.position.x, this.Link.position.y);
             this.projectile.Alive = true;
             
             if(sth==0){
@@ -605,5 +627,6 @@ zelda.overworld = {
         
         
         }
-    }
+    },        
+
 }
