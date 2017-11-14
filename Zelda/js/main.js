@@ -10,7 +10,6 @@ zelda.gameOptions = {
             zelda.game.state.start("overworld");
         }
 	}
-	
 }
 
 //objeto para colocar los elementos del layout de las salas secretas

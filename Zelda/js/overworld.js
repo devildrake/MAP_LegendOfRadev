@@ -11,6 +11,7 @@ zelda.overworld = {
         this.load.tilemap("map", "json/MapaZeldaOverWorld16x11.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("OverWorldTileSheetBien16x16", "img/tilesets/OverWorldTileSheetBien16x16.png");
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16);
+        this.load.image("LinkCollider","img/Link/LinkCollider.png");
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
         this.load.image("camaraHorizontal", "img/camara_horizontal.png");
@@ -49,6 +50,10 @@ zelda.overworld = {
         
         this.game.physics.arcade.enable(this.projectile);
 
+        this.LinkCollider = this.game.add.sprite(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY,"LinkCollider");
+        this.LinkCollider.anchor.setTo(0.5,0);
+        this.LinkCollider.scale.setTo(1);
+        
         //Spritesheet de Link, con sus animaciones de movimiento (LAS DE ATAQUE SON FRAMES QUIETOS) al que se aplican las físicas
         this.Link = this.game.add.sprite(zelda.LinkObject.lastPositionX, zelda.LinkObject.lastPositionY, "Link");
         this.Link.scale.setTo(1);
@@ -60,7 +65,8 @@ zelda.overworld = {
         this.Link.animations.add("movingUpHurt", [16], 5, true);
         this.Link.animations.add("movingSideWaysHurt", [17,18],5,true);        
         
-        this.game.physics.arcade.enable(this.Link);
+        //this.game.physics.arcade.enable(this.Link);
+        this.game.physics.arcade.enable(this.LinkCollider);
         
         //Camara
         this.game.camera.focusOn(this.Link);
@@ -108,10 +114,11 @@ zelda.overworld = {
     
     update:function(){
         //Se reinicia la velocidad a 0 a cada frame           
-        this.Link.body.velocity.setTo(0);
+        //this.Link.body.velocity.setTo(0);
+        this.LinkCollider.body.velocity.setTo(0);
         
-        this.game.physics.arcade.collide(this.Link,this.obstacles);
-        
+        //this.game.physics.arcade.collide(this.Link,this.obstacles);
+        this.game.physics.arcade.collide(this.LinkCollider,this.obstacles);
         
         //La barra espaciadora pone attacking en true
         if(this.space.isDown&&this.space.downDuration(1)){
@@ -144,7 +151,9 @@ zelda.overworld = {
         //Comportamiento si attacking es false, es el movimiento con las flechas 
         if(!zelda.LinkObject.attacking){
             if(this.cursors.left.isDown){
-                this.Link.body.velocity.x = -zelda.gameOptions.linkSpeed;
+                
+                //this.Link.body.velocity.x = -zelda.gameOptions.linkSpeed;
+                this.LinkCollider.body.velocity.x= -zelda.gameOptions.linkSpeed;
                 
                 if(zelda.LinkObject.hurt)
                     this.Link.animations.play("movingSideWaysHurt");
@@ -162,7 +171,9 @@ zelda.overworld = {
                     this.Link.animations.play("movingSideWays");
                 
                 this.Link.scale.setTo(1);
-                this.Link.body.velocity.x = zelda.gameOptions.linkSpeed;
+                //this.Link.body.velocity.x = zelda.gameOptions.linkSpeed;
+                this.LinkCollider.body.velocity.x = zelda.gameOptions.linkSpeed;
+
                 zelda.LinkObject.ResetLooking();
 
             }else if(this.cursors.up.isDown){
@@ -170,7 +181,8 @@ zelda.overworld = {
                     zelda.LinkObject.switched = true;
                     this.game.time.events.add(Phaser.Timer.SECOND * 0.15,this.switchLinkScale , this);
                 }
-                this.Link.body.velocity.y = -zelda.gameOptions.linkSpeed;
+                //this.Link.body.velocity.y = -zelda.gameOptions.linkSpeed;
+                this.LinkCollider.body.velocity.y = -zelda.gameOptions.linkSpeed;
                 
                 if(zelda.LinkObject.hurt)
                     this.Link.animations.play("movingUpHurt");
@@ -182,7 +194,8 @@ zelda.overworld = {
 
             }else if(this.cursors.down.isDown){
                 this.Link.scale.setTo(1);
-                this.Link.body.velocity.y = zelda.gameOptions.linkSpeed;
+                //this.Link.body.velocity.y = zelda.gameOptions.linkSpeed;
+                this.LinkCollider.body.velocity.y = zelda.gameOptions.linkSpeed;
                 
                 if(zelda.LinkObject.hurt)
                     this.Link.animations.play("movingDownHurt");
@@ -279,131 +292,138 @@ zelda.overworld = {
         }
         
         //FUNCIONAMIENTO DEL CAMBIO DE CAMARA
-		this.game.physics.arcade.collide(this.Link,this.cameraTop, function(){
+		this.game.physics.arcade.collide(this.LinkCollider,this.cameraTop, function(){
 			zelda.game.camera.y -= zelda.game.camera.height - 47;
             zelda.overworld.cameraTop.body.position.y -= zelda.overworld.camera.height-47;
             zelda.overworld.cameraBot.body.position.y -= zelda.overworld.camera.height-47;
             zelda.overworld.cameraLeft.body.position.y -= zelda.overworld.camera.height-47;
             zelda.overworld.cameraRight.body.position.y -= zelda.overworld.camera.height-47;
-            zelda.overworld.Link.body.position.y -= 20;
+            zelda.overworld.Link.position.y -= 20;
+            zelda.overworld.LinkCollider.body.y-=20;
 		});
-		this.game.physics.arcade.collide(this.Link,this.cameraBot, function(){
+		this.game.physics.arcade.collide(this.LinkCollider,this.cameraBot, function(){
             zelda.game.camera.y += zelda.game.camera.height;
 			zelda.overworld.cameraTop.body.position.y += zelda.overworld.camera.height-47;
             zelda.overworld.cameraBot.body.position.y += zelda.overworld.camera.height-47;
             zelda.overworld.cameraLeft.body.position.y += zelda.overworld.camera.height-47;
             zelda.overworld.cameraRight.body.position.y += zelda.overworld.camera.height-47;
-            zelda.overworld.Link.body.position.y += 20;
+            zelda.overworld.Link.position.y += 20;
+            zelda.overworld.LinkCollider.body.y+=20;
+
         });
-        this.game.physics.arcade.collide(this.Link,this.cameraRight,function(){
+        this.game.physics.arcade.collide(this.LinkCollider,this.cameraRight,function(){
             zelda.game.camera.x += zelda.game.camera.width;
 			zelda.overworld.cameraTop.body.position.x += zelda.overworld.camera.width;
             zelda.overworld.cameraBot.body.position.x += zelda.overworld.camera.width;
             zelda.overworld.cameraRight.body.position.x += zelda.overworld.camera.width;
             zelda.overworld.cameraLeft.body.position.x += zelda.overworld.camera.width;
-            zelda.overworld.Link.body.x += 20;
+            zelda.overworld.Link.position.x += 20;
+            zelda.overworld.LinkCollider.body.x+=20;
+
         });
-        this.game.physics.arcade.collide(this.Link,this.cameraLeft,function(){
+        this.game.physics.arcade.collide(this.LinkCollider,this.cameraLeft,function(){
             zelda.game.camera.x -= zelda.game.camera.width;
 			zelda.overworld.cameraTop.body.position.x -= zelda.overworld.camera.width;
             zelda.overworld.cameraBot.body.position.x -= zelda.overworld.camera.width;
             zelda.overworld.cameraRight.body.position.x -= zelda.overworld.camera.width;
             zelda.overworld.cameraLeft.body.position.x -= zelda.overworld.camera.width;
-            zelda.overworld.Link.body.position.x -= 20;
+            zelda.overworld.Link.position.x -= 20;
+            zelda.overworld.LinkCollider.body.x-=20;
+
         });
         
         //TRIGGERS PARA CAMBIOS DE PANTALLA
-        this.game.physics.arcade.overlap(this.Link, this.trigger_espada, function(){
-            zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+        this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_espada, function(){
+            zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("sword_room");
         });
         
-        this.game.physics.arcade.overlap(this.Link, this.trigger_D, function(){
-            zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+        this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_D, function(){
+            zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_D");
         });
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_M, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_M, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_M");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_I, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_I, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_I");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_L, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x - 16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_L, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x - 16;
             zelda.game.state.start("secret_room_L");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_E, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_E, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_E");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_D_2, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_D_2, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_D");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_M_2, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_M_2, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_M");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_I_2, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_I_2, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_I");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_A, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_A, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_I");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_H, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_H, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_H");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_G, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_G, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_G");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_K, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_K, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_K");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_I_2, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_I_2, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_I");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_A_2, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.Link.body.y+16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_A_2, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 8;
+            zelda.LinkObject.lastPositionY = zelda.overworld.Link.position.y+16;
             zelda.game.state.start("secret_room_A");
 		});
 		
-		this.game.physics.arcade.overlap(this.Link, this.trigger_K_2, function(){
-			zelda.LinkObject.lastPositionX = zelda.overworld.Link.body.x + 16;
+		this.game.physics.arcade.overlap(this.LinkCollider, this.trigger_K_2, function(){
+			zelda.LinkObject.lastPositionX = zelda.overworld.Link.position.x + 16;
             zelda.game.state.start("secret_room_K");
 		});
 		
@@ -419,6 +439,9 @@ zelda.overworld = {
         }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.A)){
             zelda.game.camera.x -= 10;
         }
+        
+            this.Link.position = this.LinkCollider.position;
+
     }, 
     //======================FINAL DEL UPDATE===========================
     /*
@@ -533,7 +556,6 @@ zelda.overworld = {
             this.projectile.scale.x=-1;
             this.projectile.scale.y = 1;  
             }
-
 
         }
         
