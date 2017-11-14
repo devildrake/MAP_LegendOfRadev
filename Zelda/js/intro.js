@@ -4,7 +4,9 @@ var change = false;
 var mustScroll = true;
 zelda.intro = {
     init:function(){
-		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.game.world.setBounds(0,0,1024,240);
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        //this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 	},
     
     preload:function(){
@@ -22,11 +24,11 @@ zelda.intro = {
 
 
 		this.background = this.game.add.sprite(0,0, "introImage");
-		this.background.scale.setTo(2);
+		this.background.scale.setTo(1);
 		this.background.animations.add("onward", [0,1,2,3,2,1,0], 2.5, true);
 
 		this.cascada = this.game.add.sprite(160,365,"cascada");
-		this.cascada.scale.setTo(2);
+		this.cascada.scale.setTo(1);
 		this.cascada.animations.add("go", [0,1,2,3], 30, true); 
 
 
@@ -36,16 +38,16 @@ zelda.intro = {
         this.introMusic.play();
 
 		this.fader = this.game.add.sprite(0,0,"fotoNegra");
-		this.fader.scale.setTo(2);
+		this.fader.scale.setTo(1);
 		this.fader.alpha = 0;
         
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         
 		this.storyText = this.game.add.sprite(0,480, "storyText");
-		this.storyText.scale.setTo(2);
+		this.storyText.scale.setTo(1);
 
 		this.allTreasures = this.game.add.sprite(2,480+689,"allTreasures");
-		this.allTreasures.scale.setTo(2);    
+		this.allTreasures.scale.setTo(1);    
 
     },
     
@@ -77,7 +79,8 @@ zelda.intro = {
                 this.game.time.events.add(Phaser.Timer.SECOND * 4, this.moveAgain, this);
             }
             
-            if(this.allTreasures.position.y<-596*2){
+            //if(this.allTreasures.position.y<-596*2){
+            if(this.allTreasures.position.y<-596){
                 mustScroll = false;
                 this.game.time.events.add(Phaser.Timer.SECOND * 2, this.changeScene, this);
 
