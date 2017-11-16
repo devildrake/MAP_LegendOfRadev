@@ -7,9 +7,7 @@ zelda.gameOptions = {
     lastCameraPosX: 2*16*16+8*16,
     lastCameraPosY: 4*11*16 + 9*16,
 	GoToOverworld:function(){
-		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
-            zelda.game.state.start("overworld");
-        }
+		zelda.game.state.start("overworld");
 	}
 }
 

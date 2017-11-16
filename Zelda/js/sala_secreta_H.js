@@ -50,6 +50,8 @@ zelda.sala_secreta_H = {
 	},
 	
 	update:function(){
-		zelda.gameOptions.GoToOverworld();
+		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
+       		zelda.gameOptions.GoToOverworld();
+		}
 	}
 }
