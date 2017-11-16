@@ -18,8 +18,8 @@ zelda.overworld = {
         this.load.image("camaraHorizontal", "img/camara_horizontal.png");
         this.load.image("camaraVertical", "img/camara_vertical.png");
         this.load.image("inventario", "img/inventario.png");
-        this.load.image("trigger", "img/trigger_salas_color.png");
-        //this.load.image("trigger", "img/trigger_salas.png");
+        //this.load.image("trigger", "img/trigger_salas_color.png");
+        this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
     },
 
     create:function(){
