@@ -5,6 +5,7 @@ zelda.overworld = {
         this.game.world.setBounds(0,0,112*16,60*16);
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
+        zelda.enemySpawns.InitZones();
     },
     
     preload:function(){
@@ -305,6 +306,8 @@ zelda.overworld = {
             zelda.overworld.cameraRight.body.position.y -= zelda.overworld.camera.height-47;
             zelda.overworld.Link.position.y -= 20;
             zelda.overworld.LinkCollider.body.y-=20;
+            zelda.LinkObject.currentZone-=7;
+            console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
 		});
 		this.game.physics.arcade.collide(this.LinkCollider,this.cameraBot, function(){
             zelda.game.camera.y += zelda.game.camera.height -47;
@@ -314,6 +317,9 @@ zelda.overworld = {
             zelda.overworld.cameraRight.body.position.y += zelda.overworld.camera.height-47;
             zelda.overworld.Link.position.y += 20;
             zelda.overworld.LinkCollider.body.y+=20;
+            zelda.LinkObject.currentZone+=7;
+            console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
+
 
         });
         this.game.physics.arcade.collide(this.LinkCollider,this.cameraRight,function(){
@@ -324,6 +330,8 @@ zelda.overworld = {
             zelda.overworld.cameraLeft.body.position.x += zelda.overworld.camera.width;
             zelda.overworld.Link.position.x += 20;
             zelda.overworld.LinkCollider.body.x+=20;
+            zelda.LinkObject.currentZone++;
+            console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
 
         });
         this.game.physics.arcade.collide(this.LinkCollider,this.cameraLeft,function(){
@@ -334,6 +342,8 @@ zelda.overworld = {
             zelda.overworld.cameraLeft.body.position.x -= zelda.overworld.camera.width;
             zelda.overworld.Link.position.x -= 20;
             zelda.overworld.LinkCollider.body.x-=20;
+            zelda.LinkObject.currentZone--;
+            console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
 
         });
         

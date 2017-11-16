@@ -37,6 +37,7 @@ zelda.secretLayout = {
 zelda.LinkObject = {
     maxHearts: 3,
     currentHearts: 3,
+    currentZone: 7*4+2,
     
     lastPositionX: 2*16*16+8*16,
     lastPositionY: 4*11*16 + 8*16,
@@ -67,6 +68,50 @@ zelda.LinkObject = {
         this.lookingDown = false;
         this.lookingLeft = false;
     },
+}
+
+//Crear 10 bools por zona?
+zelda.enemySpawns = {
+zones: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+
+InitZones:function(){
+    this.zones[0] = [];
+    this.zones[1] = [];
+    this.zones[2] = [true];                           //OktorokNaranja
+    this.zones[3] = [true,true,true,true,true,true];  //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Azul - Oktorok Naranja
+    this.zones[4] = [];
+    this.zones[5] = [true,true,true];                 //Subterraneo naranja - Subterraneo azul - Subterraneo azul
+    this.zones[6] = [];
+    this.zones[7] = [];
+    this.zones[8] = [true];                           //BichoMar
+    this.zones[9] = [true];                           //BichoMar
+    this.zones[10] = [true,true,true,true,true];      //BichoMar - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja
+    this.zones[11] = [false,false,false,false,false]; //Oktorok Naranja - Oktorok Azul - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    this.zones[12] = [true,true,true,true,true,true]; //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - 
+    this.zones[13] = [true,true,true,true,true,true]; //Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - 
+    this.zones[14] = [true,true];                     //Oktorok naranja - Bichomar
+    this.zones[15] = [true,true,true,true,true];      //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    this.zones[16] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    this.zones[17] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    this.zones[18] = [true,true,true,true];           //Volador naranja - Volador naranja - Volador naranja - Volador naranja
+    this.zones[19] = [true,true,true,true];           //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    this.zones[20] = [true,true];                     //Cerdo Naranja - Cerdo Azul
+    this.zones[21] = [true,true];                     //BichoMar - Oktorok Naranja
+    this.zones[22] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    this.zones[23] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    this.zones[24] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    this.zones[25] = [true,true,true,true,true];      //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - BichoMar
+    this.zones[26] = [true,true,true,true,true];      //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    this.zones[27] = [true,true,true,true,true];      //Cerdo Azul - Cerdo Naranja - Cerdo Naranja - Oktorok Azul - Oktorok Azul
+    this.zones[28] = [false,false,false,false,false]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
+    this.zones[29] = [false,false,false,false,false]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
+    this.zones[30] = [false,false,false,false,false]; 
+    this.zones[31] = [false,false,false,false,false]; //Oktorok naranja - Oktorok naranja - Oktorok naranja - Oktorok naranja
+    this.zones[32] = [false,false,false,false,false]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    this.zones[33] = [false,false,false,false,false]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    this.zones[34] = [false,false,false,false,false]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+}
+    
 }
 
 zelda.Inventory={
