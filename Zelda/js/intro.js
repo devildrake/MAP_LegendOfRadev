@@ -49,6 +49,9 @@ zelda.intro = {
 
 		this.allTreasures = this.game.add.sprite(2,480+689,"allTreasures");
 		this.allTreasures.scale.setTo(1);    
+        
+        this.enter = this.game.input.keyboard.addKey(Phaser.Keyboard.ENTER);        
+
 
     },
     
@@ -87,6 +90,9 @@ zelda.intro = {
 
                 //CAMBIO DE ESCENA A ESCENA DE SELECCON DE PARTIDA
             } 
+        }
+        if(this.enter.isDown){
+            this.changeScene();
         }
     },
 	
