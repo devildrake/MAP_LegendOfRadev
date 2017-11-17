@@ -6,6 +6,11 @@ zelda.gameOptions = {
     linkSpeed:100,
     lastCameraPosX: 2*16*16+8*16,
     lastCameraPosY: 4*11*16 + 9*16,
+    cameraPosToGoX: 0,
+    cameraPosToGoY: 0,
+    borderToSet: "None",
+    setBorders: true,
+    cameraArrivedPos: true,
 	GoToOverworld:function(){
 		zelda.game.state.start("overworld");
 	}

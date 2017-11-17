@@ -23,6 +23,9 @@ zelda.overworld = {
     },
 
     create:function(){
+        
+
+        
         this.map = this.game.add.tilemap("map");
         this.map.addTilesetImage("OverWorldTileSheetBien16x16");
         
@@ -86,87 +89,221 @@ zelda.overworld = {
     
     update:function(){
                 
-        //FUNCIONAMIENTO DEL CAMBIO DE CAMARA
-		this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraTop, function(){
-			zelda.game.camera.y -= zelda.game.camera.height - 47;
-            zelda.overworld.cameraTop.body.position.y -= zelda.overworld.camera.height-47;
+        this.MoveCamera();
+        
+        this.SetBorders();
+        
+        this.LinkBorderColision();
+        
+        this.ProjectileBorderColision();
+        
+        this.LinkSecretRoomColision();
+		
+        
+        //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
+            zelda.game.camera.y -= 10;
+        }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.S)){
+            zelda.game.camera.y +=10;
+        }
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.D)){
+            zelda.game.camera.x += 10;
+        }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.A)){
+            zelda.game.camera.x -= 10;
+        }
+        
+            //this.Link.position = this.LinkCollider.position;
+        
+
+    }, 
+    //======================FINAL DEL UPDATE===========================
+    /*
+    ScrollCameraTop:function(){
+        for(var i = 0; i<this.camera.height; i += this.camera.height/100){
+            this.camera.position. -= this.camera.height/100;
+        }
+        //.Link.body.position.y -= 20;
+    },
+    */
+    /*
+    ScrollInventario(var upOrDown){
+        if(upOrDown == "down"){
+            while(this.inventario.x < 0){
+                this.inventario.x += 0.1;
+            }
+        }
+    },
+    */
+    SetCamera:function(){
+        this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y + 47, "camaraHorizontal");
+        this.cameraTop.anchor.setTo(0,1); 
+        this.game.physics.arcade.enable(this.cameraTop);
+        //this.cameraTop.fixedToCamera = true;
+        this.cameraTop.body.immovable = true;
+        
+        this.cameraBot = this.game.add.sprite(this.camera.x, this.camera.y+this.camera.height, "camaraHorizontal");
+        this.game.physics.arcade.enable(this.cameraBot);
+        //this.cameraBot.fixedToCamera = true;
+        this.cameraBot.body.immovable = true;
+        
+        this.cameraRight = this.game.add.sprite(this.camera.x+this.camera.width, this.camera.y, "camaraVertical");
+        this.game.physics.arcade.enable(this.cameraRight);
+        //this.cameraRight.fixedToCamera = true;
+        this.cameraRight.body.immovable = true;
+        
+        this.cameraLeft = this.game.add.sprite(this.camera.x, this.camera.y, "camaraVertical");
+        this.cameraLeft.anchor.setTo(1,0);
+        this.game.physics.arcade.enable(this.cameraLeft);
+        //this.cameraRight.fixedToCamera = true;
+        this.cameraLeft.body.immovable = true;
+    },
+    
+   MoveCamera:function(){
+               //Se comprueba si la posición de la camara no es la destiada (cameraPosToGoX y cameraPosToGoY y si el bool cameraArrivedPos es false para mover incrementalmente la camara)
+        if((zelda.game.camera.y!=zelda.gameOptions.cameraPosToGoY||zelda.game.camera.x!=zelda.gameOptions.cameraPosToGoX)&&!zelda.gameOptions.cameraArrivedPos){
+            
+            if(zelda.gameOptions.borderToSet=="Upwards"){
+                zelda.game.camera.y-=1;
+            }else if(zelda.gameOptions.borderToSet=="Downwards"){
+                zelda.game.camera.y+=1;
+            }else if(zelda.gameOptions.borderToSet=="Right"){
+                zelda.game.camera.x+=1;
+
+            }else{
+                zelda.game.camera.x-=1;
+            }
+        }
+        //CUANDO LLEGA a la posición destinada se pone en false setBorders para ajustar los bordes de pantalla a la nueva escena
+        else{
+            if(zelda.gameOptions.cameraArrivedPos==false){
+            zelda.gameOptions.cameraArrivedPos=true;
+             zelda.gameOptions.setBorders=false;   
+            }
+        }
+   },
+
+    SetBorders:function(){
+                //SE AJUSTAN LOS BORDES cuando setBorders es false y en función de borderToSet, el cual cambia en los métodos de las colisiones con los bordes
+        if(!zelda.gameOptions.setBorders){
+            if(zelda.gameOptions.borderToSet=="Upwards"){
+            zelda.overworld.cameraTop.body.position.y -= zelda.overworld.camera.height-47-800;
             zelda.overworld.cameraBot.body.position.y -= zelda.overworld.camera.height-47;
             zelda.overworld.cameraLeft.body.position.y -= zelda.overworld.camera.height-47;
             zelda.overworld.cameraRight.body.position.y -= zelda.overworld.camera.height-47;
+            }   else if(zelda.gameOptions.borderToSet=="Downwards"){
+            zelda.overworld.cameraTop.body.position.y += zelda.overworld.camera.height-47;
+            zelda.overworld.cameraBot.body.position.y += zelda.overworld.camera.height-47+800;
+            zelda.overworld.cameraLeft.body.position.y += zelda.overworld.camera.height-47;
+            zelda.overworld.cameraRight.body.position.y += zelda.overworld.camera.height-47;
+            
+            }else if(zelda.gameOptions.borderToSet=="Right"){
+            zelda.overworld.cameraTop.body.position.x += zelda.overworld.camera.width;
+            zelda.overworld.cameraBot.body.position.x += zelda.overworld.camera.width;
+            zelda.overworld.cameraRight.body.position.x += zelda.overworld.camera.width+800;
+            zelda.overworld.cameraLeft.body.position.x += zelda.overworld.camera.width;
+            }else{
+            zelda.overworld.cameraTop.body.position.x -= zelda.overworld.camera.width;
+            zelda.overworld.cameraBot.body.position.x -= zelda.overworld.camera.width;
+            zelda.overworld.cameraRight.body.position.x -= zelda.overworld.camera.width;
+            zelda.overworld.cameraLeft.body.position.x -= zelda.overworld.camera.width-800;
+            }
+            zelda.gameOptions.setBorders=true;   
+        }
+    },
+    
+    LinkBorderColision:function(){
+        //FUNCIONAMIENTO DEL CAMBIO DE CAMARA A NIVEL SET DE INFORMACIÓN, SE ESTABLECE QUE cameraArrived es false y se modifica a donde debe ir la cámara en función de con que borde ha chocado
+		this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraTop, function(){
+            zelda.gameOptions.cameraArrivedPos = false;
+            zelda.gameOptions.cameraPosToGoX = zelda.overworld.camera.x;
+            zelda.gameOptions.cameraPosToGoY = zelda.overworld.camera.y;
+            zelda.gameOptions.cameraPosToGoY-=zelda.overworld.camera.height-47;
+            
+            zelda.gameOptions.borderToSet = "Upwards";
+
             zelda.overworld.linkInstance.position.y -= 20;
+            
             zelda.overworld.linkInstance.LinkCollider.body.y-=20;
+            
             zelda.LinkObject.currentZone-=7;
-            zelda.gameOptions.lastCameraPosX = zelda.game.camera.x+128;
-            zelda.gameOptions.lastCameraPosY = zelda.game.camera.y +112;
+            
+            zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
+            zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
+            
+            zelda.overworld.cameraTop.body.position.y-=800;
+            
             console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
             console.log(zelda.gameOptions.lastCameraPosX);
             console.log(zelda.gameOptions.lastCameraPosY);
+                console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
+
 		});
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraBot, function(){
-            zelda.game.camera.y += zelda.game.camera.height -47;
-			zelda.overworld.cameraTop.body.position.y += zelda.overworld.camera.height-47;
-            zelda.overworld.cameraBot.body.position.y += zelda.overworld.camera.height-47;
-            zelda.overworld.cameraLeft.body.position.y += zelda.overworld.camera.height-47;
-            zelda.overworld.cameraRight.body.position.y += zelda.overworld.camera.height-47;
+            
+            zelda.gameOptions.borderToSet = "Downwards";
+            zelda.gameOptions.cameraArrivedPos = false;
+            zelda.gameOptions.cameraPosToGoX = zelda.overworld.camera.x;
+            zelda.gameOptions.cameraPosToGoY = zelda.overworld.camera.y;
+            zelda.gameOptions.cameraPosToGoY+=zelda.overworld.camera.height-47;
+            
+            
+            //OFFSET
+            zelda.overworld.cameraBot.body.position.y -=800;
+
             zelda.overworld.linkInstance.position.y += 20;
             zelda.overworld.linkInstance.LinkCollider.body.y+=20;
             zelda.LinkObject.currentZone+=7;
-            zelda.gameOptions.lastCameraPosX = zelda.game.camera.x+128;
-            zelda.gameOptions.lastCameraPosY = zelda.game.camera.y +112;
+            zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
+            zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
             console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
             console.log(zelda.gameOptions.lastCameraPosX);
             console.log(zelda.gameOptions.lastCameraPosY);
 
+            console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
+            
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraRight,function(){
-            zelda.game.camera.x += zelda.game.camera.width;
-			zelda.overworld.cameraTop.body.position.x += zelda.overworld.camera.width;
-            zelda.overworld.cameraBot.body.position.x += zelda.overworld.camera.width;
-            zelda.overworld.cameraRight.body.position.x += zelda.overworld.camera.width;
-            zelda.overworld.cameraLeft.body.position.x += zelda.overworld.camera.width;
+            zelda.gameOptions.borderToSet = "Right";
+            zelda.gameOptions.cameraArrivedPos = false;
+            zelda.gameOptions.cameraPosToGoX = zelda.overworld.camera.x;
+            zelda.gameOptions.cameraPosToGoY = zelda.overworld.camera.y;
+            zelda.gameOptions.cameraPosToGoX+=zelda.overworld.camera.width;
+            
+            //OFFSET
+            zelda.overworld.cameraRight.body.position.x -=800;
             zelda.overworld.linkInstance.position.x += 20;
             zelda.overworld.linkInstance.LinkCollider.body.x+=20;
             zelda.LinkObject.currentZone++;
-            zelda.gameOptions.lastCameraPosX = zelda.game.camera.x+128;
-            zelda.gameOptions.lastCameraPosY = zelda.game.camera.y +112;
+            zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
+            zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
             console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
             console.log(zelda.gameOptions.lastCameraPosX);
             console.log(zelda.gameOptions.lastCameraPosY);
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraLeft,function(){
-            zelda.game.camera.x -= zelda.game.camera.width;
-			zelda.overworld.cameraTop.body.position.x -= zelda.overworld.camera.width;
-            zelda.overworld.cameraBot.body.position.x -= zelda.overworld.camera.width;
-            zelda.overworld.cameraRight.body.position.x -= zelda.overworld.camera.width;
-            zelda.overworld.cameraLeft.body.position.x -= zelda.overworld.camera.width;
+            zelda.gameOptions.borderToSet = "Left";
+            zelda.gameOptions.cameraArrivedPos = false;
+            zelda.gameOptions.cameraPosToGoX = zelda.overworld.camera.x;
+            zelda.gameOptions.cameraPosToGoY = zelda.overworld.camera.y;
+            zelda.gameOptions.cameraPosToGoX-=zelda.overworld.camera.width;
+            
+            //OFFSET
+            zelda.overworld.cameraLeft.body.position.x -=800;
+            
             zelda.overworld.linkInstance.position.x -= 20;
             zelda.overworld.linkInstance.LinkCollider.body.x-=20;
             zelda.LinkObject.currentZone--;
-            zelda.gameOptions.lastCameraPosX = zelda.game.camera.x+128;
-            zelda.gameOptions.lastCameraPosY = zelda.game.camera.y +112;
+            zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
+            zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
             console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
             console.log(zelda.gameOptions.lastCameraPosX);
             console.log(zelda.gameOptions.lastCameraPosY);
 
         });
+    },
+    
+    LinkSecretRoomColision:function(){
         
-        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraBot,function(){
-        zelda.overworld.linkInstance.projectile.Alive = false;
-        zelda.overworld.linkInstance.projectile.kill();    
-        });
-        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraLeft,function(){
-        zelda.overworld.linkInstance.projectile.Alive = false;
-        zelda.overworld.linkInstance.projectile.kill();    
-        });
-        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraTop,function(){
-        zelda.overworld.linkInstance.projectile.Alive = false;
-        zelda.overworld.linkInstance.projectile.kill();    
-        });
-        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraRight,function(){
-        zelda.overworld.linkInstance.projectile.Alive = false;
-        zelda.overworld.linkInstance.projectile.kill();    
-        });
-
         //TRIGGERS PARA CAMBIOS DE PANTALLA
         this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_espada, function(){
             zelda.LinkObject.lastPositionX = zelda.overworld.linkInstance.position.x    ;
@@ -261,66 +398,25 @@ zelda.overworld = {
 			zelda.LinkObject.lastPositionX = zelda.overworld.linkInstance.position.x + 16;
             zelda.game.state.start("secret_room_K");
 		});
-		
-        
-        //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
-        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
-            zelda.game.camera.y -= 10;
-        }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.S)){
-            zelda.game.camera.y +=10;
-        }
-        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.D)){
-            zelda.game.camera.x += 10;
-        }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.A)){
-            zelda.game.camera.x -= 10;
-        }
-        
-            //this.Link.position = this.LinkCollider.position;
-        
-
-    }, 
-    //======================FINAL DEL UPDATE===========================
-    /*
-    ScrollCameraTop:function(){
-        for(var i = 0; i<this.camera.height; i += this.camera.height/100){
-            this.camera.position. -= this.camera.height/100;
-        }
-        //.Link.body.position.y -= 20;
-    },
-    */
-    /*
-    ScrollInventario(var upOrDown){
-        if(upOrDown == "down"){
-            while(this.inventario.x < 0){
-                this.inventario.x += 0.1;
-            }
-        }
-    },
-    */
-    SetCamera:function(){
-        this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y + 47, "camaraHorizontal");
-        this.cameraTop.anchor.setTo(0,1); 
-        this.game.physics.arcade.enable(this.cameraTop);
-        //this.cameraTop.fixedToCamera = true;
-        this.cameraTop.body.immovable = true;
-        
-        this.cameraBot = this.game.add.sprite(this.camera.x, this.camera.y+this.camera.height, "camaraHorizontal");
-        this.game.physics.arcade.enable(this.cameraBot);
-        //this.cameraBot.fixedToCamera = true;
-        this.cameraBot.body.immovable = true;
-        
-        this.cameraRight = this.game.add.sprite(this.camera.x+this.camera.width, this.camera.y, "camaraVertical");
-        this.game.physics.arcade.enable(this.cameraRight);
-        //this.cameraRight.fixedToCamera = true;
-        this.cameraRight.body.immovable = true;
-        
-        this.cameraLeft = this.game.add.sprite(this.camera.x, this.camera.y, "camaraVertical");
-        this.cameraLeft.anchor.setTo(1,0);
-        this.game.physics.arcade.enable(this.cameraLeft);
-        //this.cameraRight.fixedToCamera = true;
-        this.cameraLeft.body.immovable = true;
     },
     
-   
+    ProjectileBorderColision:function(){
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraBot,function(){
+        zelda.overworld.linkInstance.projectile.Alive = false;
+        zelda.overworld.linkInstance.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraLeft,function(){
+        zelda.overworld.linkInstance.projectile.Alive = false;
+        zelda.overworld.linkInstance.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraTop,function(){
+        zelda.overworld.linkInstance.projectile.Alive = false;
+        zelda.overworld.linkInstance.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraRight,function(){
+        zelda.overworld.linkInstance.projectile.Alive = false;
+        zelda.overworld.linkInstance.projectile.kill();    
+        });
+    }
 
 }
