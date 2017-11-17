@@ -221,9 +221,9 @@ zelda.overworld = {
             
             zelda.gameOptions.borderToSet = "Upwards";
 
-            zelda.overworld.linkInstance.position.y -= 20;
+            zelda.overworld.linkInstance.position.y -= 4;
             
-            zelda.overworld.linkInstance.LinkCollider.body.y-=20;
+            zelda.overworld.linkInstance.LinkCollider.body.y-=4;
             
             zelda.LinkObject.currentZone-=7;
             
@@ -250,8 +250,8 @@ zelda.overworld = {
             //OFFSET
             zelda.overworld.cameraBot.body.position.y -=800;
 
-            zelda.overworld.linkInstance.position.y += 20;
-            zelda.overworld.linkInstance.LinkCollider.body.y+=20;
+            zelda.overworld.linkInstance.position.y += 4;
+            zelda.overworld.linkInstance.LinkCollider.body.y+=4;
             zelda.LinkObject.currentZone+=7;
             zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
             zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
@@ -271,8 +271,8 @@ zelda.overworld = {
             
             //OFFSET
             zelda.overworld.cameraRight.body.position.x -=800;
-            zelda.overworld.linkInstance.position.x += 20;
-            zelda.overworld.linkInstance.LinkCollider.body.x+=20;
+            zelda.overworld.linkInstance.position.x += 4;
+            zelda.overworld.linkInstance.LinkCollider.body.x+=4;
             zelda.LinkObject.currentZone++;
             zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
             zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
@@ -290,8 +290,8 @@ zelda.overworld = {
             //OFFSET
             zelda.overworld.cameraLeft.body.position.x -=800;
             
-            zelda.overworld.linkInstance.position.x -= 20;
-            zelda.overworld.linkInstance.LinkCollider.body.x-=20;
+            zelda.overworld.linkInstance.position.x -= 4;
+            zelda.overworld.linkInstance.LinkCollider.body.x-=4;
             zelda.LinkObject.currentZone--;
             zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
             zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
