@@ -12,6 +12,7 @@ zelda.overworld = {
         this.load.tilemap("map", "json/MapaZeldaOverWorld16x11ConOffset.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("OverWorldTileSheetBien16x16", "img/tilesets/OverWorldTileSheetBien16x16.png");
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16);
+        this.load.spritesheet("Oktorok","img/OktorokSpriteSheet.png",16,16);
         this.load.image("LinkCollider","img/Link/LinkCollider.png");
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
@@ -84,6 +85,9 @@ zelda.overworld = {
         
         this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
         
+        
+        this.oktorok = new zelda.OktorokPrefab(this.game,640,850,0);
+        this.game.add.existing(this.jumper);
         
     },
     
