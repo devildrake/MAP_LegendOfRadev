@@ -32,11 +32,7 @@ zelda.overworld = {
         
         //this.obstacles.fixedToCamera = false; this.obstacles.scrollFactorX = 0; this.obstacles.scrollFactorY = 5*16; this.obstacles.position.set(0,5*16);
         
-        
         this.map.setCollisionBetween(1,144,true,"Obstacles");
-        
-        //Inputs, flechas para andar y Space para atacar por ahora
-       
         
         //Camara
         this.game.camera.focusOnXY(zelda.gameOptions.lastCameraPosX,zelda.gameOptions.lastCameraPosY);
