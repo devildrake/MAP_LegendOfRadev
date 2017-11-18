@@ -46,10 +46,11 @@ zelda.LinkObject = {
     lastPositionX: 2*16*16+8*16,
     lastPositionY: 4*11*16 + 8*16,
     
-    //Tiene 3 bools para saber a donde esta y estaba mirando para el tema orientación
+    //Tiene 4 bools para saber a donde esta y estaba mirando para el tema orientación
     lookingUp: false,
     lookingDown: false,
     lookingLeft: false,
+    lookingRight:false,
     
     //Un booleano para gestionar si ha recibido daño
     hurt: false,
@@ -75,6 +76,7 @@ zelda.LinkObject = {
         this.lookingUp = false;
         this.lookingDown = false;
         this.lookingLeft = false;
+        this.lookingRight = false;
     },
 }
 
@@ -255,6 +257,14 @@ zelda.AIMethods = {
             obj.body.velocity.x=-50;
             obj.body.velocity.y = 0;
         }
+    },
+    
+    CreateProjectile: function(obj, velocity){
+            obj.projectile.Alive = true;
+            obj.projectile.reset(obj.body.position.x+8,obj.body.position.y+8);
+            obj.projectile.body.velocity.x = velocity.x*2;
+            obj.projectile.body.velocity.y = velocity.y*2;
+
     }
 }
 

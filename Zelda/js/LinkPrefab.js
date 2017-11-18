@@ -128,7 +128,7 @@ zelda.LinkPrefab.prototype.update = function(){
                 this.LinkCollider.body.velocity.x = zelda.gameOptions.linkSpeed;
 
                 zelda.LinkObject.ResetLooking();
-
+                zelda.LinkObject.lookingRight = true;
             }else if(this.cursors.up.isDown){
                 if(!zelda.LinkObject.switched){
                     zelda.LinkObject.switched = true;
@@ -178,6 +178,8 @@ zelda.LinkPrefab.prototype.update = function(){
                     else 
                         this.frame = 4;
                 }
+
+                
             }
     }else{
         this.animations.stop();

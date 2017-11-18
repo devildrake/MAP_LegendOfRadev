@@ -22,6 +22,7 @@ zelda.overworld = {
         this.load.image("inventario", "img/inventario.png");
         //this.load.image("trigger", "img/trigger_salas_color.png");
         this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
+        this.load.image("rockProjectile","img/RockProjectile.png");
     },
 
     create:function(){
