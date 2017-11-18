@@ -19,14 +19,18 @@ zelda.sala_secreta_A = {
         this.load.image("pocion","img/pocion_vida.png");
         this.load.image("corazon","img/slot_corazon.png");
 		this.load.image("inventario", "img/inventario.png");
+		
+		//para el prefab de link
+		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
+        this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
+        this.load.spritesheet("Sword","img/Swords.png",16,16);
     },
     
     create:function(){
-		this.allElements=[];
-        this.map = this.game.add.tilemap("sala1");
+        this.map = this.game.add.tilemap("sala");
         this.map.addTilesetImage("secret_tile");
-        this.map.createLayer("Rocas");
-		this.allElements.push(this.map);
+        this.obstacles = this.map.createLayer("Rocas");
+		this.map.setCollisionBetween(1,2,true,"Rocas");
         
         //fuego y animacion de este
         this.fire = [];
@@ -46,6 +50,8 @@ zelda.sala_secreta_A = {
         this.pocion = this.game.add.sprite(9*16, 6*16, "pocion");
 		
 		this.game.camera.y -= 47;
+		
+		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
 		
 		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;

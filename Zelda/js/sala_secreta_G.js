@@ -17,6 +17,7 @@ zelda.sala_secreta_G = {
         //-------------------------------------------
 		this.load.image("rupia", "img/rupia.png");
 		this.load.image("inventario", "img/inventario.png");
+		
 		//para el prefab de link
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
@@ -50,10 +51,12 @@ zelda.sala_secreta_G = {
 		
 		this.game.camera.y -= 47;
 		
+		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
+		
 		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
 		
-		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight/2,this);
+		
 	},
 	
 	update:function(){
