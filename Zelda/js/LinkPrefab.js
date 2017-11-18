@@ -52,6 +52,11 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.game.physics.arcade.enable(this.projectile);
 	this.game.physics.arcade.enable(this.LinkCollider);
     this.game.physics.arcade.enable(this);
+    this.game.physics.arcade.enable(this.sword);
+
+    
+    
+    
 };
 
 zelda.LinkPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -255,7 +260,6 @@ zelda.LinkPrefab.createSword = function(obj){
 		if(obj.frame ==9||obj.frame==23){
 
 			obj.sword.frame = 1;
-			obj.sword.Alive = true;
 			obj.sword.scale.y = 1;
 			obj.sword.scale.x = 1;
 			obj.sword.reset(obj.position.x,obj.position.y+16);
@@ -263,7 +267,6 @@ zelda.LinkPrefab.createSword = function(obj){
 		// up
 		else if(obj.frame == 10 || obj.frame==24){
 			obj.sword.frame = 1;
-			obj.sword.Alive = true;
 			obj.sword.scale.y= -1;
 			obj.sword.scale.x = 1;
 			obj.sword.reset(obj.position.x,obj.position.y-16);
@@ -274,7 +277,6 @@ zelda.LinkPrefab.createSword = function(obj){
 			if(zelda.LinkObject.lookingLeft){                    
 
 			obj.sword.frame = 0;
-			obj.sword.Alive = true;
 			obj.sword.scale.x = 1 ;
 			obj.sword.scale.y = 1 ;  
 			obj.sword.reset(obj.position.x-16,obj.position.y);
@@ -282,13 +284,14 @@ zelda.LinkPrefab.createSword = function(obj){
 			}
 			else{
 			obj.sword.frame = 0;
-			obj.sword.Alive = true;
 			obj.sword.scale.x= -1;
 			obj.sword.scale.y = 1;  
 			obj.sword.reset(obj.position.x+16,obj.position.y);
 
 			}
 		}
+        obj.sword.Alive = true;
+
 	}
 }
 

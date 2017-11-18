@@ -84,7 +84,7 @@ zelda.overworld = {
         
         
         
-        this.oktorok = new zelda.OktorokPrefab(this.game,640,850,0,this,1);
+        this.oktorok = new zelda.OktorokPrefab(this.game,640,850,1,this,1);
         this.game.add.existing(this.oktorok);
         
         
