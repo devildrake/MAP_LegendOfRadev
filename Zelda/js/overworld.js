@@ -90,11 +90,16 @@ zelda.overworld = {
         this.oktorok = new zelda.OktorokPrefab(this.game,640,850,1,this,1);
         this.game.add.existing(this.oktorok);
         
-        this.coraçao = new zelda.HeartPrefab(this.game,620,840,this,1);
-        this.game.add.existing(this.coraçao);
+        //this.coraçao = new zelda.HeartPrefab(this.game,620,840,this,1);
+        //this.game.add.existing(this.coraçao);
+        
+        
         
         this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
         
+            	this.loadHearts()
+
+        this.createHeart(620,840,this,1);
 
     },
     
@@ -431,6 +436,21 @@ zelda.overworld = {
         zelda.overworld.linkInstance.projectile.Alive = false;
         zelda.overworld.linkInstance.projectile.kill();    
         });
+    },
+    
+    	loadHearts:function(){
+		this.hearts = this.add.group();
+		this.hearts.enableBody = true;
+	},
+	
+	createHeart:function(posX,posY,which){
+		var heart = this.hearts.getFirstExists(false);
+		if(!heart){
+            heart = new zelda.HeartPrefab(this.game,posX,posY,this,which);
+			this.hearts.add(heart);
+		}else{
+			heart.reset(posX,posY);
+		}
     },
 
 
