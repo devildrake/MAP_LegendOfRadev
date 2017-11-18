@@ -25,8 +25,6 @@ zelda.overworld = {
 
     create:function(){
         
-
-        
         this.map = this.game.add.tilemap("map");
         this.map.addTilesetImage("OverWorldTileSheetBien16x16");
         
@@ -86,8 +84,8 @@ zelda.overworld = {
         this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
         
         
-        this.oktorok = new zelda.OktorokPrefab(this.game,640,850,0);
-        this.game.add.existing(this.jumper);
+       // this.oktorok = new zelda.OktorokPrefab(this.game,640,850,0);
+    //    this.game.add.existing(this.jumper);
         
     },
     
