@@ -25,6 +25,7 @@ zelda.overworld = {
         this.load.image("rockProjectile","img/RockProjectile.png");
         this.load.image("Heart","img/corazon.png");
         this.load.image("HalfHeart","img/mediocorazon.png");
+        this.load.spritesheet("Tektite","img/TektiteSpriteSheet.png",16,16);
 
     },
 
@@ -87,12 +88,17 @@ zelda.overworld = {
         
         
         
-        this.oktorok = new zelda.OktorokPrefab(this.game,640,850,1,this,1);
-        this.game.add.existing(this.oktorok);
+        //this.oktorok = new zelda.OktorokPrefab(this.game,640,850,1,this,1);
+        //this.game.add.existing(this.oktorok);
         
         //this.coraçao = new zelda.HeartPrefab(this.game,620,840,this,1);
         //this.game.add.existing(this.coraçao);
         
+        
+
+        
+        this.tektite = new zelda.TektitePrefab(this.game,620,840,1,this,30);
+        this.game.add.existing(this.tektite);
         
         
         this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
@@ -104,6 +110,11 @@ zelda.overworld = {
     },
     
     update:function(){
+        
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.R)){
+            zelda.TektitePrefab.CalculateRandomPos(this.tektite);
+            console.log(this.tektite.posToJump);
+        }
    
         this.MoveCamera();
         
