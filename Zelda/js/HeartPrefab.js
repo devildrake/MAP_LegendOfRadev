@@ -1,9 +1,13 @@
 var zelda = zelda || {};
 
-zelda.HeartPrefab = function(game,x,y,level){
+zelda.HeartPrefab = function(game,x,y,level,type){
 
-
+if(type==0)
 	Phaser.Sprite.call(this,game,x,y,"Heart");    
+else
+    Phaser.Sprite.call(this,game,x,y,"HalfHeart");    
+
+    
     this.scale.setTo(1);
     this.anchor.setTo(.5);
 	this.game.physics.arcade.enable(this);
@@ -21,11 +25,19 @@ zelda.HeartPrefab.prototype.update = function(){
         function(heart,linkInstance){
 
                 if(zelda.LinkObject.currentHearts!=zelda.LinkObject.maxHearts){
-                    zelda.LinkObject.currentHearts+=1;
-                    if(zelda.LinkObject.currentHearts>zelda.LinkObject.maxHearts){
-                        zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
+                    if(heart.type==0){
+                        zelda.LinkObject.currentHearts+=1;
+                        if(zelda.LinkObject.currentHearts>zelda.LinkObject.maxHearts){
+                            zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
+                        }
+                        heart.kill();
+                    }else{
+                        zelda.LinkObject.currentHearts-=0.5;
+                        if(zelda.LinkObject.currentHearts>zelda.LinkObject.maxHearts){
+                            zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
+                        }
+                        heart.kill();
                     }
-                    heart.kill();
                 }
                 
         } );
