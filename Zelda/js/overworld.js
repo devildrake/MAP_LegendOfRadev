@@ -23,6 +23,7 @@ zelda.overworld = {
         //this.load.image("trigger", "img/trigger_salas_color.png");
         this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
         this.load.image("rockProjectile","img/RockProjectile.png");
+        this.load.image("Heart","img/corazon.png");
     },
 
     create:function(){
@@ -87,6 +88,8 @@ zelda.overworld = {
         this.oktorok = new zelda.OktorokPrefab(this.game,640,850,1,this,1);
         this.game.add.existing(this.oktorok);
         
+        this.coraçao = new zelda.HeartPrefab(this.game,620,840,this);
+        this.game.add.existing(this.coraçao);
         
         this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
         

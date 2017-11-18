@@ -96,7 +96,7 @@ zelda.OktorokPrefab.prototype.update = function(){
             zelda.LinkObject.hurt = true;
             zelda.LinkObject.moveFromDmg=true;
             zelda.LinkObject.calledNotMoveFromDamage=false;
-
+            zelda.LinkObject.currentHearts-=0.5;
             if(enemy.body.velocity.y>0)
                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Down");
             else if(enemy.body.velocity.y<0)
@@ -210,7 +210,6 @@ zelda.OktorokPrefab.prototype.update = function(){
                         zelda.LinkObject.hurt = true;
                         zelda.LinkObject.moveFromDmg=true;
                         zelda.LinkObject.calledNotMoveFromDamage=false;
-
                         }
                     }
                 }
