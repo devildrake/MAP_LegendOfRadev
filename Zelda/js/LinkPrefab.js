@@ -51,6 +51,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 
 	this.game.physics.arcade.enable(this.projectile);
 	this.game.physics.arcade.enable(this.LinkCollider);
+    this.game.physics.arcade.enable(this);
 };
 
 zelda.LinkPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -62,8 +63,13 @@ zelda.LinkPrefab.prototype.constructor = zelda.LinkPrefab;
 zelda.LinkPrefab.prototype.update = function(){
 	//Se reinicia la velocidad a 0 a cada frame           
 	//this.Link.body.velocity.setTo(0);
-	this.LinkCollider.body.velocity.setTo(0);
-
+    
+    if(!zelda.LinkObject.moveFromDmg){
+	   this.LinkCollider.body.velocity.setTo(0);
+    }else if(!zelda.LinkObject.calledNotMoveFromDamage){
+        zelda.LinkObject.calledNotMoveFromDamage = true;
+        this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.setMoveFromDamageFalse, this.level);
+    }
 	//this.game.physics.arcade.collide(this.Link,this.obstacles);
 	this.game.physics.arcade.collide(this.LinkCollider,this.level.obstacles);
 
@@ -85,14 +91,14 @@ zelda.LinkPrefab.prototype.update = function(){
 		}
 		zelda.LinkObject.attacking = true;
 
-		//LINEA QUE HAY QUE BORRAR
-		zelda.LinkObject.hurt = true;
 	}
 
 	if(zelda.LinkObject.hurt&&!zelda.LinkObject.calledNotHurt){
 		this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.NotHurt , this.level);
 		zelda.LinkObject.calledNotHurt = true;
 	}
+    
+    
 
 	//Comportamiento si attacking es false, es el movimiento con las flechas 
 	if(!zelda.LinkObject.attacking){
@@ -376,5 +382,10 @@ zelda.LinkPrefab.makeLinkNotAttack = function(obj){
             obj.scale.x = -1;
         }        
         zelda.LinkObject.switched = false;
+    }
+    
+    zelda.LinkPrefab.setMoveFromDamageFalse = function(){
+        zelda.LinkObject.moveFromDmg = false;
+        zelda.LinkObject.calledNotMoveFromDamage = false;
     }
 

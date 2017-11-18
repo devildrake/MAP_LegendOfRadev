@@ -66,6 +66,10 @@ zelda.LinkObject = {
     //Este booleano sirve para animar el andar hacia arriba de Link, SE PUEDE SUSTITUIR POR UN SPRITESHEET QUE TENGA AMBOS FRAMES HACIA ARRIBA
     switched:false,
     
+    
+    calledNotMoveFromDamage: true,
+    moveFromDmg:false,
+    
     //Método para Reiniciar los booleanos de looking
     ResetLooking:function(){
         this.lookingUp = false;
@@ -182,8 +186,80 @@ zelda.Inventory={
 	
 }
 
+zelda.AIMethods = {
+    changeDir: function(obj,current){
+        var rand = zelda.randomDataGen.between(0,3);
+        //Up
+        if(current==0){
+            if(rand==0){
+                obj.body.velocity.y=0;
+                obj.body.velocity.x = obj.maxVelocity;
+            }else if(rand==1){
+                obj.body.velocity.y=0;
+                obj.body.velocity.x = -obj.maxVelocity;
+            }else{
+                obj.body.velocity.y= obj.maxVelocity;
+            }
+
+            //Down
+        }else if(current==1){
+            if(rand==0){
+                obj.body.velocity.y=0;
+                obj.body.velocity.x = obj.maxVelocity;
+            }else if(rand==1){
+                obj.body.velocity.y=0;
+                obj.body.velocity.x = -obj.maxVelocity;
+            }else{
+                obj.body.velocity.y= -obj.maxVelocity;
+            }
+
+            //Right
+        }else if(current==2){
+            if(rand==0){
+                obj.body.velocity.x=0;
+                obj.body.velocity.y = obj.maxVelocity;
+            }else if(rand==1){
+                obj.body.velocity.x=0;
+                obj.body.velocity.y = -obj.maxVelocity;
+            }else{
+                obj.body.velocity.x=-obj.maxVelocity;
+            }
+
+            //Left
+        }else{
+            if(rand==0){
+                obj.body.velocity.x=0;
+                obj.body.velocity.y = obj.maxVelocity;
+            }else if(rand==1){
+                obj.body.velocity.x=0;
+                obj.body.velocity.y = -obj.maxVelocity;
+            }else{
+                obj.body.velocity.x=obj.maxVelocity;
+            }
+        }
+    },
+    
+    GetHurt: function(obj, fromWhere){
+        if(fromWhere=="Up"){
+            obj.body.velocity.y=-50;
+            obj.body.velocity.x = 0;
+        }else if(fromWhere=="Down"){
+            obj.body.velocity.y=50;
+            obj.body.velocity.x = 0;
+
+        }else if(fromWhere=="Right"){
+            obj.body.velocity.x=50;
+            obj.body.velocity.y = 0;
+
+        }else{
+            obj.body.velocity.x=-50;
+            obj.body.velocity.y = 0;
+        }
+    }
+}
 
 
+zelda.randomDataGen = new Phaser.RandomDataGenerator();
 zelda.game = new Phaser.Game(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight,Phaser.AUTO, null, this, false, false);
 zelda.game.state.add("main", zelda.intro);
 zelda.game.state.add("sword_room", zelda.sala_espada);

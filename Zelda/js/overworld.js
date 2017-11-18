@@ -6,6 +6,7 @@ zelda.overworld = {
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
         zelda.enemySpawns.InitZones();
+
     },
     
     preload:function(){
@@ -24,7 +25,7 @@ zelda.overworld = {
     },
 
     create:function(){
-        
+
         this.map = this.game.add.tilemap("map");
         this.map.addTilesetImage("OverWorldTileSheetBien16x16");
         
@@ -81,16 +82,18 @@ zelda.overworld = {
 		this.game.physics.arcade.enable(this.trigger_K_2);
         
         
+        
+        this.oktorok = new zelda.OktorokPrefab(this.game,640,850,0,this,1);
+        this.game.add.existing(this.oktorok);
+        
+        
         this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
         
-        
-       // this.oktorok = new zelda.OktorokPrefab(this.game,640,850,0);
-    //    this.game.add.existing(this.jumper);
-        
+
     },
     
     update:function(){
-                
+   
         this.MoveCamera();
         
         this.SetBorders();
@@ -107,12 +110,15 @@ zelda.overworld = {
             zelda.game.camera.y -= 10;
         }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.S)){
             zelda.game.camera.y +=10;
+
         }
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.D)){
             zelda.game.camera.x += 10;
         }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.A)){
             zelda.game.camera.x -= 10;
         }
+        
+        
         
             //this.Link.position = this.LinkCollider.position;
         
@@ -419,6 +425,7 @@ zelda.overworld = {
         zelda.overworld.linkInstance.projectile.Alive = false;
         zelda.overworld.linkInstance.projectile.kill();    
         });
-    }
+    },
+
 
 }
