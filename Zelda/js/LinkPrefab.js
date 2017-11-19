@@ -18,6 +18,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.animations.add("movingUpHurt", [16], 5, true);
 	this.animations.add("movingSideWaysHurt", [17,18],5,true); 
 
+    this.grabbingObject = false;
 
 	this.level = level;
 	if(level != zelda.overworld){
@@ -62,7 +63,6 @@ zelda.LinkPrefab = function(game,x,y,level){
 zelda.LinkPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 
 zelda.LinkPrefab.prototype.constructor = zelda.LinkPrefab;
-
 
 
 zelda.LinkPrefab.prototype.update = function(){
@@ -187,7 +187,7 @@ zelda.LinkPrefab.prototype.update = function(){
     }
 	}
 	//Comportamiento si aun no se ha hecho invoke al método que pone attacking en false
-	else if(!zelda.LinkObject.calledNotAttack){
+	else if(!zelda.LinkObject.calledNotAttack&&zelda.LinkObject.attacking){
 		if(zelda.LinkObject.lookingDown){
 			this.scale.setTo(1);
 
@@ -249,7 +249,25 @@ zelda.LinkPrefab.prototype.update = function(){
 		//this.createSword();
 	}
 	this.position = this.LinkCollider.position;
+    
+    if(this.grabbingObject){
+		this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.StopGrabbing , this.level,this.level);
+        this.frame = 13;
+    }
+    
+    
 }
+
+zelda.LinkPrefab.GrabObject = function(level){
+    level.linkInstance.grabbingObject = true;
+    //level.linkInstance.getItemMusic.play();
+}
+
+zelda.LinkPrefab.StopGrabbing = function(level){
+    level.linkInstance.grabbingObject = false;
+}
+
+
 
 zelda.LinkPrefab.createSword = function(obj){
 	if(!obj.sword.Alive){

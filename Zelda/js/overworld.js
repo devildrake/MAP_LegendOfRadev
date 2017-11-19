@@ -27,6 +27,9 @@ zelda.overworld = {
         this.load.image("HalfHeart","img/mediocorazon.png");
         this.load.spritesheet("Tektite","img/TektiteSpriteSheet.png",16,16);
 
+        this.load.audio("getItem","sounds/Sfx/get_item.wav");
+        this.getItemMusic = this.add.audio("getItem");
+        
     },
 
     create:function(){
@@ -137,7 +140,10 @@ zelda.overworld = {
             zelda.game.camera.x -= 10;
         }
         
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.R)){
         
+        this.linkInstance.grabbingObject = true;
+        }
         
             //this.Link.position = this.LinkCollider.position;
         
