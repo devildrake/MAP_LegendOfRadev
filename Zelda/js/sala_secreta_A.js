@@ -55,12 +55,11 @@ zelda.sala_secreta_A = {
 		this.npc.animations.add("spawn",[0,1,2,3],6,false);
 		this.npc.animations.play("spawn");
 		this.npc.animations.currentAnim.onComplete.add(function(){
-			//console.log("ahora");
 			//objetos cuando acaba de spawnear el npc
-        	this.corazon = zelda.game.add.sprite(6*16, 6*16,"corazon");
-        	this.pocion = zelda.game.add.sprite(9*16, 6*16, "pocion");
-			zelda.game.physics.arcade.enable(this.corazon);
-			zelda.game.physics.arcade.enable(this.pocion);
+        	zelda.sala_secreta_A.corazon = zelda.game.add.sprite(6*16, 6*16,"corazon");
+        	zelda.sala_secreta_A.pocion = zelda.game.add.sprite(9*16, 6*16, "pocion");
+			zelda.game.physics.arcade.enable(zelda.sala_secreta_A.corazon);
+			zelda.game.physics.arcade.enable(zelda.sala_secreta_A.pocion);
 		});
 		
 		this.game.camera.y -= 47;
@@ -75,5 +74,14 @@ zelda.sala_secreta_A = {
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
+		
+		this.game.physics.arcade.overlap(this.link.LinkCollider,this.corazon, function(){
+			console.log("añadir comportamiento al coger un slot corazon");
+			zelda.sala_secreta_A.corazon.kill();
+		});
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.pocion, function(){
+			console.log("añadir comportamiento al coger la poción de vida");
+			zelda.sala_secreta_A.pocion.kill();
+		});
     }
 };
