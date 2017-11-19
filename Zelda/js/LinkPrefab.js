@@ -22,6 +22,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.level = level;
 	if(level != zelda.overworld){
 		this.LinkCollider = game.add.sprite(x,y,"LinkCollider");
+		this.frame = 0;
 	}else{
 		this.LinkCollider = game.add.sprite(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY,"LinkCollider");
 	}
@@ -224,7 +225,7 @@ zelda.LinkPrefab.prototype.update = function(){
 		this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.makeLinkNotAttack , this.level, this);
 		zelda.LinkObject.calledNotAttack = true;
 
-		zelda.LinkPrefab.createSword(this)
+		zelda.LinkPrefab.createSword(this);
 	}
 	//Comportamiento si ya se ha hecho el invoke al método que pone attacking en false pero aun no se ha llamado a dicho método
 	else{
