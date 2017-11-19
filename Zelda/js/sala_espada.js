@@ -1,6 +1,8 @@
 var zelda = zelda || {}
 
 zelda.sala_espada = {
+	getSword:false,
+	
     init:function(){
         this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -58,9 +60,12 @@ zelda.sala_espada = {
 		this.npc.animations.play("spawn");
 		//cuando acaba la animacion de spawn del npc aparece la espada.
 		this.npc.animations.currentAnim.onComplete.add(function(){
-			this.sword = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY+8, "sword", 1);
-        	this.sword.anchor.setTo(.5);
-        	this.sword.scale.setTo(1,-1);
+			if(!this.getSword){
+				this.sword = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY+8, "sword", 1);
+				this.sword.anchor.setTo(.5);
+				this.sword.scale.setTo(1,-1);
+				this.game.physics.arcade.enable(this.sword);
+			}
 		},this);
         
         this.game.camera.y -= 47;
@@ -75,5 +80,10 @@ zelda.sala_espada = {
 		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.sword, function(){
+			console.log("agregar al inventario");
+			zelda.sala_espada.sword.kill();
+			zelda.sala_espada.getSword = true;
+		});
     }
 }

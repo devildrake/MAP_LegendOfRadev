@@ -22,7 +22,6 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.level = level;
 	if(level != zelda.overworld){
 		this.LinkCollider = game.add.sprite(x,y,"LinkCollider");
-		this.frame = 0;
 	}else{
 		this.LinkCollider = game.add.sprite(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY,"LinkCollider");
 	}
@@ -76,7 +75,6 @@ zelda.LinkPrefab.prototype.update = function(){
         zelda.LinkObject.calledNotMoveFromDamage = true;
         this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.setMoveFromDamageFalse, this.level);
     }
-	//this.game.physics.arcade.collide(this.Link,this.obstacles);
 	this.game.physics.arcade.collide(this.LinkCollider,this.level.obstacles);
 
 	//La barra espaciadora pone attacking en true
@@ -130,7 +128,6 @@ zelda.LinkPrefab.prototype.update = function(){
                     this.animations.play("movingSideWays");
 
                 this.scale.setTo(1);
-                //this.Link.body.velocity.x = zelda.gameOptions.linkSpeed;
                 this.LinkCollider.body.velocity.x = zelda.gameOptions.linkSpeed;
 
                 zelda.LinkObject.ResetLooking();
@@ -140,7 +137,6 @@ zelda.LinkPrefab.prototype.update = function(){
                     zelda.LinkObject.switched = true;
                     this.game.time.events.add(Phaser.Timer.SECOND * 0.15,zelda.LinkPrefab.switchLinkScale , this.level,this);
                 }
-                //this.Link.body.velocity.y = -zelda.gameOptions.linkSpeed;
                 this.LinkCollider.body.velocity.y = -zelda.gameOptions.linkSpeed;
 
                 if(zelda.LinkObject.hurt)
@@ -153,7 +149,6 @@ zelda.LinkPrefab.prototype.update = function(){
 
             }else if(this.cursors.down.isDown){
                 this.scale.setTo(1);
-                //this.Link.body.velocity.y = zelda.gameOptions.linkSpeed;
                 this.LinkCollider.body.velocity.y = zelda.gameOptions.linkSpeed;
 
                 if(zelda.LinkObject.hurt)
