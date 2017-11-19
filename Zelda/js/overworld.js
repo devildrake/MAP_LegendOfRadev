@@ -111,10 +111,7 @@ zelda.overworld = {
     
     update:function(){
         
-        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.R)){
-            zelda.TektitePrefab.CalculateRandomPos(this.tektite);
-            console.log(this.tektite.posToJump);
-        }
+
    
         this.MoveCamera();
         

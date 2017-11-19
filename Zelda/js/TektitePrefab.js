@@ -10,7 +10,12 @@ zelda.TektitePrefab = function(game,x,y,type,level,offsetMax){
     this.scale.setTo(1);
     this.anchor.setTo(.5);
     this.maxOffset = offsetMax;
-    
+    this.jumping = false;
+    this.calledStopJumping = false;
+    this.maxVelocity = {
+     x,
+        y
+    };
     if(this.type==0){
         this.animations.add("UpDown", [2,3], 5, true);
         this.lives = 1;
@@ -24,11 +29,19 @@ zelda.TektitePrefab = function(game,x,y,type,level,offsetMax){
     this.level = level;
 	this.game.physics.arcade.enable(this);
     
-    this.posToJump = this.body.position;
-
+    //this.posToJump = this.body.position;
+    this.posToJump = {
+    x,
+    y
+    };
+    
+    
+    
 };
 
-
+    zelda.TektitePrefab.StopJumping = function(obj){
+        obj.jumping = false;
+    }
 
     zelda.TektitePrefab.CalculateRandomPos = function(obj){
 
@@ -36,9 +49,7 @@ zelda.TektitePrefab = function(game,x,y,type,level,offsetMax){
         var randomMov = zelda.randomDataGen.between(15,obj.maxOffset);
             
             var randomNum = zelda.randomDataGen.between(0,100);
-            
-        console.log(randomNum);
-        
+                    
 
             if(randomNum>50){
                 obj.posToJump.x+=randomMov;
@@ -59,13 +70,14 @@ zelda.TektitePrefab = function(game,x,y,type,level,offsetMax){
                 obj.posToJump.x = obj.level.cameraBot.body.position.x+16;
             }
             
-            if(obj.posToJump.y+16<obj.level.cameraTop.body.position.y){
-                obj.posToJump.y = obj.level.cameraBot.body.position.y-16;
-            }else if(obj.posToJump.y-16>obj.level.cameraBot.body.position.y){
-                obj.posToJump.y = obj.level.cameraBot.body.position.y+16;
+            if(obj.posToJump.y<obj.level.cameraTop.body.position.y+16){
+                obj.posToJump.y = obj.level.cameraBot.body.position.y+64;
+                
+            }else if(obj.posToJump.y>obj.level.cameraBot.body.position.y-16){
+                obj.posToJump.y = obj.level.cameraBot.body.position.y-64;
             }
         
-        
+
         
     }
 
@@ -165,6 +177,43 @@ zelda.TektitePrefab.prototype.update = function(){
                 });
         }
 
+        if(!this.jumping){
+            this.animations.play("UpDown");
+            var chanceToJump = zelda.randomDataGen.between(0,100);
+            if(chanceToJump<1){
+                this.jumping = true;
+                zelda.TektitePrefab.CalculateRandomPos(this);
+                
+                this.maxVelocity.x = (this.posToJump.x - this.body.position.x)/16;
+                this.maxVelocity.y = (this.posToJump.y - this.body.position.y)/16;
+                this.calledStopJumping = false;
+            }
+            
+            
+        }else{
+            
+            if(!this.calledStopJumping){
+                this.calledStopJumping = true;
+                this.game.time.events.add(Phaser.Timer.SECOND * 0.3,zelda.TektitePrefab.StopJumping, this.level,this);
+
+            }
+            
+            if(this.type==0){
+                this.frame = 3;
+            }else{
+                this.frame = 1;
+            }
+            
+            this.body.position.x +=  this.maxVelocity.x;
+            this.body.position.y +=  this.maxVelocity.y;          
+            console.log(this.maxVelocity);
+            
+            if(this.body.position.x == this.posToJump.x&&this.body.position.y == this.posToJump.y){
+                this.jumping = false;
+            }
+        }
+        
+        
         }
     else{
         if(!this.calledNotHurt){
@@ -172,6 +221,10 @@ zelda.TektitePrefab.prototype.update = function(){
             this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.TektitePrefab.NotHurt, this.level,this);
         }
     }
+    
+    
+    
+    
     
 }
 
