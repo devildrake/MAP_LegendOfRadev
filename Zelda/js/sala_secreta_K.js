@@ -52,6 +52,9 @@ zelda.sala_secreta_K = {
 		this.bomba = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"bomba");
 		this.bomba.anchor.setTo(.5,0);
 		this.flecha = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "flecha",3);
+		this.game.physics.arcade.enable(this.escudo);
+		this.game.physics.arcade.enable(this.bomba);
+		this.game.physics.arcade.enable(this.flecha);
 		
 		this.game.camera.y -= 47;
 		
@@ -65,5 +68,14 @@ zelda.sala_secreta_K = {
 		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(){
+			console.log("comportamiento de coger el escudo");
+		});
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.bomba, function(){
+			console.log("comportamiento de coger la bomba");
+		});
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.flecha, function(){
+			console.log("comportamiento de coger la flecha");
+		});
 	}
 }

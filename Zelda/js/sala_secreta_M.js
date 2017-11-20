@@ -53,6 +53,9 @@ zelda.sala_secreta_M = {
         this.llave = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY, "llave");
         this.llave.anchor.setTo(.5,0);
         this.vela = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "vela");
+		this.game.physics.arcade.enable(this.escudo);
+		this.game.physics.arcade.enable(this.llave);
+		this.game.physics.arcade.enable(this.vela);
 		
 		this.game.camera.y -= 47;
 		
@@ -66,5 +69,14 @@ zelda.sala_secreta_M = {
        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(){
+			console.log("comportamiento coger escudo");
+		});
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.llave, function(){
+			console.log("comportamiento coger llave");
+		});
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.vela, function(){
+			console.log("comportamiento coger vela");
+		});
     }
 }

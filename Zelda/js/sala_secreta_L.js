@@ -52,6 +52,9 @@ zelda.sala_secreta_L = {
 		this.comida = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"comida");
 		this.comida.anchor.setTo(.5,0);
 		this.corazon = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "corazon");
+		this.game.physics.arcade.enable(this.escudo);
+		this.game.physics.arcade.enable(this.comida);
+		this.game.physics.arcade.enable(this.corazon);
 		
 		this.game.camera.y -= 47;
 		
@@ -65,5 +68,15 @@ zelda.sala_secreta_L = {
 		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
+		
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(){
+			console.log("comportamiento del escudo");
+		});
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.comida, function(){
+			console.log("comportamiento de la comida");
+		});
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.corazon, function(){
+			console.log("comportamiento del corazon");
+		});
 	}
 }
