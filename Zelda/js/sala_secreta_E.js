@@ -49,11 +49,14 @@ zelda.sala_secreta_E = {
 		//-------------------------------------------
 		
 		//items
-		this.vida = this.game.add.sprite(zelda.secretLayout.item2_1X,zelda.secretLayout.itemY,"mana");
-		this.mana = this.game.add.sprite(zelda.secretLayout.item2_2X,zelda.secretLayout.itemY,"vida");
+		this.mana = this.game.add.sprite(zelda.secretLayout.item2_1X,zelda.secretLayout.itemY,"mana");
+		this.game.physics.arcade.enable(this.mana);
+		this.vida = this.game.add.sprite(zelda.secretLayout.item2_2X,zelda.secretLayout.itemY,"vida");
+		this.game.physics.arcade.enable(this.vida);
 		
 		this.papel = this.game.add.sprite(zelda.secretLayout.npcX+16, zelda.secretLayout.npcY, "papel");
 		this.papel.anchor.setTo(.5,0);
+		this.game.physics.arcade.enable(this.papel);
 		
 		this.game.camera.y -= 47;
 		
@@ -67,5 +70,14 @@ zelda.sala_secreta_E = {
 		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.vida,function(){
+			console.log("comportamiento al coger pocion de vida");
+		});
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.mana, function(){
+			console.log("comportamiento al coger pocion de mana");
+		});
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.papel, function(){
+			console.log("comportamiento al coger el papel");
+		})
 	}
 }
