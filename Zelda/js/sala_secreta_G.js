@@ -48,6 +48,7 @@ zelda.sala_secreta_G = {
 		
 		this.moneda = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"rupia");
 		this.moneda.anchor.setTo(.5,0);
+		this.game.physics.arcade.enable(this.moneda);
 		
 		this.game.camera.y -= 47;
 		
@@ -63,6 +64,8 @@ zelda.sala_secreta_G = {
 		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
-		//console.log(this.link.LinkCollider.body.position);
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.moneda, function(){
+			console.log("funcionamiento de la moneda");
+		})
 	}
 }
