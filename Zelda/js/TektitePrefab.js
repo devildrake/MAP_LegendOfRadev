@@ -122,7 +122,6 @@ zelda.TektitePrefab.prototype.update = function(){
                 this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
                     if(!npc.hurt)
                     npc.lives--;
-                    console.log(npc.lives);
                     if(npc.lives==0){
                         npc.kill();
                         npc.Alive = false;
@@ -150,7 +149,6 @@ zelda.TektitePrefab.prototype.update = function(){
                 this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
                     if(!npc.hurt)
                     npc.lives--;
-                    console.log(npc.lives);
                     if(npc.lives==0){
                         npc.kill();
                         npc.Alive = false;
@@ -206,7 +204,6 @@ zelda.TektitePrefab.prototype.update = function(){
             
             this.body.position.x +=  this.maxVelocity.x;
             this.body.position.y +=  this.maxVelocity.y;          
-            console.log(this.maxVelocity);
             
             if(this.body.position.x == this.posToJump.x&&this.body.position.y == this.posToJump.y){
                 this.jumping = false;

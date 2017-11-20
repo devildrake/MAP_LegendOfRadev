@@ -28,11 +28,11 @@ zelda.overworld = {
         this.load.spritesheet("Tektite","img/TektiteSpriteSheet.png",16,16);
 
         this.load.audio("getItem","sounds/Sfx/get_item.wav");
-        this.getItemMusic = this.add.audio("getItem");
         
     },
 
     create:function(){
+        //this.getItemMusic = this.add.audio("getItem");
 
         this.map = this.game.add.tilemap("map");
         this.map.addTilesetImage("OverWorldTileSheetBien16x16");
@@ -142,7 +142,10 @@ zelda.overworld = {
         
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.R)){
         
-        this.linkInstance.grabbingObject = true;
+        zelda.LinkPrefab.GrabObject();
+            //this.getItemMusic.play();
+            //console.log(this.getItemMusic);
+            
         }
         
             //this.Link.position = this.LinkCollider.position;

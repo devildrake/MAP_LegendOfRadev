@@ -55,7 +55,8 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.sword);
 
-    
+    zelda.LinkPrefab.grabItemSound =  this.game.add.audio("getItem");
+
     
     
 };
@@ -105,7 +106,7 @@ zelda.LinkPrefab.prototype.update = function(){
     
 
 	//Comportamiento si attacking es false, es el movimiento con las flechas 
-	if(!zelda.LinkObject.attacking){
+	if(!zelda.LinkObject.attacking&&!zelda.LinkObject.grabbingObject){
         if(zelda.gameOptions.cameraArrivedPos){
             if(this.cursors.left.isDown){
 
@@ -250,21 +251,23 @@ zelda.LinkPrefab.prototype.update = function(){
 	}
 	this.position = this.LinkCollider.position;
     
-    if(this.grabbingObject){
-		this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.StopGrabbing , this.level,this.level);
+    if(zelda.LinkObject.grabbingObject){
+		this.game.time.events.add(Phaser.Timer.SECOND * 1,zelda.LinkPrefab.StopGrabbing , this.level);
         this.frame = 13;
     }
     
     
 }
 
-zelda.LinkPrefab.GrabObject = function(level){
-    level.linkInstance.grabbingObject = true;
+zelda.LinkPrefab.GrabObject = function(){
+    zelda.LinkObject.grabbingObject = true;
+    zelda.LinkPrefab.grabItemSound.play();
+    console.log(zelda.LinkPrefab.grabItemSound);
     //level.linkInstance.getItemMusic.play();
 }
 
-zelda.LinkPrefab.StopGrabbing = function(level){
-    level.linkInstance.grabbingObject = false;
+zelda.LinkPrefab.StopGrabbing = function(){
+    zelda.LinkObject.grabbingObject = false;
 }
 
 
