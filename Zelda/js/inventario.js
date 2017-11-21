@@ -1,10 +1,10 @@
 var zelda = zelda || {}
 
 
-zelda.InventarioPrefab=function(game,x,y) {
+zelda.InventarioPrefab=function(game,x,y,level) {
 	
     
-    create:function(){
+    this.create=function(){
        this.inv = this.game.add.sprite(0,0, "background");
 		
         //posiciones
@@ -13,7 +13,7 @@ zelda.InventarioPrefab=function(game,x,y) {
         this.positionObj3=165;
         this.positionObj4=185;
         this.positionObj5=200;
-        
+        this.InvON= false;
         this.row1=50;
         this.row2=67;
         
@@ -52,7 +52,9 @@ zelda.InventarioPrefab=function(game,x,y) {
 
     zelda.InventarioPrefab.prototype.update = function(){
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.I)){
-       		
+            this.InvON=false;
+       		this.InventarioPrefab.kill;
+            
 		}
 		
 		

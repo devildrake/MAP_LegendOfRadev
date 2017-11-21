@@ -127,6 +127,8 @@ zelda.overworld = {
     },
     
     update:function(){
+        
+       
                 if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.Q)){
                     this.riverZola.Alive = true;
                 }
@@ -196,8 +198,8 @@ zelda.overworld = {
              if(this.inventario.position.y>=0){
                 zelda.gameOptions.InventoryScroll=0;
                 
-                 zelda.InventarioPrefab(this, this.inventario.position.x, this.inventario.position.y);
-                
+                this.InventarioPre = new zelda.InventarioPrefab(this.game,640,850,this);
+                this.InvON=true;
               }
         }
        
@@ -503,5 +505,8 @@ zelda.overworld = {
 		}
     },
 
+    }
+    
+    
 
-}
+
