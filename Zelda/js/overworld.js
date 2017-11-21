@@ -28,7 +28,7 @@ zelda.overworld = {
         this.load.image("Heart","img/corazon.png");
         this.load.image("HalfHeart","img/mediocorazon.png");
         this.load.spritesheet("Tektite","img/TektiteSpriteSheet.png",16,16);
-
+        this.load.spritesheet("Leever","img/LeeverSpriteSheet.png",16,16);
         this.load.audio("getItem","sounds/Sfx/get_item.wav");
         
     },
@@ -119,6 +119,8 @@ zelda.overworld = {
         this.game.add.existing(this.riverZola);
         this.riverZola.Alive = false;
         
+        this.leever = new zelda.LeeverPrefab(this.game,640,850,1,this,1);
+        this.game.add.existing(this.leever);
         
         this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
 
