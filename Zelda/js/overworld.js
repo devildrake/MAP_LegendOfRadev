@@ -10,7 +10,7 @@ zelda.overworld = {
     },
     
     preload:function(){
-        this.load.tilemap("map", "json/MapaZeldaOverWorld16x11ConOffset.json", null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap("map", "json/MapaZeldaOverWorld16x11ConOffset_Water.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("OverWorldTileSheetBien16x16", "img/tilesets/OverWorldTileSheetBien16x16.png");
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16);
         this.load.spritesheet("Oktorok","img/OktorokSpriteSheet.png",16,16);
@@ -23,6 +23,8 @@ zelda.overworld = {
         //this.load.image("trigger", "img/trigger_salas_color.png");
         this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
         this.load.image("rockProjectile","img/RockProjectile.png");
+        this.load.spritesheet("riverZolaProjectile","img/ProyectilRiverZola.png",16,16);
+        this.load.spritesheet("RiverZola","img/RiverZolaSpriteSheet.png",16,16);
         this.load.image("Heart","img/corazon.png");
         this.load.image("HalfHeart","img/mediocorazon.png");
         this.load.spritesheet("Tektite","img/TektiteSpriteSheet.png",16,16);
@@ -38,12 +40,15 @@ zelda.overworld = {
         this.map.addTilesetImage("OverWorldTileSheetBien16x16");
         
         ///Ya se crean las dos capas, Obstacles y ground
-        this.map.createLayer("Ground");
+        this.ground = this.map.createLayer("Ground");
         this.obstacles = this.map.createLayer("Obstacles");
+        this.water = this.map.createLayer("Water");
         
         //this.obstacles.fixedToCamera = false; this.obstacles.scrollFactorX = 0; this.obstacles.scrollFactorY = 5*16; this.obstacles.position.set(0,5*16);
         
         this.map.setCollisionBetween(1,144,true,"Obstacles");
+        this.map.setCollisionBetween(1,144,true,"Water");
+
         
         //Camara
         this.game.camera.focusOnXY(zelda.gameOptions.lastCameraPosX,zelda.gameOptions.lastCameraPosY);
@@ -100,21 +105,29 @@ zelda.overworld = {
         
 
         
-        this.tektite = new zelda.TektitePrefab(this.game,620,840,1,this,30);
-        this.game.add.existing(this.tektite);
+        //this.tektite = new zelda.TektitePrefab(this.game,620,840,1,this,30);
+        //this.game.add.existing(this.tektite);
         
         
-        this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
         
             	this.loadHearts()
 
         this.createHeart(620,840,this,1);
+        
+        
+        this.riverZola = new zelda.RiverZolaPrefab(this.game,0,850,this);
+        this.game.add.existing(this.riverZola);
+        this.riverZola.Alive = false;
+        
+        
+        this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
 
     },
     
     update:function(){
-        
-
+                if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.Q)){
+                    this.riverZola.Alive = true;
+                }
    
         this.MoveCamera();
         

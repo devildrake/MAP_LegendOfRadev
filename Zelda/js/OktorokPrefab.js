@@ -69,6 +69,7 @@ zelda.OktorokPrefab.prototype.update = function(){
         
 
     this.game.physics.arcade.collide(this,this.level.obstacles);
+    this.game.physics.arcade.collide(this,this.level.water);
 
     
     if(!this.hurt){
