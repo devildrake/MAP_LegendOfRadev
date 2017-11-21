@@ -14,7 +14,15 @@ zelda.gameOptions = {
 	GoToOverworld:function(){
 		zelda.game.state.start("overworld");
 	},
-    InventoryScroll:0
+    InventoryScroll:0,
+	Unpause:function(event){
+		if(zelda.game.paused){
+			zelda.game.paused = false;
+		}
+	},
+	Pause:function(level){
+		zelda.game.paused = true;
+	}
 }
 
 //objeto para colocar los elementos del layout de las salas secretas
@@ -289,4 +297,5 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 
 //Escena que se pinta
 //zelda.game.state.start("main");
+
 zelda.game.state.start("overworld");

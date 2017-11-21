@@ -68,11 +68,17 @@ zelda.sala_secreta_A = {
 		
 		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
+		
+		this.game.input.onDown.add(zelda.gameOptions.Unpause);
     },
     
     update:function(){
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
+		}
+		
+		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
+			this.game.paused = true;
 		}
 		
 		this.game.physics.arcade.overlap(this.link.LinkCollider,this.corazon, function(){

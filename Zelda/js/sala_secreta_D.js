@@ -48,11 +48,17 @@ zelda.sala_secreta_D = {
 		
 		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
+		
+		this.game.input.onDown.add(zelda.gameOptions.Unpause);
     },
     
     update:function(){
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
+		}
+		//pausar el juego con la P
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
+			zelda.gameOptions.Pause(this);
 		}
     }
 }

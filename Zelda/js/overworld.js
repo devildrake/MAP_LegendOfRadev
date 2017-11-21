@@ -56,9 +56,7 @@ zelda.overworld = {
         
         this.SetCamera();
         
-        //INVENTARIO POR ENCIMA DE TODO LO DEMÁS
-        this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
-        this.inventario.fixedToCamera = true;
+        
         
         //TRIGGERS PARA SALAS SECRETAS
         this.trigger_espada = this.game.add.sprite(2*16*16 + 4*16, 4*11*16 + 16 +5*16, "trigger");
@@ -123,6 +121,13 @@ zelda.overworld = {
         //this.game.add.existing(this.leever);
         
         this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
+		
+		//INVENTARIO POR ENCIMA DE TODO LO DEMÁS
+        this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
+        this.inventario.fixedToCamera = true;
+		
+		//evento para quitar la pausa
+		this.game.input.onDown.add(zelda.gameOptions.Unpause);
 
     },
     
@@ -171,19 +176,14 @@ zelda.overworld = {
             zelda.gameOptions.InventoryScroll=zelda.game.camera.y;
              
         }
-            //this.Link.position = this.LinkCollider.position;
         
+		//pausar el juego con la P
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
+			zelda.gameOptions.Pause(this);
+		}
 
     }, 
     //======================FINAL DEL UPDATE===========================
-    /*
-    ScrollCameraTop:function(){
-        for(var i = 0; i<this.camera.height; i += this.camera.height/100){
-            this.camera.position. -= this.camera.height/100;
-        }
-        //.Link.body.position.y -= 20;
-    },
-    */
     
     ScrollInventario(){
         if(zelda.gameOptions.InventoryScroll != 0){

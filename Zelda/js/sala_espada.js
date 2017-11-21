@@ -74,6 +74,8 @@ zelda.sala_espada = {
         
         this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
+		
+		this.game.input.onDown.add(zelda.gameOptions.Unpause);
     },
     
     update:function(){
@@ -85,5 +87,10 @@ zelda.sala_espada = {
 			zelda.sala_espada.sword.kill();
 			zelda.sala_espada.getSword = true;
 		});
+		
+		//pausar el juego con la P
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
+			zelda.gameOptions.Pause(this);
+		}
     }
 }

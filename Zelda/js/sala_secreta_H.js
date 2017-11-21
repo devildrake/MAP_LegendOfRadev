@@ -55,6 +55,8 @@ zelda.sala_secreta_H = {
 		
 		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
+		
+		this.game.input.onDown.add(zelda.gameOptions.Unpause);
 	},
 	
 	update:function(){
@@ -64,5 +66,10 @@ zelda.sala_secreta_H = {
 		this.game.physics.arcade.overlap(this.link.LinkCollider, this.moneda, function(){
 			console.log("comportamiento de la moneda");
 		});
+		
+		//pausar el juego con la P
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
+			zelda.gameOptions.Pause(this);
+		}
 	}
 }
