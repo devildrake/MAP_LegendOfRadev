@@ -77,10 +77,6 @@ zelda.sala_secreta_A = {
        		zelda.gameOptions.GoToOverworld();
 		}
 		
-		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
-			this.game.paused = true;
-		}
-		
 		this.game.physics.arcade.overlap(this.link.LinkCollider,this.corazon, function(){
 			console.log("añadir comportamiento al coger un slot corazon");
 			zelda.sala_secreta_A.corazon.kill();
@@ -89,5 +85,10 @@ zelda.sala_secreta_A = {
 			console.log("añadir comportamiento al coger la poción de vida");
 			zelda.sala_secreta_A.pocion.kill();
 		});
+		
+		//pausar el juego con la P
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
+			zelda.gameOptions.Pause(this);
+		}
     }
 };
