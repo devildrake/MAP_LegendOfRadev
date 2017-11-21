@@ -4,11 +4,7 @@ var zelda = zelda || {}
 zelda.InventarioPrefab=function(game,x,y,level) {
 	
     
-<<<<<<< Updated upstream
-    this.create=function(){
-=======
-    create:function{
->>>>>>> Stashed changes
+    create:function(){
        this.inv = this.game.add.sprite(0,0, "background");
 		
         //posiciones
