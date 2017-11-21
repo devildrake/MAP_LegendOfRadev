@@ -72,18 +72,21 @@ zelda.RiverZolaPrefab.prototype.update = function(){
 
             this.game.physics.arcade.overlap(this,this.level.cameraRight,function(npc, a){
             npc.body.velocity.x = -npc.body.velocity.x;
+            npc.body.position.x = npc.level.cameraRight.body.position.x-20;
 
             });
             this.game.physics.arcade.overlap(this,this.level.cameraLeft,function(npc, a){
             npc.body.velocity.x = -npc.body.velocity.x;
-
+            npc.body.position.x = npc.level.cameraLeft.body.position.x+20;
             });
             this.game.physics.arcade.overlap(this,this.level.cameraTop,function(npc, a){
             npc.body.velocity.y = -npc.body.velocity.y;
-
+                npc.body.position.y = npc.level.cameraTop.body.position.y+20;
             });
             this.game.physics.arcade.overlap(this,this.level.cameraBot,function(npc, a){
             npc.body.velocity.y = -npc.body.velocity.y;
+                npc.body.position.y = npc.level.cameraBot.body.position.y-20;
+                console.log("BRUHBOT");
             });
 
 
@@ -268,8 +271,8 @@ zelda.RiverZolaPrefab.prototype.update = function(){
            // console.log("Emerging");
         }else{
             this.frame = 4;
-            this.body.velocity.x = zelda.randomDataGen.between(0,90);
-            this.body.velocity.y = zelda.randomDataGen.between(0,90);
+            this.body.velocity.x = zelda.randomDataGen.between(-300,300);
+            this.body.velocity.y = zelda.randomDataGen.between(-300,300);
             
             if(!this.calledEmerging){
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.RiverZolaPrefab.Emerging, this.level,this);    
@@ -298,7 +301,13 @@ zelda.RiverZolaPrefab.Emerging = function(obj){
 
 zelda.RiverZolaPrefab.Emerge = function(obj){
     obj.emerged = true;
+    if(obj.level.linkInstance.body.position.y<obj.body.position.y)
     obj.frame = 3
+    
+    else{
+        obj.frame = 2;
+    }
+    
    // console.log("emerged");
     obj.calledSubmerge = false;
     obj.calledEmerging = false;
