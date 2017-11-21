@@ -56,9 +56,6 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.game.physics.arcade.enable(this.sword);
 
     zelda.LinkPrefab.grabItemSound =  this.game.add.audio("getItem");
-
-    
-    
 };
 
 zelda.LinkPrefab.prototype = Object.create(Phaser.Sprite.prototype);
