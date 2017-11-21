@@ -13,7 +13,8 @@ zelda.gameOptions = {
     cameraArrivedPos: true,
 	GoToOverworld:function(){
 		zelda.game.state.start("overworld");
-	}
+	},
+    InventoryScroll:0
 }
 
 //objeto para colocar los elementos del layout de las salas secretas
@@ -284,8 +285,8 @@ zelda.game.state.add("secret_room_K", zelda.sala_secreta_K);
 zelda.game.state.add("secret_room_G", zelda.sala_secreta_G);
 zelda.game.state.add("overworld", zelda.overworld);
 zelda.game.state.add("dungeon", zelda.dungeon);
-zelda.game.state.add("inventario", zelda.MenuInventario);
+
 
 //Escena que se pinta
 //zelda.game.state.start("main");
-zelda.game.state.start("inventario");
+zelda.game.state.start("overworld");

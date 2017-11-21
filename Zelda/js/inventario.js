@@ -1,51 +1,58 @@
 var zelda = zelda || {}
 
 
-zelda.MenuInventario= {
-	init:function(){
-		this.game.world.setBounds(0,0,1024,240);
-		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		
-	},
+zelda.InventarioPrefab=function(game,x,y) {
 	
-    preload:function(){
-        //this.game.stage.backgroundColor = "#ff0000";
-        this.game.stage.backgroundColor = "#black";
-        //----------Inventory ------------
-        
-        this.load.image("background", "img/inventario.png",256,223);
-        //-------------------------------------------
-        this.load.image("pocion","img/pocion_vida.png");
-        this.load.image("corazon","img/slot_corazon.png");
-        this.load.image("vela","img/vela.png");
-		this.load.image("bomba","img/bomba.png");
-		//para el prefab de link
-		
-    },
     
     create:function(){
        this.inv = this.game.add.sprite(0,0, "background");
 		
+        //posiciones
+        this.positionObj1=125;
+        this.positionObj2=145;
+        this.positionObj3=165;
+        this.positionObj4=185;
+        this.positionObj5=200;
         
+        this.row1=50;
+        this.row2=67;
         
-        //fuego y animacion de este
+        //para saber cuales casillas estan ocupadas en el inventario
+        this.array=[0,0,0,0,0
+                   ,0,0,0,0,0]
        
-        
-        //npc
-        
 		
 		this.game.camera.y = 0;
 		
+        //para saber si ya hemos puesto el objeto en el inventario
+        this.CreateBombs=false;
+        this.CreateVela=false;
+        this.CreatePotion=false;
         
-       
-		
+        
+        for( var i=0;i<array.size();i++){
+            
+            
+            if(zelda.Inventory.objects[1]==1 && this.CreateBombs==false ){
+                
+                
+            }
+        }
+        this.bomb = this.game.add.sprite(this.positionObj1,67, "bomba");
+        this.bombs = this.game.add.sprite(this.positionObj2,50, "bomba");
+		this.bombd = this.game.add.sprite(this.positionObj3,50, "bomba");
 		
         
     },
     
-    update:function(){
-        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
-       		zelda.gameOptions.GoToOverworld();
+        zelda.InventarioPrefab.prototype = Object.create(Phaser.Sprite.prototype);
+
+    zelda.InventarioPrefab.prototype.constructor = zelda.LinkPrefab;
+
+
+    zelda.InventarioPrefab.prototype.update = function(){
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.I)){
+       		
 		}
 		
 		

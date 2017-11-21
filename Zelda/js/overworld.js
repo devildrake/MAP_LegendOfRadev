@@ -119,8 +119,8 @@ zelda.overworld = {
         this.game.add.existing(this.riverZola);
         this.riverZola.Alive = false;
         
-        this.leever = new zelda.LeeverPrefab(this.game,640,850,1,this,1);
-        this.game.add.existing(this.leever);
+        //this.leever = new zelda.LeeverPrefab(this.game,640,850,1,this,1);
+        //this.game.add.existing(this.leever);
         
         this.linkInstance = new zelda.LinkPrefab(this.game,640,850,this);
 
@@ -140,6 +140,8 @@ zelda.overworld = {
         this.ProjectileBorderColision();
         
         this.LinkSecretRoomColision();
+        
+        this.ScrollInventario();
 		
         
         //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
@@ -162,7 +164,11 @@ zelda.overworld = {
             //console.log(this.getItemMusic);
             
         }
-        
+         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.I)){
+             //console.log(this.inventario.position.y);
+            zelda.gameOptions.InventoryScroll=zelda.game.camera.y;
+             
+        }
             //this.Link.position = this.LinkCollider.position;
         
 
@@ -176,15 +182,27 @@ zelda.overworld = {
         //.Link.body.position.y -= 20;
     },
     */
-    /*
-    ScrollInventario(var upOrDown){
-        if(upOrDown == "down"){
-            while(this.inventario.x < 0){
-                this.inventario.x += 0.1;
-            }
+    
+    ScrollInventario(){
+        if(zelda.gameOptions.InventoryScroll != 0){
+                this.inventario.fixedToCamera = false;
+             
+                console.log(this.inventario.position.y);
+                this.inventario.position.y+=1;
+                this.inventario.position.y+=-zelda.game.camera.y;
+                this.inventario.position.x+=-zelda.game.camera.x;
+                this.inventario.fixedToCamera = true;
+                console.log(this.inventario.position.y);
+             if(this.inventario.position.y>=0){
+                zelda.gameOptions.InventoryScroll=0;
+                
+                 zelda.InventarioPrefab(this, this.inventario.position.x, this.inventario.position.y);
+                
+              }
         }
+       
     },
-    */
+    
     SetCamera:function(){
         this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y + 47, "camaraHorizontal");
         this.cameraTop.anchor.setTo(0,1); 
