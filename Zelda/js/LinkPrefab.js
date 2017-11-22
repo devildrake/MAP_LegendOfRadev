@@ -259,7 +259,7 @@ zelda.LinkPrefab.prototype.update = function(){
 zelda.LinkPrefab.GrabObject = function(){
     zelda.LinkObject.grabbingObject = true;
     zelda.LinkPrefab.grabItemSound.play();
-    console.log(zelda.LinkPrefab.grabItemSound);
+    //console.log(zelda.LinkPrefab.grabItemSound);
     //level.linkInstance.getItemMusic.play();
 }
 
