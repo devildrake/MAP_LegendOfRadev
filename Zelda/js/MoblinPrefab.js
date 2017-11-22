@@ -12,18 +12,19 @@ zelda.MoblinPrefab = function(game,x,y,type,level,initSpeed){
     this.prevVelocity = new Phaser.Point(0,0);
     this.maxVelocity = 50;
     if(this.type==0){
-        this.animations.add("movingLeft", [8,9], 5, true);
-        this.animations.add("movingDown", [10,11], 5, true);
-        this.animations.add("movingRight", [12,13],5,true);
-        this.animations.add("movingUp", [14,15], 5, true);
-        this.lives = 1;
-        }
-    else{
-        console.log("Azul");
         this.animations.add("movingLeft", [0,1], 5, true);
         this.animations.add("movingDown", [2,3], 5, true);
         this.animations.add("movingRight", [4,5],5,true);
         this.animations.add("movingUp", [6,7], 5, true);
+
+        this.lives = 1;
+        }
+    else{
+        console.log("Azul");
+        this.animations.add("movingLeft", [8,9], 5, true);
+        this.animations.add("movingDown", [10,11], 5, true);
+        this.animations.add("movingRight", [12,13],5,true);
+        this.animations.add("movingUp", [14,15], 5, true);
         this.lives = 3;
     }
 
@@ -61,7 +62,7 @@ zelda.MoblinPrefab = function(game,x,y,type,level,initSpeed){
 
 zelda.MoblinPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 
-zelda.OktorMoblinPrefabokPrefab.prototype.constructor = zelda.MoblinPrefab;
+zelda.MoblinPrefab.prototype.constructor = zelda.MoblinPrefab;
 
 
 
@@ -284,7 +285,7 @@ zelda.MoblinPrefab.prototype.update = function(){
     else{
         if(!this.calledNotHurt){
             this.calledNotHurt = true;
-            this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.OktorokPrefab.NotHurt, this.level,this);
+            this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.MoblinPrefab.NotHurt, this.level,this);
         }
     }
     

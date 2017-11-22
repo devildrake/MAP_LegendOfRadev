@@ -30,7 +30,7 @@ zelda.overworld = {
         this.load.spritesheet("Tektite","img/TektiteSpriteSheet.png",16,16);
         this.load.spritesheet("Leever","img/LeeverSpriteSheet.png",16,16);
         this.load.audio("getItem","sounds/Sfx/get_item.wav");
-        
+        this.load.spritesheet("Moblin","img/MoblinSpriteSheet.png",16,16);
     },
 
     create:function(){
