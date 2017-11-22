@@ -31,6 +31,7 @@ zelda.overworld = {
         this.load.spritesheet("Leever","img/LeeverSpriteSheet.png",16,16);
         this.load.audio("getItem","sounds/Sfx/get_item.wav");
         this.load.spritesheet("Moblin","img/MoblinSpriteSheet.png",16,16);
+        this.load.spritesheet("Arrow","img/arrow.png",16,16);
     },
 
     create:function(){
@@ -129,13 +130,14 @@ zelda.overworld = {
 		
 		//evento para quitar la pausa
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
-        
+
 
     },
     
     update:function(){
         
-       
+                       console.log(this.moblin.body.velocity);
+
                 if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.Q)){
                     this.riverZola.Alive = true;
                 }

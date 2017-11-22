@@ -203,52 +203,101 @@ zelda.AIMethods = {
         //Up
         if(current==0){
             if(rand==0){
-                obj.body.velocity.y=0;
-                obj.body.velocity.x = obj.maxVelocity;
+                if(!obj.body.blocked.right){
+                    obj.body.velocity.y=0;
+                    obj.body.velocity.x = obj.maxVelocity;
+                }
             }else if(rand==1){
-                obj.body.velocity.y=0;
-                obj.body.velocity.x = -obj.maxVelocity;
+                if(!obj.body.blocked.left){
+                    obj.body.velocity.y=0;
+                    obj.body.velocity.x = -obj.maxVelocity;
+                }
             }else{
-                obj.body.velocity.y= obj.maxVelocity;
-                obj.body.velocity.x =0;
+                if(!obj.body.blocked.down){
+                    obj.body.velocity.y= obj.maxVelocity;
+                    obj.body.velocity.x =0;
+                }
             }
 
             //Down
         }else if(current==1){
             if(rand==0){
-                obj.body.velocity.y=0;
-                obj.body.velocity.x = obj.maxVelocity;
+                if(!obj.body.blocked.right){
+                    obj.body.velocity.y=0;
+                    obj.body.velocity.x = obj.maxVelocity;
+                }
             }else if(rand==1){
-                obj.body.velocity.y=0;
-                obj.body.velocity.x = -obj.maxVelocity;
+                if(!obj.body.blocked.left){
+                    obj.body.velocity.y=0;
+                    obj.body.velocity.x = -obj.maxVelocity;
+                }
             }else{
-                obj.body.velocity.y= -obj.maxVelocity;
-                obj.body.velocity.x =0;
+                if(!obj.body.blocked.up){
+                    obj.body.velocity.y= -obj.maxVelocity;
+                    obj.body.velocity.x =0;
+                }
             }
 
             //Right
         }else if(current==2){
             if(rand==0){
-                obj.body.velocity.x=0;
-                obj.body.velocity.y = obj.maxVelocity;
+                if(!obj.body.blocked.down){
+                        obj.body.velocity.x=0;
+                        obj.body.velocity.y = obj.maxVelocity;
+                }
             }else if(rand==1){
-                obj.body.velocity.x=0;
-                obj.body.velocity.y = -obj.maxVelocity;
+                if(!obj.body.blocked.up){
+                    obj.body.velocity.x=0;
+                    obj.body.velocity.y = -obj.maxVelocity;
+                }
             }else{
-                obj.body.velocity.x=-obj.maxVelocity;
+                if(!obj.body.blocked.left){
+                    obj.body.velocity.x=-obj.maxVelocity;
+                    obj.body.velocity.y = 0;
+                }
             }
 
             //Left
+        }else if(current = 3){
+            if(rand==0){
+                if(!obj.body.blocked.down){
+                    obj.body.velocity.x=0;
+                    obj.body.velocity.y = obj.maxVelocity;
+                }
+            }else if(rand==1){
+                if(!obj.body.blocked.up){
+                    obj.body.velocity.x=0;
+                    obj.body.velocity.y = -obj.maxVelocity;
+                }
+            }else{
+                if(!obj.body.blocked.right){
+                    obj.body.velocity.x=obj.maxVelocity;
+                    obj.body.velocity.y = 0;
+                }
+
+            }
         }else{
             if(rand==0){
-                obj.body.velocity.x=0;
-                obj.body.velocity.y = obj.maxVelocity;
+                if(!obj.body.blocked.down){
+                    obj.body.velocity.x=0;
+                    obj.body.velocity.y = obj.maxVelocity;
+                }
             }else if(rand==1){
-                obj.body.velocity.x=0;
-                obj.body.velocity.y = -obj.maxVelocity;
+                if(!obj.body.blocked.up){
+                    obj.body.velocity.x=0;
+                    obj.body.velocity.y = -obj.maxVelocity;
+                }
+            }else if(rand==2){
+                if(!obj.body.blocked.right){
+                    obj.body.velocity.x=obj.maxVelocity;
+                    obj.body.velocity.y = 0;
+                }
+
             }else{
-                obj.body.velocity.x=obj.maxVelocity;
+                    obj.body.velocity.x=-obj.maxVelocity;
+                    obj.body.velocity.y = 0; 
             }
+            
         }
     },
     

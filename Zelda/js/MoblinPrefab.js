@@ -46,7 +46,7 @@ zelda.MoblinPrefab = function(game,x,y,type,level,initSpeed){
     this.previousVelocity = this.body.velocity;
 
     
-    this.projectile = game.add.sprite(this.body.position.x,this.body.position.y,"rockProjectile");
+    this.projectile = game.add.sprite(this.body.position.x,this.body.position.y,"Arrow");
 	this.projectile.anchor.setTo(0.5);
 	this.projectile.scale.setTo(1);
     this.projectile.Alive = false;
@@ -68,7 +68,9 @@ zelda.MoblinPrefab.prototype.constructor = zelda.MoblinPrefab;
 
 zelda.MoblinPrefab.prototype.update = function(){
         
-
+    if(this.body.velocity.x==0&&this.body.velocity.y==0){
+        zelda.AIMethods.changeDir(this,4);
+    }
     this.game.physics.arcade.collide(this,this.level.obstacles);
     this.game.physics.arcade.collide(this,this.level.water);
 
@@ -94,12 +96,9 @@ zelda.MoblinPrefab.prototype.update = function(){
 
         var chancesOfChangingDir = zelda.randomDataGen.between(0,200);
             if(chancesOfChangingDir<2){
-                if(this.body.blocked.down)
-                zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(1,3));
-                else{
+                
                 zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(0,3));
 
-                }
                 console.log("CHange");
             }
         
@@ -120,26 +119,32 @@ zelda.MoblinPrefab.prototype.update = function(){
                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");
         } );
 
-        this.game.physics.arcade.overlap(this.projectile,this.level.cameraBot,function(projectile, a){
-        projectile.Alive = false;
-        projectile.kill();  
-        });
+        if(this.projectile.Alive){
+            this.game.physics.arcade.overlap(this.projectile,this.level.cameraBot,function(projectile, a){
+            projectile.Alive = false;
+            projectile.kill();  
+            });
 
-        this.game.physics.arcade.overlap(this.projectile,this.level.cameraTop,function(projectile, a){
-        projectile.Alive = false;
-        projectile.kill();  
-        });    
+            this.game.physics.arcade.overlap(this.projectile,this.level.cameraTop,function(projectile, a){
+            projectile.Alive = false;
+            projectile.kill();  
+            });    
 
-        this.game.physics.arcade.overlap(this.projectile,this.level.cameraLeft,function(projectile, a){
-        projectile.Alive = false;
-        projectile.kill();  
-        });    
+            this.game.physics.arcade.overlap(this.projectile,this.level.cameraLeft,function(projectile, a){
+            projectile.Alive = false;
+            projectile.kill();  
+            });    
 
-        this.game.physics.arcade.overlap(this.projectile,this.level.cameraRight,function(projectile, a){
-        projectile.Alive = false;
-        projectile.kill();  
-        });
+            this.game.physics.arcade.overlap(this.projectile,this.level.cameraRight,function(projectile, a){
+            projectile.Alive = false;
+            projectile.kill();  
+            });
 
+            if(this.projectile.body.velocity.x==0&&this.projectile.body.velocity.y==0){
+                this.projectile.Alive = false;
+                this.projectile.kill();
+            }
+        }
         this.game.physics.arcade.overlap(this,this.level.cameraRight,function(npc, a){
         npc.body.velocity.x = -npc.body.velocity.x;
 
@@ -171,6 +176,13 @@ zelda.MoblinPrefab.prototype.update = function(){
             this.randomNumber = zelda.randomDataGen.between(0,4000);
             if(this.randomNumber<20){
                 zelda.AIMethods.CreateProjectile(this,this.body.velocity);
+                if(this.body.velocity.x>0)
+                    this.projectile.frame = 2;
+                else if(this.body.velocity.x<0)
+                    this.projectile.frame = 0;
+                else if(this.body.velocity.y>0)
+                    this.projectile.frame = 1;
+                else this.projectile.frame = 3;
             }
         }
 
@@ -299,6 +311,8 @@ zelda.MoblinPrefab.prototype.update = function(){
             this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.MoblinPrefab.NotHurt, this.level,this);
         }
     }
+    
+    
     
 }
 
