@@ -128,6 +128,7 @@ zelda.overworld = {
 		
 		//evento para quitar la pausa
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
+        
 
     },
     
@@ -187,9 +188,29 @@ zelda.overworld = {
     
     ScrollInventario(){
         if(zelda.gameOptions.InventoryScroll != 0){
+            
+            
+            if(this.InvON==true){
                 this.inventario.fixedToCamera = false;
-             
+        
+                
+                this.inventario.position.y-=1;
+                this.inventario.position.y+=-zelda.game.camera.y;
+                this.inventario.position.x+=-zelda.game.camera.x;
+                this.inventario.fixedToCamera = true;
                 console.log(this.inventario.position.y);
+             if(this.inventario.position.y==-zelda.gameOptions.gameHeight+47){
+                zelda.gameOptions.InventoryScroll=0;
+                
+                //this.InventarioPre.kill();
+                this.InvON=false;
+            }
+            }
+            else{
+                
+                     this.inventario.fixedToCamera = false;
+        
+                
                 this.inventario.position.y+=1;
                 this.inventario.position.y+=-zelda.game.camera.y;
                 this.inventario.position.x+=-zelda.game.camera.x;
@@ -200,9 +221,14 @@ zelda.overworld = {
                 
                 this.InventarioPre = new zelda.InventarioPrefab(this.game,640,850,this);
                 this.InvON=true;
+                 
+                 
+                 
               }
+                
+            }
         }
-       
+        
     },
     
     SetCamera:function(){

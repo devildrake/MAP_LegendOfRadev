@@ -4,7 +4,7 @@ var zelda = zelda || {}
 zelda.InventarioPrefab=function(game,x,y,level) {
 	
     
-    create:function{
+    this.create=function(){
        this.inv = this.game.add.sprite(0,0, "background");
 		
         //posiciones
