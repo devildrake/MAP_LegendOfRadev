@@ -210,6 +210,7 @@ zelda.AIMethods = {
                 obj.body.velocity.x = -obj.maxVelocity;
             }else{
                 obj.body.velocity.y= obj.maxVelocity;
+                obj.body.velocity.x =0;
             }
 
             //Down
@@ -222,6 +223,7 @@ zelda.AIMethods = {
                 obj.body.velocity.x = -obj.maxVelocity;
             }else{
                 obj.body.velocity.y= -obj.maxVelocity;
+                obj.body.velocity.x =0;
             }
 
             //Right

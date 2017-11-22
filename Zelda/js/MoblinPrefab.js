@@ -92,7 +92,18 @@ zelda.MoblinPrefab.prototype.update = function(){
             this.prevVelocity.y = this.body.velocity.y;
         }
 
+        var chancesOfChangingDir = zelda.randomDataGen.between(0,200);
+            if(chancesOfChangingDir<2){
+                if(this.body.blocked.down)
+                zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(1,3));
+                else{
+                zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(0,3));
 
+                }
+                console.log("CHange");
+            }
+        
+        
         this.game.physics.arcade.overlap(this,this.level.linkInstance,
         function(enemy,linkInstance){
             zelda.LinkObject.hurt = true;
