@@ -21,7 +21,9 @@ zelda.overworld = {
         this.load.image("camaraVertical", "img/camara_vertical.png");
         this.load.image("inventario", "img/inventario.png");
         this.load.image("bomba", "img/bomba.png");
-        this.load.image("vela", "img/vela.png")
+        this.load.image("vela", "img/vela.png");
+        this.load.image("potion", "img/pocion_vida.png");
+        this.load.image("corazon", "img/corazon.png");
         //this.load.image("trigger", "img/trigger_salas_color.png");
         this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
         this.load.image("rockProjectile","img/RockProjectile.png");
@@ -200,10 +202,15 @@ zelda.overworld = {
     //======================FINAL DEL UPDATE===========================
     
         ScrollInventario(){
+            
+            
+            
+            
+            
         if(zelda.gameOptions.InventoryScroll != 0){
             
             
-            if(this.InvON==true){
+            if(zelda.Inventory.InvON==true){
                 this.inventario.fixedToCamera = false;
         
                 
@@ -211,7 +218,7 @@ zelda.overworld = {
                 this.inventario.position.y+=-zelda.game.camera.y;
                 this.inventario.position.x+=-zelda.game.camera.x;
                 this.inventario.fixedToCamera = true;
-               // console.log(this.inventario.position.y);
+               //console.log(this.inventario.position.y);
                 
              if(this.inventario.position.y==-zelda.gameOptions.gameHeight+47){
                 zelda.gameOptions.InventoryScroll=0;
@@ -221,6 +228,14 @@ zelda.overworld = {
             }
             }
             else{
+                
+                /*
+                 for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                    zelda.Inventory.draw.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
+                     zelda.Inventory.draw.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                    zelda.Inventory.draw.heart[i].position.y=zelda.game.camera.y+195;
+            
+                 }*/
                 
                      this.inventario.fixedToCamera = false;
         
@@ -233,6 +248,7 @@ zelda.overworld = {
              if(this.inventario.position.y>=0){
                 zelda.gameOptions.InventoryScroll=0;
                 
+                 
                 zelda.Inventory.draw();
                 zelda.Inventory.InvON=true;
                  

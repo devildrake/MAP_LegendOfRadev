@@ -299,6 +299,7 @@ zelda.Inventory={
     ring:false,
     stairs:false,
     ObjectB:"nothing",
+
     
     //el [0] sera el boomerang
     //el [1] sera las bombas
@@ -328,6 +329,12 @@ zelda.Inventory={
         CreateBombs:false,
         CreateVela:false,
         CreatePotion:false,
+    
+    //posicion del cursor en la array
+    Cursor:[0,0,0,0,0,
+            0,0,0,0,0],
+    
+    
 
     GetObject:function(nameObject){
         
@@ -369,6 +376,8 @@ zelda.Inventory={
        
         
     draw:function(){
+        
+        //pintar zona de objetos
         for( var i=0;i<9;i++){
             
              //bombas
@@ -434,7 +443,26 @@ zelda.Inventory={
             }
             
             //objeto
+            
         }
+        
+        //pintar corazones
+        this.heart=[zelda.LinkObject.maxHearts];
+        //pintar corazones
+        for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+            this.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+100, "corazon");
+            this.heart[i].position.x=zelda.game.camera.x+175+10*i;
+            this.heart[i].position.y=zelda.game.camera.y+195;
+            
+        }
+        
+        //pintar espada
+        
+        
+        //pintar objeto B
+        
+        
+        //pintar numero llaves y bombas
         
     },
     LoadSave:function(){
