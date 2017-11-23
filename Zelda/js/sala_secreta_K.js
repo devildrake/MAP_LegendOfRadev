@@ -93,18 +93,39 @@ zelda.sala_secreta_K = {
 			zelda.sala_secreta_K.flecha.animations.play("despawn");
 			zelda.sala_secreta_K.npc.animations.play("despawn");
 			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-				//zelda.sala_secreta_K.escudo.destroy();
-				//zelda.sala_secreta_K.flecha.destroy();
-				//zelda.sala_secreta_K.bomba.destroy();
-				//zelda.sala_secreta_K.npc.destroy();
-				console.log("1sec");
+				zelda.sala_secreta_K.escudo.destroy();
+				zelda.sala_secreta_K.flecha.destroy();
+				zelda.sala_secreta_K.bomba.destroy();
+				zelda.sala_secreta_K.npc.destroy();
 			});
 			console.log("comportamiento de coger el escudo");
 		});
-		this.game.physics.arcade.overlap(this.link.LinkCollider, this.bomba, function(){
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.bomba, function(link,bomba){
+			zelda.LinkPrefab.GrabObject();
+			bomba.y = bomba.y - 8;
+			zelda.sala_secreta_K.escudo.animations.play("despawn");
+			zelda.sala_secreta_K.flecha.animations.play("despawn");
+			zelda.sala_secreta_K.npc.animations.play("despawn");
+			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+				zelda.sala_secreta_K.escudo.destroy();
+				zelda.sala_secreta_K.flecha.destroy();
+				zelda.sala_secreta_K.bomba.destroy();
+				zelda.sala_secreta_K.npc.destroy();
+			});
 			console.log("comportamiento de coger la bomba");
 		});
-		this.game.physics.arcade.overlap(this.link.LinkCollider, this.flecha, function(){
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.flecha, function(link,flecha){
+			zelda.LinkPrefab.GrabObject();
+			flecha.y = flecha.y - 8;
+			zelda.sala_secreta_K.bomba.animations.play("despawn");
+			zelda.sala_secreta_K.escudo.animations.play("despawn");
+			zelda.sala_secreta_K.npc.animations.play("despawn");
+			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+				zelda.sala_secreta_K.escudo.destroy();
+				zelda.sala_secreta_K.flecha.destroy();
+				zelda.sala_secreta_K.bomba.destroy();
+				zelda.sala_secreta_K.npc.destroy();
+			});
 			console.log("comportamiento de coger la flecha");
 		});
 		
