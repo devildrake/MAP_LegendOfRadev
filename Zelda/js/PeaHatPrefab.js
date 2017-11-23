@@ -61,22 +61,22 @@ zelda.PeaHatPrefab.prototype.update = function(){
     }
     
     if(this.body.velocity.x==0&&this.body.velocity.y==0){
-        zelda.AIMethods.changeDir(this,4);
+        zelda.AIMethods.changeDir(this,4,true);
     }
 
 
     
     if(!this.hurt){
         if(this.prevVelocity.y<0&&this.body.blocked.up){
-            zelda.AIMethods.changeDir(this,0);
+            zelda.AIMethods.changeDir(this,0,true);
         }else if(this.prevVelocity.y>0&&this.body.blocked.down){
-                zelda.AIMethods.changeDir(this,1);
+                zelda.AIMethods.changeDir(this,1,true);
 
         }else if(this.prevVelocity.x>0&&this.body.blocked.right){
-                zelda.AIMethods.changeDir(this,2);
+                zelda.AIMethods.changeDir(this,2,true);
 
         }else if(this.prevVelocity.x<0&&this.body.blocked.left){
-                zelda.AIMethods.changeDir(this,3);
+                zelda.AIMethods.changeDir(this,3,true);
         }
 
 
@@ -88,7 +88,7 @@ zelda.PeaHatPrefab.prototype.update = function(){
         var chancesOfChangingDir = zelda.randomDataGen.between(0,200);
             if(chancesOfChangingDir<2){
                 
-                zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(0,3));
+                zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(0,3),true);
 
                 console.log("CHange");
             }

@@ -72,7 +72,7 @@ zelda.MoblinPrefab.prototype.constructor = zelda.MoblinPrefab;
 zelda.MoblinPrefab.prototype.update = function(){
         
     if(this.body.velocity.x==0&&this.body.velocity.y==0){
-        zelda.AIMethods.changeDir(this,4);
+        zelda.AIMethods.changeDir(this,4,false);
     }
     this.game.physics.arcade.collide(this,this.level.obstacles);
     this.game.physics.arcade.collide(this,this.level.water);
@@ -80,15 +80,15 @@ zelda.MoblinPrefab.prototype.update = function(){
     
     if(!this.hurt){
         if(this.prevVelocity.y<0&&this.body.blocked.up){
-            zelda.AIMethods.changeDir(this,0);
+            zelda.AIMethods.changeDir(this,0,false);
         }else if(this.prevVelocity.y>0&&this.body.blocked.down){
-                zelda.AIMethods.changeDir(this,1);
+                zelda.AIMethods.changeDir(this,1,false);
 
         }else if(this.prevVelocity.x>0&&this.body.blocked.right){
-                zelda.AIMethods.changeDir(this,2);
+                zelda.AIMethods.changeDir(this,2,false);
 
         }else if(this.prevVelocity.x<0&&this.body.blocked.left){
-                zelda.AIMethods.changeDir(this,3);
+                zelda.AIMethods.changeDir(this,3,false);
         }
 
 
@@ -100,7 +100,7 @@ zelda.MoblinPrefab.prototype.update = function(){
         var chancesOfChangingDir = zelda.randomDataGen.between(0,200);
             if(chancesOfChangingDir<2){
                 
-                zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(0,3));
+                zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(0,3,false));
 
                 console.log("CHange");
             }

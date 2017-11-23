@@ -74,15 +74,15 @@ zelda.OktorokPrefab.prototype.update = function(){
     
     if(!this.hurt){
         if(this.prevVelocity.y<0&&this.body.blocked.up){
-            zelda.AIMethods.changeDir(this,0);
+            zelda.AIMethods.changeDir(this,0,true);
         }else if(this.prevVelocity.y>0&&this.body.blocked.down){
-                zelda.AIMethods.changeDir(this,1);
+                zelda.AIMethods.changeDir(this,1,true);
 
         }else if(this.prevVelocity.x>0&&this.body.blocked.right){
-                zelda.AIMethods.changeDir(this,2);
+                zelda.AIMethods.changeDir(this,2,true);
 
         }else if(this.prevVelocity.x<0&&this.body.blocked.left){
-                zelda.AIMethods.changeDir(this,3);
+                zelda.AIMethods.changeDir(this,3,true);
         }
 
 
