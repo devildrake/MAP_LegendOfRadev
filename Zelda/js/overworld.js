@@ -144,7 +144,7 @@ zelda.overworld = {
     
     update:function(){
                        //console.log(this.moblin.animations);
-        
+        this.ScrollInventario();
                 if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.Q)){
                     //this.riverZola.Alive = true;
                     //this.createEnemy("Oktorok",this.game,640,850,this,1,1);
@@ -161,7 +161,7 @@ zelda.overworld = {
         
         this.LinkSecretRoomColision();
         
-        this.ScrollInventario();
+        
 		
         
         //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
@@ -210,7 +210,7 @@ zelda.overworld = {
                 this.inventario.position.y+=-zelda.game.camera.y;
                 this.inventario.position.x+=-zelda.game.camera.x;
                 this.inventario.fixedToCamera = true;
-                console.log(this.inventario.position.y);
+               // console.log(this.inventario.position.y);
                 
              if(this.inventario.position.y==-zelda.gameOptions.gameHeight+47){
                 zelda.gameOptions.InventoryScroll=0;
@@ -228,7 +228,7 @@ zelda.overworld = {
                 this.inventario.position.y+=-zelda.game.camera.y;
                 this.inventario.position.x+=-zelda.game.camera.x;
                 this.inventario.fixedToCamera = true;
-                console.log(this.inventario.position.y);
+               // console.log(this.inventario.position.y);
              if(this.inventario.position.y>=0){
                 zelda.gameOptions.InventoryScroll=0;
                 

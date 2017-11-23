@@ -371,16 +371,22 @@ zelda.Inventory={
     draw:function(){
         for( var i=0;i<9;i++){
             
-            //bombas
+             //bombas
             if(zelda.Inventory.objects[1]==1 && zelda.Inventory.CreateBombs==false ){
                 
                 
                 if(i<5){
-                zelda.game.add.sprite(zelda.Inventory.ArrayPosObjX[i],zelda.Inventory.row1, "bomba");
+                this.bomb= zelda.game.add.sprite(zelda.game.camera.x.x+zelda.Inventory.ArrayPosObjX[i],zelda.game.camera.x+zelda.Inventory.row1, "bomba");
+                  
+                    this.bomb.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.bomb.position.y=zelda.game.camera.y+zelda.Inventory.row1;
                     
                 }
                 else{
-                    zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "bomba");
+                   this.bomb= zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "bomba");
+                    
+                    this.bomb.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.bomb.position.y=zelda.game.camera.y+zelda.Inventory.row2;
                 }
                 zelda.Inventory.CreateBombs=true;
                 zelda.Inventory.array[i]="bombs";
@@ -392,10 +398,14 @@ zelda.Inventory={
                 
                 
                 if(i<5){
-                    zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "vela");
+                    this.vela=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "vela");
+                    this.bomb.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.bomb.position.y=zelda.game.camera.y+zelda.Inventory.row1;
                 }
                 else{
-                    zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "vela");
+                    this.vela=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "vela");
+                    this.vela.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.vela.position.y=zelda.game.camera.y+zelda.Inventory.row2;
                 }
                 
                 zelda.Inventory.CreateVela=true;
@@ -408,10 +418,14 @@ zelda.Inventory={
                 
                 
                 if(i<5){
-                    zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "potion");
+                    this.potion=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "potion");
+                    this.potion.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.potion.position.y=zelda.game.camera.y+zelda.Inventory.row1;
                 }
                 else{
-                    zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "potion");
+                    this.potion=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "potion");
+                    this.potion.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.potion.position.y=zelda.game.camera.y+zelda.Inventory.row2;
                 }
                 
                 zelda.Inventory.CreatePotion=true;
