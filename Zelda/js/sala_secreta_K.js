@@ -98,8 +98,8 @@ zelda.sala_secreta_K = {
 				//zelda.sala_secreta_K.bomba.destroy();
 				//zelda.sala_secreta_K.npc.destroy();
 				console.log("1sec");
-			}
-			console.log("comportamiento de coger el escudo")
+			});
+			console.log("comportamiento de coger el escudo");
 		});
 		this.game.physics.arcade.overlap(this.link.LinkCollider, this.bomba, function(){
 			console.log("comportamiento de coger la bomba");
