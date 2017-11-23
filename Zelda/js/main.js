@@ -289,6 +289,8 @@ InitZones:function(){
     
 }
 
+//-------------------------------Inventario-------------------------------
+
 zelda.Inventory={
     
     bombs: 0,
@@ -304,7 +306,28 @@ zelda.Inventory={
     //el [3] sera la vela
     //el [4] sera la poti vida(roja)
     //el [5] sera la poti azul(??)
-    objects:[0,0,0,0,0,0],
+    objects:[0,1,0,0,0,0],
+    
+     //posiciones
+        ArrayPosObjX:[125,145,165,185,200
+                          ,125,145,165,185,200],
+       
+        
+        row1:50,
+        row2:67,
+        
+        //para saber cuales casillas estan ocupadas en el inventario
+        array:[0,0,0,0,0
+                   ,0,0,0,0,0],
+       
+		
+		
+		InvON: false,
+        
+        //para saber si ya hemos puesto el objeto en el inventario
+        CreateBombs:false,
+        CreateVela:false,
+        CreatePotion:false,
 
     GetObject:function(nameObject){
         
@@ -341,17 +364,75 @@ zelda.Inventory={
         else if(nameObject==11){
             this.objects[5]=1;
         }
+    },
     
-},
-    
+       
+        
+    draw:function(){
+        for( var i=0;i<9;i++){
+            
+            //bombas
+            if(zelda.Inventory.objects[1]==1 && zelda.Inventory.CreateBombs==false ){
+                
+                
+                if(i<5){
+                zelda.game.add.sprite(zelda.Inventory.ArrayPosObjX[i],zelda.Inventory.row1, "bomba");
+                    
+                }
+                else{
+                    zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "bomba");
+                }
+                zelda.Inventory.CreateBombs=true;
+                zelda.Inventory.array[i]="bombs";
+                console.log("pintada")
+            }
+            //vela
+            else if(zelda.Inventory.objects[3]==1 && this.CreateVela==false){
+                
+                
+                
+                if(i<5){
+                    zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "vela");
+                }
+                else{
+                    zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "vela");
+                }
+                
+                zelda.Inventory.CreateVela=true;
+                zelda.Inventory.array[i]="vela";
+            }
+            
+            //Potion
+              else if(zelda.Inventory.objects[4]==1 && this.CreatePotion==false){
+                
+                
+                
+                if(i<5){
+                    zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "potion");
+                }
+                else{
+                    zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "potion");
+                }
+                
+                zelda.Inventory.CreatePotion=true;
+                zelda.Inventory.array[i]="potion";
+            }
+            
+            //objeto
+        }
+        
+    },
     LoadSave:function(){
         
         
         
-    }, 
+    }
+    
+},
+    
+    
 	
-	
-}
+//---------------------Final inventario---------------------------------------	
 
 zelda.AIMethods = {
     changeDir: function(obj,current,diagonales){

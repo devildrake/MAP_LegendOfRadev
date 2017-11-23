@@ -20,6 +20,7 @@ zelda.overworld = {
         this.load.image("camaraHorizontal", "img/camara_horizontal.png");
         this.load.image("camaraVertical", "img/camara_vertical.png");
         this.load.image("inventario", "img/inventario.png");
+        this.load.image("bomba", "img/bomba.png");
         //this.load.image("trigger", "img/trigger_salas_color.png");
         this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
         this.load.image("rockProjectile","img/RockProjectile.png");
@@ -197,7 +198,7 @@ zelda.overworld = {
     }, 
     //======================FINAL DEL UPDATE===========================
     
-    ScrollInventario(){
+        ScrollInventario(){
         if(zelda.gameOptions.InventoryScroll != 0){
             
             
@@ -230,8 +231,8 @@ zelda.overworld = {
              if(this.inventario.position.y>=0){
                 zelda.gameOptions.InventoryScroll=0;
                 
-                this.InventarioPre = new zelda.InventarioPrefab(this.game,640,850,this);
-                this.InvON=true;
+                zelda.Inventory.draw();
+                zelda.Inventory.InvON=true;
                  
                  
                  
