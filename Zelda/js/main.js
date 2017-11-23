@@ -306,7 +306,7 @@ zelda.Inventory={
     //el [3] sera la vela
     //el [4] sera la poti vida(roja)
     //el [5] sera la poti azul(??)
-    objects:[0,1,0,0,0,0],
+    objects:[0,1,0,1,0,0],
     
      //posiciones
         ArrayPosObjX:[125,145,165,185,200
@@ -390,17 +390,18 @@ zelda.Inventory={
                 }
                 zelda.Inventory.CreateBombs=true;
                 zelda.Inventory.array[i]="bombs";
-                console.log("pintada")
+                console.log(i)
+                console.log("bomba")
             }
             //vela
             else if(zelda.Inventory.objects[3]==1 && this.CreateVela==false){
-                
-                
+                console.log(i)
+                 console.log("vela")
                 
                 if(i<5){
                     this.vela=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "vela");
-                    this.bomb.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
-                    this.bomb.position.y=zelda.game.camera.y+zelda.Inventory.row1;
+                    this.vela.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.vela.position.y=zelda.game.camera.y+zelda.Inventory.row1;
                 }
                 else{
                     this.vela=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "vela");

@@ -21,6 +21,7 @@ zelda.overworld = {
         this.load.image("camaraVertical", "img/camara_vertical.png");
         this.load.image("inventario", "img/inventario.png");
         this.load.image("bomba", "img/bomba.png");
+        this.load.image("vela", "img/vela.png")
         //this.load.image("trigger", "img/trigger_salas_color.png");
         this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
         this.load.image("rockProjectile","img/RockProjectile.png");
