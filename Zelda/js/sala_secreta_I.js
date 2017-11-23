@@ -12,8 +12,8 @@ zelda.sala_secreta_I = {
         //----------Tiles del layaut base------------
         this.load.tilemap("sala", "json/Sala_Secreta.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("secret_tile", "img/tilesets/secret_tile.png");
-        this.load.spritesheet("fuego", "img/fuego.png",17,15);
-        this.load.spritesheet("npc", "img/orcO.png",16, 16);
+        this.load.spritesheet("fuego", "img/spawn_fuego.png",16,16);
+        this.load.spritesheet("npc", "img/spawn_orcO.png",16, 16);
         //-------------------------------------------
         
         this.load.image("rupia", "img/rupia.png");
@@ -34,22 +34,35 @@ zelda.sala_secreta_I = {
         //-------------------------------------------
         
         //fuego y animacion de este
-        this.fire = [];
-        this.fire.push(this.game.add.sprite(zelda.secretLayout.fireX1,zelda.secretLayout.fireY,"fuego",0));
-        this.fire.push(this.game.add.sprite(zelda.secretLayout.fireX2,zelda.secretLayout.fireY,"fuego",0));
-        for(var i in this.fire){
-            this.fire[i].animations.add("idle",[0,1],6,true);
-            this.fire[i].animations.play("idle");
-        }
+        this.fire1 = this.game.add.sprite(zelda.secretLayout.fireX1,zelda.secretLayout.fireY,"fuego",0);
+		this.fire1.animations.add("spawn",[0,1,2],6,false);
+		this.fire1.animations.add("idle",[3,4],6,true);
+        this.fire1.animations.play("spawn");
+		this.fire1.animations.currentAnim.onComplete.add(function () {
+			this.fire1.animations.play("idle");
+		},this);
+		
+        this.fire2 = this.game.add.sprite(zelda.secretLayout.fireX2,zelda.secretLayout.fireY,"fuego",0);
+		this.fire2.animations.add("spawn",[0,1,2],6,false);
+		this.fire2.animations.add("idle",[3,4],6,true);
+        this.fire2.animations.play("spawn");
+		this.fire2.animations.currentAnim.onComplete.add(function () {
+			this.fire2.animations.play("idle");
+		},this);
         
         //npc
         this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc", 3);
         this.npc.anchor.setTo(.5,0);
+		this.npc.animations.add("spawn",[0,1,2,3],6,false);
+		this.npc.animations.play("spawn");
+		this.npc.animations.currentAnim.onComplete.add(function(){
+			//items
+        	zelda.sala_secreta_I.rupia = zelda.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY, "rupia");
+        	zelda.sala_secreta_I.rupia.anchor.setTo(.5,0);
+			zelda.game.physics.arcade.enable(this.rupia);
+		},this);
         
-        //items
-        this.rupia = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY, "rupia");
-        this.rupia.anchor.setTo(.5,0);
-		this.game.physics.arcade.enable(this.rupia);
+        
 		
 		this.game.camera.y -= 47;
 		
@@ -65,7 +78,7 @@ zelda.sala_secreta_I = {
        		zelda.gameOptions.GoToOverworld();
 		}
 		this.game.physics.arcade.overlap(this.link.LinkCollider, this.rupia, function(){
-			console.log("funcionamiento de la rupia");
+			console.log("aparece texto oculto de cuanto dinero adquieres");
 		});
 		
 		//pausar el juego con la P

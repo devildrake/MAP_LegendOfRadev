@@ -57,7 +57,7 @@ zelda.sala_secreta_H = {
 			zelda.sala_secreta_H.moneda = zelda.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"rupia");
 			zelda.sala_secreta_H.moneda.anchor.setTo(.5,0);
 			zelda.game.physics.arcade.enable(zelda.sala_secreta_H.moneda);
-		});
+		},this);
 		//-------------------------------------------
 		
 		this.game.camera.y -= 47;
