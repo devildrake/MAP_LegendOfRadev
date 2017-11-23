@@ -211,6 +211,7 @@ zelda.overworld = {
                 this.inventario.position.x+=-zelda.game.camera.x;
                 this.inventario.fixedToCamera = true;
                 console.log(this.inventario.position.y);
+                
              if(this.inventario.position.y==-zelda.gameOptions.gameHeight+47){
                 zelda.gameOptions.InventoryScroll=0;
                 
