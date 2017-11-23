@@ -101,8 +101,6 @@ zelda.MoblinPrefab.prototype.update = function(){
             if(chancesOfChangingDir<2){
                 
                 zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(0,3,false));
-
-                console.log("CHange");
             }
         
         

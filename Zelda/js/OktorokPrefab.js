@@ -91,6 +91,12 @@ zelda.OktorokPrefab.prototype.update = function(){
             this.prevVelocity.y = this.body.velocity.y;
         }
 
+        var chancesOfChangingDir = zelda.randomDataGen.between(0,200);
+            if(chancesOfChangingDir<2){
+                
+                zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(0,3,false));
+            }
+        
 
         this.game.physics.arcade.overlap(this,this.level.linkInstance,
         function(enemy,linkInstance){
