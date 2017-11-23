@@ -1,5 +1,6 @@
 var zelda = zelda || {};
 
+//Juego,posX,posY,tipo,nivel
 zelda.LeeverPrefab = function(game,x,y,type,level){
 
     this.hurt = false;
@@ -14,17 +15,22 @@ zelda.LeeverPrefab = function(game,x,y,type,level){
     this.anchor.setTo(.5);
     this.prevVelocity = new Phaser.Point(0,0);
     this.maxVelocity = 15;
+    
+    this.spawned = false;
+    
     if(this.type==0){
-        this.animations.add("Emerge", [0,1,2], 5, true);
-        this.animations.add("Move", [3,4], 5, true);
+
         this.lives = 1;
         }
     else{
-        console.log("Azul");
-        this.animations.add("Emerge", [5,6,7], 5, true);
-        this.animations.add("Move", [8,9], 5, true);
         this.lives = 3;
     }
+        this.animations.add("EmergeNaranja", [0,1,2], 5, true);
+        this.animations.add("MoveNaranja", [3,4], 5, true);
+        this.animations.add("EmergeAzul", [5,6,7], 5, true);
+        this.animations.add("MoveAzul", [8,9], 5, true);
+        this.animations.add("Spawn",[10,11,12],15,false);
+
 
     this.level = level;
 
@@ -38,6 +44,18 @@ zelda.LeeverPrefab = function(game,x,y,type,level){
         obj.body.velocity = obj.previousVelocity;
     }
 
+zelda.LeeverPrefab.Respawn = function(obj){
+    obj.hurt = false;
+    obj.calledNotHurt = true;
+    obj.Alive = true;
+    obj.Awake = false;
+    obj.emerged = false;
+    obj.emerging = false;
+    obj.type = type;
+    obj.prevVelocity = new Phaser.Point(0,0);    
+    obj.spawned = false;
+}    
+    
 zelda.LeeverPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 
 zelda.LeeverPrefab.prototype.constructor = zelda.LeeverPrefab;
@@ -59,13 +77,20 @@ zelda.LeeverPrefab.prototype.update = function(){
     else{
         if(!this.emerged&&!this.emerging){
             zelda.LeeverPrefab.Emerging(this);
-            this.animations.play("Emerge");
+            if(this.type==0)
+            this.animations.play("EmergeNaranja");
+            else 
+            this.animations.play("EmergeAzul");
         }else if(!this.emerged&&this.emerging){
             this.game.time.events.add(Phaser.Timer.SECOND * 0.3,zelda.LeeverPrefab.Emerge, this.level,this);
         }
         
         else if(this.emerged){
-            this.play("Move");
+            if(this.type ==0)
+                this.play("MoveNaranja");
+            else
+                this.play("MoveAzul");
+            
         this.game.physics.arcade.collide(this,this.level.obstacles);
         this.game.physics.arcade.collide(this,this.level.water);
 
@@ -122,17 +147,6 @@ zelda.LeeverPrefab.prototype.update = function(){
                     zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");
             } );
 
-
-
-            if(this.body.velocity.x>0){
-                this.animations.play("movingRight");
-            }else if(this.body.velocity.x<0){
-                this.animations.play("movingLeft");
-            }else if(this.body.velocity.y<0){
-                this.animations.play("movingUp");
-            }else if(this.body.velocity.y>0){
-                this.animations.play("movingDown");
-            }
 
             if(this.level.linkInstance.sword.Alive){
                     this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){

@@ -92,43 +92,199 @@ zelda.LinkObject = {
 //Crear 10 bools por zona?
 zelda.enemySpawns = {
 zones: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+posicionesEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+especieEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+tipoEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+initialSpeedEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 
+    
 InitZones:function(){
-    this.zones[0] = [];
-    this.zones[1] = [];
-    this.zones[2] = [true];                           //OktorokNaranja
-    this.zones[3] = [true,true,true,true,true,true];  //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Azul - Oktorok Naranja
-    this.zones[4] = [];
-    this.zones[5] = [true,true,true];                 //Subterraneo naranja - Subterraneo azul - Subterraneo azul
-    this.zones[6] = [];
-    this.zones[7] = [];
-    this.zones[8] = [true];                           //BichoMar
-    this.zones[9] = [true];                           //BichoMar
-    this.zones[10] = [true,true,true,true,true];      //BichoMar - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja
-    this.zones[11] = [false,false,false,false,false]; //Oktorok Naranja - Oktorok Azul - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
-    this.zones[12] = [true,true,true,true,true,true]; //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - 
-    this.zones[13] = [true,true,true,true,true,true]; //Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - 
-    this.zones[14] = [true,true];                     //Oktorok naranja - Bichomar
-    this.zones[15] = [true,true,true,true,true];      //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
-    this.zones[16] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
-    this.zones[17] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
-    this.zones[18] = [true,true,true,true];           //Volador naranja - Volador naranja - Volador naranja - Volador naranja
-    this.zones[19] = [true,true,true,true];           //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
-    this.zones[20] = [true,true];                     //Cerdo Naranja - Cerdo Azul
-    this.zones[21] = [true,true];                     //BichoMar - Oktorok Naranja
-    this.zones[22] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
-    this.zones[23] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
-    this.zones[24] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
-    this.zones[25] = [true,true,true,true,true];      //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - BichoMar
-    this.zones[26] = [true,true,true,true,true];      //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
-    this.zones[27] = [true,true,true,true,true];      //Cerdo Azul - Cerdo Naranja - Cerdo Naranja - Oktorok Azul - Oktorok Azul
-    this.zones[28] = [false,false,false,false,false]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
-    this.zones[29] = [false,false,false,false,false]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
-    this.zones[30] = [false,false,false,false,false]; 
-    this.zones[31] = [false,false,false,false,false]; //Oktorok naranja - Oktorok naranja - Oktorok naranja - Oktorok naranja
-    this.zones[32] = [false,false,false,false,false]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    this.zones[33] = [false,false,false,false,false]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    this.zones[34] = [false,false,false,false,false]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+    zelda.enemySpawns.zones[0] = [];
+    zelda.enemySpawns.zones[1] = [];
+    zelda.enemySpawns.zones[2] = [true];                           //OktorokNaranja
+    zelda.enemySpawns.zones[3] = [true,true,true,true,true,true];  //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Azul - Oktorok Naranja
+    zelda.enemySpawns.zones[4] = [];
+    zelda.enemySpawns.zones[5] = [true,true,true];                 //Subterraneo naranja - Subterraneo azul - Subterraneo azul
+    zelda.enemySpawns.zones[6] = [];
+    zelda.enemySpawns.zones[7] = [];
+    zelda.enemySpawns.zones[8] = [true];                           //BichoMar
+    zelda.enemySpawns.zones[9] = [true];                           //BichoMar
+    zelda.enemySpawns.zones[10] = [true,true,true,true,true];      //BichoMar - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja
+    zelda.enemySpawns.zones[11] = [false,false,false,false,false]; //Oktorok Naranja - Oktorok Azul - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.zones[12] = [true,true,true,true,true,true]; //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - 
+    zelda.enemySpawns.zones[13] = [true,true,true,true,true,true]; //Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - 
+    zelda.enemySpawns.zones[14] = [true,true];                     //Oktorok naranja - Bichomar
+    zelda.enemySpawns.zones[15] = [true,true,true,true,true];      //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.zones[16] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.zones[17] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.zones[18] = [true,true,true,true];           //Volador naranja - Volador naranja - Volador naranja - Volador naranja
+    zelda.enemySpawns.zones[19] = [true,true,true,true];           //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.zones[20] = [true,true];                     //Cerdo Naranja - Cerdo Azul
+    zelda.enemySpawns.zones[21] = [true,true];                     //BichoMar - Oktorok Naranja
+    zelda.enemySpawns.zones[22] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.zones[23] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.zones[24] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.zones[25] = [true,true,true,true,true];      //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - BichoMar
+    zelda.enemySpawns.zones[26] = [true,true,true,true,true];      //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.zones[27] = [true,true,true,true,true];      //Cerdo Azul - Cerdo Naranja - Cerdo Naranja - Oktorok Azul - Oktorok Azul
+    zelda.enemySpawns.zones[28] = [true,true,true,true]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
+    zelda.enemySpawns.zones[29] = [true,true,true,true]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
+    zelda.enemySpawns.zones[30] = []; 
+    zelda.enemySpawns.zones[31] = [true,true,true,true]; //Oktorok naranja - Oktorok naranja - Oktorok naranja - Oktorok naranja
+    zelda.enemySpawns.zones[32] = [true,true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.zones[33] = [true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.zones[34] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+    
+    zelda.enemySpawns.posicionesEnemigos[0] = [];
+    zelda.enemySpawns.posicionesEnemigos[1] = [];
+    zelda.enemySpawns.posicionesEnemigos[2] = [true];                           //OktorokNaranja
+    zelda.enemySpawns.posicionesEnemigos[3] = [true,true,true,true,true,true];  //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Azul - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[4] = [];
+    zelda.enemySpawns.posicionesEnemigos[5] = [true,true,true];                 //Subterraneo naranja - Subterraneo azul - Subterraneo azul
+    zelda.enemySpawns.posicionesEnemigos[6] = [];
+    zelda.enemySpawns.posicionesEnemigos[7] = [];
+    zelda.enemySpawns.posicionesEnemigos[8] = [true];                           //BichoMar
+    zelda.enemySpawns.posicionesEnemigos[9] = [true];                           //BichoMar
+    zelda.enemySpawns.posicionesEnemigos[10] = [true,true,true,true,true];      //BichoMar - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja
+    zelda.enemySpawns.posicionesEnemigos[11] = [false,false,false,false,false]; //Oktorok Naranja - Oktorok Azul - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[12] = [true,true,true,true,true,true]; //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - 
+    zelda.enemySpawns.posicionesEnemigos[13] = [true,true,true,true,true,true]; //Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - 
+    zelda.enemySpawns.posicionesEnemigos[14] = [true,true];                     //Oktorok naranja - Bichomar
+    zelda.enemySpawns.posicionesEnemigos[15] = [true,true,true,true,true];      //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[16] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[17] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[18] = [true,true,true,true];           //Volador naranja - Volador naranja - Volador naranja - Volador naranja
+    zelda.enemySpawns.posicionesEnemigos[19] = [true,true,true,true];           //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[20] = [true,true];                     //Cerdo Naranja - Cerdo Azul
+    zelda.enemySpawns.posicionesEnemigos[21] = [true,true];                     //BichoMar - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[22] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[23] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[24] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[25] = [true,true,true,true,true];      //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - BichoMar
+    zelda.enemySpawns.posicionesEnemigos[26] = [true,true,true,true,true];      //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[27] = [true,true,true,true,true];      //Cerdo Azul - Cerdo Naranja - Cerdo Naranja - Oktorok Azul - Oktorok Azul
+    zelda.enemySpawns.posicionesEnemigos[28] = [true,true,true,true]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
+    zelda.enemySpawns.posicionesEnemigos[29] = [true,true,true,true]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
+    zelda.enemySpawns.posicionesEnemigos[30] = []; 
+    zelda.enemySpawns.posicionesEnemigos[31] = [true,true,true,true]; //Oktorok naranja - Oktorok naranja - Oktorok naranja - Oktorok naranja
+    zelda.enemySpawns.posicionesEnemigos[32] = [true,true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.posicionesEnemigos[33] = [true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.posicionesEnemigos[34] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar    
+    
+    zelda.enemySpawns.especieEnemigos[0] = [];
+    zelda.enemySpawns.especieEnemigos[1] = [];
+    zelda.enemySpawns.especieEnemigos[2] = [true];                           //OktorokNaranja
+    zelda.enemySpawns.especieEnemigos[3] = [true,true,true,true,true,true];  //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Azul - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[4] = [];
+    zelda.enemySpawns.especieEnemigos[5] = [true,true,true];                 //Subterraneo naranja - Subterraneo azul - Subterraneo azul
+    zelda.enemySpawns.especieEnemigos[6] = [];
+    zelda.enemySpawns.especieEnemigos[7] = [];
+    zelda.enemySpawns.especieEnemigos[8] = [true];                           //BichoMar
+    zelda.enemySpawns.especieEnemigos[9] = [true];                           //BichoMar
+    zelda.enemySpawns.especieEnemigos[10] = [true,true,true,true,true];      //BichoMar - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja
+    zelda.enemySpawns.especieEnemigos[11] = [false,false,false,false,false]; //Oktorok Naranja - Oktorok Azul - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[12] = [true,true,true,true,true,true]; //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - 
+    zelda.enemySpawns.especieEnemigos[13] = [true,true,true,true,true,true]; //Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - 
+    zelda.enemySpawns.especieEnemigos[14] = [true,true];                     //Oktorok naranja - Bichomar
+    zelda.enemySpawns.especieEnemigos[15] = [true,true,true,true,true];      //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[16] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[17] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[18] = [true,true,true,true];           //Volador naranja - Volador naranja - Volador naranja - Volador naranja
+    zelda.enemySpawns.especieEnemigos[19] = [true,true,true,true];           //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[20] = [true,true];                     //Cerdo Naranja - Cerdo Azul
+    zelda.enemySpawns.especieEnemigos[21] = [true,true];                     //BichoMar - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[22] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[23] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[24] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[25] = [true,true,true,true,true];      //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - BichoMar
+    zelda.enemySpawns.especieEnemigos[26] = [true,true,true,true,true];      //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.especieEnemigos[27] = [true,true,true,true,true];      //Cerdo Azul - Cerdo Naranja - Cerdo Naranja - Oktorok Azul - Oktorok Azul
+    zelda.enemySpawns.especieEnemigos[28] = [true,true,true,true]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
+    zelda.enemySpawns.especieEnemigos[29] = [true,true,true,true]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
+    zelda.enemySpawns.especieEnemigos[30] = []; 
+    zelda.enemySpawns.especieEnemigos[31] = [true,true,true,true]; //Oktorok naranja - Oktorok naranja - Oktorok naranja - Oktorok naranja
+    zelda.enemySpawns.especieEnemigos[32] = [true,true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.especieEnemigos[33] = [true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.especieEnemigos[34] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar    
+    
+    zelda.enemySpawns.tipoEnemigos[0] = [];
+    zelda.enemySpawns.tipoEnemigos[1] = [];
+    zelda.enemySpawns.tipoEnemigos[2] = [true];                           //OktorokNaranja
+    zelda.enemySpawns.tipoEnemigos[3] = [true,true,true,true,true,true];  //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Azul - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[4] = [];
+    zelda.enemySpawns.tipoEnemigos[5] = [true,true,true];                 //Subterraneo naranja - Subterraneo azul - Subterraneo azul
+    zelda.enemySpawns.tipoEnemigos[6] = [];
+    zelda.enemySpawns.tipoEnemigos[7] = [];
+    zelda.enemySpawns.tipoEnemigos[8] = [true];                           //BichoMar
+    zelda.enemySpawns.tipoEnemigos[9] = [true];                           //BichoMar
+    zelda.enemySpawns.tipoEnemigos[10] = [true,true,true,true,true];      //BichoMar - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja
+    zelda.enemySpawns.tipoEnemigos[11] = [false,false,false,false,false]; //Oktorok Naranja - Oktorok Azul - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[12] = [true,true,true,true,true,true]; //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - 
+    zelda.enemySpawns.tipoEnemigos[13] = [true,true,true,true,true,true]; //Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - 
+    zelda.enemySpawns.tipoEnemigos[14] = [true,true];                     //Oktorok naranja - Bichomar
+    zelda.enemySpawns.tipoEnemigos[15] = [true,true,true,true,true];      //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[16] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[17] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[18] = [true,true,true,true];           //Volador naranja - Volador naranja - Volador naranja - Volador naranja
+    zelda.enemySpawns.tipoEnemigos[19] = [true,true,true,true];           //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[20] = [true,true];                     //Cerdo Naranja - Cerdo Azul
+    zelda.enemySpawns.tipoEnemigos[21] = [true,true];                     //BichoMar - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[22] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[23] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[24] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[25] = [true,true,true,true,true];      //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - BichoMar
+    zelda.enemySpawns.tipoEnemigos[26] = [true,true,true,true,true];      //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.tipoEnemigos[27] = [true,true,true,true,true];      //Cerdo Azul - Cerdo Naranja - Cerdo Naranja - Oktorok Azul - Oktorok Azul
+    zelda.enemySpawns.tipoEnemigos[28] = [true,true,true,true]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
+    zelda.enemySpawns.tipoEnemigos[29] = [true,true,true,true]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
+    zelda.enemySpawns.tipoEnemigos[30] = []; 
+    zelda.enemySpawns.tipoEnemigos[31] = [true,true,true,true]; //Oktorok naranja - Oktorok naranja - Oktorok naranja - Oktorok naranja
+    zelda.enemySpawns.tipoEnemigos[32] = [true,true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.tipoEnemigos[33] = [true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.tipoEnemigos[34] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+    
+    zelda.enemySpawns.initialSpeedEnemigos[0] = [];
+    zelda.enemySpawns.initialSpeedEnemigos[1] = [];
+    zelda.enemySpawns.initialSpeedEnemigos[2] = [true];                           //OktorokNaranja
+    zelda.enemySpawns.initialSpeedEnemigos[3] = [true,true,true,true,true,true];  //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Azul - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[4] = [];
+    zelda.enemySpawns.initialSpeedEnemigos[5] = [true,true,true];                 //Subterraneo naranja - Subterraneo azul - Subterraneo azul
+    zelda.enemySpawns.initialSpeedEnemigos[6] = [];
+    zelda.enemySpawns.initialSpeedEnemigos[7] = [];
+    zelda.enemySpawns.initialSpeedEnemigos[8] = [true];                           //BichoMar
+    zelda.enemySpawns.initialSpeedEnemigos[9] = [true];                           //BichoMar
+    zelda.enemySpawns.initialSpeedEnemigos[10] = [true,true,true,true,true];      //BichoMar - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja
+    zelda.enemySpawns.initialSpeedEnemigos[11] = [false,false,false,false,false]; //Oktorok Naranja - Oktorok Azul - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[12] = [true,true,true,true,true,true]; //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - 
+    zelda.enemySpawns.initialSpeedEnemigos[13] = [true,true,true,true,true,true]; //Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - 
+    zelda.enemySpawns.initialSpeedEnemigos[14] = [true,true];                     //Oktorok naranja - Bichomar
+    zelda.enemySpawns.initialSpeedEnemigos[15] = [true,true,true,true,true];      //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[16] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[17] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[18] = [true,true,true,true];           //Volador naranja - Volador naranja - Volador naranja - Volador naranja
+    zelda.enemySpawns.initialSpeedEnemigos[19] = [true,true,true,true];           //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[20] = [true,true];                     //Cerdo Naranja - Cerdo Azul
+    zelda.enemySpawns.initialSpeedEnemigos[21] = [true,true];                     //BichoMar - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[22] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[23] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[24] = [true,true,true,true];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[25] = [true,true,true,true,true];      //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - BichoMar
+    zelda.enemySpawns.initialSpeedEnemigos[26] = [true,true,true,true,true];      //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.initialSpeedEnemigos[27] = [true,true,true,true,true];      //Cerdo Azul - Cerdo Naranja - Cerdo Naranja - Oktorok Azul - Oktorok Azul
+    zelda.enemySpawns.initialSpeedEnemigos[28] = [true,true,true,true]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
+    zelda.enemySpawns.initialSpeedEnemigos[29] = [true,true,true,true]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
+    zelda.enemySpawns.initialSpeedEnemigos[30] = []; 
+    zelda.enemySpawns.initialSpeedEnemigos[31] = [true,true,true,true]; //Oktorok naranja - Oktorok naranja - Oktorok naranja - Oktorok naranja
+    zelda.enemySpawns.initialSpeedEnemigos[32] = [true,true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.initialSpeedEnemigos[33] = [true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.initialSpeedEnemigos[34] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+    
+    
+    zelda.enemySpawns.posicionesEnemigos[31] = [1007,891,1007,891,1007,891,1007,891,1007,891];
+    zelda.enemySpawns.especieEnemigos[31] = ["Oktorok","Oktorok","Oktorok","Oktorok","Oktorok"];
+    zelda.enemySpawns.tipoEnemigos[31] = [0,0,0,0,0];
+    zelda.enemySpawns.initialSpeedEnemigos[31] = [1,1,1,1,1];
+    console.log(zelda.enemySpawns.zones[31]);
 }
     
 }
@@ -449,7 +605,37 @@ zelda.AIMethods = {
             obj.projectile.body.velocity.x = velocity.x*2;
             obj.projectile.body.velocity.y = velocity.y*2;
 
+    },
+    
+    SpawnEnemy: function(obj,hasInitialSpeed){
+        if(hasInitialSpeed){
+            console.log(hasInitialSpeed);
+            obj.Alive = true;
+            obj.spawned = true;
+
+            if(obj.initialSpeed==0){
+                obj.body.velocity.x = obj.maxVelocity;
+            }else if(obj.initialSpeed==1){
+                obj.body.velocity.x = -obj.maxVelocity;
+            }else if(obj.initialSpeed==2){
+                obj.body.velocity.y = obj.maxVelocity;
+            }else{
+                obj.body.velocity.y = -obj.maxVelocity;
+            }
+        }else{
+            obj.Alive = true;
+            obj.spawned = true;
+        }
+    },
+    
+    Spawning : function(obj,hasInitialSpeed){
+        obj.animations.play("Spawn");
+        if(!obj.calledSpawn){
+            obj.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.AIMethods.SpawnEnemy, obj.level,obj,hasInitialSpeed);
+            obj.calledSpawn = true;
+        }
     }
+    
 }
 
 

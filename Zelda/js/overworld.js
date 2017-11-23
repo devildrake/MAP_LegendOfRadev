@@ -111,17 +111,20 @@ zelda.overworld = {
         //this.moblin = new zelda.MoblinPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.moblin);
         
-        this.peahat = new zelda.PeaHatPrefab(this.game,640,850,1,this,1);
-        this.game.add.existing(this.peahat);
+        //this.peahat = new zelda.PeaHatPrefab(this.game,640,850,1,this,1);
+        //this.game.add.existing(this.peahat);
         
-            	this.loadHearts()
+        
+        this.loadHearts();
 
         this.createHeart(620,840,this,1);
         
+        this.loadEnemies();
         
-        this.riverZola = new zelda.RiverZolaPrefab(this.game,0,850,this);
-        this.game.add.existing(this.riverZola);
-        this.riverZola.Alive = false;
+
+        //this.riverZola = new zelda.RiverZolaPrefab(this.game,0,850,this);
+        //this.game.add.existing(this.riverZola);
+        //this.riverZola.Alive = false;
         
         //this.leever = new zelda.LeeverPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.leever);
@@ -139,11 +142,12 @@ zelda.overworld = {
     },
     
     update:function(){
-        
                        //console.log(this.moblin.animations);
-
+        
                 if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.Q)){
-                    this.riverZola.Alive = true;
+                    //this.riverZola.Alive = true;
+                    //this.createEnemy("Oktorok",this.game,640,850,this,1,1);
+        console.log(this.linkInstance.body.position);
                 }
    
         this.MoveCamera();
@@ -282,6 +286,7 @@ zelda.overworld = {
             if(zelda.gameOptions.cameraArrivedPos==false){
             zelda.gameOptions.cameraArrivedPos=true;
              zelda.gameOptions.setBorders=false;   
+            zelda.overworld.createEnemiesOfCurrentZone();
             }
         }
    },
@@ -340,6 +345,7 @@ zelda.overworld = {
             console.log(zelda.gameOptions.lastCameraPosX);
             console.log(zelda.gameOptions.lastCameraPosY);
                 console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
+            //zelda.overworld.createEnemiesOfCurrentZone();
 
 		});
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraBot, function(){
@@ -364,7 +370,8 @@ zelda.overworld = {
             console.log(zelda.gameOptions.lastCameraPosY);
 
             console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
-            
+                    //zelda.overworld.createEnemiesOfCurrentZone();
+
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraRight,function(){
             zelda.gameOptions.borderToSet = "Right";
@@ -383,6 +390,8 @@ zelda.overworld = {
             console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
             console.log(zelda.gameOptions.lastCameraPosX);
             console.log(zelda.gameOptions.lastCameraPosY);
+                    //zelda.overworld.createEnemiesOfCurrentZone();
+
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraLeft,function(){
             zelda.gameOptions.borderToSet = "Left";
@@ -402,8 +411,10 @@ zelda.overworld = {
             console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
             console.log(zelda.gameOptions.lastCameraPosX);
             console.log(zelda.gameOptions.lastCameraPosY);
+            //zelda.overworld.createEnemiesOfCurrentZone();
 
         });
+        
     },
     
     LinkSecretRoomColision:function(){
@@ -527,6 +538,122 @@ zelda.overworld = {
 		this.hearts = this.add.group();
 		this.hearts.enableBody = true;
 	},
+    
+    loadEnemies:function(){
+        this.oktoroks = this.add.group();
+        this.oktoroks.enableBody = true;
+
+        this.tektites = this.add.group();
+        this.tektites.enableBody = true;
+
+        this.moblins = this.add.group();
+        this.moblins.enableBody = true;
+
+        this.peahats = this.add.group();
+        this.peahats.enableBody = true;
+
+        this.riverZolas = this.add.group();
+        this.riverZolas.enableBody = true;
+
+        this.leevers = this.add.group();
+        this.leevers.enableBody = true;
+        },
+    
+    createEnemy:function(enemy, Agame, posX, posY, level, type, movingTowards){
+            if(enemy== "Oktorok"){
+                var oktorok = this.oktoroks.getFirstExists(false);
+                if(!oktorok){
+                    oktorok = new zelda.OktorokPrefab(this.game,posX,posY,type,level,movingTowards);
+                    this.oktoroks.add(oktorok);
+                }else{
+                    oktorok.type = type;
+                    oktorok.reset(posX,posY);
+                    zelda.OktorokPrefab.Respawn(oktorok);
+                    oktorok.initialSpeed = movingTowards;
+                }
+            }
+            
+            if(enemy== "Peahat"){
+                var peahat = this.peahats.getFirstExists(false);
+                if(!peahat){
+                    peahat = new zelda.PeaHatPrefab(this.game,posX,posY,type,level,movingTowards);
+                    this.peahats.add(peahat);
+                }else{
+                    peahat.reset(posX,posY);
+                    peahat.initialSpeed = movingTowards;
+                    peahat.type = type;
+                    peahat.Alive = true;
+                    peahat.spawned = false;
+                    peahat.calledSpawn = false;
+                    peahat.firstFewFrames = false;
+                    peahat.lives = 3;
+
+                }
+            }
+            
+            if(enemy== "Tektite"){
+                var tektite = this.tektites.getFirstExists(false);
+                if(!tektite){
+                    //En este caso movinTowards tiene que ser el offsetMaximo, 30 es un buen numero
+                    tektite = new zelda.TektitePrefab(this.game,posX,posY,type,level,movingTowards);
+                    this.tektites.add(tektite);
+                }else{
+                    tektite.reset(posX,posY);
+                    tektite.hurt = false;
+                    tektite.calledNotHurt = true;
+                    tektite.Alive = true;
+                    tektite.type = type;
+                    tektite.jumping = false;
+                    tektite.calledStopJumping = false;
+                    if(tektite.type==0){
+                        tektite.lives = 1;
+                        }
+                    else{
+                        tektite.lives = 3;
+                    }
+                    tektite.spawned  = false;
+                    tektite.calledSpawn = false;
+                }
+            }
+            
+            if(enemy == "Leever"){
+                var leever = this.leevers.getFirstExists(false);
+                if(!leever){
+                    leever = new zelda.LeeverPrefab(this.game,posX,posY,type,level);
+                    this.leevers.add(leever);
+                }else{
+                    leever.reset(posX,posY);
+                    leever.type = type;
+                    zelda.LeeverPrefab.Respawn(leever);
+                }
+            }
+            
+            if(enemy== "RiverZola"){
+                var riverZola = this.riverZolas.getFirstExists(false);
+                if(!riverZola){
+                    riverZola = new Zelda.RiverZolaPrefab(this.game,posX,posY,level);
+                    this.riverZolas.add(riverZola);
+                }else{
+                    riverZola.reset(posX,posY);
+                    riverZola.Alive = true;
+                }
+            }
+            
+            if(enemy== "Moblin"){
+                var moblin = this.moblins.getFirstExists(false);
+                if(!moblin){
+                    moblin = new Zelda.MoblinPrefab(this.game,posX,posY,type,level,movingTowards);
+                    this.moblins.add(moblin);
+                }
+                else{
+                    moblin.type = type;
+                    moblin.reset(posX,posY);
+                    zelda.MoblinPrefab.Respawn(moblin);
+                    moblin.initialSpeed = movingTowards;
+                }
+            }
+            
+    },
 	
 	createHeart:function(posX,posY,which){
 		var heart = this.hearts.getFirstExists(false);
@@ -537,6 +664,22 @@ zelda.overworld = {
 			heart.reset(posX,posY);
 		}
     },
+    
+    createEnemiesOfCurrentZone:function(){
+        if(zelda.LinkObject.currentZone==31){
+        var j = 0;
+            for(var i = 0;i<zelda.enemySpawns.zones[31].length;i++){
+                j+=2;
+                if(zelda.enemySpawns.zones[31][i]==true){
+                    
+                    zelda.overworld.createEnemy(zelda.enemySpawns.especieEnemigos[31][i],this.game,zelda.enemySpawns.posicionesEnemigos[31][j]-16,zelda.enemySpawns.posicionesEnemigos[31][j+1],zelda.overworld,zelda.enemySpawns.tipoEnemigos[31][i],zelda.enemySpawns.initialSpeedEnemigos[31][i]);
+                    
+                }
+                
+            }
+            
+        }
+    }
 
     }
     
