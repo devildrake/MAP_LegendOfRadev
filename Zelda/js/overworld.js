@@ -532,7 +532,7 @@ zelda.overworld = {
             zelda.game.state.start("secret_room_K");
 		});
 		
-		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_I_2, function(){
+		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_I_3, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.linkInstance.position.x + 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
             zelda.game.state.start("secret_room_I");
