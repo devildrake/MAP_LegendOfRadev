@@ -231,7 +231,9 @@ zelda.overworld = {
                 zelda.gameOptions.InventoryScroll=0;
                 
                 //this.InventarioPre.kill();
-                this.InvON=false;
+                if(zelda.Inventory.InvON!=false){
+                   zelda.Inventory.InvON=false; 
+                }
             }
             }
             else{
@@ -257,7 +259,10 @@ zelda.overworld = {
                 
                  
                 zelda.Inventory.draw();
-                zelda.Inventory.InvON=true;
+                if(zelda.Inventory.InvON!=true){
+                   zelda.Inventory.InvON=true; 
+                }
+                
                  
                  
                  
@@ -265,7 +270,7 @@ zelda.overworld = {
                 
             }
         }
-        
+        console.log(zelda.Inventory.InvON);
     },
     
     SetCamera:function(){
