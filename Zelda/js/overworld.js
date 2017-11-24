@@ -91,7 +91,7 @@ zelda.overworld = {
 		this.game.physics.arcade.enable(this.trigger_G);
 		this.trigger_K = this.game.add.sprite(5*16*16+11*16, 16*11+1*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_K);
-		this.trigger_I_2 = this.game.add.sprite(6*16*16+2*16, 2*11*16+6*16+5*16, "trigger");
+		this.trigger_I_3 = this.game.add.sprite(6*16*16+2*16, 2*11*16+6*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_I_2);
 		this.trigger_A_2 = this.game.add.sprite(6*16*16+9*16, 4*11*16 + 1*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_A_2);
@@ -511,7 +511,7 @@ zelda.overworld = {
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_A, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.linkInstance.position.x + 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
-            zelda.game.state.start("secret_room_I");
+            zelda.game.state.start("secret_room_A");
 		});
 		
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_H, function(){
