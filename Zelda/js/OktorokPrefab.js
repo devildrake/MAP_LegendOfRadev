@@ -1,7 +1,8 @@
 var zelda = zelda || {};
 
-zelda.OktorokPrefab = function(game,x,y,type,level,initSpeed){
-
+zelda.OktorokPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
+    this.posInArray = posInArray
+    this.currentZone=zone;
     this.hurt = false;
     this.calledNotHurt = true;
     this.Alive = true;
@@ -264,8 +265,9 @@ zelda.OktorokPrefab.prototype.update = function(){
                         npc.lives--;
                         console.log(npc.lives);
                         if(npc.lives==0){
-                            npc.kill();
-                            npc.Alive = false;
+                            //npc.kill();
+                            //npc.Alive = false;
+                            zelda.AIMethods.Die(npc);
                         }else{
                             npc.previousVelocity = npc.body.velocity;
                             npc.hurt = true;
@@ -295,8 +297,11 @@ zelda.OktorokPrefab.prototype.update = function(){
                         npc.lives--;
                         console.log(npc.lives);
                         if(npc.lives==0){
-                            npc.kill();
-                            npc.Alive = false;
+                            //npc.kill();
+                            //npc.Alive = false;
+                            
+                            zelda.AIMethods.Die(npc);
+                            console.log(zelda.enemySpawns.zones[npc.currentZone]);
                         }else{
                                 npc.previousVelocity = npc.body.velocity;
                             npc.hurt = true;

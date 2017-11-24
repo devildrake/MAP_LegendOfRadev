@@ -1,7 +1,8 @@
 var zelda = zelda || {};
 
-zelda.RiverZolaPrefab = function(game,x,y,level){
-
+zelda.RiverZolaPrefab = function(game,x,y,level,zone,posInArray){
+    this.posInArray = posInArray
+    this.currentZone=zone;
     this.hurt = false;
     this.calledNotHurt = true;
     this.Alive = true;
@@ -206,8 +207,10 @@ zelda.RiverZolaPrefab.prototype.update = function(){
                         npc.lives--;
                       //  console.log(npc.lives);
                         if(npc.lives==0){
-                            npc.kill();
-                            npc.Alive = false;
+                            //npc.kill();
+                            //npc.Alive = false;
+                            
+                            zelda.AIMethods.Die(npc);
                         }else{
                             npc.previousVelocity = npc.body.velocity;
                             npc.hurt = true;
@@ -234,8 +237,10 @@ zelda.RiverZolaPrefab.prototype.update = function(){
                         npc.lives--;
                         console.log(npc.lives);
                         if(npc.lives==0){
-                            npc.kill();
-                            npc.Alive = false;
+                            //npc.kill();
+                            //npc.Alive = false;
+                            
+                            zelda.AIMethods.Die(npc);
                         }else{
                                 npc.previousVelocity = npc.body.velocity;
                             npc.hurt = true;

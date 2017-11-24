@@ -1,8 +1,9 @@
 var zelda = zelda || {};
 
 //Juego,posX,posY,tipo,nivel
-zelda.LeeverPrefab = function(game,x,y,type,level){
-
+zelda.LeeverPrefab = function(game,x,y,type,level,zone,posInArray){
+    this.posInArray = posInArray
+    this.currentZone=zone;
     this.hurt = false;
     this.calledNotHurt = true;
     this.Alive = true;
@@ -154,8 +155,10 @@ zelda.LeeverPrefab.prototype.update = function(){
                         npc.lives--;
                         console.log(npc.lives);
                         if(npc.lives==0){
-                            npc.kill();
-                            npc.Alive = false;
+                            //npc.kill();
+                            //npc.Alive = false;
+                            
+                            zelda.AIMethods.Die(npc);
                         }else{
                             npc.previousVelocity = npc.body.velocity;
                             npc.hurt = true;
@@ -182,8 +185,10 @@ zelda.LeeverPrefab.prototype.update = function(){
                         npc.lives--;
                         console.log(npc.lives);
                         if(npc.lives==0){
-                            npc.kill();
-                            npc.Alive = false;
+                            //npc.kill();
+                            //npc.Alive = false;
+                            
+                            zelda.AIMethods.Die(npc);
                         }else{
                                 npc.previousVelocity = npc.body.velocity;
                             npc.hurt = true;

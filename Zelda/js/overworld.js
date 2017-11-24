@@ -342,6 +342,7 @@ zelda.overworld = {
     LinkBorderColision:function(){
         //FUNCIONAMIENTO DEL CAMBIO DE CAMARA A NIVEL SET DE INFORMACIÓN, SE ESTABLECE QUE cameraArrived es false y se modifica a donde debe ir la cámara en función de con que borde ha chocado
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraTop, function(){
+            zelda.overworld.despawnEnemiesOfPreviousZone();
             zelda.gameOptions.cameraArrivedPos = false;
             zelda.gameOptions.cameraPosToGoX = zelda.overworld.camera.x;
             zelda.gameOptions.cameraPosToGoY = zelda.overworld.camera.y;
@@ -368,7 +369,7 @@ zelda.overworld = {
 
 		});
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraBot, function(){
-            
+            zelda.overworld.despawnEnemiesOfPreviousZone();
             zelda.gameOptions.borderToSet = "Downwards";
             zelda.gameOptions.cameraArrivedPos = false;
             zelda.gameOptions.cameraPosToGoX = zelda.overworld.camera.x;
@@ -393,6 +394,7 @@ zelda.overworld = {
 
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraRight,function(){
+            zelda.overworld.despawnEnemiesOfPreviousZone();
             zelda.gameOptions.borderToSet = "Right";
             zelda.gameOptions.cameraArrivedPos = false;
             zelda.gameOptions.cameraPosToGoX = zelda.overworld.camera.x;
@@ -413,6 +415,7 @@ zelda.overworld = {
 
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraLeft,function(){
+            zelda.overworld.despawnEnemiesOfPreviousZone();
             zelda.gameOptions.borderToSet = "Left";
             zelda.gameOptions.cameraArrivedPos = false;
             zelda.gameOptions.cameraPosToGoX = zelda.overworld.camera.x;
@@ -578,24 +581,26 @@ zelda.overworld = {
         this.leevers.enableBody = true;
         },
     
-    createEnemy:function(enemy, Agame, posX, posY, level, type, movingTowards){
+    createEnemy:function(enemy, Agame, posX, posY, level, type, movingTowards, currentZone, posInArray){
             if(enemy== "Oktorok"){
                 var oktorok = this.oktoroks.getFirstExists(false);
                 if(!oktorok){
-                    oktorok = new zelda.OktorokPrefab(this.game,posX,posY,type,level,movingTowards);
+                    oktorok = new zelda.OktorokPrefab(this.game,posX,posY,type,level,movingTowards,currentZone,posInArray);
                     this.oktoroks.add(oktorok);
                 }else{
                     oktorok.type = type;
                     oktorok.reset(posX,posY);
+                    oktorok.currentZone = currentZone;
                     zelda.OktorokPrefab.Respawn(oktorok);
                     oktorok.initialSpeed = movingTowards;
                 }
+                console.log(oktorok.currentZone);
             }
             
             if(enemy== "Peahat"){
                 var peahat = this.peahats.getFirstExists(false);
                 if(!peahat){
-                    peahat = new zelda.PeaHatPrefab(this.game,posX,posY,type,level,movingTowards);
+                    peahat = new zelda.PeaHatPrefab(this.game,posX,posY,type,level,movingTowards,currentZone,posInArray);
                     this.peahats.add(peahat);
                 }else{
                     peahat.reset(posX,posY);
@@ -606,6 +611,8 @@ zelda.overworld = {
                     peahat.calledSpawn = false;
                     peahat.firstFewFrames = false;
                     peahat.lives = 3;
+                    peahat.currentZone = currentZone;
+
 
                 }
             }
@@ -614,9 +621,10 @@ zelda.overworld = {
                 var tektite = this.tektites.getFirstExists(false);
                 if(!tektite){
                     //En este caso movinTowards tiene que ser el offsetMaximo, 30 es un buen numero
-                    tektite = new zelda.TektitePrefab(this.game,posX,posY,type,level,movingTowards);
+                    tektite = new zelda.TektitePrefab(this.game,posX,posY,type,level,movingTowards,currentZone,posInArray);
                     this.tektites.add(tektite);
                 }else{
+                    tektite.currentZone = currentZone;
                     tektite.reset(posX,posY);
                     tektite.hurt = false;
                     tektite.calledNotHurt = true;
@@ -638,9 +646,10 @@ zelda.overworld = {
             if(enemy == "Leever"){
                 var leever = this.leevers.getFirstExists(false);
                 if(!leever){
-                    leever = new zelda.LeeverPrefab(this.game,posX,posY,type,level);
+                    leever = new zelda.LeeverPrefab(this.game,posX,posY,type,level,currentZone,posInArray);
                     this.leevers.add(leever);
                 }else{
+                    leever.currentZone = currentZone;
                     leever.reset(posX,posY);
                     leever.type = type;
                     zelda.LeeverPrefab.Respawn(leever);
@@ -650,21 +659,23 @@ zelda.overworld = {
             if(enemy== "RiverZola"){
                 var riverZola = this.riverZolas.getFirstExists(false);
                 if(!riverZola){
-                    riverZola = new Zelda.RiverZolaPrefab(this.game,posX,posY,level);
+                    riverZola = new Zelda.RiverZolaPrefab(this.game,posX,posY,level,currentZone,posInArray);
                     this.riverZolas.add(riverZola);
                 }else{
                     riverZola.reset(posX,posY);
                     riverZola.Alive = true;
+                    riverZola.currentZone = currentZone;
                 }
             }
             
             if(enemy== "Moblin"){
                 var moblin = this.moblins.getFirstExists(false);
                 if(!moblin){
-                    moblin = new Zelda.MoblinPrefab(this.game,posX,posY,type,level,movingTowards);
+                    moblin = new Zelda.MoblinPrefab(this.game,posX,posY,type,level,movingTowards,currentZone,posInArray);
                     this.moblins.add(moblin);
                 }
                 else{
+                    moblin.currentZone = currentZone;
                     moblin.type = type;
                     moblin.reset(posX,posY);
                     zelda.MoblinPrefab.Respawn(moblin);
@@ -685,23 +696,63 @@ zelda.overworld = {
     },
     
     createEnemiesOfCurrentZone:function(){
-        if(zelda.LinkObject.currentZone==31){
         var j = 0;
-            for(var i = 0;i<zelda.enemySpawns.zones[31].length;i++){
+            for(var i = 0;i<zelda.enemySpawns.zones[zelda.LinkObject.currentZone].length;i++){
                 j+=2;
-                if(zelda.enemySpawns.zones[31][i]==true){
-                    
-                    zelda.overworld.createEnemy(zelda.enemySpawns.especieEnemigos[31][i],this.game,zelda.enemySpawns.posicionesEnemigos[31][j]-16,zelda.enemySpawns.posicionesEnemigos[31][j+1],zelda.overworld,zelda.enemySpawns.tipoEnemigos[31][i],zelda.enemySpawns.initialSpeedEnemigos[31][i]);
+                if(zelda.enemySpawns.zones[zelda.LinkObject.currentZone][i]==true){
+                    zelda.overworld.createEnemy(zelda.enemySpawns.especieEnemigos[zelda.LinkObject.currentZone][i],this.game,zelda.enemySpawns.posicionesEnemigos[zelda.LinkObject.currentZone][j]-16,zelda.enemySpawns.posicionesEnemigos[zelda.LinkObject.currentZone][j+1],zelda.overworld,zelda.enemySpawns.tipoEnemigos[zelda.LinkObject.currentZone][i],zelda.enemySpawns.initialSpeedEnemigos[zelda.LinkObject.currentZone][i],zelda.LinkObject.currentZone,i);
                     
                 }
-                
-            }
             
         }
-    }
-
-    }
+    },
     
+    despawnEnemiesOfPreviousZone:function(){
+        for(var i=0;i<this.oktoroks.children.length;i++){
+            if(this.oktoroks.children[i].Alive){
+                this.oktoroks.children[i].Alive = false;
+                this.oktoroks.children[i].kill();
+            }
+        }
+        
+        for(var i=0;i<this.tektites.children.length;i++){
+            if(this.tektites.children[i].Alive){
+                this.tektites.children[i].Alive = false;
+                this.tektites.children[i].kill();
+            }
+        }
+        
+        for(var i=0;i<this.moblins.children.length;i++){
+            if(this.moblins.children[i].Alive){
+                this.moblins.children[i].Alive = false;
+                this.moblins.children[i].kill();
+            }
+        }
+        
+        for(var i=0;i<this.leevers.children.length;i++){
+            if(this.leevers.children[i].Alive){
+                this.leevers.children[i].Alive = false;
+                this.leevers.children[i].kill();
+            }
+        }
+        
+        for(var i=0;i<this.peahats.children.length;i++){
+            if(this.peahats.children[i].Alive){
+                this.peahats.children[i].Alive = false;
+                this.peahats.children[i].kill();
+            }
+        }
+        
+        for(var i=0;i<this.riverZolas.children.length;i++){
+            if(this.riverZolas.children[i].Alive){
+                this.riverZolas.children[i].Alive = false;
+                this.riverZolas.children[i].kill();
+            }
+        }
+        
+        
+    }
+}
     
 
 

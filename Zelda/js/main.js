@@ -758,6 +758,12 @@ zelda.AIMethods = {
             obj.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.AIMethods.SpawnEnemy, obj.level,obj,hasInitialSpeed);
             obj.calledSpawn = true;
         }
+    },
+    
+    Die: function(npc){
+        npc.Alive = false;
+        npc.kill();
+        zelda.enemySpawns.zones[npc.currentZone][npc.posInArray] = false;
     }
     
 }
