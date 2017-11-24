@@ -16,8 +16,8 @@ zelda.sala_secreta_A = {
         //-------------------------------------------
         this.load.spritesheet("fuego", "img/spawn_fuego.png",16,16);
         this.load.spritesheet("npc", "img/spawn_oldman.png",16,16);
-        this.load.image("pocion","img/pocion_vida.png");
-        this.load.image("corazon","img/slot_corazon.png");
+        this.load.spritesheet("pocion","img/pocion_vida.png",16,16);
+        this.load.spritesheet("corazon","img/slot_corazon.png",16,16);
 		this.load.image("inventario", "img/inventario.png");
 		
 		//para el prefab de link
@@ -53,13 +53,16 @@ zelda.sala_secreta_A = {
         this.npc = this.game.add.sprite(8*16, 4*16, "npc", 0);
         this.npc.anchor.setTo(.5,0);
 		this.npc.animations.add("spawn",[0,1,2,3],6,false);
+		this.npc.animations.add("despawn",[3,4],6,true);
 		this.npc.animations.play("spawn");
 		this.npc.animations.currentAnim.onComplete.add(function(){
 			//objetos cuando acaba de spawnear el npc
-        	zelda.sala_secreta_A.corazon = zelda.game.add.sprite(6*16, 6*16,"corazon");
-        	zelda.sala_secreta_A.pocion = zelda.game.add.sprite(9*16, 6*16, "pocion");
+        	zelda.sala_secreta_A.corazon = zelda.game.add.sprite(6*16, 6*16,"corazon",0);
+        	zelda.sala_secreta_A.pocion = zelda.game.add.sprite(9*16, 6*16, "pocion",0);
 			zelda.game.physics.arcade.enable(zelda.sala_secreta_A.corazon);
 			zelda.game.physics.arcade.enable(zelda.sala_secreta_A.pocion);
+			zelda.sala_secreta_A.corazon.animations.add("despawn",[0,1],6,true);
+			zelda.sala_secreta_A.pocion.animations.add("despawn",[0,1],6,true);
 		});
 		
 		this.game.camera.y -= 47;
@@ -77,7 +80,16 @@ zelda.sala_secreta_A = {
        		zelda.gameOptions.GoToOverworld();
 		}
 		
-		this.game.physics.arcade.overlap(this.link.LinkCollider,this.corazon, function(){
+		this.game.physics.arcade.overlap(this.link.LinkCollider,this.corazon, function(link,corazon){
+			zelda.LinkPrefab.GrabObject();
+			corazon.y -= 8;
+			zelda.sala_secreta_A.npc.animations.play("despawn");
+			zelda.sala_secreta_A.pocion.animations.play("despanw");
+			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+				zelda.sala_secreta_A.corazon.destroy();
+				zelda.sala_secreta_A.pocion.destroy();
+				zelda.sala_secreta_A.npc.destroy();
+			});
 			console.log("añadir comportamiento al coger un slot corazon");
 			zelda.sala_secreta_A.corazon.kill();
 		});

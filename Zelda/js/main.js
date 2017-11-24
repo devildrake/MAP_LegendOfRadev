@@ -817,7 +817,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 //Escena que se pinta
 //zelda.game.state.start("main");
 
-zelda.game.state.start("sword_room");
+zelda.game.state.start("secret_room_A");
 
 //Para la fuente
 WebFontConfig = {
