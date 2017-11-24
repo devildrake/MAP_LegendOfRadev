@@ -25,7 +25,7 @@ zelda.sala_espada = {
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
-		this.load.spritesheet("particulas","img/spawn_particles.png",16,16);
+		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
     
     create:function(){
@@ -76,6 +76,19 @@ zelda.sala_espada = {
         this.inventario.fixedToCamera = true;
 		
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
+		
+		//TEXTOS EN PANTALLA
+		this.str  = "IT'S DANGEROUS TO GO\nALONE! TAKE THIS.";
+		this.strToPrint = "";
+		this.strCount = 0;
+		this.textTimer = 0;
+		this.textUpdateTime = 50;
+		
+		this.texto = this.game.add.text(3*16,16*2+4,this.strToPrint);
+		this.texto.fill = "white";
+		this.texto.font = "Press Start 2P";
+		this.texto.fontSize = 8;
+		this.texto.align = "center";
     },
     
     update:function(){
@@ -92,5 +105,12 @@ zelda.sala_espada = {
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
 			zelda.gameOptions.Pause(this);
 		}
+		if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
+			this.strToPrint += this.str[this.strCount];
+			this.texto.setText(this.strToPrint);
+			this.strCount++;
+			this.textTimer = 0;
+		}
+		this.textTimer += zelda.game.time.elapsed;
     }
 }
