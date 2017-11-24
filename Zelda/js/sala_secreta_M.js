@@ -12,13 +12,13 @@ zelda.sala_secreta_M = {
         //----------Elementos del layaut base------------
         this.load.tilemap("sala", "json/Sala_Secreta.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("secret_tile", "img/tilesets/secret_tile.png");
-        this.load.spritesheet("fuego", "img/fuego.png",17,15);
-        this.load.spritesheet("npc", "img/shopkeeper.png",16, 16);
+        this.load.spritesheet("fuego", "img/spawn_fuego.png",16,16);
+        this.load.spritesheet("npc", "img/spawn_shopkeeper.png",16, 16);
         //-------------------------------------------
         
-        this.load.image("escudo", "img/escudo.png");
-        this.load.image("llave", "img/llave.png");
-        this.load.image("vela", "img/vela.png");
+        this.load.spritesheet("escudo", "img/escudo.png",16,16);
+        this.load.spritesheet("llave", "img/llave.png",16,16);
+        this.load.spritesheet("vela", "img/vela.png",16,16);
 		this.load.image("inventario", "img/inventario.png");
 		
 		//para el prefab de link
@@ -34,29 +34,44 @@ zelda.sala_secreta_M = {
         this.obstacles = this.map.createLayer("Rocas");
 		this.map.setCollisionBetween(1,2,true,"Rocas");
         
-        //fuego y animacion de este
-        this.fire = [];
-        this.fire.push(this.game.add.sprite(zelda.secretLayout.fireX1,zelda.secretLayout.fireY,"fuego",0));
-        this.fire.push(this.game.add.sprite(zelda.secretLayout.fireX2,zelda.secretLayout.fireY,"fuego",0));
-        for(var i in this.fire){
-            this.fire[i].animations.add("idle",[0,1],6,true);
-            this.fire[i].animations.play("idle");
-        }
-		//-------------------------------------------
-        
-        //npc
-        this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc", 0);
-        this.npc.anchor.setTo(.5,0);
-        
-        //objetos
-        this.escudo = this.game.add.sprite(zelda.secretLayout.item1X, zelda.secretLayout.itemY, "escudo");
-        this.llave = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY, "llave");
-        this.llave.anchor.setTo(.5,0);
-        this.vela = this.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "vela");
-		this.game.physics.arcade.enable(this.escudo);
-		this.game.physics.arcade.enable(this.llave);
-		this.game.physics.arcade.enable(this.vela);
+        ///fuego y animacion de este
+        this.fire1 = this.game.add.sprite(zelda.secretLayout.fireX1,zelda.secretLayout.fireY,"fuego",0);
+		this.fire1.animations.add("spawn",[0,1,2],6,false);
+		this.fire1.animations.add("idle",[3,4],6,true);
+        this.fire1.animations.play("spawn");
+		this.fire1.animations.currentAnim.onComplete.add(function () {
+			this.fire1.animations.play("idle");
+		},this);
 		
+        this.fire2 = this.game.add.sprite(zelda.secretLayout.fireX2,zelda.secretLayout.fireY,"fuego",0);
+		this.fire2.animations.add("spawn",[0,1,2],6,false);
+		this.fire2.animations.add("idle",[3,4],6,true);
+        this.fire2.animations.play("spawn");
+		this.fire2.animations.currentAnim.onComplete.add(function () {
+			this.fire2.animations.play("idle");
+		},this);
+		
+		//npc
+		this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
+		this.npc.anchor.setTo(.5,0);
+		this.npc.animations.add("spawn",[0,1,2,3],6,false);
+		this.npc.animations.add("despawn",[3,4],6, true);
+		this.npc.animations.play("spawn");
+		this.npc.animations.currentAnim.onComplete.add(function(){
+			zelda.sala_secreta_M.escudo = zelda.game.add.sprite(zelda.secretLayout.item1X, zelda.secretLayout.itemY, "escudo");
+			zelda.sala_secreta_M.llave = zelda.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY, "llave");
+			zelda.sala_secreta_M.llave.anchor.setTo(.5,0);
+			zelda.sala_secreta_M.vela = zelda.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "vela");
+			
+			zelda.game.physics.arcade.enable(zelda.sala_secreta_M.escudo);
+			zelda.game.physics.arcade.enable(zelda.sala_secreta_M.llave);
+			zelda.game.physics.arcade.enable(zelda.sala_secreta_M.vela);
+			
+			zelda.sala_secreta_M.escudo.animations.add("despawn",[0,1], 6, true);
+			zelda.sala_secreta_M.llave.animations.add("despawn",[0,1], 6, true);
+			zelda.sala_secreta_M.vela.animations.add("despawn",[0,1], 6, true);
+		});
+        
 		this.game.camera.y -= 47;
 		
 		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
@@ -71,13 +86,46 @@ zelda.sala_secreta_M = {
        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
-		this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(){
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(link, escudo){
+			zelda.LinkPrefab.GrabObject();
+			escudo.y -= 8;
+			zelda.sala_secreta_M.llave.animations.play("despawn");
+			zelda.sala_secreta_M.vela.animations.play("despawn");
+			zelda.sala_secreta_M.npc.animations.play("despawn");
+			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+				zelda.sala_secreta_M.llave.destroy();
+				zelda.sala_secreta_M.escudo.destroy();
+				zelda.sala_secreta_M.npc.destroy();
+				zelda.sala_secreta_M.vela.destroy();
+			});
 			console.log("comportamiento coger escudo");
 		});
-		this.game.physics.arcade.overlap(this.link.LinkCollider, this.llave, function(){
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.llave, function(link, llave){
+			zelda.LinkPrefab.GrabObject();
+			llave.y -= 8;
+			zelda.sala_secreta_M.escudo.animations.play("despawn");
+			zelda.sala_secreta_M.vela.animations.play("despawn");
+			zelda.sala_secreta_M.npc.animations.play("despawn");
+			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+				zelda.sala_secreta_M.llave.destroy();
+				zelda.sala_secreta_M.escudo.destroy();
+				zelda.sala_secreta_M.npc.destroy();
+				zelda.sala_secreta_M.vela.destroy();
+			});
 			console.log("comportamiento coger llave");
 		});
-		this.game.physics.arcade.overlap(this.link.LinkCollider, this.vela, function(){
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.vela, function(link,vela){
+			zelda.LinkPrefab.GrabObject();
+			vela.y -= 8;
+			zelda.sala_secreta_M.escudo.animations.play("despawn");
+			zelda.sala_secreta_M.llave.animations.play("despawn");
+			zelda.sala_secreta_M.npc.animations.play("despawn");
+			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+				zelda.sala_secreta_M.llave.destroy();
+				zelda.sala_secreta_M.escudo.destroy();
+				zelda.sala_secreta_M.npc.destroy();
+				zelda.sala_secreta_M.vela.destroy();
+			});
 			console.log("comportamiento coger vela");
 		});
 		
