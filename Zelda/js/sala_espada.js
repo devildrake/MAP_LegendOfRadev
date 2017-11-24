@@ -1,7 +1,7 @@
 var zelda = zelda || {}
 
 zelda.sala_espada = {
-	getSword:false,
+	roomDone:false,
 	
     init:function(){
         this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
@@ -53,20 +53,22 @@ zelda.sala_espada = {
 			this.fire2.animations.play("idle");
 		},this);
         
-        //npc
-        this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
-        this.npc.anchor.setTo(.5,0);
-		this.npc.animations.add("spawn",[0,1,2,3],6, false);
-		this.npc.animations.play("spawn");
-		//cuando acaba la animacion de spawn del npc aparece la espada.
-		this.npc.animations.currentAnim.onComplete.add(function(){
-			if(!this.getSword){
+		if(!this.roomDone){
+			//npc
+			this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
+			this.npc.anchor.setTo(.5,0);
+			this.npc.animations.add("spawn",[0,1,2,3],6, false);
+			this.npc.animations.add("despawn",[3,4], 6, true);
+			this.npc.animations.play("spawn");
+			//cuando acaba la animacion de spawn del npc aparece la espada.
+			this.npc.animations.currentAnim.onComplete.add(function(){
 				this.sword = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY+8, "sword", 1);
 				this.sword.anchor.setTo(.5);
 				this.sword.scale.setTo(1,-1);
+				
 				this.game.physics.arcade.enable(this.sword);
-			}
-		},this);
+			},this);
+		}
         
         this.game.camera.y -= 47;
 		
@@ -95,17 +97,27 @@ zelda.sala_espada = {
 		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
-		this.game.physics.arcade.overlap(this.link.LinkCollider, this.sword, function(){
-			console.log("agregar al inventario");
-			zelda.sala_espada.sword.kill();
-			zelda.sala_espada.getSword = true;
+		this.game.physics.arcade.overlap(this.link.LinkCollider, this.sword, function(link,sword){
+			//console.log("agregar al inventario");
+			zelda.LinkPrefab.GrabObject();
+			sword.y -= 8;
+			zelda.sala_espada.npc.animations.play("despawn");
+			zelda.sala_espada.texto.destroy();
+			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+				console.log("time event");
+				zelda.sala_espada.sword.destroy();
+				zelda.sala_espada.npc.destroy();
+			});
+			zelda.sala_espada.roomDone = true;
 		});
 		
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
 			zelda.gameOptions.Pause(this);
 		}
-		if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
+		
+		//animacion de aparicion de los textos
+		if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime && !this.roomDone){
 			this.strToPrint += this.str[this.strCount];
 			this.texto.setText(this.strToPrint);
 			this.strCount++;
