@@ -6,7 +6,7 @@ zelda.overworld = {
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
         zelda.enemySpawns.InitZones();
-
+        zelda.overworld.spawnStuff = true;
     },
     
     preload:function(){
@@ -58,7 +58,7 @@ zelda.overworld = {
         
         //Camara
         this.game.camera.focusOnXY(zelda.gameOptions.lastCameraPosX,zelda.gameOptions.lastCameraPosY);
-        console.log("Focusing on" + zelda.gameOptions.lastCameraPosX,zelda.gameOptions.lastCameraPosY);
+        //console.log("Focusing on" + zelda.gameOptions.lastCameraPosX,zelda.gameOptions.lastCameraPosY);
         
         this.SetCamera();
         
@@ -151,7 +151,14 @@ zelda.overworld = {
                 if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.Q)){
                     //this.riverZola.Alive = true;
                     //this.createEnemy("Oktorok",this.game,640,850,this,1,1);
-        console.log(this.linkInstance.body.position);
+                    console.log("Zona = " + zelda.LinkObject.currentZone + " Posicion = " + this.linkInstance.body.position);
+                }
+        
+                if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.O)){
+                    //this.riverZola.Alive = true;
+                    //this.createEnemy("Oktorok",this.game,640,850,this,1,1);
+                    zelda.overworld.spawnStuff = !zelda.overworld.spawnStuff;
+                    console.log(zelda.overworld.spawnStuff);
                 }
    
         this.MoveCamera();
@@ -290,14 +297,14 @@ zelda.overworld = {
         if((zelda.game.camera.y!=zelda.gameOptions.cameraPosToGoY||zelda.game.camera.x!=zelda.gameOptions.cameraPosToGoX)&&!zelda.gameOptions.cameraArrivedPos){
             
             if(zelda.gameOptions.borderToSet=="Upwards"){
-                zelda.game.camera.y-=1;
+                zelda.game.camera.y-=2;
             }else if(zelda.gameOptions.borderToSet=="Downwards"){
-                zelda.game.camera.y+=1;
+                zelda.game.camera.y+=2;
             }else if(zelda.gameOptions.borderToSet=="Right"){
-                zelda.game.camera.x+=1;
+                zelda.game.camera.x+=2;
 
             }else{
-                zelda.game.camera.x-=1;
+                zelda.game.camera.x-=2;
             }
         }
         //CUANDO LLEGA a la posición destinada se pone en false setBorders para ajustar los bordes de pantalla a la nueva escena
@@ -361,10 +368,10 @@ zelda.overworld = {
             
             zelda.overworld.cameraTop.body.position.y-=800;
             
-            console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
-            console.log(zelda.gameOptions.lastCameraPosX);
-            console.log(zelda.gameOptions.lastCameraPosY);
-                console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
+            //console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
+            ///console.log(zelda.gameOptions.lastCameraPosX);
+            //console.log(zelda.gameOptions.lastCameraPosY);
+               // console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
             //zelda.overworld.createEnemiesOfCurrentZone();
 
 		});
@@ -385,11 +392,11 @@ zelda.overworld = {
             zelda.LinkObject.currentZone+=7;
             zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
             zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
-            console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
-            console.log(zelda.gameOptions.lastCameraPosX);
-            console.log(zelda.gameOptions.lastCameraPosY);
+            //console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
+            //console.log(zelda.gameOptions.lastCameraPosX);
+            //console.log(zelda.gameOptions.lastCameraPosY);
 
-            console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
+            //console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
                     //zelda.overworld.createEnemiesOfCurrentZone();
 
         });
@@ -408,13 +415,14 @@ zelda.overworld = {
             zelda.LinkObject.currentZone++;
             zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
             zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
-            console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
-            console.log(zelda.gameOptions.lastCameraPosX);
-            console.log(zelda.gameOptions.lastCameraPosY);
+            //console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
+            //console.log(zelda.gameOptions.lastCameraPosX);
+            //console.log(zelda.gameOptions.lastCameraPosY);
                     //zelda.overworld.createEnemiesOfCurrentZone();
 
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraLeft,function(){
+            if(zelda.LinkObject.lookingLeft){
             zelda.overworld.despawnEnemiesOfPreviousZone();
             zelda.gameOptions.borderToSet = "Left";
             zelda.gameOptions.cameraArrivedPos = false;
@@ -430,11 +438,11 @@ zelda.overworld = {
             zelda.LinkObject.currentZone--;
             zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
             zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
-            console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
-            console.log(zelda.gameOptions.lastCameraPosX);
-            console.log(zelda.gameOptions.lastCameraPosY);
+            //console.log(zelda.enemySpawns.zones[zelda.LinkObject.currentZone]);
+            //console.log(zelda.gameOptions.lastCameraPosX);
+            //console.log(zelda.gameOptions.lastCameraPosY);
             //zelda.overworld.createEnemiesOfCurrentZone();
-
+            }
         });
         
     },
@@ -659,7 +667,7 @@ zelda.overworld = {
             if(enemy== "RiverZola"){
                 var riverZola = this.riverZolas.getFirstExists(false);
                 if(!riverZola){
-                    riverZola = new Zelda.RiverZolaPrefab(this.game,posX,posY,level,currentZone,posInArray);
+                    riverZola = new zelda.RiverZolaPrefab(this.game,posX,posY,level,currentZone,posInArray);
                     this.riverZolas.add(riverZola);
                 }else{
                     riverZola.reset(posX,posY);
@@ -671,7 +679,7 @@ zelda.overworld = {
             if(enemy== "Moblin"){
                 var moblin = this.moblins.getFirstExists(false);
                 if(!moblin){
-                    moblin = new Zelda.MoblinPrefab(this.game,posX,posY,type,level,movingTowards,currentZone,posInArray);
+                    moblin = new zelda.MoblinPrefab(this.game,posX,posY,type,level,movingTowards,currentZone,posInArray);
                     this.moblins.add(moblin);
                 }
                 else{
@@ -696,14 +704,16 @@ zelda.overworld = {
     },
     
     createEnemiesOfCurrentZone:function(){
+        if(zelda.overworld.spawnStuff){
         var j = 0;
-            for(var i = 0;i<zelda.enemySpawns.zones[zelda.LinkObject.currentZone].length;i++){
-                j+=2;
+            for(var i = 0;i<zelda.enemySpawns.zones[zelda.LinkObject.currentZone].length;++i){
                 if(zelda.enemySpawns.zones[zelda.LinkObject.currentZone][i]==true){
-                    zelda.overworld.createEnemy(zelda.enemySpawns.especieEnemigos[zelda.LinkObject.currentZone][i],this.game,zelda.enemySpawns.posicionesEnemigos[zelda.LinkObject.currentZone][j]-16,zelda.enemySpawns.posicionesEnemigos[zelda.LinkObject.currentZone][j+1],zelda.overworld,zelda.enemySpawns.tipoEnemigos[zelda.LinkObject.currentZone][i],zelda.enemySpawns.initialSpeedEnemigos[zelda.LinkObject.currentZone][i],zelda.LinkObject.currentZone,i);
-                    
+                    zelda.overworld.createEnemy(zelda.enemySpawns.especieEnemigos[zelda.LinkObject.currentZone][i],this.game,zelda.enemySpawns.posicionesEnemigos[zelda.LinkObject.currentZone][j],zelda.enemySpawns.posicionesEnemigos[zelda.LinkObject.currentZone][j+1],zelda.overworld,zelda.enemySpawns.tipoEnemigos[zelda.LinkObject.currentZone][i],zelda.enemySpawns.initialSpeedEnemigos[zelda.LinkObject.currentZone][i],zelda.LinkObject.currentZone,i);
+                    console.log("Spawning a " + zelda.enemySpawns.especieEnemigos[zelda.LinkObject.currentZone][i]);
+                    console.log("at " + zelda.enemySpawns.posicionesEnemigos[zelda.LinkObject.currentZone][j] + ", " +zelda.enemySpawns.posicionesEnemigos[zelda.LinkObject.currentZone][j+1]);
                 }
-            
+                            j+=2;
+        }
         }
     },
     

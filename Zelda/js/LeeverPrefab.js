@@ -52,7 +52,6 @@ zelda.LeeverPrefab.Respawn = function(obj){
     obj.Awake = false;
     obj.emerged = false;
     obj.emerging = false;
-    obj.type = type;
     obj.prevVelocity = new Phaser.Point(0,0);    
     obj.spawned = false;
 }    
