@@ -270,7 +270,7 @@ zelda.overworld = {
                 
             }
         }
-        console.log(zelda.Inventory.InvON);
+        
     },
     
     SetCamera:function(){

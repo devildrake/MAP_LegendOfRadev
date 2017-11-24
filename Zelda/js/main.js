@@ -403,8 +403,8 @@ zelda.Inventory={
                 }
                 zelda.Inventory.CreateBombs=true;
                 zelda.Inventory.array[i]="bombs";
-                console.log(i)
-                console.log("bomba")
+                //console.log(i)
+                //console.log("bomba")
             }
             //vela
             else if(zelda.Inventory.objects[3]==1 && this.CreateVela==false){
@@ -448,6 +448,9 @@ zelda.Inventory={
             
             //objeto
             
+            
+            
+           
         }
         
         //pintar corazones
@@ -457,7 +460,7 @@ zelda.Inventory={
             this.heart[i]=zelda.game.add.sprite(-zelda.game.camera.x+50*i,zelda.game.camera.y+100, "corazon");
             this.heart[i].position.x=zelda.game.camera.x+175+10*i;
             this.heart[i].position.y=zelda.game.camera.y+195;
-            this.heart[i].fixedToCamera=true;
+            //this.heart[i].fixedToCamera=true;
             
         }
         
@@ -469,6 +472,26 @@ zelda.Inventory={
         
         //pintar numero llaves y bombas
         
+        
+         //killing spree
+            if(zelda.overworld.inventario.position.y>0){
+                
+                if(zelda.Inventory.CreateBombs==true){
+                    this.bomb.kill();
+                    
+                }
+                
+                if(zelda.Inventory.CreatePotion==true){
+                    this.potion.kill();
+                    
+                }
+                 if(zelda.Inventory.CreateVela==true){
+                    this.vela.kill();
+                    
+                }
+               
+           
+            }
     },
     LoadSave:function(){
         
