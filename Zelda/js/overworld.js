@@ -133,8 +133,10 @@ zelda.overworld = {
         
         this.loadEnemies();
         
-        this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M);        
-
+        this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
+        
+        this.InvButton = this.game.input.keyboard.addKey(Phaser.Keyboard.I); 
+        this.ObjbButton = this.game.input.keyboard.addKey(Phaser.Keyboard.F); 
 
         //this.riverZola = new zelda.RiverZolaPrefab(this.game,0,850,this);
         //this.game.add.existing(this.riverZola);
@@ -224,7 +226,7 @@ zelda.overworld = {
             //console.log(this.getItemMusic);
             
         }
-         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.I)&&zelda.Inventory.released){
+         if(this.InvButton.isDown&&zelda.Inventory.released && this.InvButton.downDuration(1)){
              //console.log(this.inventario.position.y);
             zelda.gameOptions.InventoryScroll=zelda.game.camera.y;
             zelda.Inventory.released = false;
@@ -233,11 +235,11 @@ zelda.overworld = {
 
         }
         
-            if(!zelda.game.input.keyboard.isDown(Phaser.Keyboard.I)){
+            if(!this.InvButton.isDown && this.InvButton.downDuration(1)){
                              zelda.Inventory.released = true;
              }
         
-         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.F)){
+         if(this.ObjbButton.isDown && this.ObjbButton.downDuration(1)){
              zelda.Inventory.SelecObjB();
              zelda.Inventory.PintarObjB();
              console.log(zelda.Inventory.ObjectB);
