@@ -201,11 +201,18 @@ zelda.overworld = {
             //console.log(this.getItemMusic);
             
         }
-         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.I)){
+         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.I)&&zelda.Inventory.released){
              //console.log(this.inventario.position.y);
             zelda.gameOptions.InventoryScroll=zelda.game.camera.y;
-             
+            zelda.Inventory.released = false;
+            zelda.Inventory.ScrollingInventory= !zelda.Inventory.ScrollingInventory;
+            console.log(zelda.Inventory.ScrollingInventory);
+
         }
+        
+            if(!zelda.game.input.keyboard.isDown(Phaser.Keyboard.I)){
+                             zelda.Inventory.released = true;
+             }
         
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
@@ -217,12 +224,7 @@ zelda.overworld = {
     
         ScrollInventario(){
             
-            
-            
-            
-            
         if(zelda.gameOptions.InventoryScroll != 0){
-            
             
             if(zelda.Inventory.InvON==true){
                 this.inventario.fixedToCamera = false;

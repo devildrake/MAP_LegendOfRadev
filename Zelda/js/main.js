@@ -303,8 +303,8 @@ zelda.Inventory={
     ring:false,
     stairs:false,
     ObjectB:"nothing",
-
-    
+    ScrollingInventory: false,
+    released: true,
     //el [0] sera el boomerang
     //el [1] sera las bombas
     //el [2] sera el arco
