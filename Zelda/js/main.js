@@ -297,6 +297,8 @@ InitZones:function(){
 
 zelda.Inventory={
     
+    hasSword: false,
+    equippedSword: "Bronze",
     bombs: 0,
     keys:0,
     rupies:0,
