@@ -5,7 +5,6 @@ zelda.overworld = {
         this.game.world.setBounds(0,0,112*16,60*16);
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
-        zelda.enemySpawns.InitZones();
         zelda.overworld.spawnStuff = true;
     },
     
