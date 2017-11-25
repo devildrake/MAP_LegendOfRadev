@@ -801,6 +801,7 @@ zelda.AIMethods = {
     },
     
     GetHurt: function(obj, fromWhere){
+        obj.hurtBySword = true;
         if(fromWhere=="Up"){
             obj.body.velocity.y=-50;
             obj.body.velocity.x = 0;
