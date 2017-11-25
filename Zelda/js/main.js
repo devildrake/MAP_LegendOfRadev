@@ -339,6 +339,7 @@ zelda.Inventory={
             0,0,0,0,0],
     
     
+    
 
     GetObject:function(nameObject){
         
@@ -455,6 +456,9 @@ zelda.Inventory={
         
         //pintar corazones
         this.heart=[zelda.LinkObject.maxHearts];
+        
+        
+        
         //pintar corazones
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
             this.heart[i]=zelda.game.add.sprite(-zelda.game.camera.x+50*i,zelda.game.camera.y+100, "corazon");
@@ -473,25 +477,7 @@ zelda.Inventory={
         //pintar numero llaves y bombas
         
         
-         //killing spree
-            if(zelda.overworld.inventario.position.y>0){
-                
-                if(zelda.Inventory.CreateBombs==true){
-                    this.bomb.kill();
-                    
-                }
-                
-                if(zelda.Inventory.CreatePotion==true){
-                    this.potion.kill();
-                    
-                }
-                 if(zelda.Inventory.CreateVela==true){
-                    this.vela.kill();
-                    
-                }
-               
-           
-            }
+         
     },
     LoadSave:function(){
         
@@ -817,7 +803,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 //Escena que se pinta
 //zelda.game.state.start("main");
 
-zelda.game.state.start("secret_room_A");
+zelda.game.state.start("overworld");
 
 //Para la fuente
 WebFontConfig = {

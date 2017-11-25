@@ -141,7 +141,14 @@ zelda.overworld = {
 		
 		//evento para quitar la pausa
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
-
+        
+        //pintar corazones
+        /*for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                    zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
+                     zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                    zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+            
+                 }*/
 
     },
     
@@ -230,7 +237,36 @@ zelda.overworld = {
              if(this.inventario.position.y==-zelda.gameOptions.gameHeight+47){
                 zelda.gameOptions.InventoryScroll=0;
                 
-                //this.InventarioPre.kill();
+                 //killing sprites
+                  if(zelda.Inventory.CreateBombs==true){
+                     zelda.Inventory.bomb.kill();
+                    zelda.Inventory.CreateBombs=false;
+                }
+                
+                if(zelda.Inventory.CreatePotion==true){
+                    zelda.Inventory.potion.kill();
+                    zelda.Inventory.CreatePotion=false;
+                }
+                 if(zelda.Inventory.CreateVela==true){
+                     zelda.Inventory.vela.kill();
+                    zelda.Inventory.CreateVela=false;
+                }
+                 
+                  for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                    zelda.Inventory.heart[i].kill();
+                   
+            
+                 }
+                 for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                    zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
+                     zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                    zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+            
+                 }
+                 
+                 
+                //things
+                 console.log("cerrado");
                 if(zelda.Inventory.InvON!=false){
                    zelda.Inventory.InvON=false; 
                 }
@@ -238,13 +274,7 @@ zelda.overworld = {
             }
             else{
                 
-                /*
-                 for(var i=0;i< zelda.LinkObject.currentHearts;i++){
-                    zelda.Inventory.draw.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
-                     zelda.Inventory.draw.heart[i].position.x=zelda.game.camera.x+175+10*i;
-                    zelda.Inventory.draw.heart[i].position.y=zelda.game.camera.y+195;
-            
-                 }*/
+                
                 
                      this.inventario.fixedToCamera = false;
         
@@ -256,7 +286,10 @@ zelda.overworld = {
                // console.log(this.inventario.position.y);
              if(this.inventario.position.y>=0){
                 zelda.gameOptions.InventoryScroll=0;
+                console.log("abierto");
+                 
                 
+                 
                  
                 zelda.Inventory.draw();
                 if(zelda.Inventory.InvON!=true){
