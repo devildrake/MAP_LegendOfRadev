@@ -246,10 +246,13 @@ zelda.overworld = {
              }
         
          if(this.ObjbButton.isDown && this.ObjbButton.downDuration(1)){
-            
+            if(zelda.Inventory.InvON==true){
              zelda.Inventory.SelecObjB();
              zelda.Inventory.PintarObjB();
-             console.log(zelda.Inventory.ObjectB);
+             console.log(zelda.Inventory.ObjectB);}
+             else{
+                 
+             }
              }
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
