@@ -16,6 +16,8 @@ zelda.TektitePrefab = function(game,x,y,type,level,offsetMax,zone,posInArray){
     this.calledStopJumping = false;
     this.wasPaused = false;
     this.hurtBySword = false;
+            this.hurtSound = this.game.add.audio("EnemyHurt");
+
     this.maxVelocity = {
      x,
         y
@@ -140,8 +142,10 @@ zelda.TektitePrefab.prototype.update = function(){
 
                     if(this.level.linkInstance.sword.Alive&&!this.hurtBySword){
                             this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
-                                if(!npc.hurt)
-                                npc.lives--;
+                                if(!npc.hurt){
+                                    npc.lives--;
+                                    npc.hurtSound.play();
+                                }
                                 if(npc.lives==0){
                                    //npc.kill();
                                 //npc.Alive = false;
@@ -173,8 +177,10 @@ zelda.TektitePrefab.prototype.update = function(){
                             this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
                             npc.level.linkInstance.projectile.kill();
                             npc.level.linkInstance.projectile.Alive = false;
-                                if(!npc.hurt)
-                                npc.lives--;
+                                if(!npc.hurt){
+                                    npc.lives--;
+                                    npc.hurtSound.play();
+                                }
                                 if(npc.lives==0){
                                 //npc.kill();
                                 //npc.Alive = false;

@@ -19,7 +19,6 @@ zelda.LeeverPrefab = function(game,x,y,type,level,zone,posInArray){
     this.wasPaused = false;
     this.spawned = false;
     this.hurtBySword = false;
-
     if(this.type==0){
 
         this.lives = 1;
@@ -32,7 +31,7 @@ zelda.LeeverPrefab = function(game,x,y,type,level,zone,posInArray){
         this.animations.add("EmergeAzul", [5,6,7], 5, true);
         this.animations.add("MoveAzul", [8,9], 5, true);
         this.animations.add("Spawn",[10,11,12],15,false);
-
+        this.hurtSound = this.game.add.audio("EnemyHurt");
 
     this.level = level;
 
@@ -155,8 +154,10 @@ zelda.LeeverPrefab.prototype.update = function(){
 
                     if(this.level.linkInstance.sword.Alive&&!this.hurtBySword){
                             this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
-                                if(!npc.hurt)
+                                if(!npc.hurt){
                                 npc.lives--;
+                                npc.hurtSound.play();
+                                }
                                 console.log(npc.lives);
                                 if(npc.lives==0){
                                     //npc.kill();
@@ -189,9 +190,10 @@ zelda.LeeverPrefab.prototype.update = function(){
                             this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
                             npc.level.linkInstance.projectile.kill();
                             npc.level.linkInstance.projectile.Alive = false;
-                                if(!npc.hurt)
+                                if(!npc.hurt){
                                 npc.lives--;
-                                console.log(npc.lives);
+                                npc.hurtSound.play();
+                                }
                                 if(npc.lives==0){
                                     //npc.kill();
                                     //npc.Alive = false;

@@ -67,7 +67,8 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.game.physics.arcade.enable(this.sword);
 
     zelda.LinkPrefab.grabItemSound =  this.game.add.audio("getItem");
-    zelda.LinkPrefab.shootProjectile = this.game.add.audio("ShootProjectile");
+    zelda.LinkPrefab.shootProjectileSound = this.game.add.audio("ShootProjectile");
+    zelda.LinkPrefab.attackSound = this.game.add.audio("SwordAttak");
     
         //this.particlesA = game.add.sprite(0,0,"Particles");
     this.particlesA = [0,0,0,0];
@@ -145,6 +146,8 @@ zelda.LinkPrefab.prototype.update = function(){
                     }
                 }
             }
+            if(!zelda.LinkObject.attacking)
+            zelda.LinkPrefab.attackSound.play();
             zelda.LinkObject.attacking = true;
 
         }
@@ -500,7 +503,7 @@ zelda.LinkPrefab.makeLinkNotAttack = function(){
 
 zelda.LinkPrefab.createProjectile = function(sth,obj){        
 	if(!obj.projectile.Alive){
-            zelda.LinkPrefab.shootProjectile.play();
+            zelda.LinkPrefab.shootProjectileSound.play();
 
 		obj.projectile.reset(obj.position.x, obj.position.y);
 		obj.projectile.Alive = true;

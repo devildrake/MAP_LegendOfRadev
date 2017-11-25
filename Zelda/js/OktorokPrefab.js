@@ -14,6 +14,8 @@ zelda.OktorokPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.maxVelocity = 30;
     this.wasPaused = false;
     this.hurtBySword = false;   
+    
+        this.hurtSound = this.game.add.audio("EnemyHurt");
         this.animations.add("movingLeftNaranja", [8,9], 5, true);
         this.animations.add("movingDownNaranja", [10,11], 5, true);
         this.animations.add("movingRightNaranja", [12,13],5,true);
@@ -278,6 +280,7 @@ zelda.OktorokPrefab.prototype.update = function(){
                         this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
                             if(!npc.hurt)
                             npc.lives--;
+                            npc.hurtSound.play();
                             console.log(npc.lives);
                             if(npc.lives==0){
                                 //npc.kill();
@@ -310,9 +313,12 @@ zelda.OktorokPrefab.prototype.update = function(){
                             npc.level.linkInstance.projectile.kill();
                             npc.level.linkInstance.projectile.Alive = false;
 
-                            if(!npc.hurt)
+                            if(!npc.hurt){
                             npc.lives--;
                             console.log(npc.lives);
+                                npc.hurtSound.play();
+
+                            }
                             if(npc.lives==0){
                                 //npc.kill();
                                 //npc.Alive = false;

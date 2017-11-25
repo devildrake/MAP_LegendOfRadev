@@ -16,7 +16,8 @@ zelda.MoblinPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.spawned  = false;
     this.calledSpawn = false;
     this.initialSpeed = initSpeed;
-    
+            this.hurtSound = this.game.add.audio("EnemyHurt");
+
     if(this.type==0){
         this.lives = 1;
         }
@@ -294,8 +295,10 @@ zelda.MoblinPrefab.prototype.update = function(){
 
                 if(this.level.linkInstance.sword.Alive&&!this.hurtBySword){
                         this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
-                            if(!npc.hurt)
-                            npc.lives--;
+                            if(!npc.hurt){
+                                npc.lives--;
+                                npc.hurtSound.play();
+                            }
                             console.log(npc.lives);
                             if(npc.lives==0){
                                 //npc.kill();
@@ -330,8 +333,10 @@ zelda.MoblinPrefab.prototype.update = function(){
                             npc.level.linkInstance.projectile.kill();
                             npc.level.linkInstance.projectile.Alive = false;
 
-                            if(!npc.hurt)
+                            if(!npc.hurt){
                             npc.lives--;
+                            npc.hurtSound.play();
+                            }
                             console.log(npc.lives);
                             if(npc.lives==0){
                                 //npc.kill();

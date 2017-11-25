@@ -29,6 +29,7 @@ zelda.RiverZolaPrefab = function(game,x,y,level,zone,posInArray){
     this.projectile.animations.add("Go",[1,2,3],5,true);
     this.projectile.previousVelocityX=0;
     this.projectile.previousVelocityY=0;
+            this.hurtSound = this.game.add.audio("EnemyHurt");
     this.projectile.futureSpeed = {
      x,
         y
@@ -225,8 +226,11 @@ zelda.RiverZolaPrefab.prototype.update = function(){
 
                 if(this.level.linkInstance.sword.Alive&&!this.hurtBySword){
                         this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
-                            if(!npc.hurt)
+                            if(!npc.hurt){
                             npc.lives--;
+                                    npc.hurtSound.play();
+
+                            }
                           //  console.log(npc.lives);
                             if(npc.lives==0){
                                 //npc.kill();
@@ -259,9 +263,10 @@ zelda.RiverZolaPrefab.prototype.update = function(){
                         this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
                             npc.level.linkInstance.projectile.kill();
                             npc.level.linkInstance.projectile.Alive = false;
-                            if(!npc.hurt)
-                            npc.lives--;
-                            
+                            if(!npc.hurt){
+                                npc.lives--;
+                                npc.hurtSound.play();
+                            }
                             console.log(npc.lives);
                             if(npc.lives==0){
                                 //npc.kill();

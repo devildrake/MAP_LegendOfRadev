@@ -15,6 +15,8 @@ zelda.PeaHatPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.hurtBySword = false;
     this.maxVelocity = 50;
     this.firstFewFrames = false;
+            this.hurtSound = this.game.add.audio("EnemyHurt");
+
         this.animations.add("Move", [0,1], 20, true);
         this.animations.add("MoveSlow",[0,1],10,true);
         this.animations.add("Spawn",[2,3,4],15,false);
@@ -148,8 +150,10 @@ zelda.PeaHatPrefab.prototype.update = function(){
 
                     if(this.level.linkInstance.sword.Alive&&!this.hurtBySword){
                             this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
-                                if(!npc.hurt)
-                                npc.lives--;
+                                if(!npc.hurt){
+                                    npc.lives--;
+                                    npc.hurtSound.play();
+                                }
                                 console.log(npc.lives);
                                 if(npc.lives==0){
                                     //npc.kill();
@@ -182,9 +186,10 @@ zelda.PeaHatPrefab.prototype.update = function(){
                             this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
                                 npc.level.linkInstance.projectile.kill();
                                 npc.level.linkInstance.projectile.Alive = false;
-                                if(!npc.hurt)
-                                npc.lives--;
-                                console.log(npc.lives);
+                                if(!npc.hurt){
+                                    npc.lives--;
+                                    npc.hurtSound.play();
+                                }
                                 if(npc.lives==0){
                                     //npc.kill();
                                     //npc.Alive = false;
