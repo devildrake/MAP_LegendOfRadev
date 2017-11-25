@@ -26,7 +26,18 @@ zelda.LinkPrefab = function(game,x,y,level){
 	}else{
 		this.LinkCollider = game.add.sprite(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY,"LinkCollider");
 	}
+    
+    //this.particlesA = game.add.sprite(0,0,"Particles");
+    this.particlesA = [0,0,0,0];
+        this.particlesA[0] = game.add.sprite(0,0,"Particles");
+        this.particlesA[1] = game.add.sprite(0,0,"Particles");
+        this.particlesA[2] = game.add.sprite(0,0,"Particles");
+        this.particlesA[3] = game.add.sprite(0,0,"Particles");
 
+    //console.log(this.praticlesA[0]);
+    //console.log(this.particlesA[0]);
+    
+    
 	this.LinkCollider.anchor.setTo(0.5,0);
 	this.LinkCollider.scale.setTo(1);
 
@@ -444,3 +455,7 @@ zelda.LinkPrefab.makeLinkNotAttack = function(obj){
         zelda.LinkObject.calledNotMoveFromDamage = false;
     }
 
+    zelda.LinkPrefab.createParticles = function(){
+        
+        
+    }

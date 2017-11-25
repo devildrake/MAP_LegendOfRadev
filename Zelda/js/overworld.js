@@ -39,6 +39,7 @@ zelda.overworld = {
         this.load.spritesheet("Moblin","img/MoblinSpriteSheet.png",16,16);
         this.load.spritesheet("Arrow","img/arrow.png",16,16);
         this.load.spritesheet("PeaHat","img/PeaHatSpriteSheet.png",16,16);
+        this.load.spritesheet("Particles","img/ProjectileParticles.png",16,16);
     },
 
     create:function(){
