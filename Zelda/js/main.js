@@ -478,9 +478,19 @@ zelda.Inventory={
         
         //pintar objeto B
         
-        
+       /* 
         //pintar numero llaves y bombas
-        
+        this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
+		this.strToPrint = "";
+		this.strCount = 0;
+		this.textTimer = 0;
+		this.textUpdateTime = 50;
+		
+		this.texto = this.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+183,this.strToPrint);
+		this.texto.fill = "white";
+		this.texto.font = "Press Start 2P";
+		this.texto.fontSize = 3;
+		this.texto.align = "center";*/
         
          
     },
@@ -595,6 +605,9 @@ zelda.Inventory={
             this.PintObj.position.x=this.PosObjBX;
             this.PintObj.position.y=this.PosObjBY;
         }
+        
+        
+        
         
     },
     

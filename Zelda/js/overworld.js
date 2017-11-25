@@ -40,6 +40,7 @@ zelda.overworld = {
         this.load.spritesheet("Arrow","img/arrow.png",16,16);
         this.load.spritesheet("PeaHat","img/PeaHatSpriteSheet.png",16,16);
         this.load.spritesheet("Particles","img/ProjectileParticles.png",16,16);
+       this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
 
     create:function(){
@@ -237,7 +238,8 @@ zelda.overworld = {
              }
         
          if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.F)){
-                             zelda.Inventory.SelecObjB();
+             zelda.Inventory.SelecObjB();
+             zelda.Inventory.PintarObjB();
              console.log(zelda.Inventory.ObjectB);
              }
 		//pausar el juego con la P
