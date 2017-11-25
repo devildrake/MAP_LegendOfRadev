@@ -138,7 +138,7 @@ zelda.TektitePrefab.prototype.update = function(){
                         else this.animations.play("UpDownAzul");
                     }
 
-                    if(this.level.linkInstance.sword.Alive){
+                    if(this.level.linkInstance.sword.Alive&&!this.hurtBySword){
                             this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
                                 if(!npc.hurt)
                                 npc.lives--;

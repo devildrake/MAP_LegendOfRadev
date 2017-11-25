@@ -292,7 +292,7 @@ zelda.MoblinPrefab.prototype.update = function(){
 
                 });
 
-                if(this.level.linkInstance.sword.Alive){
+                if(this.level.linkInstance.sword.Alive&&!this.hurtBySword){
                         this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
                             if(!npc.hurt)
                             npc.lives--;
@@ -320,6 +320,8 @@ zelda.MoblinPrefab.prototype.update = function(){
                                 zelda.AIMethods.GetHurt(npc,whereTo);
                             }
                         });
+                    }else{
+                        this.hurtBySword = false;
                     }
 
 
@@ -357,9 +359,7 @@ zelda.MoblinPrefab.prototype.update = function(){
                                 zelda.AIMethods.GetHurt(npc,whereTo);
                             }
                         });
-                }else{
-                        this.hurtBySword = false;
-                    }
+                }
 
                 }
             else{
