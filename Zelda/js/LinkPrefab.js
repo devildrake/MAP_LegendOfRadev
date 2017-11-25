@@ -49,7 +49,10 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.projectile.outOfBoundsKill = true;
 	this.projectile.checkWorldBounds = true;
 	this.projectile.events.onOutOfBounds.add(function notAlive(){this.projectile.Alive = false;}, this);
-
+    this.projectile.previousVelocityX = 0;
+    this.projectile.previousVelocityY = 0;
+    this.wasPaused = false;
+    
 	this.game.physics.arcade.enable(this.projectile);
 	this.game.physics.arcade.enable(this.LinkCollider);
     this.game.physics.arcade.enable(this);
@@ -68,7 +71,14 @@ zelda.LinkPrefab.prototype.update = function(){
 	//this.Link.body.velocity.setTo(0);
     
     if(!zelda.Inventory.ScrollingInventory){
-
+            if(this.wasPaused&&!zelda.Inventory.InvON){
+                this.wasPaused = false;
+                
+                if(this.projectile.Alive){
+                    this.projectile.body.velocity.x = this.projectile.previousVelocityX;
+                    this.projectile.body.velocity.y = this.projectile.previousVelocityY;
+                }
+            }
         if(!zelda.LinkObject.moveFromDmg){
            this.LinkCollider.body.velocity.setTo(0);
         }else if(!zelda.LinkObject.calledNotMoveFromDamage){
@@ -133,7 +143,7 @@ zelda.LinkPrefab.prototype.update = function(){
                     zelda.LinkObject.ResetLooking();
                     zelda.LinkObject.lookingRight = true;
                 }else if(this.cursors.up.isDown){
-                        console.log(zelda.LinkObject.switched);
+                        //console.log(zelda.LinkObject.switched);
                         
                     
                     if(!zelda.LinkObject.switched){
@@ -259,9 +269,25 @@ zelda.LinkPrefab.prototype.update = function(){
             this.frame = 13;
         }
     }else{
-        this.animations.stop();
-        this.body.velocity.setTo(0);
-        this.LinkCollider.body.velocity.setTo(0);
+
+        
+            if(!this.wasPaused){
+                this.wasPaused = true;
+                this.projectile.previousVelocityX = this.projectile.body.velocity.x; 
+                this.projectile.previousVelocityY = this.projectile.body.velocity.y; 
+                this.animations.stop();
+                this.body.velocity.setTo(0);
+                this.LinkCollider.body.velocity.setTo(0);
+
+                this.projectile.body.velocity.setTo(0);
+                this.prevVelocity = this.body.velocity;
+
+                this.body.velocity.setTo(0);
+                this.animations.stop();
+            }
+        
+        
+        
     }
 
 }

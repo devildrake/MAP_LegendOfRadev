@@ -12,7 +12,7 @@ zelda.OktorokPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.anchor.setTo(.5);
     this.prevVelocity = new Phaser.Point(0,0);
     this.maxVelocity = 30;
-    
+    this.wasPaused = false;
 
         this.animations.add("movingLeftNaranja", [8,9], 5, true);
         this.animations.add("movingDownNaranja", [10,11], 5, true);
@@ -50,6 +50,8 @@ zelda.OktorokPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
 	this.projectile.scale.setTo(1);
     this.projectile.Alive = false;
     this.projectile.level = this.level;
+    this.projectile.previousVelocityX=0;
+    this.projectile.previousVelocityY=0;
     this.game.physics.arcade.enable(this.projectile);
     this.projectile.kill();
 };
@@ -81,10 +83,23 @@ zelda.OktorokPrefab.prototype.constructor = zelda.OktorokPrefab;
 
 
 zelda.OktorokPrefab.prototype.update = function(){
-    if(!zelda.Inventory.ScrollingInventory){
+    if(!zelda.Inventory.ScrollingInventory&&!zelda.Inventory.InvON){
         if(this.spawned){
+            
+            if(this.wasPaused&&!zelda.Inventory.InvON){
+                this.wasPaused = false;
+                
+                this.body.velocity = this.prevVelocity;
+                if(this.projectile.Alive){
+                    this.projectile.body.velocity.x = this.projectile.previousVelocityX;
+                    this.projectile.body.velocity.y = this.projectile.previousVelocityY;
+                    console.log(this.projectile.previousVelocityX);
+                                        console.log(this.projectile.previousVelocityY);
 
-                    if(this.body.velocity.x==0&&this.body.velocity.y==0){
+                }
+            }
+
+            if(this.body.velocity.x==0&&this.body.velocity.y==0){
                 zelda.AIMethods.changeDir(this,4,false);
             }
 
@@ -336,7 +351,19 @@ zelda.OktorokPrefab.prototype.update = function(){
             zelda.AIMethods.Spawning(this,true);
         }
     }else{
-        this.body.velocity.setTo(0);
+        if(!this.wasPaused){
+            this.wasPaused = true;
+            this.projectile.previousVelocityX = this.projectile.body.velocity.x; 
+            this.projectile.previousVelocityY = this.projectile.body.velocity.y; 
+            console.log(this.projectile.body.velocity.x);
+            console.log(this.projectile.body.velocity.y);
+
+            this.projectile.body.velocity.setTo(0);
+            this.prevVelocity = this.body.velocity;
+            
+            this.body.velocity.setTo(0);
+            this.animations.stop();
+        }
     }
 }
 
