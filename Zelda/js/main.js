@@ -406,6 +406,7 @@ zelda.Inventory={
                     this.bomb.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
                     this.bomb.position.y=zelda.game.camera.y+zelda.Inventory.row2;
                 }
+                
                 zelda.Inventory.CreateBombs=true;
                 zelda.Inventory.array[i]="bombs";
                 //console.log(i)
@@ -413,8 +414,8 @@ zelda.Inventory={
             }
             //vela
             else if(zelda.Inventory.objects[3]==1 && this.CreateVela==false){
-                console.log(i)
-                 console.log("vela")
+                //console.log(i)
+                 //console.log("vela")
                 
                 if(i<5){
                     this.vela=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "vela");
@@ -429,6 +430,7 @@ zelda.Inventory={
                 
                 zelda.Inventory.CreateVela=true;
                 zelda.Inventory.array[i]="vela";
+               
             }
             
             //Potion
@@ -452,7 +454,6 @@ zelda.Inventory={
             }
             
             //objeto
-            
             
             
            
@@ -484,34 +485,36 @@ zelda.Inventory={
          
     },
     
-    
+    Tecla:false,
     MovementCursor:function(){
         if(zelda.Inventory.InvON ){
            this.Cuadrado= zelda.game.input.keyboard.createCursorKeys();
             
                 
-            
-          for(var i=0;i<10;i++){
-            
-              if(zelda.Inventory.Cursor[i]==1){
-                  if(i<5){
-                      
-                    this.selec=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "cursor");
-                    this.selec.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
-                    this.selec.position.y=zelda.game.camera.y+zelda.Inventory.row1;
+          if(zelda.Inventory.selecAlive==false)  {
+            for(var i=0;i<10;i++){
+
+                  if(zelda.Inventory.Cursor[i]==1){
+                      if(i<5){
+
+                        this.selec=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "cursor");
+                        this.selec.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                        this.selec.position.y=zelda.game.camera.y+zelda.Inventory.row1;
+                      }
+                      else{
+                          this.selec=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "cursor");
+                          this.selec.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                            this.selec.position.y=zelda.game.camera.y+zelda.Inventory.row2;
+                      }
                   }
-                  else{
-                      this.selec=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "cursor");
-                      this.selec.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
-                        this.selec.position.y=zelda.game.camera.y+zelda.Inventory.row2;
-                  }
-              }
+                this.tecla=false;
 
 
-
-
+               
+            }
+               zelda.Inventory.selecAlive=true;
           }
-            if(this.Cuadrado.left.isDown){
+            if(this.Cuadrado.left.isDown && zelda.Inventory.selecAlive && this.tecla==false){
                 for(var i=0;i<10;i++){
 
                     if(i==0 && this.Cursor[i]!=0){
@@ -525,41 +528,54 @@ zelda.Inventory={
                         zelda.Inventory.Cursor[i]=0;
 
                     }
-                    this.selec.kill();
+                    
                 }
-                
+                this.tecla=true;
+               this.selec.kill();
+                zelda.Inventory.selecAlive=false;
             }
 
-            if(this.Cuadrado.right.isDown){
+            if(this.Cuadrado.right.isDown && zelda.Inventory.selecAlive && this.tecla==false){
+               
                 for(var i=0;i<10;i++){
 
-                    if(i==8 && zelda.Inventory.Cursor[i]!=0){
+                    if(i==9 && zelda.Inventory.Cursor[i]!=0){
 
                         zelda.Inventory.Cursor[0]=1;
-                        zelda.Inventory.Cursor[i]=0;
+                        zelda.Inventory.Cursor[9]=0;
                         i=10;
                     }
                     else if(zelda.Inventory.Cursor[i]!=0){
                         zelda.Inventory.Cursor[i+1]=1;
                         zelda.Inventory.Cursor[i]=0;
-
+                        i=10;
                     }
-                    this.selec.kill();
+                   
                 }
-                
+                this.tecla=true;
+                this.selec.kill();
+                zelda.Inventory.selecAlive=false;
             }
 
         
             
         }
-        else{
-            
-            
-        }
+        
         
     },
     
+    SelecObjB:function(){
     
+        for(var i=0; i<10;i++){
+    
+            if(zelda.Inventory.Cursor[i]==1 && zelda.Inventory.array[i]!=0){
+            
+                zelda.Inventory.ObjectB=zelda.Inventory.array[i];
+            }
+        }
+    
+    },
+        
     LoadSave:function(){
         
         

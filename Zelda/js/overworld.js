@@ -235,6 +235,10 @@ zelda.overworld = {
                              zelda.Inventory.released = true;
              }
         
+         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.F)){
+                             zelda.Inventory.SelecObjB();
+             console.log(zelda.Inventory.ObjectB);
+             }
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
 			zelda.gameOptions.Pause(this);
