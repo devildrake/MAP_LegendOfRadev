@@ -67,7 +67,7 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.game.physics.arcade.enable(this.sword);
 
     zelda.LinkPrefab.grabItemSound =  this.game.add.audio("getItem");
-    
+    zelda.LinkPrefab.shootProjectile = this.game.add.audio("ShootProjectile");
     
         //this.particlesA = game.add.sprite(0,0,"Particles");
     this.particlesA = [0,0,0,0];
@@ -500,6 +500,8 @@ zelda.LinkPrefab.makeLinkNotAttack = function(){
 
 zelda.LinkPrefab.createProjectile = function(sth,obj){        
 	if(!obj.projectile.Alive){
+            zelda.LinkPrefab.shootProjectile.play();
+
 		obj.projectile.reset(obj.position.x, obj.position.y);
 		obj.projectile.Alive = true;
         obj.projectile.prevAlive = true;
