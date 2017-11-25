@@ -315,6 +315,7 @@ zelda.Inventory={
     //el [5] sera la poti azul(??)
     objects:[0,1,0,1,0,0],
     
+    Cuadrado:0,
      //posiciones
         ArrayPosObjX:[125,145,165,185,200
                           ,125,145,165,185,200],
@@ -337,7 +338,7 @@ zelda.Inventory={
         CreatePotion:false,
     
     //posicion del cursor en la array
-    Cursor:[0,0,0,0,0,
+    Cursor:[1,0,0,0,0,
             0,0,0,0,0],
     
     
@@ -481,6 +482,79 @@ zelda.Inventory={
         
          
     },
+    
+    
+    MovementCursor:function(){
+        if(zelda.Inventory.InvON ){
+           
+            
+          for(var i=0;i<10;i++){
+            
+              if(zelda.Inventory.Cursor[i]==1){
+                  if(i<5){
+                      
+                    this.selec=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "cursor");
+                    this.selec.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.selec.position.y=zelda.game.camera.y+zelda.Inventory.row1;
+                  }
+                  else{
+                      this.selec=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "cursor");
+                      this.selec.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                        this.selec.position.y=zelda.game.camera.y+zelda.Inventory.row2;
+                  }
+              }
+
+
+
+
+          }
+            if(zelda.game.cursors.left.isDown){
+                for(var i=0;i<10;i++){
+
+                    if(i==0 && this.Cursor[i]!=0){
+
+                        this.Cursor[9]=1;
+                        this.Cursor[0]=0;
+                        i=10;
+                    }
+                    else if(this.cursors[i]!=0){
+                        this.Cursor[i-1]=1;
+                        this.Cursor[i]=0;
+
+                    }
+
+                }
+
+            }
+
+            if(zelda.game.cursors.right.isDown){
+                for(var i=0;i<10;i++){
+
+                    if(i==8 && this.Cursor[i]!=0){
+
+                        this.Cursor[0]=1;
+                        this.Cursor[i]=0;
+                        i=10;
+                    }
+                    else if(this.Cursor[i]!=0){
+                        this.Cursor[i+1]=1;
+                        this.Cursor[i]=0;
+
+                    }
+
+                }
+
+            }
+
+        
+        }
+        else{
+            
+            
+        }
+    },
+    
+    
     LoadSave:function(){
         
         

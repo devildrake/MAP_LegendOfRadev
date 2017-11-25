@@ -24,6 +24,7 @@ zelda.overworld = {
         this.load.image("vela", "img/vela.png");
         this.load.image("potion", "img/pocion_vida.png");
         this.load.image("corazon", "img/corazon.png");
+        this.load.image("cursor","img/inventario/selector.png")
         //this.load.image("trigger", "img/trigger_salas_color.png");
         this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
         this.load.image("rockProjectile","img/RockProjectile.png");
@@ -179,7 +180,7 @@ zelda.overworld = {
         this.LinkSecretRoomColision();
         
         
-		
+		zelda.Inventory.MovementCursor();
         
         //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
@@ -286,6 +287,7 @@ zelda.overworld = {
                 this.inventario.position.y+=-zelda.game.camera.y;
                 this.inventario.position.x+=-zelda.game.camera.x;
                 this.inventario.fixedToCamera = true;
+                zelda.Inventory.MovementCursor();
                // console.log(this.inventario.position.y);
              if(this.inventario.position.y>=0){
                 zelda.gameOptions.InventoryScroll=0;
@@ -300,6 +302,7 @@ zelda.overworld = {
                 }
                 
                  
+                 //controles en inventario
                  
                  
               }
