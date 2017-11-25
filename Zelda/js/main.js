@@ -575,6 +575,29 @@ zelda.Inventory={
         }
     
     },
+    PosObjBX:0,PosObjBY:0,PintObj:0,
+    
+    PintarObjB:function(){
+        this.PosObjBX=zelda.game.camera.x+124;
+        this.PosObjBY=zelda.game.camera.y+193;
+        if(zelda.Inventory.ObjectB=="bombs"){
+            this.PintObj=zelda.game.add.sprite(0,0, "bomba");
+            this.PintObj.position.x=this.PosObjBX;
+            this.PintObj.position.y=this.PosObjBY;
+        }
+        else if(zelda.Inventory.ObjectB=="vela"){
+            this.PintObj=zelda.game.add.sprite(0,0, "vela");
+            this.PintObj.position.x=this.PosObjBX;
+            this.PintObj.position.y=this.PosObjBY;
+        }
+        else if(zelda.Inventory.ObjectB=="potion"){
+            this.PintObj=zelda.game.add.sprite(0,0, "potion");
+            this.PintObj.position.x=this.PosObjBX;
+            this.PintObj.position.y=this.PosObjBY;
+        }
+        
+    },
+    
         
     LoadSave:function(){
         

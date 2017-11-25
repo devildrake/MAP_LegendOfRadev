@@ -296,6 +296,18 @@ zelda.overworld = {
                 //things
                  console.log("cerrado");
                  zelda.Inventory.ScrollingInventory = false;
+                 zelda.Inventory.selec.kill();
+                 if(zelda.Inventory.ObjectB!=0){
+                     zelda.Inventory.PintObj.kill();
+                     
+                 }
+                 else{
+                     this.PosObjBX=zelda.game.camera.x+124;
+                     this.PosObjBY=zelda.game.camera.y+23;
+                     this.PintObj.position.x=this.PosObjBX;
+                     this.PintObj.position.y=this.PosObjBY;
+                 }
+                 
                 if(zelda.Inventory.InvON!=false){
                    zelda.Inventory.InvON=false; 
                 }
@@ -319,11 +331,13 @@ zelda.overworld = {
                 console.log("abierto");
                  
                 
+                
                  
                  
                 zelda.Inventory.draw();
                 if(zelda.Inventory.InvON!=true){
                    zelda.Inventory.InvON=true; 
+                     zelda.Inventory.PintarObjB();
                 }
                 
                  
