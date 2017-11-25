@@ -308,15 +308,17 @@ zelda.overworld = {
                  console.log("cerrado");
                  zelda.Inventory.ScrollingInventory = false;
                  zelda.Inventory.selec.kill();
-                 if(zelda.Inventory.ObjectB!=0){
-                     zelda.Inventory.PintObj.kill();
+                 if(zelda.Inventory.ObjectB=="nothing"){
+                     //zelda.Inventory.PintObj.kill();
+                     
                      
                  }
                  else{
-                     this.PosObjBX=zelda.game.camera.x+124;
-                     this.PosObjBY=zelda.game.camera.y+23;
-                     this.PintObj.position.x=this.PosObjBX;
-                     this.PintObj.position.y=this.PosObjBY;
+                     
+                     zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
+                     zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
+                     zelda.Inventory.PintObj.position.x=zelda.Inventory.PosObjBX;
+                     zelda.Inventory.PintObj.position.y=zelda.Inventory.PosObjBY;
                  }
                  
                 if(zelda.Inventory.InvON!=false){
