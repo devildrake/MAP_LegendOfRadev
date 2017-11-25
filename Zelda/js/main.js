@@ -340,6 +340,7 @@ zelda.Inventory={
     //posicion del cursor en la array
     Cursor:[1,0,0,0,0,
             0,0,0,0,0],
+    selecAlive:false,
     
     
     
@@ -486,7 +487,9 @@ zelda.Inventory={
     
     MovementCursor:function(){
         if(zelda.Inventory.InvON ){
-           
+           this.Cuadrado= zelda.game.input.keyboard.createCursorKeys();
+            
+                
             
           for(var i=0;i<10;i++){
             
@@ -508,50 +511,52 @@ zelda.Inventory={
 
 
           }
-            if(zelda.game.cursors.left.isDown){
+            if(this.Cuadrado.left.isDown){
                 for(var i=0;i<10;i++){
 
                     if(i==0 && this.Cursor[i]!=0){
 
-                        this.Cursor[9]=1;
-                        this.Cursor[0]=0;
+                        zelda.Inventory.Cursor[9]=1;
+                        zelda.Inventory.Cursor[0]=0;
                         i=10;
                     }
-                    else if(this.cursors[i]!=0){
-                        this.Cursor[i-1]=1;
-                        this.Cursor[i]=0;
+                    else if(zelda.Inventory.Cursor[i]!=0){
+                        zelda.Inventory.Cursor[i-1]=1;
+                        zelda.Inventory.Cursor[i]=0;
 
                     }
-
+                    this.selec.kill();
                 }
-
+                
             }
 
-            if(zelda.game.cursors.right.isDown){
+            if(this.Cuadrado.right.isDown){
                 for(var i=0;i<10;i++){
 
-                    if(i==8 && this.Cursor[i]!=0){
+                    if(i==8 && zelda.Inventory.Cursor[i]!=0){
 
-                        this.Cursor[0]=1;
-                        this.Cursor[i]=0;
+                        zelda.Inventory.Cursor[0]=1;
+                        zelda.Inventory.Cursor[i]=0;
                         i=10;
                     }
-                    else if(this.Cursor[i]!=0){
-                        this.Cursor[i+1]=1;
-                        this.Cursor[i]=0;
+                    else if(zelda.Inventory.Cursor[i]!=0){
+                        zelda.Inventory.Cursor[i+1]=1;
+                        zelda.Inventory.Cursor[i]=0;
 
                     }
-
+                    this.selec.kill();
                 }
-
+                
             }
 
         
+            
         }
         else{
             
             
         }
+        
     },
     
     
