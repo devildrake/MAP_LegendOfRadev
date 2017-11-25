@@ -18,7 +18,8 @@ zelda.RiverZolaPrefab = function(game,x,y,level,zone,posInArray){
     this.calledEmerging = false;
 	this.game.physics.arcade.enable(this);
     this.wasPaused = false;
-
+    this.lives = 3;
+    this.hurtBySword = false;
     this.projectile = game.add.sprite(this.body.position.x,this.body.position.y,"riverZolaProjectile");
 	this.projectile.anchor.setTo(0.5);
 	this.projectile.scale.setTo(1);
@@ -84,6 +85,10 @@ zelda.RiverZolaPrefab.prototype.update = function(){
 
                 }
             }
+            
+            if(this.hurt)
+            this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.OktorokPrefab.NotHurt, this.level,this);
+
             
             this.game.physics.arcade.collide(this,this.level.obstacles);
             this.game.physics.arcade.collide(this,this.level.ground);
@@ -245,13 +250,18 @@ zelda.RiverZolaPrefab.prototype.update = function(){
                                 zelda.AIMethods.GetHurt(npc,whereTo);
                             }
                         });
+                    }else{
+                        this.hurtBySword = false;
                     }
 
 
                 if(this.level.linkInstance.projectile.Alive){
                         this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
+                            npc.level.linkInstance.projectile.kill();
+                            npc.level.linkInstance.projectile.Alive = false;
                             if(!npc.hurt)
                             npc.lives--;
+                            
                             console.log(npc.lives);
                             if(npc.lives==0){
                                 //npc.kill();

@@ -15,6 +15,7 @@ zelda.TektitePrefab = function(game,x,y,type,level,offsetMax,zone,posInArray){
     this.jumping = false;
     this.calledStopJumping = false;
     this.wasPaused = false;
+    this.hurtBySword = false;
     this.maxVelocity = {
      x,
         y
@@ -163,11 +164,15 @@ zelda.TektitePrefab.prototype.update = function(){
                                     zelda.AIMethods.GetHurt(npc,whereTo);
                                 }
                             });
-                        }
+                        }else{
+                        this.hurtBySword = false;
+                    }
 
 
                     if(this.level.linkInstance.projectile.Alive){
                             this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
+                            npc.level.linkInstance.projectile.kill();
+                            npc.level.linkInstance.projectile.Alive = false;
                                 if(!npc.hurt)
                                 npc.lives--;
                                 if(npc.lives==0){

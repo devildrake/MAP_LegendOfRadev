@@ -40,7 +40,7 @@ zelda.MoblinPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
 
     
 	this.game.physics.arcade.enable(this);
-
+    this.hurtBySword = false;
 
     
     //console.log(this.animations);
@@ -357,7 +357,9 @@ zelda.MoblinPrefab.prototype.update = function(){
                                 zelda.AIMethods.GetHurt(npc,whereTo);
                             }
                         });
-                }
+                }else{
+                        this.hurtBySword = false;
+                    }
 
                 }
             else{

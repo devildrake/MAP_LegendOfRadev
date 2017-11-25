@@ -13,7 +13,7 @@ zelda.OktorokPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.prevVelocity = new Phaser.Point(0,0);
     this.maxVelocity = 30;
     this.wasPaused = false;
-
+    this.hurtBySword = false;   
         this.animations.add("movingLeftNaranja", [8,9], 5, true);
         this.animations.add("movingDownNaranja", [10,11], 5, true);
         this.animations.add("movingRightNaranja", [12,13],5,true);
@@ -300,6 +300,8 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 zelda.AIMethods.GetHurt(npc,whereTo);
                             }
                         });
+                    }else{
+                        this.hurtBySword = false;
                     }
 
 

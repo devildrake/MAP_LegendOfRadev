@@ -12,7 +12,7 @@ zelda.PeaHatPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.anchor.setTo(.5);
     this.prevVelocity = new Phaser.Point(0,0);
     this.wasPaused = false;
-
+    this.hurtBySword = false;
     this.maxVelocity = 50;
     this.firstFewFrames = false;
         this.animations.add("Move", [0,1], 20, true);
@@ -173,11 +173,15 @@ zelda.PeaHatPrefab.prototype.update = function(){
                                     zelda.AIMethods.GetHurt(npc,whereTo);
                                 }
                             });
-                        }
+                        }else{
+                        this.hurtBySword = false;
+                    }
 
 
                     if(this.level.linkInstance.projectile.Alive){
                             this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
+                                npc.level.linkInstance.projectile.kill();
+                                npc.level.linkInstance.projectile.Alive = false;
                                 if(!npc.hurt)
                                 npc.lives--;
                                 console.log(npc.lives);

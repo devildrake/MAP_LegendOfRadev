@@ -18,7 +18,8 @@ zelda.LeeverPrefab = function(game,x,y,type,level,zone,posInArray){
     this.maxVelocity = 15;
     this.wasPaused = false;
     this.spawned = false;
-    
+    this.hurtBySword = false;
+
     if(this.type==0){
 
         this.lives = 1;
@@ -179,11 +180,15 @@ zelda.LeeverPrefab.prototype.update = function(){
                                     zelda.AIMethods.GetHurt(npc,whereTo);
                                 }
                             });
-                        }
+                        }else{
+                        this.hurtBySword = false;
+                    }
 
 
                     if(this.level.linkInstance.projectile.Alive){
                             this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
+                            npc.level.linkInstance.projectile.kill();
+                            npc.level.linkInstance.projectile.Alive = false;
                                 if(!npc.hurt)
                                 npc.lives--;
                                 console.log(npc.lives);
