@@ -246,6 +246,7 @@ zelda.overworld = {
              }
         
          if(this.ObjbButton.isDown && this.ObjbButton.downDuration(1)){
+             zelda.Inventory.ObjPintado=false;
              zelda.Inventory.SelecObjB();
              zelda.Inventory.PintarObjB();
              console.log(zelda.Inventory.ObjectB);
