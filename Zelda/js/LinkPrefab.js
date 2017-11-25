@@ -39,7 +39,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.sword.anchor.setTo(0.5);
 	this.sword.kill();
 	this.sword.Alive = false;
-
+    this.descending = false;
 
 	this.projectile = this.game.add.sprite(0,0,"Sword");
 	this.projectile.anchor.setTo(0.5);
