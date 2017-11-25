@@ -205,7 +205,7 @@ zelda.overworld = {
              //console.log(this.inventario.position.y);
             zelda.gameOptions.InventoryScroll=zelda.game.camera.y;
             zelda.Inventory.released = false;
-            zelda.Inventory.ScrollingInventory= !zelda.Inventory.ScrollingInventory;
+            zelda.Inventory.ScrollingInventory = true;
             console.log(zelda.Inventory.ScrollingInventory);
 
         }
@@ -269,6 +269,7 @@ zelda.overworld = {
                  
                 //things
                  console.log("cerrado");
+                 zelda.Inventory.ScrollingInventory = false;
                 if(zelda.Inventory.InvON!=false){
                    zelda.Inventory.InvON=false; 
                 }
