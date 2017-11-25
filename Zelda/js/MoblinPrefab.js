@@ -236,7 +236,7 @@ zelda.MoblinPrefab.prototype.update = function(){
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.linkInstance,function(projectile,linkInstance){
                     if(!zelda.LinkObject.hurt){
-                        if(linkInstance.body.velocity.x!=0||linkInstance.body.velocity.y!=0){
+                        if(linkInstance.LinkCollider.body.velocity.x!=0||linkInstance.LinkCollider.body.velocity.y!=0){
                             zelda.LinkObject.hurt = true;
                             zelda.LinkObject.moveFromDmg=true;
                             zelda.LinkObject.calledNotMoveFromDamage=false;
@@ -252,13 +252,16 @@ zelda.MoblinPrefab.prototype.update = function(){
                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");   
 
                             }
-                        }else if(linkInstance.body.velocity.x==0&&linkInstance.body.velocity.y==0){
+                        }else if(linkInstance.LinkCollider.body.velocity.x==0&&linkInstance.LinkCollider.body.velocity.y==0){
                             if(projectile.body.velocity.x>0){
                                 if(!zelda.LinkObject.lookingLeft){
                                  zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right"); 
                                 zelda.LinkObject.hurt = true;
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
+
+                                }else{
+                                    zelda.LinkPrefab.blockSound.play();
 
                                 }
                             }else if(projectile.body.velocity.x<0){
@@ -268,6 +271,9 @@ zelda.MoblinPrefab.prototype.update = function(){
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
 
+                                }else{
+                                    zelda.LinkPrefab.blockSound.play();
+
                                 }
                             }else if(projectile.body.velocity.y>0){
                                 if(!zelda.LinkObject.lookingUp){
@@ -276,6 +282,9 @@ zelda.MoblinPrefab.prototype.update = function(){
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
 
+                                }else{
+                                    zelda.LinkPrefab.blockSound.play();
+
                                 }
                             }else if(projectile.body.velocity.y<0){
                                 if(!zelda.LinkObject.lookingDown){
@@ -283,6 +292,9 @@ zelda.MoblinPrefab.prototype.update = function(){
                                 zelda.LinkObject.hurt = true;
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
+                                }else{
+                                    zelda.LinkPrefab.blockSound.play();
+
                                 }
                             }
                         }

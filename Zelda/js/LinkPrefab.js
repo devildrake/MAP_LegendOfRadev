@@ -69,6 +69,7 @@ zelda.LinkPrefab = function(game,x,y,level){
     zelda.LinkPrefab.grabItemSound =  this.game.add.audio("getItem");
     zelda.LinkPrefab.shootProjectileSound = this.game.add.audio("ShootProjectile");
     zelda.LinkPrefab.attackSound = this.game.add.audio("SwordAttak");
+    zelda.LinkPrefab.blockSound = this.game.add.audio("ShieldBlock");
     
         //this.particlesA = game.add.sprite(0,0,"Particles");
     this.particlesA = [0,0,0,0];

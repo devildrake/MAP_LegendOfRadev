@@ -219,23 +219,26 @@ zelda.OktorokPrefab.prototype.update = function(){
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.linkInstance,function(projectile,linkInstance){
                     if(!zelda.LinkObject.hurt){
-                        if(linkInstance.body.velocity.x!=0||linkInstance.body.velocity.y!=0){
+                        if(linkInstance.LinkCollider.body.velocity.x!=0||linkInstance.LinkCollider.body.velocity.y!=0||linkInstance.attacking){
                             zelda.LinkObject.hurt = true;
                             zelda.LinkObject.moveFromDmg=true;
                             zelda.LinkObject.calledNotMoveFromDamage=false;
                             if(projectile.body.velocity.x>0){
                                  zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right");   
+                                zelda.LinkObject.calledNotMoveFromDamage=false;
+
                             }else if(projectile.body.velocity.x<0){
                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");   
+                                zelda.LinkObject.calledNotMoveFromDamage=false;
 
                             }else if(projectile.body.velocity.y>0){
                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Down");   
-
+                                zelda.LinkObject.calledNotMoveFromDamage=false;
                             }else if(projectile.body.velocity.y<0){
                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");   
-
+                                
                             }
-                        }else if(linkInstance.body.velocity.x==0&&linkInstance.body.velocity.y==0){
+                        }else if(linkInstance.body.LinkCollider.velocity.x==0&&linkInstance.body.LinkCollider.velocity.y==0){
                             if(projectile.body.velocity.x>0){
                                 if(!zelda.LinkObject.lookingLeft){
                                  zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right"); 
@@ -243,6 +246,9 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
 
+                                }else{
+                                    console.log(linkInstance);
+                                    zelda.LinkPrefab.blockSound.play();
                                 }
                             }else if(projectile.body.velocity.x<0){
                                 if(!zelda.LinkObject.lookingRight){
@@ -251,6 +257,8 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
 
+                                }else{
+                                    zelda.LinkPrefab.blockSound.play();
                                 }
                             }else if(projectile.body.velocity.y>0){
                                 if(!zelda.LinkObject.lookingUp){
@@ -259,6 +267,8 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
 
+                                }else{
+                                    zelda.LinkPrefab.blockSound.play();
                                 }
                             }else if(projectile.body.velocity.y<0){
                                 if(!zelda.LinkObject.lookingDown){
@@ -266,6 +276,8 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 zelda.LinkObject.hurt = true;
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
+                                }else{
+                                    zelda.LinkPrefab.blockSound.play();
                                 }
                             }
                         }
