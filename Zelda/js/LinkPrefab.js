@@ -27,12 +27,6 @@ zelda.LinkPrefab = function(game,x,y,level){
 		this.LinkCollider = game.add.sprite(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY,"LinkCollider");
 	}
     
-    //this.particlesA = game.add.sprite(0,0,"Particles");
-    this.particlesA = [0,0,0,0];
-        this.particlesA[0] = game.add.sprite(0,0,"Particles");
-        this.particlesA[1] = game.add.sprite(0,0,"Particles");
-        this.particlesA[2] = game.add.sprite(0,0,"Particles");
-        this.particlesA[3] = game.add.sprite(0,0,"Particles");
 
     //console.log(this.praticlesA[0]);
     //console.log(this.particlesA[0]);
@@ -55,6 +49,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.projectile = this.game.add.sprite(0,0,"Sword");
 	this.projectile.anchor.setTo(0.5);
 	this.projectile.Alive = false;
+    this.projectile.prevAlive = false;
 	this.projectile.kill();
 
 	this.projectile.outOfBoundsKill = true;
@@ -64,12 +59,48 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.projectile.previousVelocityY = 0;
     this.wasPaused = false;
     
+
+
 	this.game.physics.arcade.enable(this.projectile);
 	this.game.physics.arcade.enable(this.LinkCollider);
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.sword);
 
     zelda.LinkPrefab.grabItemSound =  this.game.add.audio("getItem");
+    
+    
+        //this.particlesA = game.add.sprite(0,0,"Particles");
+    this.particlesA = [0,0,0,0];
+        this.particlesA[0] = game.add.sprite(0,0,"Particles");
+        this.particlesA[1] = game.add.sprite(0,0,"Particles");
+        this.particlesA[2] = game.add.sprite(0,0,"Particles");
+        this.particlesA[3] = game.add.sprite(0,0,"Particles");
+        
+
+    this.particlesB = [0,0,0,0];
+        this.particlesB[0] = game.add.sprite(0,0,"Particles");
+        this.particlesB[1] = game.add.sprite(0,0,"Particles");
+        this.particlesB[2] = game.add.sprite(0,0,"Particles");
+        this.particlesB[3] = game.add.sprite(0,0,"Particles");
+        
+    for(var i =0;i<this.particlesA.length;i++){
+        this.particlesA[i].Alive = false; 
+        this.particlesB[i].Alive = false; 
+        this.particlesA[i].kill();
+        this.particlesB[i].kill();
+        this.particlesA[i].scale.setTo(1);
+        this.particlesB[i].scale.setTo(1);
+        this.particlesA[i].anchor.setTo(1);
+        this.particlesB[i].anchor.setTo(1);
+        this.game.physics.arcade.enable(this.particlesA[i]);
+	   this.game.physics.arcade.enable(this.particlesB[i]);
+        this.particlesA[i].frame = i;
+                this.particlesB[i].frame = i;
+
+        }
+    this.particlesA[0].calledBeDestroyed= false;
+        this.particlesB[0].calledBeDestroyed= false;
+
 };
 
 zelda.LinkPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -123,7 +154,95 @@ zelda.LinkPrefab.prototype.update = function(){
             zelda.LinkObject.calledNotHurt = true;
         }
 
+        if(this.particlesA[0].Alive){
+            
+            if(!this.particlesA[0].calledBeDestroyed){
+            for(var i=0;i<4;i++)
+            this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.AIMethods.BeDestroyed, this.level,this.particlesA[i]);
+                this.particlesA[0].calledBeDestroyed = true;
+            }
+        }
+        if(this.particlesB[0].Alive){
+            if(!this.particlesB[0].calledBeDestroyed){
+            for(var i=0;i<4;i++)
+            this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.AIMethods.BeDestroyed, this.level,this.particlesB[i]);
+                this.particlesB[0].calledBeDestroyed = true;
+            }
+        }
 
+        if(this.projectile.prevAlive&&!this.projectile.Alive){
+            this.projectile.prevAlive=false;
+            
+            if(!this.particlesA[0].Alive){
+                this.particlesA[0].reset(this.projectile.position.x,this.projectile.position.y);
+                this.particlesA[1].reset(this.projectile.position.x,this.projectile.position.y);
+                this.particlesA[2].reset(this.projectile.position.x,this.projectile.position.y);
+                this.particlesA[3].reset(this.projectile.position.x,this.projectile.position.y);
+                for(var i=0;i<4;i++)
+                    this.particlesA[i].Alive = true;
+                    this.particlesA[0].thePos = this.projectile.position;
+                this.particlesA[0].body.velocity.x=-30;
+                this.particlesA[0].body.velocity.y=-30;
+              
+                this.particlesA[1].body.velocity.x=30;
+                this.particlesA[1].body.velocity.y=-30;           
+                
+                this.particlesA[3].body.velocity.x=30;
+                this.particlesA[3].body.velocity.y=30;     
+                
+                this.particlesA[2].body.velocity.x=-30;
+                this.particlesA[2].body.velocity.y=30;
+                //this.particlesA[0].reset(this.projectile.position);
+
+                
+                
+            }else if(!this.particlesB[0].Alive){
+                this.particlesB[0].reset(this.projectile.position.x,this.projectile.position.y);
+                this.particlesB[1].reset(this.projectile.position.x,this.projectile.position.y);
+                this.particlesB[2].reset(this.projectile.position.x,this.projectile.position.y);
+                this.particlesB[3].reset(this.projectile.position.x,this.projectile.position.y);
+                
+                for(var i=0;i<4;i++)
+                    this.particlesB[i].Alive = true;
+                
+                this.particlesB[0].body.velocity.x=-30;
+                this.particlesB[0].body.velocity.y=-30;
+              
+                this.particlesB[1].body.velocity.x=30;
+                this.particlesB[1].body.velocity.y=-30;           
+                
+                this.particlesB[3].body.velocity.x=30;
+                this.particlesB[3].body.velocity.y=30;     
+                
+                this.particlesB[2].body.velocity.x=-30;
+                this.particlesB[2].body.velocity.y=30;
+                //this.particlesA[0].reset(this.projectile.position);
+                
+            }else{
+                               this.particlesA[0].reset(this.projectile.position.x,this.projectile.position.y);
+                this.particlesA[1].reset(this.projectile.position.x,this.projectile.position.y);
+                this.particlesA[2].reset(this.projectile.position.x,this.projectile.position.y);
+                this.particlesA[3].reset(this.projectile.position.x,this.projectile.position.y);
+                for(var i=0;i<4;i++)
+                    this.particlesA[i].Alive = true;
+                
+                this.particlesA[0].body.velocity.x=-30;
+                this.particlesA[0].body.velocity.y=-30;
+              
+                this.particlesA[1].body.velocity.x=30;
+                this.particlesA[1].body.velocity.y=-30;           
+                
+                this.particlesA[3].body.velocity.x=30;
+                this.particlesA[3].body.velocity.y=30;     
+                
+                this.particlesA[2].body.velocity.x=-30;
+                this.particlesA[2].body.velocity.y=30;
+                //this.particlesA[0].reset(this.projectile.position);
+            }
+            
+            
+            
+        }
 
         //Comportamiento si attacking es false, es el movimiento con las flechas 
         if(!zelda.LinkObject.attacking&&!zelda.LinkObject.grabbingObject){
@@ -383,6 +502,7 @@ zelda.LinkPrefab.createProjectile = function(sth,obj){
 	if(!obj.projectile.Alive){
 		obj.projectile.reset(obj.position.x, obj.position.y);
 		obj.projectile.Alive = true;
+        obj.projectile.prevAlive = true;
 
 		if(sth==0){
 			obj.projectile.body.velocity.y = 200;

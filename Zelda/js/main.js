@@ -912,7 +912,14 @@ zelda.AIMethods = {
         npc.Alive = false;
         npc.kill();
         zelda.enemySpawns.zones[npc.currentZone][npc.posInArray] = false;
+    },
+        
+    BeDestroyed:function(something){
+        something.Alive = false;
+        something.kill();
+        something.calledBeDestroyed = false;
     }
+    
     
 }
 
