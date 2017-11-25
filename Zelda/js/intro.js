@@ -7,6 +7,8 @@ zelda.intro = {
         this.game.world.setBounds(0,0,1024,240);
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         //this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
+        zelda.enemySpawns.InitZones();
+
 	},
     
     preload:function(){

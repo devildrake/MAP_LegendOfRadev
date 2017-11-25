@@ -238,7 +238,7 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");   
                                 
                             }
-                        }else if(linkInstance.body.LinkCollider.velocity.x==0&&linkInstance.body.LinkCollider.velocity.y==0){
+                        }else if(linkInstance.LinkCollider.body.velocity.x==0&&linkInstance.LinkCollider.body.velocity.y==0){
                             if(projectile.body.velocity.x>0){
                                 if(!zelda.LinkObject.lookingLeft){
                                  zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right"); 
