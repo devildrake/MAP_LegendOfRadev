@@ -232,7 +232,7 @@ zelda.overworld = {
             //console.log(this.getItemMusic);
             
         }
-         if(this.InvButton.isDown&&zelda.Inventory.released && this.InvButton.downDuration(1)){
+         if(this.InvButton.isDown && zelda.Inventory.released && this.InvButton.downDuration(1)){
              //console.log(this.inventario.position.y);
             zelda.gameOptions.InventoryScroll=zelda.game.camera.y;
             zelda.Inventory.released = false;
@@ -241,12 +241,12 @@ zelda.overworld = {
 
         }
         
-            if(!this.InvButton.isDown && this.InvButton.downDuration(1)){
+            if(!this.InvButton.isDown ){
                              zelda.Inventory.released = true;
              }
         
          if(this.ObjbButton.isDown && this.ObjbButton.downDuration(1)){
-             zelda.Inventory.ObjPintado=false;
+            
              zelda.Inventory.SelecObjB();
              zelda.Inventory.PintarObjB();
              console.log(zelda.Inventory.ObjectB);

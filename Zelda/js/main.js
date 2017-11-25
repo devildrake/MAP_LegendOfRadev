@@ -591,21 +591,24 @@ zelda.Inventory={
         if(zelda.Inventory.ObjPintado==false){
             this.PosObjBX=zelda.game.camera.x+124;
             this.PosObjBY=zelda.game.camera.y+193;
-            zelda.Inventory.ObjPintado=true;
+           
             if(zelda.Inventory.ObjectB=="bombs"){
                 this.PintObj=zelda.game.add.sprite(0,0, "bomba");
                 this.PintObj.position.x=this.PosObjBX;
                 this.PintObj.position.y=this.PosObjBY;
+                 zelda.Inventory.ObjPintado=true;
             }
             else if(zelda.Inventory.ObjectB=="vela"){
                 this.PintObj=zelda.game.add.sprite(0,0, "vela");
                 this.PintObj.position.x=this.PosObjBX;
                 this.PintObj.position.y=this.PosObjBY;
+                 zelda.Inventory.ObjPintado=true;
             }
             else if(zelda.Inventory.ObjectB=="potion"){
                 this.PintObj=zelda.game.add.sprite(0,0, "potion");
                 this.PintObj.position.x=this.PosObjBX;
                 this.PintObj.position.y=this.PosObjBY;
+                 zelda.Inventory.ObjPintado=true;
             }
 
         
@@ -613,7 +616,7 @@ zelda.Inventory={
             
             console.log("sas");
             this.PintObj.kill();
-            zelda.Inventory.ObjPintado=true;
+            zelda.Inventory.ObjPintado=false;
             zelda.Inventory.PintarObjB();
         }
         
