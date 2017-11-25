@@ -112,6 +112,7 @@ zelda.sala_espada = {
 				zelda.sala_espada.npc.destroy();
 			});
 			zelda.sala_espada.roomDone = true;
+            zelda.Inventory.hasSword = true;
 		});
 		
 		//pausar el juego con la P

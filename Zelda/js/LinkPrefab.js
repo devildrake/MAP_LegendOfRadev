@@ -78,7 +78,7 @@ zelda.LinkPrefab.prototype.update = function(){
         this.game.physics.arcade.collide(this.LinkCollider,this.level.obstacles);
 
         //La barra espaciadora pone attacking en true
-        if(this.space.isDown&&this.space.downDuration(1)){
+        if(this.space.isDown&&this.space.downDuration(1)&&zelda.Inventory.hasSword){
             if(!zelda.LinkObject.attacking){
                 if(zelda.LinkObject.currentHearts==zelda.LinkObject.maxHearts){
                     if(zelda.LinkObject.lookingDown){
