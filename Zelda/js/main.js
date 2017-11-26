@@ -500,6 +500,27 @@ zelda.Inventory={
             //this.heart[i].fixedToCamera=true;
             
         }
+        for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
+                    
+                        this.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                        this.heart[i].position.y=zelda.game.camera.y+195;
+                    }else{
+                        if(i==zelda.LinkObject.currentHearts-.5){
+                            
+                           this.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                            this.heart[i].position.y=zelda.game.camera.y+195;
+                            
+                            
+                        }else{
+                            
+                           this.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                            this.heart[i].position.y=zelda.game.camera.y+195;
+                            }                   
+                    }
+            
+            
+                 }
         
         //pintar espada
         
@@ -978,7 +999,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 //Escena que se pinta
 //zelda.game.state.start("main");
 
-zelda.game.state.start("overworld");
+zelda.game.state.start("main");
 
 //Para la fuente
 WebFontConfig = {
