@@ -80,7 +80,7 @@ zelda.overworld = {
         //TRIGGERS PARA SALAS SECRETAS
         this.trigger_espada = this.game.add.sprite(2*16*16 + 4*16, 4*11*16 + 16 +5*16, "trigger");
         this.game.physics.arcade.enable(this.trigger_espada);
-        
+         
         this.trigger_D = this.game.add.sprite(16*16+6*16, 4*11*16 + 16+5*16, "trigger");
         this.game.physics.arcade.enable(this.trigger_D);
         
@@ -140,6 +140,7 @@ zelda.overworld = {
         
         
         
+        
         //this.oktorok = new zelda.OktorokPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.oktorok);
         
@@ -187,12 +188,14 @@ zelda.overworld = {
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
         
         //pintar corazones
-        /*for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+        zelda.Inventory.startHearts();
+        for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                     zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
                      zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
                     zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                    
             
-                 }*/
+                 }
 
     },
     
@@ -320,13 +323,13 @@ zelda.overworld = {
                     zelda.Inventory.CreateVela=false;
                 }
                  
-                  for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                  /*for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                     zelda.Inventory.heart[i].kill();
                    
             
-                 }
+                 }*/
                  for(var i=0;i< zelda.LinkObject.currentHearts;i++){
-                    zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
+                    //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
                      zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
                     zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
             
@@ -431,13 +434,23 @@ zelda.overworld = {
             }else{
                 zelda.game.camera.x-=2;
             }
+            //poner aqui actualizacion objetos HUD para cuando se mueva
+            //y cuando digo aqui no me refiero al for
+            for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                    zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                    zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                    
+            
+                 }
         }
         //CUANDO LLEGA a la posición destinada se pone en false setBorders para ajustar los bordes de pantalla a la nueva escena
         else{
             if(zelda.gameOptions.cameraArrivedPos==false){
-            zelda.gameOptions.cameraArrivedPos=true;
-             zelda.gameOptions.setBorders=false;   
-            zelda.overworld.createEnemiesOfCurrentZone();
+                zelda.gameOptions.cameraArrivedPos=true;
+                 zelda.gameOptions.setBorders=false;   
+                zelda.overworld.createEnemiesOfCurrentZone();
+                
+
             }
         }
    },
@@ -581,6 +594,7 @@ zelda.overworld = {
     LinkSecretRoomColision:function(){
         
         
+          
         /* //Escaleras
 		this.game.physics.arcade.enable(this.trigger_I);
 		this.game.physics.arcade.enable(this.trigger_L);
@@ -593,6 +607,7 @@ zelda.overworld = {
         this.game.physics.arcade.enable(this.trigger_G);
 		this.game.physics.arcade.enable(this.trigger_K);
 		this.game.physics.arcade.enable(this.trigger_I_3);*/
+        
         
         
         //TRIGGERS PARA CAMBIOS DE PANTALLA
