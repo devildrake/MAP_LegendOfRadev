@@ -313,6 +313,7 @@ zelda.Inventory={
     ScrollingInventory: false,
     released: true,
     RemakeHearts:false,
+    HasSword:false,
     //el [0] sera el boomerang
     //el [1] sera las bombas
     //el [2] sera el arco
@@ -524,7 +525,7 @@ zelda.Inventory={
                  }
         
         //pintar espada
-        
+      
         
         //pintar objeto B
         
@@ -1000,7 +1001,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 //Escena que se pinta
 //zelda.game.state.start("main");
 
-zelda.game.state.start("main");
+zelda.game.state.start("overworld");
 
 //Para la fuente
 WebFontConfig = {
