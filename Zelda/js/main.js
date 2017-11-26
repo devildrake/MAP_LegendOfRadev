@@ -63,7 +63,7 @@ zelda.LinkObject = {
     
     goingDownStairWay:false,
     goingUpStairWay:false,
-
+    whereToPlaceStairWayGround: 0,
     //Un booleano para gestionar si ha recibido daño
     hurt: false,
     
