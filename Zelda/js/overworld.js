@@ -51,6 +51,7 @@ zelda.overworld = {
         this.load.image("GroundTile","img/GroundSprite.png");
         this.load.spritesheet("Stalfos","img/StalfosSpriteSheet.png",16,16);
         this.load.spritesheet("Keese","img/KeeseSpriteSheet.png",16,16);
+        this.load.spritesheet("Goriya","img/GoriyaSpriteSheet.png",16,16);
        this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
         this.load.spritesheet("Gel","img/GelSpriteSheet.png",16,16);
     },
@@ -168,6 +169,8 @@ zelda.overworld = {
         //this.peahat = new zelda.PeaHatPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.peahat);
         
+        this.goriya = new zelda.GoriyaPrefab(this.game,640,850,1,this,1);
+        this.game.add.existing(this.goriya);
         
         this.loadHearts();
         this.loadRupies();
