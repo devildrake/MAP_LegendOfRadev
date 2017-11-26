@@ -189,7 +189,7 @@ zelda.overworld = {
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
         
         //pintar corazones
-        zelda.Inventory.startHearts();
+        zelda.Inventory.startHUD();
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                     zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
                      zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
@@ -334,7 +334,8 @@ zelda.overworld = {
                     zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
             
                  }
-                 
+                 zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
+                  zelda.Inventory.texto.position.y=zelda.game.camera.y+16;   
                  
                 //things
                  console.log("cerrado");
@@ -436,6 +437,8 @@ zelda.overworld = {
             }
             //poner aqui actualizacion objetos HUD para cuando se mueva
             //y cuando digo aqui no me refiero al for
+                zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
+                  zelda.Inventory.texto.position.y=zelda.game.camera.y+12;   
             for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                     zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
                     zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
