@@ -23,7 +23,8 @@ zelda.overworld = {
         this.load.image("vela", "img/vela.png");
         this.load.image("potion", "img/pocion_vida.png");
         this.load.image("corazon", "img/corazon.png");
-        this.load.image("cursor","img/inventario/selector.png")
+        this.load.image("cursor","img/inventario/selector.png");
+        this.load.spritesheet("sword", "img/Swords.png", 16,16);
         //this.load.image("trigger", "img/trigger_salas_color.png");
         this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
         this.load.image("rockProjectile","img/RockProjectile.png");
@@ -231,7 +232,7 @@ zelda.overworld = {
             
             
                  }
-
+        
     },
     
     update:function(){
@@ -356,6 +357,17 @@ zelda.overworld = {
     
         ScrollInventario(){
             
+                  if(zelda.Inventory.HasSword &&zelda.Inventory.equippedSword=="Bronze"){
+
+                    zelda.Inventory.sword = zelda.game.add.sprite(150+20, 190, "sword", 1);
+                    zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+                    zelda.Inventory.sword.position.y=zelda.game.camera.y+27;
+                    zelda.Inventory.sword.anchor.setTo(.5);
+                    zelda.Inventory.sword.scale.setTo(1,-1);
+                    //zelda.Inventory.HasSword=false;
+                    zelda.Inventory.equippedSword="";
+                    }
+            
         if(zelda.gameOptions.InventoryScroll != 0){
             
             if(zelda.Inventory.InvON==true){
@@ -393,7 +405,13 @@ zelda.overworld = {
                 
                  zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
                   zelda.Inventory.texto.position.y=this.inventario.position.y+10; 
-                
+               
+                           if(zelda.Inventory.HasSword){ 
+                            zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+                            zelda.Inventory.sword.position.y=this.inventario.position.y+27;
+                           }
+
+
                   if(zelda.Inventory.ObjectB!="nothing"){
                 zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
                      zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
@@ -415,11 +433,14 @@ zelda.overworld = {
                     zelda.Inventory.CreateVela=false;
                 }
                 zelda.Inventory.selec.kill();
+                if(zelda.Inventory.HasSword){
+                            zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+                            zelda.Inventory.sword.position.y=this.inventario.position.y+27;
+                        }
              if(this.inventario.position.y==-zelda.gameOptions.gameHeight+47){
                 zelda.gameOptions.InventoryScroll=0;
                 
-                 //killing sprites
-                
+                         
                 //things
                  console.log("cerrado");
                  zelda.Inventory.ScrollingInventory = false;
@@ -447,25 +468,30 @@ zelda.overworld = {
 
 
                      }
-                 zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
-                  zelda.Inventory.texto.position.y=zelda.game.camera.y+10; 
+                     zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
+                      zelda.Inventory.texto.position.y=zelda.game.camera.y+10;
+                        if(zelda.Inventory.HasSword){
+                            zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+                            zelda.Inventory.sword.position.y=zelda.game.camera.y+27;
+                        }
+                     if(zelda.Inventory.ObjectB=="nothing"){
+                         //zelda.Inventory.PintObj.kill();
+
+
+                     }
+                     else{
+
+                         zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
+                         zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
+                         zelda.Inventory.PintObj.position.x=zelda.Inventory.PosObjBX;
+                         zelda.Inventory.PintObj.position.y=zelda.Inventory.PosObjBY;
+                     }
                  
-                 if(zelda.Inventory.ObjectB=="nothing"){
-                     //zelda.Inventory.PintObj.kill();
-                     
-                     
-                 }
-                 else{
-                     
-                     zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
-                     zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
-                     zelda.Inventory.PintObj.position.x=zelda.Inventory.PosObjBX;
-                     zelda.Inventory.PintObj.position.y=zelda.Inventory.PosObjBY;
-                 }
+                    if(zelda.Inventory.InvON!=false){
+                       zelda.Inventory.InvON=false; 
+                    }
                  
-                if(zelda.Inventory.InvON!=false){
-                   zelda.Inventory.InvON=false; 
-                }
+                 
             }
             }
             else{
@@ -499,8 +525,18 @@ zelda.overworld = {
                             }                   
                     }
             
-            
+           
+
+                            
+
+
                  }
+                
+                    if(zelda.Inventory.HasSword){
+                        zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+                        zelda.Inventory.sword.position.y=this.inventario.position.y+202;
+                    }
+                
                  zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
                   zelda.Inventory.texto.position.y=this.inventario.position.y+10; 
                 
@@ -520,7 +556,11 @@ zelda.overworld = {
                 console.log("abierto");
                  
                 
-                 
+                  if(zelda.Inventory.HasSword){
+                      
+                        zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+                        zelda.Inventory.sword.position.y=zelda.game.camera.y+202;
+                    }
                  
                 zelda.Inventory.draw();
                 if(zelda.Inventory.InvON!=true){
@@ -615,6 +655,10 @@ zelda.overworld = {
                      zelda.Inventory.PintObj.position.y=zelda.Inventory.PosObjBY;
                 
             }
+            if(zelda.Inventory.HasSword){
+                            zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+                            zelda.Inventory.sword.position.y=zelda.game.camera.y+27;
+                        }
         }
         //CUANDO LLEGA a la posición destinada se pone en false setBorders para ajustar los bordes de pantalla a la nueva escena
         else{
