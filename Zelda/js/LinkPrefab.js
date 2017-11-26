@@ -71,6 +71,7 @@ zelda.LinkPrefab = function(game,x,y,level){
     zelda.LinkPrefab.attackSound = this.game.add.audio("SwordAttak");
     zelda.LinkPrefab.blockSound = this.game.add.audio("ShieldBlock");
     
+    
         //this.particlesA = game.add.sprite(0,0,"Particles");
     this.particlesA = [0,0,0,0];
         this.particlesA[0] = game.add.sprite(0,0,"Particles");
@@ -103,6 +104,10 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.particlesA[0].calledBeDestroyed= false;
         this.particlesB[0].calledBeDestroyed= false;
     zelda.LinkObject.switched = false;
+    
+    this.spriteSueloEscaleras = this.game.add.sprite(0,0,"GroundTile");
+    this.spriteSueloEscaleras.Alive = false;
+    this.spriteSueloEscaleras.kill();
 };
 
 zelda.LinkPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -433,10 +438,16 @@ zelda.LinkPrefab.prototype.update = function(){
         }
     }else{
         if(zelda.LinkObject.goingDownStairWay){
-            this.spriteSueloEscaleras.reset();
+            this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround);
+            this.spriteSueloEscaleras.Alive = true;
+            this.LinkCollider.body.velocity.x = 0;
+            this.LinkCollider.body.velocity.y = 5;
+
         }else{
-            
-            
+            this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround);
+            this.spriteSueloEscaleras.Alive = true;
+            this.LinkCollider.body.velocity.x = 0;
+            this.LinkCollider.body.velocity.y = -5;
         }
         
         
