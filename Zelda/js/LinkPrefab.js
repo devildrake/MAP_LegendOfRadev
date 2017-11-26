@@ -137,7 +137,6 @@ zelda.LinkPrefab.prototype.constructor = zelda.LinkPrefab;
 //PRINCIPIO DEL UPDATE=========================================================================================================================================
 
 zelda.LinkPrefab.prototype.update = function(){
-    console.log(zelda.LinkObject.currentHearts);
     
     if(zelda.LinkObject.currentHearts==0.5){
         if(!zelda.LinkPrefab.lowHpSound.isPlaying)

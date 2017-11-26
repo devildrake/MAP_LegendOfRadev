@@ -49,6 +49,8 @@ zelda.overworld = {
         this.load.spritesheet("PeaHat","img/PeaHatSpriteSheet.png",16,16);
         this.load.spritesheet("Particles","img/ProjectileParticles.png",16,16);
         this.load.image("GroundTile","img/GroundSprite.png");
+        this.load.spritesheet("Stalfos","img/StalfosSpriteSheet.png",16,16);
+        this.load.spritesheet("Keese","img/KeeseSpriteSheet.png",16,16);
        this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
 
@@ -190,6 +192,12 @@ zelda.overworld = {
 		
 		//evento para quitar la pausa
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
+        
+        //this.stalfos = new zelda.StalfosPrefab(this.game,640,850,1,this,1);
+        //this.game.add.existing(this.stalfos);
+        //this.keese = new zelda.KeesePrefab(this.game,640,850,1,this,1);
+        //this.game.add.existing(this.keese);
+        
         
         //pintar corazones
         zelda.Inventory.startHUD();
