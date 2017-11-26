@@ -155,6 +155,8 @@ zelda.overworld = {
         //this.game.add.existing(this.coraçao);
         
         
+        //this.gel = new zelda.GelPrefab(this.game,640,850,1,this,1);
+        //this.game.add.existing(this.gel);
 
         
         //this.tektite = new zelda.TektitePrefab(this.game,620,840,1,this,30);
