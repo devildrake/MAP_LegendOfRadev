@@ -22,6 +22,7 @@ zelda.sala_espada = {
         //-------------------------------------------
         this.load.spritesheet("sword", "img/Swords.png", 16,16);
         this.load.image("inventario", "img/inventario.png");
+		this.load.image("collider", "img/camara_horizontal.png");
 		
 		//para el prefab de link
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
@@ -55,6 +56,8 @@ zelda.sala_espada = {
 		this.fire2.animations.currentAnim.onComplete.add(function () {
 			this.fire2.animations.play("idle");
 		},this);
+		
+		
         
 		if(!this.roomDone){
 			//npc
@@ -95,13 +98,16 @@ zelda.sala_espada = {
 		
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
 		
-		
+		this.trigger = this.game.add.sprite(0,180,"collider");
+		this.game.physics.arcade.enable(this.trigger);
+		this.trigger.body.immovable = true;
     },
     
     update:function(){
-		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
-       		zelda.gameOptions.GoToOverworld();
-		}
+		this.game.physics.arcade.collide(this.link.LinkCollider,this.trigger,function(){
+			zelda.gameOptions.GoToOverworld();
+		});
+       		
 		if(!this.roomDone){
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.sword, function(link,sword){
 				//console.log("agregar al inventario");

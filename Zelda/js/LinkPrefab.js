@@ -478,7 +478,7 @@ zelda.LinkPrefab.StopGrabbing = function(){
 zelda.LinkPrefab.changeScene = function(){
     zelda.game.state.start(zelda.LinkObject.sceneToGo);
     zelda.LinkObject.calledChangeLater = false;
-    zelda.LinkObject.goingDownStairWay = zelda.LinkObject.goingUpStairWay = false;
+    zelda.LinkObject.goingDownStairWay = false;
 }
 
 zelda.LinkPrefab.createSword = function(obj){
