@@ -312,6 +312,7 @@ zelda.Inventory={
     ObjectB:"nothing",
     ScrollingInventory: false,
     released: true,
+    RemakeHearts:false,
     //el [0] sera el boomerang
     //el [1] sera las bombas
     //el [2] sera el arco

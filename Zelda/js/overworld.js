@@ -251,6 +251,35 @@ zelda.overworld = {
 
 		}
         
+        if(zelda.LinkObject.hurt){
+                
+             for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                 zelda.Inventory.heart[i].kill();
+                if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5 || zelda.LinkObject.currentHearts==0){
+                    zelda.Inventory.heart[i+1].kill();
+                    zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
+                     zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                    zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                    }else{
+                        if(i==zelda.LinkObject.currentHearts-.5){
+                           
+                            zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "HalfHeart");
+                            zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                            zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                            
+                            
+                        }else{
+                            
+                            zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
+                            zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                            zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                            }                   
+                    }
+            
+            
+                 }
+            
+        }
         
    
         this.MoveCamera();
@@ -388,23 +417,23 @@ zelda.overworld = {
                  zelda.Inventory.selec.kill();
                  
                  //"pintar" los objetos junto el inventario q sube y baja, pero los pinta debajo por x motivos
-                       for(var i=0;i< zelda.LinkObject.currentHearts;i++){
-                           if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
+                          for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                    if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
+                        
+                         zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                        zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                        }else{
+                            if(i==zelda.LinkObject.currentHearts-.5){
+                                
+                                zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                                zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
 
-                             zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
-                            zelda.Inventory.heart[i].position.y=this.inventario.position.y+15;
+
                             }else{
-                                    if(i==zelda.LinkObject.currentHearts-.5){
-
-                                    zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
-                                    zelda.Inventory.heart[i].position.y=this.inventario.position.y+15;
-
-
-                                    }else{
-
-                                    zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
-                                    zelda.Inventory.heart[i].position.y=this.inventario.position.y+15;
-                                    }                   
+                                
+                                zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                                zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                                }                   
                         }
 
 
