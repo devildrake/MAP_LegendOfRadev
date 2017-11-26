@@ -122,6 +122,9 @@ zelda.LinkPrefab.prototype.constructor = zelda.LinkPrefab;
 //PRINCIPIO DEL UPDATE=========================================================================================================================================
 
 zelda.LinkPrefab.prototype.update = function(){
+                this.position = this.LinkCollider.position;
+
+
 	//Se reinicia la velocidad a 0 a cada frame           
 	//this.Link.body.velocity.setTo(0);
     if(!zelda.LinkObject.goingDownStairWay&&!zelda.LinkObject.goingUpStairWay){
@@ -407,7 +410,6 @@ zelda.LinkPrefab.prototype.update = function(){
                 }
                 //this.createSword();
             }
-            this.position = this.LinkCollider.position;
 
             if(zelda.LinkObject.grabbingObject){
                 this.game.time.events.add(Phaser.Timer.SECOND * 1,zelda.LinkPrefab.StopGrabbing , this.level);
@@ -442,19 +444,23 @@ zelda.LinkPrefab.prototype.update = function(){
         if(zelda.LinkObject.goingDownStairWay&&!zelda.LinkObject.calledChangeLater){
             this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround.x,zelda.LinkObject.whereToPlaceStairWayGround.y+16);
             this.spriteSueloEscaleras.Alive = true;
-            console.log(this.spriteSueloEscaleras);
             this.LinkCollider.body.velocity.x = 0;
             this.LinkCollider.body.velocity.y = 15;
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.changeScene, this.level);
 
-        }else if(!zelda.LinkObject.calledChangeLater){
-            console.log(this.spriteSueloEscaleras);
-            this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.changeScene, this.level);
-            this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround.x,zelda.LinkObject.whereToPlaceStairWayGround.y+16);
+        }else if(zelda.LinkObject.goingUpStairWay){
+            //console.log(this.spriteSueloEscaleras);
+            //this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.changeScene, this.level);
+            this.spriteSueloEscaleras.reset(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
+            //this.LinkCollider.body.velocity.x = 0;
+            this.LinkCollider.body.velocity.y = -5;
+            this.animations.play("movingDown");
+            
+            
+            if(this.position.y+8<this.spriteSueloEscaleras.position.y&&this.spriteSueloEscaleras.Alive){
+                zelda.LinkObject.goingUpStairWay = false;
+            }
             this.spriteSueloEscaleras.Alive = true;
-            this.LinkCollider.body.velocity.x = 0;
-            this.LinkCollider.body.velocity.y = -15;
-
         }
         
         
@@ -580,10 +586,12 @@ zelda.LinkPrefab.createProjectile = function(sth,obj){
 	}
 }
 
-zelda.LinkPrefab.stairWayUp = function(where,sceneToGoTo){
+zelda.LinkPrefab.stairWayUp = function(whereX,whereY){
     zelda.LinkObject.goingUpStairWay = true;
-    zelda.LinkObject.whereToPlaceStairWayGround = where;
-    zelda.LinkObject.sceneToGo = sceneToGoTo;
+    zelda.LinkObject.whereToPlaceStairWayGround.x = whereX;
+    zelda.LinkObject.whereToPlaceStairWayGround.y = whereY;
+
+    //zelda.LinkObject.sceneToGo = sceneToGoTo;
 }
 
 zelda.LinkPrefab.stairWayDown = function(where,sceneToGoTo){
