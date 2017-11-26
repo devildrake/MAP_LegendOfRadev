@@ -81,6 +81,12 @@ zelda.LinkPrefab = function(game,x,y,level){
     
     if(zelda.LinkPrefab.stairsSound==undefined)
     zelda.LinkPrefab.stairsSound = this.game.add.audio("Stairs");
+   
+    if(zelda.LinkPrefab.getHurtSound==undefined)
+    zelda.LinkPrefab.getHurtSound = this.game.add.audio("LinkHurt");
+    
+    if(zelda.LinkPrefab.lowHpSound==undefined)
+    zelda.LinkPrefab.lowHpSound = this.game.add.audio("LowHp");
     
         //this.particlesA = game.add.sprite(0,0,"Particles");
     this.particlesA = [0,0,0,0];
@@ -131,6 +137,13 @@ zelda.LinkPrefab.prototype.constructor = zelda.LinkPrefab;
 //PRINCIPIO DEL UPDATE=========================================================================================================================================
 
 zelda.LinkPrefab.prototype.update = function(){
+    console.log(zelda.LinkObject.currentHearts);
+    
+    if(zelda.LinkObject.currentHearts==0.5){
+        if(!zelda.LinkPrefab.lowHpSound.isPlaying)
+        zelda.LinkPrefab.lowHpSound.play();
+    }
+    
                 this.position = this.LinkCollider.position;
 
 
@@ -177,6 +190,8 @@ zelda.LinkPrefab.prototype.update = function(){
             }
 
             if(zelda.LinkObject.hurt&&!zelda.LinkObject.calledNotHurt){
+                if(!zelda.LinkPrefab.getHurtSound.isPlaying)
+                zelda.LinkPrefab.getHurtSound.play();
                 this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.NotHurt , this.level);
                 zelda.LinkObject.calledNotHurt = true;
             }
