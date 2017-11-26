@@ -114,6 +114,7 @@ zelda.sala_espada = {
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.sword, function(link,sword){
 				//console.log("agregar al inventario");
 				zelda.LinkPrefab.GrabObject();
+                zelda.LinkPrefab.getSpecialItemSound.play();
 				sword.y -= 8;
 				zelda.sala_espada.npc.animations.play("despawn");
 				zelda.sala_espada.texto.destroy();
