@@ -67,6 +67,8 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.sword);
 
+    if(zelda.LinkPrefab.getSpecialItemSound==undefined)
+    zelda.LinkPrefab.getSpecialItemSound =  this.game.add.audio("getSpecialItem");
     
     if(zelda.LinkPrefab.grabHeartSound==undefined)
     zelda.LinkPrefab.grabHeartSound =  this.game.add.audio("GrabHeart");
