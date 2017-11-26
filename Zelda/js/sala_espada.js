@@ -107,6 +107,7 @@ zelda.sala_espada = {
     update:function(){
 		//SALIR DE LA SALA
 		this.game.physics.arcade.collide(this.link.LinkCollider,this.trigger,function(){
+            zelda.LinkPrefab.stairWayUp(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
 			zelda.gameOptions.GoToOverworld();
 		});
        		
