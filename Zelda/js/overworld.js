@@ -171,7 +171,7 @@ zelda.overworld = {
         this.loadRupies();
 
         this.createHeart(620,840,this,1);
-        
+    
         this.loadEnemies();
         
         this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
@@ -947,7 +947,7 @@ zelda.overworld = {
         this.rupies = this.add.group(),
         this.rupies.enableBody = true;
         
-    }
+    },
     
     loadEnemies:function(){
         this.oktoroks = this.add.group();
@@ -1087,12 +1087,12 @@ zelda.overworld = {
     createRupy:function(posX,posY,which){
         var rupy = this.rupies.getFirstExists(false);
         if(!rupy){
-            rupy = new zelda.RupyPrefab(this.game,posX,posY,this,which);
-            this.rupies.add(rupy);
+            //rupy = new zelda.RupyPrefab(this.game,posX,posY,this,which);
+            //this.rupies.add(rupy);
         }else{
-            rupy.reset(posX,posY);
+            //rupy.reset(posX,posY);
         }
-    }
+    },
     
     createEnemiesOfCurrentZone:function(){
         if(zelda.overworld.spawnStuff){

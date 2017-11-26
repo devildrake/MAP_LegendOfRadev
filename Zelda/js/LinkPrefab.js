@@ -498,6 +498,8 @@ zelda.LinkPrefab.prototype.update = function(){
         
         
     }
+    console.log(zelda.LinkObject.currentHearts);
+    
 }
 
 //FINAL DEL UPDATE=========================================================================================================================================

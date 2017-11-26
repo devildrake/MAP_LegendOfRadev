@@ -12,7 +12,7 @@ else
     this.anchor.setTo(.5);
 	this.game.physics.arcade.enable(this);
     this.level = level;
-
+    this.type = type;
 }
 
 
@@ -23,7 +23,6 @@ zelda.HeartPrefab.prototype.constructor = zelda.HeartPrefab;
 zelda.HeartPrefab.prototype.update = function(){
             this.game.physics.arcade.overlap(this,this.level.linkInstance,
         function(heart,linkInstance){
-
                 if(zelda.LinkObject.currentHearts!=zelda.LinkObject.maxHearts){
                     if(heart.type==0){
                         zelda.LinkObject.currentHearts+=1;
@@ -32,7 +31,7 @@ zelda.HeartPrefab.prototype.update = function(){
                         }
                         heart.kill();
                     }else{
-                        zelda.LinkObject.currentHearts-=0.5;
+                        zelda.LinkObject.currentHearts+=0.5;
                         if(zelda.LinkObject.currentHearts>zelda.LinkObject.maxHearts){
                             zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
                         }
