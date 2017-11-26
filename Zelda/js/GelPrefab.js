@@ -14,6 +14,7 @@ zelda.GelPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.maxVelocity = 30;
     this.wasPaused = false;
     this.hurtBySword = false;   
+    this.mustMove = false;
     
         this.hurtSound = this.game.add.audio("EnemyHurt");
         this.animations.add("Move", [0,1], 5, true);
@@ -37,8 +38,6 @@ zelda.GelPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.initialSpeed = initSpeed;
     
     this.previousVelocity = this.body.velocity;
-
-
 };
 
 zelda.GelPrefab.Respawn = function (obj){
@@ -65,11 +64,13 @@ zelda.GelPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 
 zelda.GelPrefab.prototype.constructor = zelda.GelPrefab;
 
-
-
 zelda.GelPrefab.prototype.update = function(){
     if(!zelda.Inventory.ScrollingInventory&&!zelda.Inventory.InvON){
         if(this.spawned){
+            
+            
+            
+            
             
             if(this.wasPaused&&!zelda.Inventory.InvON){
                 this.wasPaused = false;
@@ -149,17 +150,7 @@ zelda.GelPrefab.prototype.update = function(){
 
                 });
 
-                if(this.body.velocity.x>0){
-                        this.frame = 1;
 
-                }else if(this.body.velocity.x<0){
-                        this.frame = 1;
-                }else if(this.body.velocity.y<0){
-                        this.frame = 1;
-                }else if(this.body.velocity.y>0){
-                        this.frame = 1;
-                }
-                else this.frame = 0;
 
 
 
@@ -241,6 +232,35 @@ zelda.GelPrefab.prototype.update = function(){
                     this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.OktorokPrefab.NotHurt, this.level,this);
                 }
             }
+            
+            if(!this.mustMove){
+                this.body.velocity.setTo(0);
+                var chancesToMoveAgain = zelda.randomDataGen.between(0,100);
+                if(chancesToMoveAgain<5){
+                    this.mustMove = true;
+                }
+                
+                
+            }else{
+                var chancesToStopMoving = zelda.randomDataGen.between(0,100);
+                if(chancesToStopMoving<5){
+                    this.mustMove = false;
+                }
+            }
+            
+            
+                if(this.body.velocity.x>0){
+                this.frame = 1;
+
+                }else if(this.body.velocity.x<0){
+                        this.frame = 1;
+                }else if(this.body.velocity.y<0){
+                        this.frame = 1;
+                }else if(this.body.velocity.y>0){
+                        this.frame = 1;
+                }
+                else this.frame = 0;
+            
         }else{
             zelda.AIMethods.Spawning(this,true);
         }

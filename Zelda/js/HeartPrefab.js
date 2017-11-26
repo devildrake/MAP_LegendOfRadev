@@ -29,12 +29,14 @@ zelda.HeartPrefab.prototype.update = function(){
                         if(zelda.LinkObject.currentHearts>zelda.LinkObject.maxHearts){
                             zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
                         }
+                        zelda.LinkPrefab.PlayGrabHeart();
                         heart.kill();
                     }else{
                         zelda.LinkObject.currentHearts+=0.5;
                         if(zelda.LinkObject.currentHearts>zelda.LinkObject.maxHearts){
                             zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
                         }
+                        zelda.LinkPrefab.PlayGrabHeart();
                         heart.kill();
                     }
                 }

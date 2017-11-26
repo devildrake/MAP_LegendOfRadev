@@ -83,6 +83,11 @@ zelda.sala_secreta_I = {
 		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
+		
+		//TRIGGER PARA SALIR DE LA SALA AL OVERWORLD
+		this.trigger = this.game.add.sprite(0,180,"collider");
+		this.game.physics.arcade.enable(this.trigger);
+		this.trigger.body.immovable = true;
     },
     
     update:function(){

@@ -98,22 +98,23 @@ zelda.sala_espada = {
 		
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
 		
+		//TRIGGER PARA SALIR DE LA SALA AL OVERWORLD
 		this.trigger = this.game.add.sprite(0,180,"collider");
 		this.game.physics.arcade.enable(this.trigger);
 		this.trigger.body.immovable = true;
     },
     
     update:function(){
+		//SALIR DE LA SALA
 		this.game.physics.arcade.collide(this.link.LinkCollider,this.trigger,function(){
-            zelda.LinkPrefab.stairWayUp(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
 			zelda.gameOptions.GoToOverworld();
-            
 		});
        		
 		if(!this.roomDone){
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.sword, function(link,sword){
 				//console.log("agregar al inventario");
 				zelda.LinkPrefab.GrabObject();
+                zelda.LinkPrefab.getSpecialItemSound.play();
 				sword.y -= 8;
 				zelda.sala_espada.npc.animations.play("despawn");
 				zelda.sala_espada.texto.destroy();

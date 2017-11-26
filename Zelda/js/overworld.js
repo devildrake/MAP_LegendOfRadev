@@ -45,6 +45,8 @@ zelda.overworld = {
         this.load.audio("Stairs","sounds/Sfx/stairs.wav");
         this.load.audio("LinkHurt","sounds/Sfx/link_hurt.wav");
         this.load.audio("LowHp","sounds/Sfx/low_health.wav");
+        this.load.audio("GrabHeart","sounds/Sfx/get_heart.wav");
+        this.load.audio("getSpecialItem","sounds/Sfx/receive_item.mp3");
         this.load.spritesheet("Moblin","img/MoblinSpriteSheet.png",16,16);
         this.load.spritesheet("Arrow","img/arrow.png",16,16);
         this.load.spritesheet("PeaHat","img/PeaHatSpriteSheet.png",16,16);
@@ -52,6 +54,7 @@ zelda.overworld = {
         this.load.image("GroundTile","img/GroundSprite.png");
         this.load.spritesheet("Stalfos","img/StalfosSpriteSheet.png",16,16);
         this.load.spritesheet("Keese","img/KeeseSpriteSheet.png",16,16);
+        this.load.spritesheet("Goriya","img/GoriyaSpriteSheet.png",16,16);
        this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
         this.load.spritesheet("Gel","img/GelSpriteSheet.png",16,16);
     },
@@ -156,17 +159,21 @@ zelda.overworld = {
         //this.game.add.existing(this.coraçao);
         
         
+        //this.gel = new zelda.GelPrefab(this.game,640,850,1,this,1);
+        //this.game.add.existing(this.gel);
 
         
         //this.tektite = new zelda.TektitePrefab(this.game,620,840,1,this,30);
         //this.game.add.existing(this.tektite);
         
-        //this.moblin = new zelda.MoblinPrefab(this.game,640,850,1,this,1);
-        //this.game.add.existing(this.moblin);
+        this.moblin = new zelda.MoblinPrefab(this.game,640,850,1,this,1);
+        this.game.add.existing(this.moblin);
         
         //this.peahat = new zelda.PeaHatPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.peahat);
         
+        //this.goriya = new zelda.GoriyaPrefab(this.game,640,850,1,this,1);
+        //this.game.add.existing(this.goriya);
         
         this.loadHearts();
         this.loadRupies();

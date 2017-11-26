@@ -67,6 +67,12 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.sword);
 
+    if(zelda.LinkPrefab.getSpecialItemSound==undefined)
+    zelda.LinkPrefab.getSpecialItemSound =  this.game.add.audio("getSpecialItem");
+    
+    if(zelda.LinkPrefab.grabHeartSound==undefined)
+    zelda.LinkPrefab.grabHeartSound =  this.game.add.audio("GrabHeart");
+    
     if(zelda.LinkPrefab.grabItemSound==undefined)
     zelda.LinkPrefab.grabItemSound =  this.game.add.audio("getItem");
     
@@ -523,6 +529,10 @@ zelda.LinkPrefab.changeScene = function(){
     zelda.game.state.start(zelda.LinkObject.sceneToGo);
 
 
+}
+zelda.LinkPrefab.PlayGrabHeart = function(){
+    if(!zelda.LinkPrefab.grabHeartSound.isPlaying)
+        zelda.LinkPrefab.grabHeartSound.play();
 }
 
 zelda.LinkPrefab.createSword = function(obj){

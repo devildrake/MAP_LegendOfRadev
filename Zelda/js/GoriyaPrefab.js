@@ -1,12 +1,12 @@
 var zelda = zelda || {};
 
-zelda.MoblinPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
+zelda.GoriyaPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.posInArray = posInArray
     this.currentZone=zone;
     this.hurt = false;
     this.calledNotHurt = true;
     this.Alive = true;
-	Phaser.Sprite.call(this,game,x,y,"Moblin");    
+	Phaser.Sprite.call(this,game,x,y,"Goriya");    
     this.type = type;
     this.scale.setTo(1);
     this.anchor.setTo(.5);
@@ -16,26 +16,18 @@ zelda.MoblinPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.spawned  = false;
     this.calledSpawn = false;
     this.initialSpeed = initSpeed;
-            this.hurtSound = this.game.add.audio("EnemyHurt");
+    this.hurtSound = this.game.add.audio("EnemyHurt");
 
-    if(this.type==0){
-        this.lives = 1;
-        }
-    else{
+
         this.lives = 3;
-    }
-
-        this.animations.add("movingLeftNaranja", [0,1], 5, true);
-        this.animations.add("movingDownNaranja", [2,3], 5, true);
-        this.animations.add("movingRightNaranja", [4,5],5,true);
-        this.animations.add("movingUpNaranja", [6,7], 5, true);
-        
-        this.animations.add("movingLeftAzul", [8,9], 5, true);
-        this.animations.add("movingDownAzul", [10,11], 5, true);
-        this.animations.add("movingRightAzul", [12,13],5,true);
-        this.animations.add("movingUpAzul", [14,15], 5, true);
     
-    this.animations.add("Spawn",[16,17,18],15,false);
+
+        this.animations.add("movingLeft", [0,1], 5, true);
+        this.animations.add("movingDown", [2,3], 5, true);
+        this.animations.add("movingRight", [4,5],5,true);
+        this.animations.add("movingUp", [6,7], 5, true);
+    
+    this.animations.add("Spawn",[8,9,10],15,false);
 
     this.level = level;
 
@@ -61,10 +53,8 @@ zelda.MoblinPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.projectile.kill();
 };
 
-zelda.MoblinPrefab.Respawn = function (obj){
-    if(obj.type==0)
-        obj.lives = 1;
-    else 
+zelda.GoriyaPrefab.Respawn = function (obj){
+
         obj.lives = 3;
     
     obj.hurt = false;
@@ -76,18 +66,18 @@ zelda.MoblinPrefab.Respawn = function (obj){
 
 }
 
-    zelda.MoblinPrefab.NotHurt = function(obj){
+    zelda.GoriyaPrefab.NotHurt = function(obj){
         obj.hurt = false;   
         obj.body.velocity = obj.previousVelocity;
     }
 
-zelda.MoblinPrefab.prototype = Object.create(Phaser.Sprite.prototype);
+zelda.GoriyaPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 
-zelda.MoblinPrefab.prototype.constructor = zelda.MoblinPrefab;
+zelda.GoriyaPrefab.prototype.constructor = zelda.GoriyaPrefab;
 
 
 
-zelda.MoblinPrefab.prototype.update = function(){
+zelda.GoriyaPrefab.prototype.update = function(){
         
     if(this.spawned){
         if(!zelda.Inventory.InvON&&!zelda.Inventory.ScrollingInventory){
@@ -201,33 +191,13 @@ zelda.MoblinPrefab.prototype.update = function(){
                 });
 
                 if(this.body.velocity.x>0){
-                    if(this.type==0){
-                        this.animations.play("movingRightNaranja");
-                    }
-                    else {
-                        this.animations.play("movingRightAzul");
-                    }
+                        this.animations.play("movingRight");
                 }else if(this.body.velocity.x<0){
-                    if(this.type==0){
-                        this.animations.play("movingLeftNaranja");
-                    }
-                    else {
-                        this.animations.play("movingLeftAzul");
-                    }
+                        this.animations.play("movingLeft");
                 }else if(this.body.velocity.y<0){
-                    if(this.type==0){
-                        this.animations.play("movingUpNaranja");
-                    }
-                    else {
-                        this.animations.play("movingUpAzul");
-                    }
+                        this.animations.play("movingUp");
                 }else if(this.body.velocity.y>0){
-                    if(this.type==0){
-                        this.animations.play("movingDownNaranja");
-                    }
-                    else {
-                        this.animations.play("movingDownAzul");
-                    }
+                        this.animations.play("movingDown");
                 }
 
                 if(!this.projectile.Alive&&this.Alive){
@@ -392,7 +362,7 @@ zelda.MoblinPrefab.prototype.update = function(){
             else{
                 if(!this.calledNotHurt){
                     this.calledNotHurt = true;
-                    this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.MoblinPrefab.NotHurt, this.level,this);
+                    this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.GoriyaPrefab.NotHurt, this.level,this);
                 }
             }
         }else{

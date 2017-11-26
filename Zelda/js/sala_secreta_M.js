@@ -23,6 +23,7 @@ zelda.sala_secreta_M = {
         this.load.spritesheet("llave", "img/llave.png",16,16);
         this.load.spritesheet("vela", "img/vela.png",16,16);
 		this.load.image("inventario", "img/inventario.png");
+		this.load.image("collider", "img/camara_horizontal.png");
 		
 		//para el prefab de link
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
@@ -87,12 +88,18 @@ zelda.sala_secreta_M = {
         this.inventario.fixedToCamera = true;
 		
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
+		
+		//TRIGGER PARA SALIR DE LA SALA AL OVERWORLD
+		this.trigger = this.game.add.sprite(0,180,"collider");
+		this.game.physics.arcade.enable(this.trigger);
+		this.trigger.body.immovable = true;
     },
     
     update:function(){
-       if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
-       		zelda.gameOptions.GoToOverworld();
-		}
+       //SALIR DE LA SALA
+		this.game.physics.arcade.collide(this.link.LinkCollider,this.trigger,function(){
+			zelda.gameOptions.GoToOverworld();
+		});
 		
 		if(!this.roomDone1&&zelda.LinkObject.currentZone==22 || !this.roomDone2&&zelda.LinkObject.currentZone==17){
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(link, escudo){
