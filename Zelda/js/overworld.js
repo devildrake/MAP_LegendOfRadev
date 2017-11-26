@@ -619,7 +619,10 @@ zelda.overworld = {
             zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
             zelda.overworld.overworldMusic.stop();
 
-            zelda.game.state.start("sword_room");
+            //zelda.game.state.start("sword_room");
+            var posToSpawnSprite = zelda.overworld.trigger_espada.body.position;
+            posToSpawnSprite.y+=16;
+            zelda.LinkPrefab.stairWayDown(posToSpawnSprite,"sword_room");
         });
         
         this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_D, function(){
