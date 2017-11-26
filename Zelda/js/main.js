@@ -611,8 +611,8 @@ zelda.Inventory={
     
     PintarObjB:function(){
         if(zelda.Inventory.ObjPintado==false){
-            this.PosObjBX=zelda.game.camera.x+124;
-            this.PosObjBY=zelda.game.camera.y+193;
+            this.PosObjBX=zelda.game.camera.x+63;
+            this.PosObjBY=zelda.game.camera.y+51;
            
             if(zelda.Inventory.ObjectB=="bombs"){
                 this.PintObj=zelda.game.add.sprite(0,0, "bomba");
