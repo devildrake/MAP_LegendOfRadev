@@ -52,6 +52,7 @@ zelda.overworld = {
         this.load.spritesheet("Stalfos","img/StalfosSpriteSheet.png",16,16);
         this.load.spritesheet("Keese","img/KeeseSpriteSheet.png",16,16);
        this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+        this.load.spritesheet("Gel","img/GelSpriteSheet.png",16,16);
     },
 
     create:function(){
@@ -167,6 +168,7 @@ zelda.overworld = {
         
         
         this.loadHearts();
+        this.loadRupies();
 
         this.createHeart(620,840,this,1);
         
@@ -941,6 +943,12 @@ zelda.overworld = {
 		this.hearts.enableBody = true;
 	},
     
+    loadRupies:function(){
+        this.rupies = this.add.group(),
+        this.rupies.enableBody = true;
+        
+    }
+    
     loadEnemies:function(){
         this.oktoroks = this.add.group();
         this.oktoroks.enableBody = true;
@@ -1075,6 +1083,16 @@ zelda.overworld = {
 			heart.reset(posX,posY);
 		}
     },
+    
+    createRupy:function(posX,posY,which){
+        var rupy = this.rupies.getFirstExists(false);
+        if(!rupy){
+            rupy = new zelda.RupyPrefab(this.game,posX,posY,this,which);
+            this.rupies.add(rupy);
+        }else{
+            rupy.reset(posX,posY);
+        }
+    }
     
     createEnemiesOfCurrentZone:function(){
         if(zelda.overworld.spawnStuff){
