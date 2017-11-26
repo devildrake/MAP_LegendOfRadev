@@ -170,31 +170,30 @@ zelda.overworld = {
     },
     
     update:function(){
-                       //console.log(this.moblin.animations);
         this.ScrollInventario();
-                if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.Q)){
-                    //this.riverZola.Alive = true;
-                    //this.createEnemy("Oktorok",this.game,640,850,this,1,1);
-                    console.log("Zona = " + zelda.LinkObject.currentZone + " Posicion = " + this.linkInstance.body.position);
-                }
-        
-                if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.O)){
-                    //this.riverZola.Alive = true;
-                    //this.createEnemy("Oktorok",this.game,640,850,this,1,1);
-                    zelda.overworld.spawnStuff = !zelda.overworld.spawnStuff;
-                    console.log(zelda.overworld.spawnStuff);
-                }
-        
-                if(this.muteButton.isDown&&this.muteButton.downDuration(1)){
-                    if(!this.playMusic)   {
-                        this.playMusic = true;
-                        this.overworldMusic.play();
-                    }else{
-                        this.playMusic = false;
-                        this.overworldMusic.stop();
-                    }
-                        
-                }
+		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.Q)){
+			//this.riverZola.Alive = true;
+			//this.createEnemy("Oktorok",this.game,640,850,this,1,1);
+			console.log("Zona = " + zelda.LinkObject.currentZone + " Posicion = " + this.linkInstance.body.position);
+		}
+
+		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.O)){
+			//this.riverZola.Alive = true;
+			//this.createEnemy("Oktorok",this.game,640,850,this,1,1);
+			zelda.overworld.spawnStuff = !zelda.overworld.spawnStuff;
+			console.log(zelda.overworld.spawnStuff);
+		}
+
+		if(this.muteButton.isDown&&this.muteButton.downDuration(1)){
+			if(!this.playMusic)   {
+				this.playMusic = true;
+				this.overworldMusic.play();
+			}else{
+				this.playMusic = false;
+				this.overworldMusic.stop();
+			}
+
+		}
         
         
    

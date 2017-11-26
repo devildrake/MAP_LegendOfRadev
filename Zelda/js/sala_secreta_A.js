@@ -1,6 +1,9 @@
 var zelda = zelda || {};
 //16X11 tiles
 zelda.sala_secreta_A = {
+	roomDone1:false,
+	roomDone2:false,
+	
 	init:function(){
 		this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -24,6 +27,8 @@ zelda.sala_secreta_A = {
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
+		
+		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
     
     create:function(){
@@ -49,21 +54,24 @@ zelda.sala_secreta_A = {
 			this.fire2.animations.play("idle");
 		},this);
         
-        //npc
-        this.npc = this.game.add.sprite(8*16, 4*16, "npc", 0);
-        this.npc.anchor.setTo(.5,0);
-		this.npc.animations.add("spawn",[0,1,2,3],6,false);
-		this.npc.animations.add("despawn",[3,4],6,true);
-		this.npc.animations.play("spawn");
-		this.npc.animations.currentAnim.onComplete.add(function(){
-			//objetos cuando acaba de spawnear el npc
-        	zelda.sala_secreta_A.corazon = zelda.game.add.sprite(6*16, 6*16,"corazon",0);
-        	zelda.sala_secreta_A.pocion = zelda.game.add.sprite(9*16, 6*16, "pocion",0);
-			zelda.game.physics.arcade.enable(zelda.sala_secreta_A.corazon);
-			zelda.game.physics.arcade.enable(zelda.sala_secreta_A.pocion);
-			zelda.sala_secreta_A.corazon.animations.add("despawn",[0,1],6,true);
-			zelda.sala_secreta_A.pocion.animations.add("despawn",[0,1],6,true);
-		});
+		if(!this.roomDone1&&zelda.LinkObject.currentZone == 11 || !this.roomDone2&&zelda.LinkObject.currentZone==34){
+			//npc
+			this.npc = this.game.add.sprite(8*16, 4*16, "npc", 0);
+			this.npc.anchor.setTo(.5,0);
+			this.npc.animations.add("spawn",[0,1,2,3],6,false);
+			this.npc.animations.add("despawn",[3,4],6,true);
+			this.npc.animations.play("spawn");
+			this.npc.animations.currentAnim.onComplete.add(function(){
+				//objetos cuando acaba de spawnear el npc
+				zelda.sala_secreta_A.corazon = zelda.game.add.sprite(6*16, 6*16,"corazon",0);
+				zelda.sala_secreta_A.pocion = zelda.game.add.sprite(9*16, 6*16, "pocion",0);
+				zelda.game.physics.arcade.enable(zelda.sala_secreta_A.corazon);
+				zelda.game.physics.arcade.enable(zelda.sala_secreta_A.pocion);
+				zelda.sala_secreta_A.corazon.animations.add("despawn",[0,1],6,true);
+				zelda.sala_secreta_A.pocion.animations.add("despawn",[0,1],6,true);
+				
+			});
+		}
 		
 		this.game.camera.y -= 47;
 		
@@ -79,24 +87,34 @@ zelda.sala_secreta_A = {
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
-		
-		this.game.physics.arcade.overlap(this.link.LinkCollider,this.corazon, function(link,corazon){
-			zelda.LinkPrefab.GrabObject();
-			corazon.y -= 8;
-			zelda.sala_secreta_A.npc.animations.play("despawn");
-			zelda.sala_secreta_A.pocion.animations.play("despanw");
-			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-				zelda.sala_secreta_A.corazon.destroy();
-				zelda.sala_secreta_A.pocion.destroy();
-				zelda.sala_secreta_A.npc.destroy();
+		if(!this.roomDone1&&zelda.LinkObject.currentZone == 11 || !this.roomDone2&&zelda.LinkObject.currentZone==34){
+			this.game.physics.arcade.overlap(this.link.LinkCollider,this.corazon, function(link,corazon){
+				zelda.LinkPrefab.GrabObject();
+				corazon.y -= 8;
+				zelda.sala_secreta_A.npc.animations.play("despawn");
+				zelda.sala_secreta_A.pocion.animations.play("despawn");
+				zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+					zelda.sala_secreta_A.corazon.destroy();
+					zelda.sala_secreta_A.pocion.destroy();
+					zelda.sala_secreta_A.npc.destroy();
+				});
+				if(zelda.LinkObject.currentZone==11) zelda.sala_secreta_A.roomDone1 = true;
+				else if(zelda.LinkObject.currentZone==34) zelda.sala_secreta_A.roomDone2 = true;
 			});
-			console.log("añadir comportamiento al coger un slot corazon");
-			zelda.sala_secreta_A.corazon.kill();
-		});
-		this.game.physics.arcade.overlap(this.link.LinkCollider, this.pocion, function(){
-			console.log("añadir comportamiento al coger la poción de vida");
-			zelda.sala_secreta_A.pocion.kill();
-		});
+			this.game.physics.arcade.overlap(this.link.LinkCollider, this.pocion, function(link,pocion){
+				zelda.LinkPrefab.GrabObject();
+				pocion.y -= 8;
+				zelda.sala_secreta_A.npc.animations.play("despawn");
+				zelda.sala_secreta_A.corazon.animations.play("despawn");
+				zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+					zelda.sala_secreta_A.corazon.destroy();
+					zelda.sala_secreta_A.pocion.destroy();
+					zelda.sala_secreta_A.npc.destroy();
+				});
+				if(zelda.LinkObject.currentZone==11) zelda.sala_secreta_A.roomDone1 = true;
+				else if(zelda.LinkObject.currentZone==34) zelda.sala_secreta_A.roomDone2 = true;
+			});
+		}
 		
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){

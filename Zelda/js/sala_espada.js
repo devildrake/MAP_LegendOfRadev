@@ -71,6 +71,19 @@ zelda.sala_espada = {
 				
 				this.game.physics.arcade.enable(this.sword);
 			},this);
+			
+			//TEXTOS EN PANTALLA
+			this.str  = "IT'S DANGEROUS TO GO\nALONE! TAKE THIS.";
+			this.strToPrint = "";
+			this.strCount = 0;
+			this.textTimer = 0;
+			this.textUpdateTime = 50;
+
+			this.texto = this.game.add.text(3*16,16*2+4,this.strToPrint);
+			this.texto.fill = "white";
+			this.texto.font = "Press Start 2P";
+			this.texto.fontSize = 8;
+			this.texto.align = "center";
 		}
         
         this.game.camera.y -= 47;
@@ -82,51 +95,42 @@ zelda.sala_espada = {
 		
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
 		
-		//TEXTOS EN PANTALLA
-		this.str  = "IT'S DANGEROUS TO GO\nALONE! TAKE THIS.";
-		this.strToPrint = "";
-		this.strCount = 0;
-		this.textTimer = 0;
-		this.textUpdateTime = 50;
 		
-		this.texto = this.game.add.text(3*16,16*2+4,this.strToPrint);
-		this.texto.fill = "white";
-		this.texto.font = "Press Start 2P";
-		this.texto.fontSize = 8;
-		this.texto.align = "center";
     },
     
     update:function(){
 		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
-		this.game.physics.arcade.overlap(this.link.LinkCollider, this.sword, function(link,sword){
-			//console.log("agregar al inventario");
-			zelda.LinkPrefab.GrabObject();
-			sword.y -= 8;
-			zelda.sala_espada.npc.animations.play("despawn");
-			zelda.sala_espada.texto.destroy();
-			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-				console.log("time event");
-				zelda.sala_espada.sword.destroy();
-				zelda.sala_espada.npc.destroy();
+		if(!this.roomDone){
+			this.game.physics.arcade.overlap(this.link.LinkCollider, this.sword, function(link,sword){
+				//console.log("agregar al inventario");
+				zelda.LinkPrefab.GrabObject();
+				sword.y -= 8;
+				zelda.sala_espada.npc.animations.play("despawn");
+				zelda.sala_espada.texto.destroy();
+				zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+					console.log("time event");
+					zelda.sala_espada.sword.destroy();
+					zelda.sala_espada.npc.destroy();
+				});
+				zelda.sala_espada.roomDone = true;
+				zelda.Inventory.hasSword = true;
 			});
-			zelda.sala_espada.roomDone = true;
-            zelda.Inventory.hasSword = true;
-		});
+			
+			//animacion de aparicion de los textos
+			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime && !this.roomDone){
+				this.strToPrint += this.str[this.strCount];
+				this.texto.setText(this.strToPrint);
+				this.strCount++;
+				this.textTimer = 0;
+			}
+			this.textTimer += zelda.game.time.elapsed;
+		}
 		
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
 			zelda.gameOptions.Pause(this);
-		}
-		
-		//animacion de aparicion de los textos
-		if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime && !this.roomDone){
-			this.strToPrint += this.str[this.strCount];
-			this.texto.setText(this.strToPrint);
-			this.strCount++;
-			this.textTimer = 0;
-		}
-		this.textTimer += zelda.game.time.elapsed;
-    }
+		}	
+	}
 }

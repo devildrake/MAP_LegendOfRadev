@@ -1,6 +1,8 @@
 var zelda = zelda || {}
 
 zelda.sala_secreta_D = {
+	roomDone1:false,
+	roomDone2:false,
     init:function(){
 		this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -21,6 +23,8 @@ zelda.sala_secreta_D = {
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
+		
+		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
     
     create:function(){
@@ -52,6 +56,14 @@ zelda.sala_secreta_D = {
 		this.npc.animations.add("spawn",[0,1,2,3],6, false);
 		this.npc.animations.play("spawn");
 		
+		if(!this.roomDone1&&zelda.LinkObject.currentZone == 29 || !this.roomDone2&&zelda.LinkObject.currentZone==24){
+			//TEXTO
+			this.numeros = this.game.add.text(8*16-8,7*16-8,"-10");
+			this.numeros.fill = "white";
+			this.numeros.font = "Press Start 2P";
+			this.numeros.fontSize = 12;
+			this.numeros.align = "center";
+		}
 		this.game.camera.y -= 47;
 		
 		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
@@ -60,6 +72,8 @@ zelda.sala_secreta_D = {
         this.inventario.fixedToCamera = true;
 		
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
+		
+		
     },
     
     update:function(){
@@ -69,6 +83,12 @@ zelda.sala_secreta_D = {
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
 			zelda.gameOptions.Pause(this);
+		}
+		
+		if(!this.roomDone1&&zelda.LinkObject.currentZone == 29 || !this.roomDone2&&zelda.LinkObject.currentZone==24){
+			if(zelda.LinkObject.currentZone == 29)zelda.sala_secreta_D.roomDone1 = true;
+			if(zelda.LinkObject.currentZone == 24)zelda.sala_secreta_D.roomDone2 = true;
+			console.log("-10 a las rupias de link");	
 		}
     }
 }

@@ -1,6 +1,8 @@
 var zelda = zelda || {}
 
 zelda.sala_secreta_G = {
+	roomDone:false,
+	
 	init:function(){
 		this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -22,6 +24,8 @@ zelda.sala_secreta_G = {
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
+		
+		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 	},
 	
 	create:function(){
@@ -49,19 +53,25 @@ zelda.sala_secreta_G = {
 			this.fire2.animations.play("idle");
 		},this);
 		
-		//npc
-		this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc",3);
-		this.npc.anchor.setTo(.5,0);
-		this.npc.animations.add("spawn",[0,1,2,3],6,false);
-		this.npc.animations.play("spawn");
-		this.npc.animations.currentAnim.onComplete.add(function(){
-			zelda.sala_secreta_G.moneda = zelda.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"rupia");
-			zelda.sala_secreta_G.moneda.anchor.setTo(.5,0);
-			zelda.game.physics.arcade.enable(zelda.sala_secreta_G.moneda);
-		});
-		//-------------------------------------------
-		
-		
+		if(!this.roomDone){
+			//npc
+			this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc",3);
+			this.npc.anchor.setTo(.5,0);
+			this.npc.animations.add("spawn",[0,1,2,3],6,false);
+			this.npc.animations.play("spawn");
+			this.npc.animations.currentAnim.onComplete.add(function(){
+				zelda.sala_secreta_G.moneda = zelda.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"rupia");
+				zelda.sala_secreta_G.moneda.anchor.setTo(.5,0);
+				zelda.game.physics.arcade.enable(zelda.sala_secreta_G.moneda);
+				//TEXTO
+				zelda.sala_secreta_G.numeros = zelda.game.add.text(zelda.secretLayout.item2X, zelda.secretLayout.itemY+16, "");
+				zelda.sala_secreta_G.numeros.anchor.setTo(.5,0)
+				zelda.sala_secreta_G.numeros.fill = "white";
+				zelda.sala_secreta_G.numeros.font = "Press Start 2P";
+				zelda.sala_secreta_G.numeros.fontSize = 10;
+			});
+			//-------------------------------------------
+		}
 		
 		this.game.camera.y -= 47;
 		
@@ -77,9 +87,13 @@ zelda.sala_secreta_G = {
 		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
        		zelda.gameOptions.GoToOverworld();
 		}
-		this.game.physics.arcade.overlap(this.link.LinkCollider, this.moneda, function(){
-			console.log("aparece texto oculto de cuanto dinero adquieres");
-		});
+		if(!this.roomDone){
+			this.game.physics.arcade.overlap(this.link.LinkCollider, this.moneda, function(){
+				zelda.sala_secreta_G.numeros.setText("10");
+				console.log("aparece texto oculto de cuanto dinero adquieres");
+				zelda.sala_secreta_G.roomDone = true;
+			});
+		}
 		
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
