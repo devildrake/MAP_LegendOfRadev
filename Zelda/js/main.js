@@ -546,7 +546,7 @@ zelda.Inventory={
             }
                zelda.Inventory.selecAlive=true;
           }
-            if(this.Cuadrado.left.isDown && zelda.Inventory.selecAlive && this.tecla==false){
+            if(this.Cuadrado.left.isDown && zelda.Inventory.selecAlive && this.Cuadrado.left.downDuration(1)){
                 for(var i=0;i<10;i++){
 
                     if(i==0 && this.Cursor[i]!=0){
@@ -567,7 +567,7 @@ zelda.Inventory={
                 zelda.Inventory.selecAlive=false;
             }
 
-            if(this.Cuadrado.right.isDown && zelda.Inventory.selecAlive && this.tecla==false){
+            if(this.Cuadrado.right.isDown && zelda.Inventory.selecAlive && this.Cuadrado.right.downDuration(1)){
                
                 for(var i=0;i<10;i++){
 
