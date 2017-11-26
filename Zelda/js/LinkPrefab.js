@@ -17,7 +17,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.animations.add("movingDownHurt", [14,15], 5, true);
 	this.animations.add("movingUpHurt", [16], 5, true);
 	this.animations.add("movingSideWaysHurt", [17,18],5,true); 
-
+    zelda.LinkObject.calledNotHurt = false;
     this.grabbingObject = false;
 
 	this.level = level;
@@ -492,6 +492,7 @@ zelda.LinkPrefab.prototype.update = function(){
             
             if(this.position.y+8<this.spriteSueloEscaleras.position.y&&this.spriteSueloEscaleras.Alive){
                 zelda.LinkObject.goingUpStairWay = false;
+                zelda.overworld.createEnemiesOfCurrentZone();
             }
             this.spriteSueloEscaleras.Alive = true;
         }
