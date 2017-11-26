@@ -64,6 +64,8 @@ zelda.LinkObject = {
     goingDownStairWay:false,
     goingUpStairWay:false,
     whereToPlaceStairWayGround: 0,
+    sceneToGo : "none",
+    calledChangeLater: false,
     //Un booleano para gestionar si ha recibido daño
     hurt: false,
     
@@ -352,12 +354,21 @@ zelda.Inventory={
         
         if(nameObject==1){
             this.rupies+=1;
+            this.texto.kill()
+            this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
+            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
         }
         else if(nameObject==2){
             this.bombs+=1;
+            this.texto.kill()
+            this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
+            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
         }
         else if(nameObject==3){
             this.keys+=1;
+            this.texto.kill()
+            this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
+            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
         }
         else if(nameObject==4){
             this.ring=true;
@@ -385,9 +396,20 @@ zelda.Inventory={
         }
     },
     
-       startHearts:function(){
+       startHUD:function(){
            
-           this.heart=[zelda.LinkObject.maxHearts];
+            this.heart=[zelda.LinkObject.maxHearts];
+            this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
+            this.strToPrint = "";
+            this.strCount = 0;
+            this.textTimer = 0;
+            this.textUpdateTime = 50;
+		
+            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.texto.fill = "white";
+            this.texto.font = "Press Start 2P";
+            this.texto.fontSize = 6;
+            this.texto.align = "center";
        },
         
     draw:function(){
@@ -486,17 +508,11 @@ zelda.Inventory={
         
        
         //pintar numero llaves y bombas
-        this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
-		this.strToPrint = "";
-		this.strCount = 0;
-		this.textTimer = 0;
-		this.textUpdateTime = 50;
+        
 		
-		this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+184,this.str);
-		this.texto.fill = "white";
-		this.texto.font = "Press Start 2P";
-		this.texto.fontSize = 5;
-		this.texto.align = "center";
+		
+		zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
+        zelda.Inventory.texto.position.y=zelda.game.camera.y+185;   
         
          
     },
