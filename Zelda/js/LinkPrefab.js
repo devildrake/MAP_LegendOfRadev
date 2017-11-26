@@ -442,6 +442,10 @@ zelda.LinkPrefab.prototype.update = function(){
         }
     }else{
         if(zelda.LinkObject.goingDownStairWay&&!zelda.LinkObject.calledChangeLater){
+            if(!zelda.LinkObject.switched){
+                zelda.LinkObject.switched = true;
+                this.game.time.events.add(Phaser.Timer.SECOND * 0.15,zelda.LinkPrefab.switchLinkScale , this.level,this);
+            }
             this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround.x,zelda.LinkObject.whereToPlaceStairWayGround.y+16);
             this.spriteSueloEscaleras.Alive = true;
             this.LinkCollider.body.velocity.x = 0;
