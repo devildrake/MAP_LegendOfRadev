@@ -307,6 +307,8 @@ zelda.overworld = {
                 this.inventario.position.x+=-zelda.game.camera.x;
                 this.inventario.fixedToCamera = true;
                //console.log(this.inventario.position.y);
+                
+                //"pintar" los objetos junto el inventario q sube y baja, pero los pinta debajo por x motivos
                 for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                     //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
                      zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
@@ -315,6 +317,14 @@ zelda.overworld = {
                  }
                  zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
                   zelda.Inventory.texto.position.y=this.inventario.position.y+10; 
+                
+                  if(zelda.Inventory.ObjectB!="nothing"){
+                zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
+                     zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
+                     zelda.Inventory.PintObj.position.x=zelda.Inventory.PosObjBX;
+                     zelda.Inventory.PintObj.position.y=this.inventario.position.y;
+                
+            }
                 
              if(this.inventario.position.y==-zelda.gameOptions.gameHeight+47){
                 zelda.gameOptions.InventoryScroll=0;
@@ -346,6 +356,7 @@ zelda.overworld = {
                  zelda.Inventory.ScrollingInventory = false;
                  zelda.Inventory.selec.kill();
                  
+                 //"pintar" los objetos junto el inventario q sube y baja, pero los pinta debajo por x motivos
                   for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                     //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
                      zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
@@ -393,6 +404,14 @@ zelda.overworld = {
                  }
                  zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
                   zelda.Inventory.texto.position.y=this.inventario.position.y+10; 
+                
+                  if(zelda.Inventory.ObjectB!="nothing"){
+                zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
+                     zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
+                     zelda.Inventory.PintObj.position.x=zelda.Inventory.PosObjBX;
+                     zelda.Inventory.PintObj.position.y=this.inventario.position.y;
+                
+            }
                 
                 
                 zelda.Inventory.MovementCursor();
@@ -470,6 +489,13 @@ zelda.overworld = {
                     
             
                  }
+            if(zelda.Inventory.ObjectB!="nothing"){
+                zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
+                     zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
+                     zelda.Inventory.PintObj.position.x=zelda.Inventory.PosObjBX;
+                     zelda.Inventory.PintObj.position.y=zelda.Inventory.PosObjBY;
+                
+            }
         }
         //CUANDO LLEGA a la posición destinada se pone en false setBorders para ajustar los bordes de pantalla a la nueva escena
         else{
