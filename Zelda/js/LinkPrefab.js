@@ -102,7 +102,7 @@ zelda.LinkPrefab = function(game,x,y,level){
         }
     this.particlesA[0].calledBeDestroyed= false;
         this.particlesB[0].calledBeDestroyed= false;
-
+    zelda.LinkObject.switched = false;
 };
 
 zelda.LinkPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -536,6 +536,14 @@ zelda.LinkPrefab.createProjectile = function(sth,obj){
 			obj.projectile.scale.y = 1;  
 		}
 	}
+}
+
+zelda.LinkPrefab.stairWayUp = function(swhere, obj){
+    zelda.LinkObject.goingUpStairWay = true;
+}
+
+zelda.LinkPrefab.stairWayDown = function(swhere, obj){
+    zelda.LinkObject.goingDownStairWay = true;
 }
 
 zelda.LinkPrefab.makeLinkNotAttack = function(obj){
