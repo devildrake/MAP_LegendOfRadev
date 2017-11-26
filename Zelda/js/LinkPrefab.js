@@ -67,11 +67,20 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.sword);
 
+    if(zelda.LinkPrefab.grabItemSound==undefined)
     zelda.LinkPrefab.grabItemSound =  this.game.add.audio("getItem");
+    
+    if(zelda.LinkPrefab.shootProjectileSound==undefined)
     zelda.LinkPrefab.shootProjectileSound = this.game.add.audio("ShootProjectile");
+    
+    if(zelda.LinkPrefab.attackSound==undefined)
     zelda.LinkPrefab.attackSound = this.game.add.audio("SwordAttak");
+    
+    if(zelda.LinkPrefab.blockSound==undefined)
     zelda.LinkPrefab.blockSound = this.game.add.audio("ShieldBlock");
     
+    if(zelda.LinkPrefab.stairsSound==undefined)
+    zelda.LinkPrefab.stairsSound = this.game.add.audio("Stairs");
     
         //this.particlesA = game.add.sprite(0,0,"Particles");
     this.particlesA = [0,0,0,0];
@@ -450,15 +459,20 @@ zelda.LinkPrefab.prototype.update = function(){
             this.spriteSueloEscaleras.Alive = true;
             this.LinkCollider.body.velocity.x = 0;
             this.LinkCollider.body.velocity.y = 15;
-            this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.changeScene, this.level);
+            this.game.time.events.add(Phaser.Timer.SECOND * 0.94,zelda.LinkPrefab.changeScene, this.level);
+            if(!zelda.LinkPrefab.stairsSound.isPlaying)
+            zelda.LinkPrefab.stairsSound.play();
 
         }else if(zelda.LinkObject.goingUpStairWay){
             //console.log(this.spriteSueloEscaleras);
             //this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.changeScene, this.level);
             this.spriteSueloEscaleras.reset(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
             //this.LinkCollider.body.velocity.x = 0;
-            this.LinkCollider.body.velocity.y = -5;
+            this.LinkCollider.body.velocity.y = -12;
             this.animations.play("movingDown");
+            
+            if(!zelda.LinkPrefab.stairsSound.isPlaying)
+            zelda.LinkPrefab.stairsSound.play();
             
             
             if(this.position.y+8<this.spriteSueloEscaleras.position.y&&this.spriteSueloEscaleras.Alive){
@@ -486,9 +500,12 @@ zelda.LinkPrefab.StopGrabbing = function(){
 }
 
 zelda.LinkPrefab.changeScene = function(){
-    zelda.game.state.start(zelda.LinkObject.sceneToGo);
+                    zelda.LinkPrefab.stairsSound.stop();
     zelda.LinkObject.calledChangeLater = false;
     zelda.LinkObject.goingDownStairWay = false;
+    zelda.game.state.start(zelda.LinkObject.sceneToGo);
+
+
 }
 
 zelda.LinkPrefab.createSword = function(obj){

@@ -41,6 +41,7 @@ zelda.overworld = {
         this.load.audio("GetHeart","sounds/Sfx/get_heart.wav");
         this.load.audio("GetHurt","sounds/Sfx/link_hurt.wav");
         this.load.audio("ShieldBlock","sounds/Sfx/shield.wav");
+        this.load.audio("Stairs","sounds/Sfx/stairs.wav");
         this.load.spritesheet("Moblin","img/MoblinSpriteSheet.png",16,16);
         this.load.spritesheet("Arrow","img/arrow.png",16,16);
         this.load.spritesheet("PeaHat","img/PeaHatSpriteSheet.png",16,16);
