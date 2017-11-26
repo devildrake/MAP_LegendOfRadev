@@ -45,6 +45,7 @@ zelda.overworld = {
         this.load.spritesheet("Arrow","img/arrow.png",16,16);
         this.load.spritesheet("PeaHat","img/PeaHatSpriteSheet.png",16,16);
         this.load.spritesheet("Particles","img/ProjectileParticles.png",16,16);
+        this.load.image("GroundTile","img/GroundSprite.png");
        this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
 
@@ -80,36 +81,64 @@ zelda.overworld = {
         //TRIGGERS PARA SALAS SECRETAS
         this.trigger_espada = this.game.add.sprite(2*16*16 + 4*16, 4*11*16 + 16 +5*16, "trigger");
         this.game.physics.arcade.enable(this.trigger_espada);
+         
         this.trigger_D = this.game.add.sprite(16*16+6*16, 4*11*16 + 16+5*16, "trigger");
         this.game.physics.arcade.enable(this.trigger_D);
+        
 		this.trigger_M = this.game.add.sprite(16*16+7*16, 3*11*16+16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_M);
+        
+        //Escalera
 		this.trigger_I = this.game.add.sprite(16*16+10*16, 2*11*16 + 6*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_I);
-		this.trigger_L = this.game.add.sprite(16*16+9*16, 11*16+7*16+5*16, "trigger");
+		
+        //Escalera
+        this.trigger_L = this.game.add.sprite(16*16+9*16, 11*16+7*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_L);
+        
+        //Escalera
 		this.trigger_E = this.game.add.sprite(3*16*16+4*16, 4*11*16+6*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_E);
+        
+        //Escalera
 		this.trigger_D_2 = this.game.add.sprite(3*16*16+2*16, 3*11*16+6*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_D_2);
+        
+        //Escalera
 		this.trigger_M_2 = this.game.add.sprite(3*16*16+6*16, 2*11*16+5*16+5*16, "trigger");
-		this.game.physics.arcade.enable(this.trigger_M_2);
+        this.game.physics.arcade.enable(this.trigger_M_2);
+
+        //Escalera
 		this.trigger_I_2 = this.game.add.sprite(4*16*16+9*16, 4*11*16 + 5*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_I_2);
+        
+        //Escalera
 		this.trigger_A = this.game.add.sprite(4*16*16+5*16, 16*11+3*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_A);
+        
+        
+        //Escalera
 		this.trigger_H = this.game.add.sprite(5*16*16+6*16,5*16+5*16, "trigger");
-		this.game.physics.arcade.enable(this.trigger_A);
+		this.game.physics.arcade.enable(this.trigger_H);
+        
+        //Escalera
 		this.trigger_G = this.game.add.sprite(5*16*16+12*16, 3*16*11+6*16+5*16, "trigger");
-		this.game.physics.arcade.enable(this.trigger_G);
+        this.game.physics.arcade.enable(this.trigger_G);
+
+        //Escalera
 		this.trigger_K = this.game.add.sprite(5*16*16+11*16, 16*11+1*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_K);
+        
+        //Escalera
 		this.trigger_I_3 = this.game.add.sprite(6*16*16+2*16, 2*11*16+6*16+5*16, "trigger");
-		this.game.physics.arcade.enable(this.trigger_I_2);
+		this.game.physics.arcade.enable(this.trigger_I_3);
+        
 		this.trigger_A_2 = this.game.add.sprite(6*16*16+9*16, 4*11*16 + 1*16+5*16, "trigger");
 		this.game.physics.arcade.enable(this.trigger_A_2);
+        
 		this.trigger_K_2 = this.game.add.sprite(6*16*16+11*16, 16*11+2*16+5*16    , "trigger");
 		this.game.physics.arcade.enable(this.trigger_K_2);
+        
         
         
         
@@ -160,12 +189,14 @@ zelda.overworld = {
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
         
         //pintar corazones
-        /*for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+        zelda.Inventory.startHearts();
+        for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                     zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
                      zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
                     zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                    
             
-                 }*/
+                 }
 
     },
     
@@ -292,13 +323,13 @@ zelda.overworld = {
                     zelda.Inventory.CreateVela=false;
                 }
                  
-                  for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                  /*for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                     zelda.Inventory.heart[i].kill();
                    
             
-                 }
+                 }*/
                  for(var i=0;i< zelda.LinkObject.currentHearts;i++){
-                    zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
+                    //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
                      zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
                     zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
             
@@ -403,13 +434,23 @@ zelda.overworld = {
             }else{
                 zelda.game.camera.x-=2;
             }
+            //poner aqui actualizacion objetos HUD para cuando se mueva
+            //y cuando digo aqui no me refiero al for
+            for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                    zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                    zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                    
+            
+                 }
         }
         //CUANDO LLEGA a la posición destinada se pone en false setBorders para ajustar los bordes de pantalla a la nueva escena
         else{
             if(zelda.gameOptions.cameraArrivedPos==false){
-            zelda.gameOptions.cameraArrivedPos=true;
-             zelda.gameOptions.setBorders=false;   
-            zelda.overworld.createEnemiesOfCurrentZone();
+                zelda.gameOptions.cameraArrivedPos=true;
+                 zelda.gameOptions.setBorders=false;   
+                zelda.overworld.createEnemiesOfCurrentZone();
+                
+
             }
         }
    },
@@ -551,6 +592,23 @@ zelda.overworld = {
     },
     
     LinkSecretRoomColision:function(){
+        
+        
+          
+        /* //Escaleras
+		this.game.physics.arcade.enable(this.trigger_I);
+		this.game.physics.arcade.enable(this.trigger_L);
+		this.game.physics.arcade.enable(this.trigger_E);
+		this.game.physics.arcade.enable(this.trigger_D_2);
+        this.game.physics.arcade.enable(this.trigger_M_2);
+		this.game.physics.arcade.enable(this.trigger_I_2);
+		this.game.physics.arcade.enable(this.trigger_A);
+		this.game.physics.arcade.enable(this.trigger_H);
+        this.game.physics.arcade.enable(this.trigger_G);
+		this.game.physics.arcade.enable(this.trigger_K);
+		this.game.physics.arcade.enable(this.trigger_I_3);*/
+        
+        
         
         //TRIGGERS PARA CAMBIOS DE PANTALLA
         this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_espada, function(){

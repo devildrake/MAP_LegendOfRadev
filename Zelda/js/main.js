@@ -61,6 +61,9 @@ zelda.LinkObject = {
     lookingLeft: false,
     lookingRight:false,
     
+    goingDownStairWay:false,
+    goingUpStairWay:false,
+    whereToPlaceStairWayGround: 0,
     //Un booleano para gestionar si ha recibido daño
     hurt: false,
     
@@ -382,7 +385,10 @@ zelda.Inventory={
         }
     },
     
-       
+       startHearts:function(){
+           
+           this.heart=[zelda.LinkObject.maxHearts];
+       },
         
     draw:function(){
         
@@ -460,13 +466,13 @@ zelda.Inventory={
         }
         
         //pintar corazones
-        this.heart=[zelda.LinkObject.maxHearts];
+        //this.heart=[zelda.LinkObject.maxHearts];
         
         
         
         //pintar corazones
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
-            this.heart[i]=zelda.game.add.sprite(-zelda.game.camera.x+50*i,zelda.game.camera.y+100, "corazon");
+            //this.heart[i]=zelda.game.add.sprite(-zelda.game.camera.x+50*i,zelda.game.camera.y+100, "corazon");
             this.heart[i].position.x=zelda.game.camera.x+175+10*i;
             this.heart[i].position.y=zelda.game.camera.y+195;
             //this.heart[i].fixedToCamera=true;
@@ -478,7 +484,7 @@ zelda.Inventory={
         
         //pintar objeto B
         
-       /* 
+       
         //pintar numero llaves y bombas
         this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
 		this.strToPrint = "";
@@ -486,11 +492,11 @@ zelda.Inventory={
 		this.textTimer = 0;
 		this.textUpdateTime = 50;
 		
-		this.texto = this.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+183,this.strToPrint);
+		this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+184,this.str);
 		this.texto.fill = "white";
 		this.texto.font = "Press Start 2P";
-		this.texto.fontSize = 3;
-		this.texto.align = "center";*/
+		this.texto.fontSize = 5;
+		this.texto.align = "center";
         
          
     },
@@ -956,7 +962,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 //Escena que se pinta
 //zelda.game.state.start("main");
 
-zelda.game.state.start("secret_room_K");
+zelda.game.state.start("overworld");
 
 //Para la fuente
 WebFontConfig = {
