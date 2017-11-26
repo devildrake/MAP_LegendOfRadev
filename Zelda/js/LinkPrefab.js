@@ -109,7 +109,7 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.spriteSueloEscaleras = this.game.add.sprite(0,0,"GroundTile");
     this.spriteSueloEscaleras.Alive = false;
     this.spriteSueloEscaleras.kill();
-    
+    //this.spriteSueloEscaleras.immovable = true;
 };
 
 zelda.LinkPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -440,21 +440,20 @@ zelda.LinkPrefab.prototype.update = function(){
         }
     }else{
         if(zelda.LinkObject.goingDownStairWay&&!zelda.LinkObject.calledChangeLater){
-            this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround.x,zelda.LinkObject.whereToPlaceStairWayGround.y);
+            this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround.x,zelda.LinkObject.whereToPlaceStairWayGround.y+16);
             this.spriteSueloEscaleras.Alive = true;
             console.log(this.spriteSueloEscaleras);
             this.LinkCollider.body.velocity.x = 0;
-            this.LinkCollider.body.velocity.y = 8;
+            this.LinkCollider.body.velocity.y = 15;
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.changeScene, this.level);
 
         }else if(!zelda.LinkObject.calledChangeLater){
-                        console.log(this.spriteSueloEscaleras);
-
+            console.log(this.spriteSueloEscaleras);
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.changeScene, this.level);
-            this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround.x,zelda.LinkObject.whereToPlaceStairWayGround.y);
+            this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround.x,zelda.LinkObject.whereToPlaceStairWayGround.y+16);
             this.spriteSueloEscaleras.Alive = true;
             this.LinkCollider.body.velocity.x = 0;
-            this.LinkCollider.body.velocity.y = -8;
+            this.LinkCollider.body.velocity.y = -15;
 
         }
         
