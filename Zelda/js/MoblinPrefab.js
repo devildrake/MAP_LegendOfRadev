@@ -201,25 +201,33 @@ zelda.MoblinPrefab.prototype.update = function(){
                 });
 
                 if(this.body.velocity.x>0){
-                    if(this.type==0)
+                    if(this.type==0){
                         this.animations.play("movingRightNaranja");
-                    else 
+                    }
+                    else {
                         this.animations.play("movingRightAzul");
+                    }
                 }else if(this.body.velocity.x<0){
-                    if(this.type==0)
+                    if(this.type==0){
                         this.animations.play("movingLeftNaranja");
-                    else 
-                        this.animations.play("movingLefttAzul");
+                    }
+                    else {
+                        this.animations.play("movingLeftAzul");
+                    }
                 }else if(this.body.velocity.y<0){
-                    if(this.type==0)
+                    if(this.type==0){
                         this.animations.play("movingUpNaranja");
-                    else 
+                    }
+                    else {
                         this.animations.play("movingUpAzul");
+                    }
                 }else if(this.body.velocity.y>0){
-                    if(this.type==0)
+                    if(this.type==0){
                         this.animations.play("movingDownNaranja");
-                    else 
+                    }
+                    else {
                         this.animations.play("movingDownAzul");
+                    }
                 }
 
                 if(!this.projectile.Alive&&this.Alive){
