@@ -167,8 +167,8 @@ zelda.overworld = {
         //this.tektite = new zelda.TektitePrefab(this.game,620,840,1,this,30);
         //this.game.add.existing(this.tektite);
         
-        //this.moblin = new zelda.MoblinPrefab(this.game,640,850,1,this,1);
-        //this.game.add.existing(this.moblin);
+        this.moblin = new zelda.MoblinPrefab(this.game,640,850,1,this,1);
+        this.game.add.existing(this.moblin);
         
         //this.peahat = new zelda.PeaHatPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.peahat);

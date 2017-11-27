@@ -182,7 +182,7 @@ zelda.LeeverPrefab.prototype.update = function(){
                                     npc.previousVelocity = npc.body.velocity;
                                     //zelda.AIMethods.GetHurt(npc,whereTo);
                                     npc.body.velocity.setTo(0);
-
+                                    npc.hurtBySword = true;
                                 }
                             });
                         }else{
