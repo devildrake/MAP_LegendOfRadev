@@ -22,10 +22,10 @@ zelda.GoriyaPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
         this.lives = 3;
     
 
-        this.animations.add("movingLeft", [0,1], 5, true);
-        this.animations.add("movingDown", [2,3], 5, true);
-        this.animations.add("movingRight", [4,5],5,true);
-        this.animations.add("movingUp", [6,7], 5, true);
+        this.animations.add("movingLeft", [0,1], 12, true);
+        this.animations.add("movingDown", [2,3], 12, true);
+        this.animations.add("movingRight", [4,5],12,true);
+        this.animations.add("movingUp", [6,7], 12, true);
     
     this.animations.add("Spawn",[8,9,10],15,false);
 
@@ -41,7 +41,9 @@ zelda.GoriyaPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.previousVelocity = this.body.velocity;
 
     
-    this.projectile = game.add.sprite(this.body.position.x,this.body.position.y,"Arrow");
+    this.projectile = game.add.sprite(this.body.position.x,this.body.position.y,"Boomerang");
+        this.projectile.animations.add("Roll",[0,1,2,3,4,5,6,7],15,true);
+    this.projectile.returning = false;
     this.projectile.previousVelocityX=0;
     this.projectile.previousVelocityY=0;
 	this.projectile.anchor.setTo(0.5);
@@ -96,7 +98,7 @@ zelda.GoriyaPrefab.prototype.update = function(){
             }
             
             
-            if(this.body.velocity.x==0&&this.body.velocity.y==0){
+            if(this.body.velocity.x==0&&this.body.velocity.y==0&&!this.projectile.Alive){
                 zelda.AIMethods.changeDir(this,4,false);
             }
             this.game.physics.arcade.collide(this,this.level.obstacles);
@@ -148,6 +150,19 @@ zelda.GoriyaPrefab.prototype.update = function(){
                 } );
 
                 if(this.projectile.Alive){
+                    this.body.velocity.setTo(0);
+                    var distanceFromOriginX = this.body.position.x - this.projectile.body.position.x;
+                    var distanceFromOriginY = this.body.position.y - this.projectile.body.position.y;
+                    var distanceFromOrigin = Math.sqrt((distanceFromOriginX*distanceFromOriginX)+(distanceFromOriginY*distanceFromOriginY));
+                    console.log(distanceFromOrigin);
+                    
+                    if(distanceFromOrigin>100&&!this.projectile.returning&&distanceFromOrigin<300){
+                        this.projectile.returning= true;
+                        this.projectile.body.velocity.x = -this.projectile.body.velocity.x;
+                        this.projectile.body.velocity.y = -this.projectile.body.velocity.y;
+                    }
+                    
+                    
                     this.game.physics.arcade.overlap(this.projectile,this.level.cameraBot,function(projectile, a){
                     projectile.Alive = false;
                     projectile.kill();  
@@ -167,6 +182,14 @@ zelda.GoriyaPrefab.prototype.update = function(){
                     projectile.Alive = false;
                     projectile.kill();  
                     });
+                    
+                    if(this.projectile.returning){
+                                            
+                    this.game.physics.arcade.overlap(this.projectile,this,function(projectile, a){
+                    projectile.Alive = false;
+                    projectile.kill();  
+                    });
+                    }
 
                     if(this.projectile.body.velocity.x==0&&this.projectile.body.velocity.y==0){
                         this.projectile.Alive = false;
@@ -204,13 +227,9 @@ zelda.GoriyaPrefab.prototype.update = function(){
                     this.randomNumber = zelda.randomDataGen.between(0,4000);
                     if(this.randomNumber<20){
                         zelda.AIMethods.CreateProjectile(this,this.body.velocity);
-                        if(this.body.velocity.x>0)
-                            this.projectile.frame = 2;
-                        else if(this.body.velocity.x<0)
-                            this.projectile.frame = 0;
-                        else if(this.body.velocity.y>0)
-                            this.projectile.frame = 1;
-                        else this.projectile.frame = 3;
+                        this.projectile.returning = false;
+                        this.projectile.animations.play("Roll");
+                        console.log("ShouldRoll");
                     }
                 }
 
