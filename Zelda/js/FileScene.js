@@ -47,6 +47,12 @@ zelda.FileScene = {
         
         //crear cursor
         this.heart= zelda.game.add.sprite(33,90, "corazon");
+        
+        this.str1="";
+        this.str2="";
+        this.str3="";
+        this.KeyboardpositionX=[20,40,0,0,0,0,0,0,0,0,0,0]
+        this.keyboardpositionY=[140,170,180,200]
     },
     
     update:function(){

@@ -406,15 +406,19 @@ zelda.Inventory={
     RemakeHearts:false,
     HasSword:false,
     healed:false,
+    escudo:false,
     //el [0] sera el boomerang
     //el [1] sera las bombas
     //el [2] sera el arco
     //el [3] sera la vela
     //el [4] sera la poti vida(roja)
-    
-    objects:[0,1,0,1,0],
+    //el [5] sera el escudo
+    // el [6] sera la pocion azul
+    objects:[0,0,0,0,0,0,0],
     flechas:0,
     Cuadrado:0,
+    SlotCorazon:0,
+    Comida:false,
      //posiciones
         ArrayPosObjX:[125,145,165,185,200
                           ,125,145,165,185,200],
@@ -501,6 +505,22 @@ zelda.Inventory={
         //flechas
         else if(nameObject==11){
             
+        }
+        //escudo
+        else if(nameObject==12){
+            this.objects[5]=1;
+        }
+        //pocion azul
+         else if(nameObject==13){
+            this.objects[6]=1;
+        }
+        //comida
+         else if(nameObject==14){
+            
+        }
+        //slot de corazon
+         else if(nameObject==15){
+            this.objects[5]=1;
         }
     },
     
