@@ -8,6 +8,7 @@ zelda.FileScene = {
         //cantidades de posiciones de cada estado y la posicion actual
         this.positionsSelectMax=5;
         this.CurrentPosition=1;
+        this.slotSelected=0;
         
         //booleanos para intercambiar entre los diferentes apartados
         this.select=true;
@@ -74,15 +75,15 @@ zelda.FileScene = {
     SelectorControls:function(){
         
         //mover el cursor/corazon
-        if(this.cursors.up.isDown && this.cursors.up.downDuration(1)){
+        if(this.cursors.up.isDown && this.cursors.up.downDuration(.5) && this.CurrentPosition!=4 && this.CurrentPosition!=5){
             if(this.CurrentPosition!=0){
                 this.CurrentPosition-=1;
             }else{
-                this.CurrentPosition=this.positionsSelectMax;
+                this.CurrentPosition=3;
             }
             
-        }else if(this.cursors.down.isDown && this.cursors.down.downDuration(1)){
-             if(this.CurrentPosition!=this.positionsSelectMax){
+        }else if(this.cursors.down.isDown && this.cursors.down.downDuration(.5) && this.CurrentPosition!=4 && this.CurrentPosition!=5){
+             if(this.CurrentPosition!=3){
                 this.CurrentPosition+=1;
             }else{
                 this.CurrentPosition=0;
@@ -90,38 +91,54 @@ zelda.FileScene = {
             
             
             }
+        if(this.cursors.up.isDown && this.cursors.up.downDuration(1) && this.CurrentPosition==4){
+                this.CurrentPosition+=1; console.log("entra");
+            }
         
+        else if(this.cursors.up.isDown && this.cursors.up.downDuration(1) && this.CurrentPosition==5){
+                this.CurrentPosition-=1;
+            }
+        
+        if(this.cursors.down.isDown && this.cursors.down.downDuration(1) && this.CurrentPosition==5){
+                this.CurrentPosition-=1;
+            }      
+        
+        else if(this.cursors.down.isDown && this.cursors.down.downDuration(1) && this.CurrentPosition==4){
+                this.CurrentPosition+=1;
+            }
         
         //pintar
         if(this.CurrentPosition==1){
             
             this.heart.position.x=33;
             this.heart.position.y=90;
-            if(this.space.isDown && this.space.downDuration(1)){
-                
-                
+            if(this.space.isDown && this.space.downDuration(.5)){
+                this.slotSelected=1;
+                this.CurrentPosition=4;
             }
         }
         else if(this.CurrentPosition==2){
             this.heart.position.x=33;
             this.heart.position.y=115;
-            if(this.space.isDown && this.space.downDuration(1)){
+            if(this.space.isDown && this.space.downDuration(.5)){
                 
-                
+                this.slotSelected=2;
+                this.CurrentPosition=4;
             }
         }
         else if(this.CurrentPosition==3){
             this.heart.position.x=33;
             this.heart.position.y=137;
-            if(this.space.isDown && this.space.downDuration(1)){
-                
+            if(this.space.isDown && this.space.downDuration(.5)){
+                this.slotSelected=3;
+                this.CurrentPosition=4;
                 
             }
         }
         else if(this.CurrentPosition==4){
             this.heart.position.x=33;
             this.heart.position.y=165;
-            if(this.space.isDown && this.space.downDuration(1)){
+            if(this.space.isDown && this.space.downDuration(.5)){
                 this.register=true;
                 this.select=false;
                 this.background.kill();
@@ -136,7 +153,7 @@ zelda.FileScene = {
         else if(this.CurrentPosition==5){
             this.heart.position.x=33;
             this.heart.position.y=180;
-            if(this.space.isDown && this.space.downDuration(1)){
+            if(this.space.isDown && this.space.downDuration(.5)){
                 this.delete=true;
                 this.select=false;
                 this.heart.kill();
@@ -154,14 +171,14 @@ zelda.FileScene = {
     RegisterControls:function(){
         
         //mover el cursor/corazon
-        if(this.cursors.up.isDown && this.cursors.up.downDuration(1)){
+        if(this.cursors.up.isDown && this.cursors.up.downDuration(.5)){
             if(this.CurrentPosition!=0){
                 this.CurrentPosition-=1;
             }else{
                 this.CurrentPosition=this.positionsSelectMax;
             }
             
-        }else if(this.cursors.down.isDown && this.cursors.down.downDuration(1)){
+        }else if(this.cursors.down.isDown && this.cursors.down.downDuration(.5)){
              if(this.CurrentPosition!=this.positionsSelectMax){
                this.CurrentPosition+=1;
             }else{
@@ -174,31 +191,6 @@ zelda.FileScene = {
         
         //pintar
         if(this.CurrentPosition==1){
-            
-            this.heart.position.x=65;
-            this.heart.position.y=42;
-            if(this.space.isDown && this.space.downDuration(1)){
-                this.ReadSave();
-                
-            }
-        }
-        else if(this.CurrentPosition==2){
-            this.heart.position.x=65;
-            this.heart.position.y=64;
-            if(this.space.isDown && this.space.downDuration(1)){
-                this.ReadSave();
-                
-            }
-        }
-        else if(this.CurrentPosition==3){
-            this.heart.position.x=65;
-            this.heart.position.y=90;
-            if(this.space.isDown && this.space.downDuration(1)){
-                this.ReadSave();
-                
-            }
-        }
-        else if(this.CurrentPosition==4){
             this.heart.position.x=65;
             this.heart.position.y=107;
             if(this.space.isDown && this.space.downDuration(1)){
@@ -206,7 +198,7 @@ zelda.FileScene = {
                 
             }
         }
-        else if(this.CurrentPosition==5){
+        else if(this.CurrentPosition==2){
             this.heart.position.x=160;
             this.heart.position.y=107;
             if(this.space.isDown && this.space.downDuration(1)){
@@ -214,7 +206,7 @@ zelda.FileScene = {
                 
             }
         }
-        
+        //añadir controles teclado
         
     },
     
