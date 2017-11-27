@@ -408,7 +408,7 @@ zelda.LinkPrefab.prototype.update = function(){
                         this.frame = 11;
                 }
 
-                this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.makeLinkNotAttack , this.level, this);
+                this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.LinkPrefab.makeLinkNotAttack , this.level, this);
                 zelda.LinkObject.calledNotAttack = true;
 
                 zelda.LinkPrefab.createSword(this);

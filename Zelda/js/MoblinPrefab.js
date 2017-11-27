@@ -343,7 +343,9 @@ zelda.MoblinPrefab.prototype.update = function(){
                                     whereTo="Up";
                                 }
                                 npc.previousVelocity = npc.body.velocity;
-                                zelda.AIMethods.GetHurt(npc,whereTo);
+                                //zelda.AIMethods.GetHurt(npc,whereTo);
+                                npc.body.velocity.setTo(0);
+
                             }
                         });
                     }else{
