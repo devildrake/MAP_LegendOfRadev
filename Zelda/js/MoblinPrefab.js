@@ -246,6 +246,7 @@ zelda.MoblinPrefab.prototype.update = function(){
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.linkInstance,function(projectile,linkInstance){
                     if(!zelda.LinkObject.hurt){
+                        zelda.LinkObject.currentHearts-=0.5;
                         if(linkInstance.LinkCollider.body.velocity.x!=0||linkInstance.LinkCollider.body.velocity.y!=0){
                             zelda.LinkObject.hurt = true;
                             zelda.LinkObject.moveFromDmg=true;
