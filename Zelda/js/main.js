@@ -413,7 +413,7 @@ zelda.Inventory={
     //el [4] sera la poti vida(roja)
     
     objects:[0,1,0,1,0],
-    
+    flechas:0,
     Cuadrado:0,
      //posiciones
         ArrayPosObjX:[125,145,165,185,200
@@ -435,6 +435,7 @@ zelda.Inventory={
         CreateBombs:false,
         CreateVela:false,
         CreatePotion:false,
+        CreateArco:false,
     
     //posicion del cursor en la array
     Cursor:[1,0,0,0,0,
@@ -446,39 +447,50 @@ zelda.Inventory={
 
     GetObject:function(nameObject){
         
+        //rupias (solo hay un tipo de momento, tendras q ponerle un string o algop ara q detecte diferentes tipos de rupias)
         if(nameObject==1){
-            this.rupies+=1;
+            //this.rupies+=1;
             this.texto.kill()
             this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
             this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
         }
+        //numero bombas
         else if(nameObject==2){
             this.bombs+=1;
             this.texto.kill()
             this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
             this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
+            if(this.bombs<=0){this.objects[1]=0;} else if(this.bombs>0){this.objects[i]=1;}
         }
+        
+        //numero de llaves
         else if(nameObject==3){
             this.keys+=1;
             this.texto.kill()
             this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
             this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
         }
+        //anillo q no se que hace pero tenemso los sprites creo
         else if(nameObject==4){
             this.ring=true;
         }
+        //las escaleras esas para poder caminar un poco sobre salientes y agua
         else if(nameObject==5){
             this.stairs=true;
         }
+        //boomerang
         else if(nameObject==6){
             this.objects[0]=1;
         }
+        //bombas, aunq no se si hace falta con los ifs q puse arriba
         else if(nameObject==7){
              this.objects[1]=1;
         }
+        //arco
          else if(nameObject==8){
              this.objects[2]=1;
         }
+        //vela (la de fuego)
          else if(nameObject==9){
              this.objects[3]=1;
         }
@@ -486,8 +498,9 @@ zelda.Inventory={
         else if(nameObject==10){
              this.objects[4]=1;
         }
+        //flechas
         else if(nameObject==11){
-            this.objects[5]=1;
+            
         }
     },
     
@@ -579,7 +592,24 @@ zelda.Inventory={
                 zelda.Inventory.CreatePotion=true;
                 zelda.Inventory.array[i]="potion";
             }
-            
+            else if(zelda.Inventory.objects[2]==1 && this.CreateArco==false){
+                
+                
+                
+                if(i<5){
+                    this.bow=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "arco");
+                    this.bow.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.bow.position.y=zelda.game.camera.y+zelda.Inventory.row1;
+                }
+                else{
+                    this.bow=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "arco");
+                    this.bow.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.bow.position.y=zelda.game.camera.y+zelda.Inventory.row2;
+                }
+                
+                zelda.Inventory.CreateArco=true;
+                zelda.Inventory.array[i]="arco";
+            }
             //objeto
             
             

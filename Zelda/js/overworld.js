@@ -25,6 +25,8 @@ zelda.overworld = {
         this.load.image("corazon", "img/corazon.png");
         this.load.image("cursor","img/inventario/selector.png");
         this.load.spritesheet("sword", "img/Swords.png", 16,16);
+        //this.load.image("arco","img/bow.png");
+        this.load.image("shield","img/escudo.png");
         //this.load.image("trigger", "img/trigger_salas_color.png");
         this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
         this.load.image("rockProjectile","img/RockProjectile.png");
