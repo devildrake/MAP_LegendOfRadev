@@ -39,7 +39,6 @@ zelda.gameOptions = {
             arco:0,
             vela:0,
             potion:0,
-            arco:0,
             hasSword:false,
             boomerang:0,
             SecretA1Done:zelda.sala_secreta_A.roomDone1,
@@ -57,19 +56,57 @@ zelda.gameOptions = {
             SecretLDone:zelda.sala_secreta_L.roomDone,
             SecretM1Done:zelda.sala_secreta_M.roomDone1,
             SecretM2Done:zelda.sala_secreta_M.roomDone2,
-            SwordRoomDone:zelda.sala_espada.roomDone
+            SwordRoomDone:zelda.sala_espada.roomDone,
+            //hay que modificar esas last positions antes de hacer el save
+            LinkPositionX:zelda.LinkObject.lastPositionX,
+            LinkPositionY:zelda.LinkObject.lastPositionY
             
             
             };
         
         // localStorage only works with strings, so JSON.stringify first.
         localStorage.setItem("save", JSON.stringify(saveObject));
+        this.load();
   
     },
     
-    load:function(NameFile){
+    load:function(/*NameFile*/){
+        //inicializa el archivo que quieres cargar
+        var load = localStorage.getItem("save");
+        //copiamos a una variable local
+       this.obj= JSON.parse(load );
         
-       this.obj= JSON.parse(NameFile);
+        //cambiamos cada variable por la correspondiente
+        //console.log(this.obj.vela);
+        
+        zelda.LinkObject.currentHearts=this.obj.Lifes;
+        zelda.Inventory.Bombs=this.obj.Bombs;
+        zelda.Inventory.keys=this.obj.keys;
+        zelda.Inventory.rupies=this.obj.rupies;
+        zelda.Inventory.array[2]=this.obj.arco;
+        zelda.Inventory.array[3]=this.obj.vela;
+        zelda.Inventory.array[4]=this.obj.potion;
+        zelda.Inventory.hasSword=this.obj.hasSword;
+        zelda.Inventory.array[0]=this.obj.boomerang;
+        zelda.sala_secreta_A.roomDone1=this.obj.SecretA1Done;
+        zelda.sala_secreta_A.roomDone2=this.obj.SecretA2Done;
+        zelda.sala_secreta_D.roomDone1=this.obj.SecretD1Done;
+        zelda.sala_secreta_D.roomDone2=this.obj.SecretD2Done;
+        zelda.sala_secreta_E.roomDone=this.obj.SecretEDone;
+        zelda.sala_secreta_G.roomDone=this.obj.SecretGDone;
+        zelda.sala_secreta_H.roomDone=this.obj.SecretHDone;
+        zelda.sala_secreta_I.roomDone1=this.obj.SecretI1Done;
+        zelda.sala_secreta_I.roomDone2=this.obj.SecretI2Done;
+        zelda.sala_secreta_I.roomDone3=this.obj.SecretI3Done;
+        zelda.sala_secreta_K.roomDone1=this.objSecretK1Done;
+        zelda.sala_secreta_K.roomDone2=this.obj.SecretK2Done;
+        zelda.sala_secreta_L.roomDone=this.obj.SecretLDone;
+        zelda.sala_secreta_M.roomDone1=this.obj.SecretM1Done;
+        zelda.sala_secreta_M.roomDone2=this.obj.SecretM2Done;
+        zelda.sala_espada.roomDone=this.obj.SwordRoomDone;
+        zelda.LinkObject.lastPositionX=this.obj.LinkPositionX;
+        zelda.LinkObject.lastPositionY=this.obj.LinkPositionY;
+        
         
         
     }
