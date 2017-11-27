@@ -138,10 +138,6 @@ zelda.FileScene = {
                 this.slotSelected=2;
                 this.CurrentPosition=4;
                 
-                if(this.space.isDown && this.space.downDuration(.5)){
-                this.slotSelected=1;
-                this.CurrentPosition=4;
-                
                 if(zelda.gameOptions.load("save"+this.slotSelected)===null){
                     
                 }
@@ -151,8 +147,6 @@ zelda.FileScene = {
                     zelda.game.state.start("overworld");    
                     
                 }
-                
-            }
             }
         }
         else if(this.CurrentPosition==3){
@@ -162,10 +156,6 @@ zelda.FileScene = {
                 this.slotSelected=3;
                 this.CurrentPosition=4;
                 
-                if(this.space.isDown && this.space.downDuration(.5)){
-                this.slotSelected=1;
-                this.CurrentPosition=4;
-                
                 if(zelda.gameOptions.load("save"+this.slotSelected)===null){
                     
                 }
@@ -175,8 +165,6 @@ zelda.FileScene = {
                     zelda.game.state.start("overworld");    
                     
                 }
-                
-            }
             }
         }
         else if(this.CurrentPosition==4){
