@@ -322,6 +322,14 @@ zelda.overworld = {
             zelda.Inventory.healed=false;
             
         }
+        if(zelda.Inventory.healed==true && zelda.LinkObject.currentHearts==zelda.LinkObject.maxHearts){
+            for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                    zelda.Inventory.heart[i].kill();
+                    zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
+                     zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                    zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+            }
+        }
    
         this.MoveCamera();
         
