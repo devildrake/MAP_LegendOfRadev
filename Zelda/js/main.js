@@ -83,33 +83,33 @@ zelda.gameOptions = {
             return null;
         }
         else{
-        zelda.LinkObject.currentHearts=this.obj.Lifes;
-        zelda.Inventory.Bombs=this.obj.Bombs;
-        zelda.Inventory.keys=this.obj.keys;
-        zelda.Inventory.rupies=this.obj.rupies;
-        zelda.Inventory.array[2]=this.obj.arco;
-        zelda.Inventory.array[3]=this.obj.vela;
-        zelda.Inventory.array[4]=this.obj.potion;
-        zelda.Inventory.hasSword=this.obj.hasSword;
-        zelda.Inventory.array[0]=this.obj.boomerang;
-        zelda.sala_secreta_A.roomDone1=this.obj.SecretA1Done;
-        zelda.sala_secreta_A.roomDone2=this.obj.SecretA2Done;
-        zelda.sala_secreta_D.roomDone1=this.obj.SecretD1Done;
-        zelda.sala_secreta_D.roomDone2=this.obj.SecretD2Done;
-        zelda.sala_secreta_E.roomDone=this.obj.SecretEDone;
-        zelda.sala_secreta_G.roomDone=this.obj.SecretGDone;
-        zelda.sala_secreta_H.roomDone=this.obj.SecretHDone;
-        zelda.sala_secreta_I.roomDone1=this.obj.SecretI1Done;
-        zelda.sala_secreta_I.roomDone2=this.obj.SecretI2Done;
-        zelda.sala_secreta_I.roomDone3=this.obj.SecretI3Done;
-        zelda.sala_secreta_K.roomDone1=this.objSecretK1Done;
-        zelda.sala_secreta_K.roomDone2=this.obj.SecretK2Done;
-        zelda.sala_secreta_L.roomDone=this.obj.SecretLDone;
-        zelda.sala_secreta_M.roomDone1=this.obj.SecretM1Done;
-        zelda.sala_secreta_M.roomDone2=this.obj.SecretM2Done;
-        zelda.sala_espada.roomDone=this.obj.SwordRoomDone;
-        zelda.LinkObject.lastPositionX=this.obj.LinkPositionX;
-        zelda.LinkObject.lastPositionY=this.obj.LinkPositionY;
+			zelda.LinkObject.currentHearts=this.obj.Lifes;
+			zelda.Inventory.Bombs=this.obj.Bombs;
+			zelda.Inventory.keys=this.obj.keys;
+			zelda.Inventory.rupies=this.obj.rupies;
+			zelda.Inventory.array[2]=this.obj.arco;
+			zelda.Inventory.array[3]=this.obj.vela;
+			zelda.Inventory.array[4]=this.obj.potion;
+			zelda.Inventory.hasSword=this.obj.hasSword;
+			zelda.Inventory.array[0]=this.obj.boomerang;
+			zelda.sala_secreta_A.roomDone1=this.obj.SecretA1Done;
+			zelda.sala_secreta_A.roomDone2=this.obj.SecretA2Done;
+			zelda.sala_secreta_D.roomDone1=this.obj.SecretD1Done;
+			zelda.sala_secreta_D.roomDone2=this.obj.SecretD2Done;
+			zelda.sala_secreta_E.roomDone=this.obj.SecretEDone;
+			zelda.sala_secreta_G.roomDone=this.obj.SecretGDone;
+			zelda.sala_secreta_H.roomDone=this.obj.SecretHDone;
+			zelda.sala_secreta_I.roomDone1=this.obj.SecretI1Done;
+			zelda.sala_secreta_I.roomDone2=this.obj.SecretI2Done;
+			zelda.sala_secreta_I.roomDone3=this.obj.SecretI3Done;
+			zelda.sala_secreta_K.roomDone1=this.objSecretK1Done;
+			zelda.sala_secreta_K.roomDone2=this.obj.SecretK2Done;
+			zelda.sala_secreta_L.roomDone=this.obj.SecretLDone;
+			zelda.sala_secreta_M.roomDone1=this.obj.SecretM1Done;
+			zelda.sala_secreta_M.roomDone2=this.obj.SecretM2Done;
+			zelda.sala_espada.roomDone=this.obj.SwordRoomDone;
+			zelda.LinkObject.lastPositionX=this.obj.LinkPositionX;
+			zelda.LinkObject.lastPositionY=this.obj.LinkPositionY;
         }
         
         
@@ -482,6 +482,7 @@ zelda.Inventory={
          else if(nameObject==9){
              this.objects[3]=1;
         }
+		//pocion
         else if(nameObject==10){
              this.objects[4]=1;
         }

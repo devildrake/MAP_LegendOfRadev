@@ -92,7 +92,7 @@ zelda.sala_secreta_A = {
     update:function(){
         //SALIR DE LA SALA
 		this.game.physics.arcade.collide(this.link.LinkCollider,this.trigger,function(){
-            zelda.LinkPrefab.stairWayUp(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
+			zelda.LinkPrefab.stairWayUp(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
 			zelda.gameOptions.GoToOverworld();
 		});
 		
@@ -113,6 +113,7 @@ zelda.sala_secreta_A = {
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.pocion, function(link,pocion){
 				zelda.LinkPrefab.GrabObject();
 				pocion.y -= 8;
+				zelda.Inventory.GetObject(10);
 				zelda.sala_secreta_A.npc.animations.play("despawn");
 				zelda.sala_secreta_A.corazon.animations.play("despawn");
 				zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
