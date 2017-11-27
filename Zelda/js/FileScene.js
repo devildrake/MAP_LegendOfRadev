@@ -21,6 +21,7 @@ zelda.FileScene = {
         this.FileName;
         
         
+        
 	},
     
     preload:function(){
@@ -92,6 +93,7 @@ zelda.FileScene = {
             
             }
         if(this.cursors.up.isDown && this.cursors.up.downDuration(1) && this.CurrentPosition==4){
+            
                 this.CurrentPosition+=1; console.log("entra");
             }
         
@@ -115,7 +117,17 @@ zelda.FileScene = {
             if(this.space.isDown && this.space.downDuration(.5)){
                 this.slotSelected=1;
                 this.CurrentPosition=4;
-                zelda.gameOptions.save();
+                
+                if(zelda.gameOptions.load("save"+this.slotSelected)===null){
+                    
+                }
+                else{
+                    //zelda.gameOptions.loadsave=true;
+                    zelda.gameOptions.load("save"+this.slotSelected);
+                    zelda.game.state.start("overworld");    
+                    
+                }
+                
             }
         }
         else if(this.CurrentPosition==2){

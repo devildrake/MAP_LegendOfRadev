@@ -13,6 +13,7 @@ zelda.gameOptions = {
     cameraArrivedPos: true,
     chancesToSpawnHeart:20,
     chancesToSpawnRupy: 60,
+    loadedsave:false,
     //chancesToSpawnBomb: 100,
 	GoToOverworld:function(){
 		zelda.game.state.start("overworld");
@@ -66,19 +67,22 @@ zelda.gameOptions = {
         
         // localStorage only works with strings, so JSON.stringify first.
         localStorage.setItem("save", JSON.stringify(saveObject));
-        this.load();
+        
   
     },
     
-    load:function(/*NameFile*/){
+    load:function(NameFile){
         //inicializa el archivo que quieres cargar
-        var load = localStorage.getItem("save");
+        var load = localStorage.getItem(NameFile);
         //copiamos a una variable local
        this.obj= JSON.parse(load );
         
         //cambiamos cada variable por la correspondiente
         //console.log(this.obj.vela);
-        
+        if(this.obj===null){
+            return null;
+        }
+        else{
         zelda.LinkObject.currentHearts=this.obj.Lifes;
         zelda.Inventory.Bombs=this.obj.Bombs;
         zelda.Inventory.keys=this.obj.keys;
@@ -106,7 +110,7 @@ zelda.gameOptions = {
         zelda.sala_espada.roomDone=this.obj.SwordRoomDone;
         zelda.LinkObject.lastPositionX=this.obj.LinkPositionX;
         zelda.LinkObject.lastPositionY=this.obj.LinkPositionY;
-        
+        }
         
         
     }
