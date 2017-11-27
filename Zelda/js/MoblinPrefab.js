@@ -106,7 +106,7 @@ zelda.MoblinPrefab.prototype.update = function(){
             }
             
             
-            if(this.body.velocity.x==0&&this.body.velocity.y==0){
+            if(this.body.velocity.x==0&&this.body.velocity.y==0&&!this.hurtBySword){
                 zelda.AIMethods.changeDir(this,4,false);
             }
             this.game.physics.arcade.collide(this,this.level.obstacles);
