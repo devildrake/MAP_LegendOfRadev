@@ -28,7 +28,8 @@ zelda.gameOptions = {
 	},
     
     save:function(){
-    
+        console.log("guardado");
+        // package everything you need into an object.
         var saveObject = {
 	       Lifes: zelda.LinkObject.currentHearts,
 	       FileName: "Link",
@@ -38,9 +39,39 @@ zelda.gameOptions = {
             arco:0,
             vela:0,
             potion:0,
+            arco:0,
+            hasSword:false,
+            boomerang:0,
+            SecretA1Done:zelda.sala_secreta_A.roomDone1,
+            SecretA2Done:zelda.sala_secreta_A.roomDone2,
+            SecretD1Done:zelda.sala_secreta_D.roomDone1,
+            SecretD2Done:zelda.sala_secreta_D.roomDone2,
+            SecretEDone:zelda.sala_secreta_E.roomDone,
+            SecretGDone:zelda.sala_secreta_G.roomDone,
+            SecretHDone:zelda.sala_secreta_H.roomDone,
+            SecretI1Done:zelda.sala_secreta_I.roomDone1,
+            SecretI2Done:zelda.sala_secreta_I.roomDone2,
+            SecretI3Done:zelda.sala_secreta_I.roomDone3,
+            SecretK1Done:zelda.sala_secreta_K.roomDone1,
+            SecretK2Done:zelda.sala_secreta_K.roomDone2,
+            SecretLDone:zelda.sala_secreta_L.roomDone,
+            SecretM1Done:zelda.sala_secreta_M.roomDone1,
+            SecretM2Done:zelda.sala_secreta_M.roomDone2,
+            SwordRoomDone:zelda.sala_espada.roomDone
             
             
             };
+        
+        // localStorage only works with strings, so JSON.stringify first.
+        localStorage.setItem("save", JSON.stringify(saveObject));
+  
+    },
+    
+    load:function(NameFile){
+        
+       this.obj= JSON.parse(NameFile);
+        
+        
     }
 }
 
@@ -339,8 +370,8 @@ zelda.Inventory={
     //el [2] sera el arco
     //el [3] sera la vela
     //el [4] sera la poti vida(roja)
-    //el [5] sera la poti azul(??)
-    objects:[0,1,0,1,0,0],
+    
+    objects:[0,1,0,1,0],
     
     Cuadrado:0,
      //posiciones
@@ -435,6 +466,10 @@ zelda.Inventory={
        },
         
     draw:function(){
+        
+        if(zelda.Inventory.bombs>0){
+            zelda.Inventory.objects[1]=1 ;
+        }
         
         //pintar zona de objetos
         for( var i=0;i<9;i++){
@@ -1029,7 +1064,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 //Escena que se pinta
 //zelda.game.state.start("main");
 
-zelda.game.state.start("main");
+zelda.game.state.start("select");
 
 //Para la fuente
 WebFontConfig = {

@@ -115,6 +115,7 @@ zelda.FileScene = {
             if(this.space.isDown && this.space.downDuration(.5)){
                 this.slotSelected=1;
                 this.CurrentPosition=4;
+                zelda.gameOptions.save();
             }
         }
         else if(this.CurrentPosition==2){
