@@ -9,6 +9,9 @@ zelda.FileScene = {
         this.positionsSelectMax=5;
         this.CurrentPosition=1;
         this.slotSelected=0;
+        this.slotOccupied1=0;
+        this.slotOccupied2=0;
+        this.slotOccupied3=0;
         
         //booleanos para intercambiar entre los diferentes apartados
         this.select=true;
@@ -51,8 +54,12 @@ zelda.FileScene = {
         this.str1="";
         this.str2="";
         this.str3="";
-        this.KeyboardpositionX=[20,40,0,0,0,0,0,0,0,0,0,0]
-        this.keyboardpositionY=[140,170,180,200]
+        this.strAux="";
+        this.KeyboardpositionX=[44,60,76,92,108,124,140,156,172,188,204,220]
+        this.KeyboardpositionY=[120,137,153,167];
+        this.Keyboard=false;
+        this.i=0;
+        this.j=0;
     },
     
     update:function(){
@@ -206,17 +213,18 @@ zelda.FileScene = {
         
     },
     
+    //registrar file
     RegisterControls:function(){
         
         //mover el cursor/corazon
-        if(this.cursors.up.isDown && this.cursors.up.downDuration(.5)){
+        if(this.cursors.left.isDown && this.cursors.left.downDuration(.5) && this.Keyboard==false){
             if(this.CurrentPosition!=0){
                 this.CurrentPosition-=1;
             }else{
                 this.CurrentPosition=this.positionsSelectMax;
             }
             
-        }else if(this.cursors.down.isDown && this.cursors.down.downDuration(.5)){
+        }else if(this.cursors.right.isDown && this.cursors.right.downDuration(.5) && this.Keyboard==false){
              if(this.CurrentPosition!=this.positionsSelectMax){
                this.CurrentPosition+=1;
             }else{
@@ -225,26 +233,242 @@ zelda.FileScene = {
             
             
             }
-        
+        if(((this.cursors.up.isDown && this.cursors.up.downDuration(1)) || (this.cursors.down.isDown && this.cursors.down.downDuration(1)))){
+            this.Keyboard=!this.Keyboard;
+            //console.log(this.Keyboard);
+            this.i=0;
+            this.j=0;
+        }
         
         //pintar
-        if(this.CurrentPosition==1){
+        if(this.CurrentPosition==1 && this.Keyboard==false ){
             this.heart.position.x=65;
             this.heart.position.y=107;
             if(this.space.isDown && this.space.downDuration(1)){
-                
+                //poner register
                 
             }
         }
-        else if(this.CurrentPosition==2){
+        else if(this.CurrentPosition==2 && this.Keyboard==false){
             this.heart.position.x=160;
             this.heart.position.y=107;
             if(this.space.isDown && this.space.downDuration(1)){
-                
+                //poner "funcion" end
                 
             }
         }
         //añadir controles teclado
+        
+        if(this.Keyboard==true){
+            //pintar texto str en posicion dependiendo del file que vas a rellenar
+            
+            
+            //movimiento en keyboard
+            this.heart.position.x=this.KeyboardpositionX[this.i];
+            this.heart.position.y=this.KeyboardpositionY[this.j];
+            
+            if(this.cursors.right.isDown && this.cursors.right.downDuration(.5)){
+                
+                this.i++;
+                if(this.i>=11 && this.j>=4){
+                    this.i=0;
+                    this.j=0;
+                }
+                else if(this.i==11){
+                    this.i=0;
+                    this.j++;
+                }
+                
+                
+            }
+            if(this.cursors.left.isDown && this.cursors.left.downDuration(.5)){
+                
+                this.i--;
+                if(this.i<0 && this.j<=0){
+                    this.i=10;
+                    this.j=3;
+                }
+                else if(this.i<0){
+                    this.i=10;
+                    this.j--;
+                }
+                
+                
+            }
+            
+            //seleccionar letra, añadirla al string pertinente
+            
+            if(this.space.isDown && this.space.downDuration(.5)){
+               
+                if(this.i==0){
+                    if(this.j==0){
+                        this.strAux="A";
+                    }else if(this.j==1){
+                        this.strAux="L";
+                    }else if(this.j==2){
+                        this.strAux="W";
+                    }
+                    else if(this.j==3){
+                        this.strAux="0";
+                    }
+                }
+                else if(this.i==1){
+                    if(this.j==0){
+                        this.strAux="B";
+                    }else if(this.j==1){
+                        this.strAux="M";
+                    }else if(this.j==2){
+                        this.strAux="X";
+                    }
+                    else if(this.j==3){
+                        this.strAux="1";
+                    }
+                }
+                else if(this.i==2){
+                    if(this.j==0){
+                        this.strAux="C";
+                    }else if(this.j==1){
+                        this.strAux="N";
+                    }else if(this.j==2){
+                        this.strAux="Y";
+                    }
+                    else if(this.j==3){
+                        this.strAux="2";
+                    }
+                }
+                else if(this.i==3){
+                    if(this.j==0){
+                        this.strAux="D";
+                    }else if(this.j==1){
+                        this.strAux="O";
+                    }else if(this.j==2){
+                        this.strAux="Z";
+                    }
+                    else if(this.j==3){
+                        this.strAux="3";
+                    }
+                }
+                else if(this.i==4){
+                    if(this.j==0){
+                        this.strAux="E";
+                    }else if(this.j==1){
+                        this.strAux="P";
+                    }else if(this.j==2){
+                        this.strAux="-";
+                    }
+                    else if(this.j==3){
+                        this.strAux="4";
+                    }
+                }
+                else if(this.i==5){
+                    if(this.j==0){
+                        this.strAux="F";
+                    }else if(this.j==1){
+                        this.strAux="Q";
+                    }else if(this.j==2){
+                        this.strAux=".";
+                    }
+                    else if(this.j==3){
+                        this.strAux="5";
+                    }
+                }
+                else if(this.i==6){
+                    if(this.j==0){
+                        this.strAux="G";
+                    }else if(this.j==1){
+                        this.strAux="R";
+                    }else if(this.j==2){
+                        this.strAux=",";
+                    }
+                    else if(this.j==3){
+                        this.strAux="6";
+                    }
+                }
+                else if(this.i==7){
+                    if(this.j==0){
+                        this.strAux="H";
+                    }else if(this.j==1){
+                        this.strAux="S";
+                    }else if(this.j==2){
+                        this.strAux="!";
+                    }
+                    else if(this.j==3){
+                        this.strAux="7";
+                    }
+                }
+                else if(this.i==8){
+                    if(this.j==0){
+                        this.strAux="I";
+                    }else if(this.j==1){
+                        this.strAux="T";
+                    }else if(this.j==2){
+                        this.strAux="'";
+                    }
+                    else if(this.j==3){
+                        this.strAux="8";
+                    }
+                }
+                else if(this.i==9){
+                    if(this.j==0){
+                        this.strAux="J";
+                    }else if(this.j==1){
+                        this.strAux="U";
+                    }else if(this.j==2){
+                        this.strAux="&";
+                    }
+                    else if(this.j==3){
+                        this.strAux="9";
+                    }
+                }
+                else if(this.i==10){
+                    if(this.j==0){
+                        this.strAux="K";
+                    }else if(this.j==1){
+                        this.strAux="V";
+                    }else if(this.j==2){
+                        this.strAux=".";
+                    }
+                    else if(this.j==3){
+                        this.strAux=" ";
+                    }
+                }
+               
+               //ahora se lo sumamos al string correspondiente
+                    if(this.slotSelected==1){
+                        
+                        this.str1+=this.strAux;
+                    }
+                    else if(this.slotSelected==2){
+
+                            this.str2+=this.strAux;
+                        }
+                    else if(this.slotSelected==3){
+
+                                this.str3+=this.strAux;
+                            }
+            
+                
+            console.log("click");
+            
+            //pintar el string pertinente
+            if(this.slotSelected==1){
+                  
+                console.log(this.str1);
+                
+            }
+            
+            else if(this.slotSelected==2){
+
+                
+                
+             }
+            else if(this.slotSelected==3){
+
+               
+                
+            }
+        }
+        }
         
     },
     
