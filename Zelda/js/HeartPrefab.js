@@ -31,6 +31,7 @@ zelda.HeartPrefab.prototype.update = function(){
                         }
                         zelda.LinkPrefab.PlayGrabHeart();
                         heart.kill();
+                        zelda.Inventory.healed=true;
                     }else{
                         zelda.LinkObject.currentHearts+=0.5;
                         if(zelda.LinkObject.currentHearts>zelda.LinkObject.maxHearts){
@@ -38,6 +39,7 @@ zelda.HeartPrefab.prototype.update = function(){
                         }
                         zelda.LinkPrefab.PlayGrabHeart();
                         heart.kill();
+                        zelda.Inventory.healed=true;
                     }
                 }
                 
