@@ -1176,6 +1176,7 @@ zelda.overworld = {
     },
     
     createRupy:function(posX,posY,which){
+        console.log("Creating Rupy");
         var rupy = this.rupies.getFirstExists(false);
         if(!rupy){
             //rupy = new zelda.RupyPrefab(this.game,posX,posY,this,which);
