@@ -126,6 +126,7 @@ zelda.sala_secreta_A = {
 				});
 				if(zelda.LinkObject.currentZone==11) zelda.sala_secreta_A.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone==34) zelda.sala_secreta_A.roomDone2 = true;
+				zelda.Inventory.GetObject(0);
 			});
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.pocion, function(link,pocion){
 				zelda.LinkPrefab.GrabObject();
@@ -140,6 +141,7 @@ zelda.sala_secreta_A = {
 				});
 				if(zelda.LinkObject.currentZone==11) zelda.sala_secreta_A.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone==34) zelda.sala_secreta_A.roomDone2 = true;
+				zelda.Inventory.GetObject(10);
 			});
 		}
 		

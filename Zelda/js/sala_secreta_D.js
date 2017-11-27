@@ -69,7 +69,7 @@ zelda.sala_secreta_D = {
 			this.numeros = this.game.add.text(8*16-8,7*16-8,"-10");
 			this.numeros.fill = "white";
 			this.numeros.font = "Press Start 2P";
-			this.numeros.fontSize = 12;
+			this.numeros.fontSize = 10;
 			this.numeros.align = "center";
 		}
 		this.game.camera.y -= 47;
@@ -90,6 +90,7 @@ zelda.sala_secreta_D = {
 		this.collider = this.game.add.sprite(0,16*3,"collider_inv");
 		this.game.physics.arcade.enable(this.collider);
 		this.collider.body.immovable = true;
+		
     },
     
     update:function(){
@@ -112,7 +113,8 @@ zelda.sala_secreta_D = {
 		if(!this.roomDone1&&zelda.LinkObject.currentZone == 29 || !this.roomDone2&&zelda.LinkObject.currentZone==24){
 			if(zelda.LinkObject.currentZone == 29)zelda.sala_secreta_D.roomDone1 = true;
 			if(zelda.LinkObject.currentZone == 24)zelda.sala_secreta_D.roomDone2 = true;
-			console.log("-10 a las rupias de link");	
+			zelda.Inventory.rupies -= 10;
+			if(zelda.Inventory.rupies<0) zelda.Inventory.rupies = 0;
 		}
     }
 }
