@@ -1070,6 +1070,7 @@ zelda.overworld = {
                     oktorok.type = type;
                     oktorok.reset(posX,posY);
                     oktorok.currentZone = currentZone;
+                    oktorok.posInArray = posInArray;
                     zelda.OktorokPrefab.Respawn(oktorok);
                     oktorok.initialSpeed = movingTowards;
                 }
@@ -1091,6 +1092,7 @@ zelda.overworld = {
                     peahat.firstFewFrames = false;
                     peahat.lives = 3;
                     peahat.currentZone = currentZone;
+                    peahat.posInArray = posInArray;
 
 
                 }
@@ -1119,6 +1121,8 @@ zelda.overworld = {
                     }
                     tektite.spawned  = false;
                     tektite.calledSpawn = false;
+                    tektite.posInArray = posInArray;
+
                 }
             }
             
@@ -1131,7 +1135,10 @@ zelda.overworld = {
                     leever.currentZone = currentZone;
                     leever.reset(posX,posY);
                     leever.type = type;
+                    leever.posInArray = posInArray;
+
                     zelda.LeeverPrefab.Respawn(leever);
+                    
                 }
             }
             
@@ -1144,6 +1151,8 @@ zelda.overworld = {
                     riverZola.reset(posX,posY);
                     riverZola.Alive = true;
                     riverZola.currentZone = currentZone;
+                    riverZola.posInArray = posInArray;
+
                     riverZola.lives = 3;
                 }
             }
@@ -1159,6 +1168,7 @@ zelda.overworld = {
                     moblin.type = type;
                     moblin.reset(posX,posY);
                     zelda.MoblinPrefab.Respawn(moblin);
+                    moblin.posInArray = posInArray;
                     moblin.initialSpeed = movingTowards;
                 }
             }
