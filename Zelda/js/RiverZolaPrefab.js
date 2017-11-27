@@ -125,18 +125,20 @@ zelda.RiverZolaPrefab.prototype.update = function(){
 
                 this.game.physics.arcade.overlap(this,this.level.linkInstance,
                 function(enemy,linkInstance){
-                    zelda.LinkObject.hurt = true;
-                    zelda.LinkObject.moveFromDmg=true;
-                    zelda.LinkObject.calledNotMoveFromDamage=false;
-                    zelda.LinkObject.currentHearts-=0.5;
-                    if(enemy.body.velocity.y>0)
-                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Down");
-                    else if(enemy.body.velocity.y<0)
-                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");
-                    else if(enemy.body.velocity.x>0)
-                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right");
-                    else 
-                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");
+                    if(!zelda.LinkObject.hurt){
+                        zelda.LinkObject.hurt = true;
+                        zelda.LinkObject.moveFromDmg=true;
+                        zelda.LinkObject.calledNotMoveFromDamage=false;
+                        zelda.LinkObject.currentHearts-=0.5;
+                        if(enemy.body.velocity.y>0)
+                            zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Down");
+                        else if(enemy.body.velocity.y<0)
+                            zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");
+                        else if(enemy.body.velocity.x>0)
+                            zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right");
+                        else 
+                            zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");
+                    }
                 } );
 
 
@@ -170,6 +172,7 @@ zelda.RiverZolaPrefab.prototype.update = function(){
                             zelda.LinkObject.hurt = true;
                             zelda.LinkObject.moveFromDmg=true;
                             zelda.LinkObject.calledNotMoveFromDamage=false;
+                            zelda.LinkObject.currentHearts-=0.5;
                             if(projectile.body.velocity.x>0){
                                  zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right");   
                             }else if(projectile.body.velocity.x<0){

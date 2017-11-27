@@ -1065,6 +1065,7 @@ zelda.AIMethods = {
     Die: function(npc){
         npc.Alive = false;
         npc.kill();
+        console.log("Eliminando enemigo en zona " +npc.currentZone + " en la posicion " + npc.posInArray);
         zelda.enemySpawns.zones[npc.currentZone][npc.posInArray] = false;
         var randomChance = zelda.randomDataGen.between(0,99);
         if(randomChance<zelda.gameOptions.chancesToSpawnRupy&&randomChance>zelda.gameOptions.chancesToSpawnHeart){
@@ -1104,9 +1105,9 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 
 
 //Escena que se pinta
-//zelda.game.state.start("main");
+zelda.game.state.start("main");
 
-zelda.game.state.start("select");
+//zelda.game.state.start("select");
 
 //Para la fuente
 WebFontConfig = {
