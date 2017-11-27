@@ -115,8 +115,8 @@ zelda.sala_secreta_G = {
 		if(!this.roomDone){
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.moneda, function(){
 				zelda.sala_secreta_G.numeros.setText("10");
-				console.log("aparece texto oculto de cuanto dinero adquieres");
 				zelda.sala_secreta_G.roomDone = true;
+				zelda.Inventory.rupies += 10;
 			});
 		}
 		

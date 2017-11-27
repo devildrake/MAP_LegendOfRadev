@@ -419,6 +419,7 @@ zelda.Inventory={
     Cuadrado:0,
     SlotCorazon:0,
     Comida:false,
+	trozoMapa:false,
      //posiciones
         ArrayPosObjX:[125,145,165,185,200
                           ,125,145,165,185,200],
@@ -450,15 +451,13 @@ zelda.Inventory={
     
 
     GetObject:function(nameObject){
-        //coger corazón
+        //corazones
 		if(nameObject==0){
-			console.log("corazon añadido");
 			zelda.LinkObject.currentHearts++;
 			if(zelda.LinkObject.currentHearts>zelda.LinkObject.maxHearts){
 				zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
 			}
 		}
-		
         //rupias (solo hay un tipo de momento, tendras q ponerle un string o algop ara q detecte diferentes tipos de rupias)
         else if(nameObject==1){
             //this.rupies+=1;
@@ -508,7 +507,6 @@ zelda.Inventory={
         }
 		//pocion
         else if(nameObject==10){
-			console.log("podion añadida");
              this.objects[4]=1;
         }
         //flechas
@@ -531,6 +529,13 @@ zelda.Inventory={
          else if(nameObject==15){
             this.objects[5]=1;
         }
+		//trozo de mapa
+		else if(nameObject==16){
+			this.trozoMapa = true;	
+		}
+		else{
+			console.log("NO HAY COMPORTAMIENTO PARA EL OBJETO AÑADIDO");
+		}
     },
     
        startHUD:function(){
@@ -1166,7 +1171,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 //Escena que se pinta
 //zelda.game.state.start("main");
 
-zelda.game.state.start("secret_room_D");
+zelda.game.state.start("secret_room_M");
 
 //Para la fuente
 WebFontConfig = {

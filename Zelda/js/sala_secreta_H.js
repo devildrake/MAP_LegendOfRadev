@@ -116,7 +116,7 @@ zelda.sala_secreta_H = {
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.moneda, function(){
 				zelda.sala_secreta_H.numeros.setText("30");
 				zelda.sala_secreta_H.roomDone = true;
-				console.log("+30 a las rupias de link");
+				zelda.Inventory.rupies += 30;
 			});
 		}
 		

@@ -134,7 +134,7 @@ zelda.sala_secreta_M = {
 				});
 				if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
-				console.log("comportamiento coger escudo");
+				zelda.Inventory.GetObject(12);
 			});
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.llave, function(link, llave){
 				zelda.LinkPrefab.GrabObject();
@@ -150,7 +150,7 @@ zelda.sala_secreta_M = {
 				});
 				if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
-				console.log("comportamiento coger llave");
+				zelda.Inventory.GetObject(3);
 			});
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.vela, function(link,vela){
 				zelda.LinkPrefab.GrabObject();
@@ -166,7 +166,7 @@ zelda.sala_secreta_M = {
 				});
 				if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
-				console.log("comportamiento coger vela");
+				zelda.Inventory.GetObject(9);
 			});
 		}
 			
