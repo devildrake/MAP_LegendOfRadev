@@ -19,6 +19,7 @@ zelda.sala_secreta_D = {
         this.load.spritesheet("npc", "img/spawn_oldman.png",16, 16);
 		this.load.image("inventario", "img/inventario.png");
 		this.load.image("collider", "img/camara_horizontal.png");
+		this.load.image("collider_inv", "img/collider_invisible.png");
 		
 		//para el prefab de link
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
@@ -42,6 +43,8 @@ zelda.sala_secreta_D = {
 		this.fire1.animations.currentAnim.onComplete.add(function () {
 			this.fire1.animations.play("idle");
 		},this);
+		this.game.physics.arcade.enable(this.fire1);
+		this.fire1.body.immovable = true;
 		
         this.fire2 = this.game.add.sprite(zelda.secretLayout.fireX2,zelda.secretLayout.fireY,"fuego",0);
 		this.fire2.animations.add("spawn",[0,1,2],6,false);
@@ -50,12 +53,16 @@ zelda.sala_secreta_D = {
 		this.fire2.animations.currentAnim.onComplete.add(function () {
 			this.fire2.animations.play("idle");
 		},this);
+		this.game.physics.arcade.enable(this.fire2);
+		this.fire2.body.immovable = true;
         
         //npc
         this.npc = this.game.add.sprite(8*16, 4*16, "npc", 0);
         this.npc.anchor.setTo(.5,0);
 		this.npc.animations.add("spawn",[0,1,2,3],6, false);
 		this.npc.animations.play("spawn");
+		this.game.physics.arcade.enable(this.npc);
+		this.npc.body.immovable = true;
 		
 		if(!this.roomDone1&&zelda.LinkObject.currentZone == 29 || !this.roomDone2&&zelda.LinkObject.currentZone==24){
 			//TEXTO
@@ -78,6 +85,11 @@ zelda.sala_secreta_D = {
 		this.trigger = this.game.add.sprite(0,180,"collider");
 		this.game.physics.arcade.enable(this.trigger);
 		this.trigger.body.immovable = true;
+		
+		//COLLIDER PARA LIMITAR EL MOVIMIENTO
+		this.collider = this.game.add.sprite(0,16*3,"collider_inv");
+		this.game.physics.arcade.enable(this.collider);
+		this.collider.body.immovable = true;
     },
     
     update:function(){
@@ -86,6 +98,12 @@ zelda.sala_secreta_D = {
             zelda.LinkPrefab.stairWayUp(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
 			zelda.gameOptions.GoToOverworld();
 		});
+		
+		this.game.physics.arcade.collide(this.link.LinkCollider,this.collider);
+		this.game.physics.arcade.collide(this.link.LinkCollider, this.npc);
+		this.game.physics.arcade.collide(this.link.LinkCollider, this.fire1);
+		this.game.physics.arcade.collide(this.link.LinkCollider, this.fire2);
+		
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
 			zelda.gameOptions.Pause(this);
