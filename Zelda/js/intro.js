@@ -104,7 +104,7 @@ zelda.intro = {
     
     changeScene:function(){
         this.introMusic.stop();
-        zelda.game.state.start("overworld");    
+        zelda.game.state.start("select");    
     }
 
 };
