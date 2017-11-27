@@ -11,6 +11,7 @@ zelda.gameOptions = {
     borderToSet: "None",
     setBorders: true,
     cameraArrivedPos: true,
+    
 	GoToOverworld:function(){
 		zelda.game.state.start("overworld");
 	},
@@ -22,7 +23,23 @@ zelda.gameOptions = {
 	},
 	Pause:function(level){
 		zelda.game.paused = true;
-	}
+	},
+    
+    save:function(){
+    
+        var saveObject = {
+	       Lifes: zelda.LinkObject.currentHearts,
+	       FileName: "Link",
+            Bombs: zelda.Inventory.bombs,
+            keys:zelda.Inventory.keys,
+            rupies:zelda.Inventory.rupies,
+            arco:0,
+            vela:0,
+            potion:0,
+            
+            
+            };
+    }
 }
 
 //objeto para colocar los elementos del layout de las salas secretas
