@@ -61,6 +61,7 @@ zelda.FileScene = {
         this.i=0;
         this.j=0;
         this.canSave=false;
+        this.goingDelete=false;
     },
     
     update:function(){
@@ -131,7 +132,11 @@ zelda.FileScene = {
             if(this.space.isDown && this.space.downDuration(.5)){
                 this.slotSelected=1;
                 this.CurrentPosition=4;
-                
+               if(this.delete==true){
+                   localStorage.removeItem("save"+this.slotSelected);
+                   this.delete=false;
+                   this.texto1.kill();
+               } else{
                 if(zelda.gameOptions.load("save"+this.slotSelected)===null){
                     
                 }
@@ -141,7 +146,8 @@ zelda.FileScene = {
                     zelda.game.state.start("overworld");    
                     
                 }
-                
+                   this.CurrentPosition=4;
+               }
             }
         }
         else if(this.CurrentPosition==2){
@@ -150,8 +156,12 @@ zelda.FileScene = {
             if(this.space.isDown && this.space.downDuration(.5)){
                 
                 this.slotSelected=2;
-                this.CurrentPosition=4;
                 
+                if(this.delete==true){
+                   localStorage.removeItem("save"+this.slotSelected);
+                   this.delete=false;
+                   this.texto2.kill();
+               } else{
                 if(zelda.gameOptions.load("save"+this.slotSelected)===null){
                     
                 }
@@ -161,6 +171,8 @@ zelda.FileScene = {
                     zelda.game.state.start("overworld");    
                     
                 }
+            this.CurrentPosition=4;
+            }
             }
         }
         else if(this.CurrentPosition==3){
@@ -168,8 +180,12 @@ zelda.FileScene = {
             this.heart.position.y=137;
             if(this.space.isDown && this.space.downDuration(1)){
                 this.slotSelected=3;
-                this.CurrentPosition=4;
                 
+                if(this.delete==true){
+                   localStorage.removeItem("save"+this.slotSelected);
+                   this.delete=false;
+                   this.texto3.kill();
+               } else{
                 if(zelda.gameOptions.load("save"+this.slotSelected)===null){
                     
                 }
@@ -179,6 +195,8 @@ zelda.FileScene = {
                     zelda.game.state.start("overworld");    
                     
                 }
+                 this.CurrentPosition=4;  
+               }
             }
         }
         else if(this.CurrentPosition==4){
@@ -215,7 +233,7 @@ zelda.FileScene = {
             this.heart.position.y=180;
             if(this.space.isDown && this.space.downDuration(.5)){
                 this.delete=true;
-                this.select=false;
+                
                 this.heart.kill();
                 this.heart= zelda.game.add.sprite(33,90, "corazon");
                 this.CurrentPosition=1;
@@ -241,22 +259,22 @@ zelda.FileScene = {
                       var load2 = localStorage.getItem("save"+2);
                     //copiamos a una variable local
                    var obj2= JSON.parse(load2 );
-                 var texto2 = zelda.game.add.text(75,95, obj2.FileName);
-                texto2.fill = "white";
-                texto2.font = "Press Start 2P";
-                texto2.fontSize =7;
-                texto2.align = "center";
+                 this.texto2 = zelda.game.add.text(75,95, obj2.FileName);
+                this.texto2.fill = "white";
+                this.texto2.font = "Press Start 2P";
+                this.texto2.fontSize =7;
+                this.texto2.align = "center";
             
                 }
          if(zelda.gameOptions.load("save"+3)!==null){
                       var load3 = localStorage.getItem("save"+3);
                     //copiamos a una variable local
                    var obj3= JSON.parse(load3 );
-                 var texto3 = zelda.game.add.text(75,95, obj3.FileName);
-                texto3.fill = "white";
-                texto3.font = "Press Start 2P";
-                texto3.fontSize =7;
-                texto3.align = "center";
+                this.texto3 = zelda.game.add.text(75,95, obj3.FileName);
+                this.texto3.fill = "white";
+                this.texto3.font = "Press Start 2P";
+                this.texto3.fontSize =7;
+                this.texto3.align = "center";
              
                 }
         
