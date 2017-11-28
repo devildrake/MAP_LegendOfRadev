@@ -25,7 +25,7 @@ zelda.BombPrefab.prototype.update = function(){
                 if(zelda.Inventory.bombs!=999){
                     
                         zelda.Inventory.bombs+=1;
-                        zelda.Inventory.GetObject:function(2);
+                        zelda.Inventory.GetObject(2);
                         zelda.LinkPrefab.GrabObject();
                         bomb.kill();
                         
