@@ -833,7 +833,7 @@ zelda.Inventory={
         
         }else{
             
-            console.log("sas");
+           // console.log("sas");
             this.PintObj.kill();
             zelda.Inventory.ObjPintado=false;
             zelda.Inventory.PintarObjB();
@@ -842,11 +842,26 @@ zelda.Inventory={
         
     },
     
+    
+    
         
-    LoadSave:function(){
+    UseObjectB:function(){
         
-        
-        
+        if(zelda.Inventory.ObjectB=="bombs"){
+            
+            
+    
+        }
+        else if(zelda.Inventory.ObjectB=="vela"){
+                
+                
+        }
+        else if(zelda.Inventory.ObjectB=="potion"){
+                
+                
+        }
+    
+    
     }
     
 },
