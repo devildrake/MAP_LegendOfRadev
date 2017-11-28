@@ -185,7 +185,7 @@ zelda.overworld = {
         
         this.loadHearts();
         this.loadRupies();
-
+        this.loadBombs();
         this.createHeart(620,840,this,1);
     
         this.loadEnemies();
@@ -1046,6 +1046,11 @@ zelda.overworld = {
         this.rupies.enableBody = true;
         
     },
+    loadRupies:function(){
+        this.bombs = this.add.group(),
+        this.bombs.enableBody = true;
+        
+    },
     
     loadEnemies:function(){
         this.oktoroks = this.add.group();
@@ -1204,10 +1209,24 @@ zelda.overworld = {
         }else{
             rupy.reset(posX,posY);
             if(which==0)
-                heart.frame = 0;
-            else heart.frame = 1;
+                rupy.frame = 0;
+            else rupy.frame = 1;
 		}
-        }
+        
+    },
+    createBomb:function(posX,posY,which){
+        console.log("Creating Rupy");
+        var bomb= this.bombs.getFirstExists(false);
+        if(!bomb){
+            bomb = new zelda.BombPrefab(this.game,posX,posY,this,which);
+            this.bombs.add(bomb);
+        }else{
+            bomb.reset(posX,posY);
+            if(which==0)
+                bomb.frame = 0;
+            else bomb.frame = 1;
+		}
+        
     },
     
     createEnemiesOfCurrentZone:function(){

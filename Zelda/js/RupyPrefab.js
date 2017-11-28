@@ -25,19 +25,19 @@ zelda.RupyPrefab.prototype.constructor = zelda.RupyPrefab;
 zelda.RupyPrefab.prototype.update = function(){
             this.game.physics.arcade.overlap(this,this.level.linkInstance,
         function(rupy,linkInstance){
-                if(zelda.LinkObject.currentHearts!=999){
+                if(zelda.Inventory.rupies!=999){
                     if(rupy.type==0){
                         zelda.Inventory.rupies+=5;
                         zelda.Inventory.GetObject:function(1);
                         zelda.LinkPrefab.GrabObject();
                         rupy.kill();
-                        zelda.Inventory.healed=true;
+                       
                     }else{
                         zelda.Inventory.rupies+=1;
                         zelda.Inventory.GetObject:function(1);
                         zelda.LinkPrefab.GrabObject();
                         heart.kill();
-                        zelda.Inventory.healed=true;
+                        
                     }
                 }
                 
