@@ -60,6 +60,7 @@ zelda.FileScene = {
         this.Keyboard=false;
         this.i=0;
         this.j=0;
+        this.canSave=false;
     },
     
     update:function(){
@@ -192,6 +193,20 @@ zelda.FileScene = {
                 this.heart.kill();
                 this.heart= zelda.game.add.sprite(33,90, "corazon");
                 this.CurrentPosition=1;
+                this.str1="";
+                this.str2="";
+                this.str3="";
+                if(zelda.gameOptions.load("save"+1)!==null){
+                  this.texto1.kill();  
+                }
+                
+                if(zelda.gameOptions.load("save"+2)!==null){
+                    this.texto2.kill();
+                }
+                
+                if(zelda.gameOptions.load("save"+3)!==null){
+                   this.texto3.kill(); 
+                }
                 
             }
         }
@@ -210,6 +225,41 @@ zelda.FileScene = {
         
         
         //pintar el nombre y los corazones del file
+         if(zelda.gameOptions.load("save"+1)!==null){
+                    var load1 = localStorage.getItem("save"+1);
+                    //copiamos a una variable local
+                   var obj1= JSON.parse(load1 );
+                 this.texto1 = zelda.game.add.text(75,95, obj1.FileName);
+                this.texto1.fill = "white";
+                this.texto1.font = "Press Start 2P";
+                this.texto1.fontSize =7;
+                this.texto1.align = "center";
+            
+        
+                }
+         if(zelda.gameOptions.load("save"+2)!==null){
+                      var load2 = localStorage.getItem("save"+2);
+                    //copiamos a una variable local
+                   var obj2= JSON.parse(load2 );
+                 var texto2 = zelda.game.add.text(75,95, obj2.FileName);
+                texto2.fill = "white";
+                texto2.font = "Press Start 2P";
+                texto2.fontSize =7;
+                texto2.align = "center";
+            
+                }
+         if(zelda.gameOptions.load("save"+3)!==null){
+                      var load3 = localStorage.getItem("save"+3);
+                    //copiamos a una variable local
+                   var obj3= JSON.parse(load3 );
+                 var texto3 = zelda.game.add.text(75,95, obj3.FileName);
+                texto3.fill = "white";
+                texto3.font = "Press Start 2P";
+                texto3.fontSize =7;
+                texto3.align = "center";
+             
+                }
+        
         
     },
     
@@ -244,14 +294,25 @@ zelda.FileScene = {
         if(this.CurrentPosition==1 && this.Keyboard==false ){
             this.heart.position.x=65;
             this.heart.position.y=107;
-            if(this.space.isDown && this.space.downDuration(1)){
+            if(this.space.isDown && this.space.downDuration(1) && this.canSave==true ){
                 //poner register
                   
 
-                    /*    zelda.gameOptions.save("save"+this.slotSelected);
-                zelda.game.state.start("overworld");*/
+                       
+                    if(this.slotSelected){
+                        zelda.Inventory.StrSave=this.str1;
+                    }else if(this.slotSelected){
+                        zelda.Inventory.StrSave=this.str2;
+                    }else if(this.slotSelected){
+                        zelda.Inventory.StrSave=this.str3;
+                    }
+                    var str="save"+this.slotSelected;
+                    zelda.gameOptions.save(str);
+                zelda.game.state.start("overworld");
                   
+            
             }
+            this.canSave=true;
         }
         else if(this.CurrentPosition==2 && this.Keyboard==false){
             this.heart.position.x=160;
@@ -267,6 +328,7 @@ zelda.FileScene = {
                 this.heart= zelda.game.add.sprite(33,90, "corazon");
                 this.CurrentPosition=1;
                 this.slotSelected=0;
+                this.canSave=false;
                 //aqui faltara poner q se muevan los nombres de los files ya existentes
             }
         }
@@ -496,7 +558,24 @@ zelda.FileScene = {
                 this.texto3.align = "center";
                 
             }
+            
+            
         }
+        //pintar aqui si ya hay un slot ocupado
+            if(zelda.gameOptions.load("save"+1)!==null){
+                  this.texto1.position.x=100;
+                  this.texto1.position.y=45;
+                }
+                
+                if(zelda.gameOptions.load("save"+2)!==null){
+                    this.texto2.position.x=100;
+                  this.texto2.position.y=68;
+                }
+                
+                if(zelda.gameOptions.load("save"+3)!==null){
+                   this.texto1.position.x=100;
+                  this.texto1.position.y=90;
+                }
         
     },
     

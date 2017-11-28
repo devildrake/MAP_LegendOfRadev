@@ -14,6 +14,7 @@ zelda.gameOptions = {
     chancesToSpawnHeart:20,
     chancesToSpawnRupy: 60,
     loadedsave:false,
+    StrSave:"Link",
     //chancesToSpawnBomb: 100,
 	GoToOverworld:function(){
 		zelda.game.state.start("overworld");
@@ -28,12 +29,12 @@ zelda.gameOptions = {
 		zelda.game.paused = true;
 	},
     
-    save:function(){
+    save:function(Name){
         console.log("guardado");
         // package everything you need into an object.
         var saveObject = {
 	       Lifes: zelda.LinkObject.currentHearts,
-	       FileName: "Link",
+	       FileName: zelda.Inventory.StrSave,
             Bombs: zelda.Inventory.bombs,
             keys:zelda.Inventory.keys,
             rupies:zelda.Inventory.rupies,
@@ -66,7 +67,7 @@ zelda.gameOptions = {
             };
         
         // localStorage only works with strings, so JSON.stringify first.
-        localStorage.setItem("save", JSON.stringify(saveObject));
+        localStorage.setItem(Name, JSON.stringify(saveObject));
         
   
     },
