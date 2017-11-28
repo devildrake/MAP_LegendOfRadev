@@ -371,7 +371,7 @@ zelda.overworld = {
             zelda.game.camera.x -= 10;
         }
 
-         if(this.InvButton.isDown && zelda.Inventory.released && this.InvButton.downDuration(1)){
+         if(this.InvButton.isDown && zelda.Inventory.released && this.InvButton.downDuration(1)&&!zelda.LinkObject.attacking&&!zelda.LinkObject.hurt&&!zelda.LinkObject.invincible&&zelda.cameraArrivedPos){
              //console.log(this.inventario.position.y);
             zelda.gameOptions.InventoryScroll=zelda.game.camera.y;
             zelda.Inventory.released = false;

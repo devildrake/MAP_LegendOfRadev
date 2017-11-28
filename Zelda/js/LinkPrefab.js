@@ -19,7 +19,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.animations.add("movingSideWaysHurt", [17,18],5,true); 
     zelda.LinkObject.calledNotHurt = false;
     this.grabbingObject = false;
-
+    zelda.LinkObject.invincible = false;
 	this.level = level;
 	if(level != zelda.overworld){
 		this.LinkCollider = game.add.sprite(x,y,"LinkCollider");
@@ -543,14 +543,14 @@ zelda.LinkPrefab.createSword = function(obj){
 			obj.sword.frame = 1;
 			obj.sword.scale.y = 1;
 			obj.sword.scale.x = 1;
-			obj.sword.reset(obj.position.x,obj.position.y+16);
+			obj.sword.reset(obj.position.x+2,obj.position.y+12);
 		}
 		// up
 		else if(obj.frame == 10 || obj.frame==24){
 			obj.sword.frame = 1;
 			obj.sword.scale.y= -1;
 			obj.sword.scale.x = 1;
-			obj.sword.reset(obj.position.x,obj.position.y-16);
+			obj.sword.reset(obj.position.x-2,obj.position.y-12);
 
 		}
 
@@ -560,14 +560,14 @@ zelda.LinkPrefab.createSword = function(obj){
 			obj.sword.frame = 0;
 			obj.sword.scale.x = 1 ;
 			obj.sword.scale.y = 1 ;  
-			obj.sword.reset(obj.position.x-16,obj.position.y);
+			obj.sword.reset(obj.position.x-11,obj.position.y+2);
 
 			}
 			else{
 			obj.sword.frame = 0;
 			obj.sword.scale.x= -1;
 			obj.sword.scale.y = 1;  
-			obj.sword.reset(obj.position.x+16,obj.position.y);
+			obj.sword.reset(obj.position.x+11,obj.position.y+2);
 
 			}
 		}
