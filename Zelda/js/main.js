@@ -537,7 +537,7 @@ zelda.Inventory={
        startHUD:function(){
            
             this.heart=[zelda.LinkObject.maxHearts];
-            this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
+            this.str  = "X"+zelda.Inventory.rupies+"\n"+"X"+zelda.Inventory.keys+"\n"+"X"+zelda.Inventory.bombs+"\n";
             this.strToPrint = "";
             this.strCount = 0;
             this.textTimer = 0;

@@ -34,6 +34,8 @@ zelda.FileScene = {
         this.load.image("register","img/inicio_y_saveFiles/register.png",256,240);
         this.load.image("fotoNegra","img/inicio_y_saveFiles/FondoNegroParaFade.png",256,240);
          this.load.image("corazon", "img/corazon.png");
+        this.load.audio("keyboard","sounds/Sfx/selectKeyboard.WAV");
+        this.load.audio("menu","sounds/Sfx/moveMenu.WAV");
         
 		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
@@ -62,6 +64,8 @@ zelda.FileScene = {
         this.j=0;
         this.canSave=false;
         this.goingDelete=false;
+        this.SfxKeyboard = this.add.audio("keyboard");
+        this.SfxMenu = this.add.audio("menu");
     },
     
     update:function(){
@@ -92,6 +96,7 @@ zelda.FileScene = {
         
         //mover el cursor/corazon
         if(this.cursors.up.isDown && this.cursors.up.downDuration(.5) && this.CurrentPosition!=4 && this.CurrentPosition!=5){
+            this.SfxMenu.play();
             if(this.CurrentPosition!=0){
                 this.CurrentPosition-=1;
             }else{
@@ -99,6 +104,7 @@ zelda.FileScene = {
             }
             
         }else if(this.cursors.down.isDown && this.cursors.down.downDuration(.5) && this.CurrentPosition!=4 && this.CurrentPosition!=5){
+            this.SfxMenu.play();
              if(this.CurrentPosition!=3){
                 this.CurrentPosition+=1;
             }else{
@@ -108,19 +114,23 @@ zelda.FileScene = {
             
             }
         if(this.cursors.up.isDown && this.cursors.up.downDuration(1) && this.CurrentPosition==4){
+            this.SfxMenu.play();
             
                 this.CurrentPosition+=1; console.log("entra");
             }
         
         else if(this.cursors.up.isDown && this.cursors.up.downDuration(1) && this.CurrentPosition==5){
+            this.SfxMenu.play();
                 this.CurrentPosition-=1;
             }
         
         if(this.cursors.down.isDown && this.cursors.down.downDuration(1) && this.CurrentPosition==5){
+            this.SfxMenu.play();
                 this.CurrentPosition-=1;
             }      
         
         else if(this.cursors.down.isDown && this.cursors.down.downDuration(1) && this.CurrentPosition==4){
+            this.SfxMenu.play();
                 this.CurrentPosition+=1;
             }
         
@@ -130,6 +140,7 @@ zelda.FileScene = {
             this.heart.position.x=33;
             this.heart.position.y=90;
             if(this.space.isDown && this.space.downDuration(.5)){
+                this.SfxKeyboard.play();
                 this.slotSelected=1;
                 this.CurrentPosition=4;
                if(this.delete==true){
@@ -154,7 +165,7 @@ zelda.FileScene = {
             this.heart.position.x=33;
             this.heart.position.y=115;
             if(this.space.isDown && this.space.downDuration(.5)){
-                
+                this.SfxKeyboard.play();
                 this.slotSelected=2;
                 
                 if(this.delete==true){
@@ -180,7 +191,7 @@ zelda.FileScene = {
             this.heart.position.y=137;
             if(this.space.isDown && this.space.downDuration(1)){
                 this.slotSelected=3;
-                
+                this.SfxKeyboard.play();
                 if(this.delete==true){
                    localStorage.removeItem("save"+this.slotSelected);
                    this.delete=false;
@@ -203,6 +214,7 @@ zelda.FileScene = {
             this.heart.position.x=33;
             this.heart.position.y=165;
             if(this.space.isDown && this.space.downDuration(1)){
+                this.SfxKeyboard.play();
                 this.register=true;
                 this.select=false;
                 this.background.kill();
@@ -233,7 +245,7 @@ zelda.FileScene = {
             this.heart.position.y=180;
             if(this.space.isDown && this.space.downDuration(.5)){
                 this.delete=true;
-                
+                this.SfxKeyboard.play();
                 this.heart.kill();
                 this.heart= zelda.game.add.sprite(33,90, "corazon");
                 this.CurrentPosition=1;
@@ -286,6 +298,7 @@ zelda.FileScene = {
         
         //mover el cursor/corazon
         if(this.cursors.left.isDown && this.cursors.left.downDuration(.5) && this.Keyboard==false){
+            this.SfxMenu.play();
             if(this.CurrentPosition!=0){
                 this.CurrentPosition-=1;
             }else{
@@ -293,6 +306,7 @@ zelda.FileScene = {
             }
             
         }else if(this.cursors.right.isDown && this.cursors.right.downDuration(.5) && this.Keyboard==false){
+            this.SfxMenu.play();
              if(this.CurrentPosition!=this.positionsSelectMax){
                this.CurrentPosition+=1;
             }else{
@@ -303,6 +317,7 @@ zelda.FileScene = {
             }
         if(((this.cursors.up.isDown && this.cursors.up.downDuration(1)) || (this.cursors.down.isDown && this.cursors.down.downDuration(1)))){
             this.Keyboard=!this.Keyboard;
+            this.SfxMenu.play();
             //console.log(this.Keyboard);
             this.i=0;
             this.j=0;
@@ -314,7 +329,7 @@ zelda.FileScene = {
             this.heart.position.y=107;
             if(this.space.isDown && this.space.downDuration(1) && this.canSave==true ){
                 //poner register
-                  
+                  this.SfxKeyboard.play();
 
                        
                     if(this.slotSelected){
@@ -337,6 +352,7 @@ zelda.FileScene = {
             this.heart.position.y=107;
             if(this.space.isDown && this.space.downDuration(1)){
                 //poner "funcion" end
+                this.SfxKeyboard.play();
                 this.register=false;
                 this.select=true;
                 this.background.kill();
@@ -361,7 +377,7 @@ zelda.FileScene = {
             this.heart.position.y=this.KeyboardpositionY[this.j];
             
             if(this.cursors.right.isDown && this.cursors.right.downDuration(.5)){
-                
+                this.SfxMenu.play();
                 this.i++;
                 if(this.i>=11 && this.j>=4){
                     this.i=0;
@@ -375,7 +391,7 @@ zelda.FileScene = {
                 
             }
             if(this.cursors.left.isDown && this.cursors.left.downDuration(.5)){
-                
+                this.SfxMenu.play();
                 this.i--;
                 if(this.i<0 && this.j<=0){
                     this.i=10;
@@ -392,7 +408,7 @@ zelda.FileScene = {
             //seleccionar letra, añadirla al string pertinente
             
             if(this.space.isDown && this.space.downDuration(.5)){
-               
+               this.SfxKeyboard.play();
                 if(this.i==0){
                     if(this.j==0){
                         this.strAux="A";
