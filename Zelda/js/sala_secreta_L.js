@@ -23,7 +23,17 @@ zelda.sala_secreta_L = {
 		this.load.image("inventario", "img/inventario.png");
 		this.load.image("collider", "img/camara_horizontal.png");
 		this.load.image("collider_inv", "img/collider_invisible.png");
+		   //-----------Inventario
 		
+        this.load.image("bomba", "img/bomba.png");
+        this.load.image("vela", "img/vela.png");
+        this.load.image("potion", "img/pocion_vida.png");
+        //this.load.image("corazon", "img/corazon.png");
+        this.load.image("cursor","img/inventario/selector.png");
+        this.load.spritesheet("sword", "img/Swords.png", 16,16);
+        //this.load.image("arco","img/bow.png");
+        //this.load.image("shield","img/escudo.png");
+        //-----------------------------
 		//para el prefab de link
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
@@ -103,6 +113,30 @@ zelda.sala_secreta_L = {
 		this.collider = this.game.add.sprite(0,16*3,"collider_inv");
 		this.game.physics.arcade.enable(this.collider);
 		this.collider.body.immovable = true;
+        
+        //pintar corazones
+        zelda.Inventory.startHUD();
+        for(var i=0;i< zelda.LinkObject.currentHearts;i++){
+                if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
+                    zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
+                     zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                    zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                    }else{
+                        if(i==zelda.LinkObject.currentHearts-.5){
+                            zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "HalfHeart");
+                            zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                            zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                            
+                            
+                        }else{
+                            zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
+                            zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
+                            zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+                            }                   
+                    }
+            
+            
+                 }
 	},
 	
 	update:function(){
