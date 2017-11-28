@@ -242,6 +242,7 @@ zelda.sala_secreta_E = {
 					zelda.sala_secreta_E.npc.destroy();
 				},this);
 				zelda.sala_secreta_E.roomDone = true;
+				zelda.Inventory.GetObject(10);
 			});
 
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.mana, function(link, mana){
@@ -257,6 +258,7 @@ zelda.sala_secreta_E = {
 					zelda.sala_secreta_E.npc.destroy();
 				},this);
 				zelda.sala_secreta_E.roomDone = true;
+				zelda.Inventory.GetObject(13);
 			});
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.papel, function(link, papel){
 				zelda.LinkPrefab.GrabObject();
@@ -271,6 +273,7 @@ zelda.sala_secreta_E = {
 					zelda.sala_secreta_E.npc.destroy();
 				},this);
 				zelda.sala_secreta_E.roomDone = true;
+				zelda.Inventory.GetObject(16);
 			});
 		}
 		//botton I

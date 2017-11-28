@@ -239,7 +239,7 @@ zelda.sala_secreta_L = {
 					zelda.sala_secreta_L.npc.destroy();
 				});
 				zelda.sala_secreta_L.roomDone = true;
-				console.log("comportamiento del escudo");
+				zelda.Inventory.GetObject(12);
 			});
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.comida, function(link, comida){
 				zelda.LinkPrefab.GrabObject();
@@ -254,7 +254,7 @@ zelda.sala_secreta_L = {
 					zelda.sala_secreta_L.npc.destroy();
 				});
 				zelda.sala_secreta_L.roomDone = true;
-				console.log("comportamiento de la comida");
+				zelda.Inventory.GetObject(14);
 			});
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.corazon, function(link, corazon){
 				zelda.LinkPrefab.GrabObject();
@@ -269,7 +269,7 @@ zelda.sala_secreta_L = {
 					zelda.sala_secreta_L.npc.destroy();
 				});
 				zelda.sala_secreta_L.roomDone = true;
-				console.log("comportamiento del corazon");
+				zelda.Inventory.GetObject(0);
 			});
 		}
 		//botton I

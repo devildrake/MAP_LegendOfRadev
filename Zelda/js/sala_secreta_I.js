@@ -230,7 +230,7 @@ zelda.sala_secreta_I = {
 				if(zelda.LinkObject.currentZone == 15)zelda.sala_secreta_I.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone == 20)zelda.sala_secreta_I.roomDone2 = true;
 				else if(zelda.LinkObject.currentZone == 32)zelda.sala_secreta_I.roomDone3 = true;
-				console.log("+100 a las rupias de link");
+				zelda.Inventory.rupies+=100;
 			});
 		}
 		//botton I
