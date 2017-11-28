@@ -137,7 +137,7 @@ zelda.OktorokPrefab.prototype.update = function(){
 
                 this.game.physics.arcade.overlap(this,this.level.linkInstance,
                 function(enemy,linkInstance){
-                    if(!zelda.LinkObject.hurt){
+                    if(!zelda.LinkObject.hurt&&!zelda.LinkObject.invincible){
                         zelda.LinkObject.hurt = true;
                         zelda.LinkObject.moveFromDmg=true;
                         zelda.LinkObject.calledNotMoveFromDamage=false;
@@ -220,9 +220,10 @@ zelda.OktorokPrefab.prototype.update = function(){
                 }
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.linkInstance,function(projectile,linkInstance){
-                    if(!zelda.LinkObject.hurt){
+                    if(!zelda.LinkObject.hurt&&!zelda.LinkObject.invincible){
                         if(linkInstance.LinkCollider.body.velocity.x!=0||linkInstance.LinkCollider.body.velocity.y!=0||linkInstance.attacking){
                             zelda.LinkObject.hurt = true;
+                            zelda.LinkObject.currentHearts-=0.5;
                             zelda.LinkObject.moveFromDmg=true;
                             zelda.LinkObject.calledNotMoveFromDamage=false;
                             if(projectile.body.velocity.x>0){
@@ -243,7 +244,7 @@ zelda.OktorokPrefab.prototype.update = function(){
                         }else if(linkInstance.LinkCollider.body.velocity.x==0&&linkInstance.LinkCollider.body.velocity.y==0){
                             if(projectile.body.velocity.x>0){
                                 if(!zelda.LinkObject.lookingLeft){
-                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right"); 
+                                zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right"); 
                                 zelda.LinkObject.hurt = true;
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;

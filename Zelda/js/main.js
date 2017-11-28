@@ -160,6 +160,7 @@ zelda.LinkObject = {
     calledChangeLater: false,
     //Un booleano para gestionar si ha recibido daño
     hurt: false,
+    invincible: false,
     
     //Un booleano para gestionar si se ha llamado al método que pone hurt en false
     calledNotHurt:false,

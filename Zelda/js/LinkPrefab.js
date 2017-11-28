@@ -19,7 +19,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.animations.add("movingSideWaysHurt", [17,18],5,true); 
     zelda.LinkObject.calledNotHurt = false;
     this.grabbingObject = false;
-
+    zelda.LinkObject.invincible = false;
 	this.level = level;
 	if(level != zelda.overworld){
 		this.LinkCollider = game.add.sprite(x,y,"LinkCollider");

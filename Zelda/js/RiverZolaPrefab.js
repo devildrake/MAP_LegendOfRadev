@@ -125,7 +125,7 @@ zelda.RiverZolaPrefab.prototype.update = function(){
 
                 this.game.physics.arcade.overlap(this,this.level.linkInstance,
                 function(enemy,linkInstance){
-                    if(!zelda.LinkObject.hurt){
+                    if(!zelda.LinkObject.hurt&&!zelda.LinkObject.invincible){
                         zelda.LinkObject.hurt = true;
                         zelda.LinkObject.moveFromDmg=true;
                         zelda.LinkObject.calledNotMoveFromDamage=false;
@@ -168,7 +168,7 @@ zelda.RiverZolaPrefab.prototype.update = function(){
                 }
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.linkInstance,function(projectile,linkInstance){
-                    if(!zelda.LinkObject.hurt){
+                    if(!zelda.LinkObject.hurt&&!zelda.LinkObject.invincible){
                             zelda.LinkObject.hurt = true;
                             zelda.LinkObject.moveFromDmg=true;
                             zelda.LinkObject.calledNotMoveFromDamage=false;
