@@ -34,6 +34,7 @@ zelda.overworld = {
         this.load.spritesheet("RiverZola","img/RiverZolaSpriteSheet.png",16,16);
         this.load.image("Heart","img/corazon.png");
         this.load.image("HalfHeart","img/mediocorazon.png");
+        this.load.spritesheet("HeartSpriteSheet","img/HeartSpriteSheet.png",16,16);
         this.load.spritesheet("Tektite","img/TektiteSpriteSheet.png",16,16);
         this.load.spritesheet("Leever","img/LeeverSpriteSheet.png",16,16);
         this.load.audio("getItem","sounds/Sfx/get_item.wav");
@@ -1188,6 +1189,9 @@ zelda.overworld = {
 			this.hearts.add(heart);
 		}else{
 			heart.reset(posX,posY);
+            if(which==0)
+                heart.frame = 0;
+            else heart.frame = 1;
 		}
     },
     
