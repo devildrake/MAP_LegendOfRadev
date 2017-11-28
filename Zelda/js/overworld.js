@@ -60,6 +60,8 @@ zelda.overworld = {
         this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
         this.load.spritesheet("Gel","img/GelSpriteSheet.png",16,16);
         this.load.spritesheet("Boomerang","img/Boomerang.png",16,16);
+        this.load.spritesheet("rupia", "img/RupiaSpriteSheet.png",16,16);
+        
     },
 
     create:function(){
@@ -1193,10 +1195,10 @@ zelda.overworld = {
         console.log("Creating Rupy");
         var rupy = this.rupies.getFirstExists(false);
         if(!rupy){
-            //rupy = new zelda.RupyPrefab(this.game,posX,posY,this,which);
-            //this.rupies.add(rupy);
+            rupy = new zelda.RupyPrefab(this.game,posX,posY,this,which);
+            this.rupies.add(rupy);
         }else{
-            //rupy.reset(posX,posY);
+            rupy.reset(posX,posY);
         }
     },
     
