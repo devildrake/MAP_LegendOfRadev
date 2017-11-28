@@ -5,15 +5,16 @@ zelda.gameOptions = {
 	gameHeight:11*16 + 47,//176 + 47 = 223
     linkSpeed:100,
     lastCameraPosX: 2*16*16+8*16,
-    lastCameraPosY: 4*11*16 + 9*16,
+    lastCameraPosY: 4*11*16 + 9*16+4,
     cameraPosToGoX: 0,
     cameraPosToGoY: 0,
     borderToSet: "None",
     setBorders: true,
     cameraArrivedPos: true,
-    chancesToSpawnHeart:20,
-    chancesToSpawnRupy: 60,
+    chancesToSpawnHeart:0,
+    chancesToSpawnRupy: 80,
     loadedsave:false,
+    StrSave:"Link",
     //chancesToSpawnBomb: 100,
 	GoToOverworld:function(){
 		zelda.game.state.start("overworld");
@@ -28,12 +29,12 @@ zelda.gameOptions = {
 		zelda.game.paused = true;
 	},
     
-    save:function(){
+    save:function(Name){
         console.log("guardado");
         // package everything you need into an object.
         var saveObject = {
 	       Lifes: zelda.LinkObject.currentHearts,
-	       FileName: "Link",
+	       FileName: zelda.Inventory.StrSave,
             Bombs: zelda.Inventory.bombs,
             keys:zelda.Inventory.keys,
             rupies:zelda.Inventory.rupies,
@@ -66,7 +67,7 @@ zelda.gameOptions = {
             };
         
         // localStorage only works with strings, so JSON.stringify first.
-        localStorage.setItem("save", JSON.stringify(saveObject));
+        localStorage.setItem(Name, JSON.stringify(saveObject));
         
   
     },
@@ -463,14 +464,22 @@ zelda.Inventory={
             //this.rupies+=1;
             this.texto.kill()
             this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
-            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
+            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.texto.fill = "white";
+            this.texto.font = "Press Start 2P";
+            this.texto.fontSize = 6;
+            this.texto.align = "center";
         }
         //numero bombas
         else if(nameObject==2){
             this.bombs+=1;
             this.texto.kill()
             this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
-            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
+           this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.texto.fill = "white";
+            this.texto.font = "Press Start 2P";
+            this.texto.fontSize = 6;
+            this.texto.align = "center";
             if(this.bombs<=0){this.objects[1]=0;} else if(this.bombs>0){this.objects[i]=1;}
         }
         
@@ -479,7 +488,11 @@ zelda.Inventory={
             this.keys+=1;
             this.texto.kill()
             this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
-            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
+            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.texto.fill = "white";
+            this.texto.font = "Press Start 2P";
+            this.texto.fontSize = 6;
+            this.texto.align = "center";
         }
         //anillo q no se que hace pero tenemso los sprites creo
         else if(nameObject==4){
@@ -541,7 +554,7 @@ zelda.Inventory={
        startHUD:function(){
            
             this.heart=[zelda.LinkObject.maxHearts];
-            this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
+            this.str  = "X"+zelda.Inventory.rupies+"\n"+"X"+zelda.Inventory.keys+"\n"+"X"+zelda.Inventory.bombs+"\n";
             this.strToPrint = "";
             this.strCount = 0;
             this.textTimer = 0;
@@ -1171,7 +1184,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 //Escena que se pinta
 //zelda.game.state.start("main");
 
-zelda.game.state.start("secret_room_M");
+zelda.game.state.start("main");
 
 //Para la fuente
 WebFontConfig = {
