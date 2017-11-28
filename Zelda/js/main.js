@@ -465,14 +465,22 @@ zelda.Inventory={
             //this.rupies+=1;
             this.texto.kill()
             this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
-            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
+            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.texto.fill = "white";
+            this.texto.font = "Press Start 2P";
+            this.texto.fontSize = 6;
+            this.texto.align = "center";
         }
         //numero bombas
         else if(nameObject==2){
             this.bombs+=1;
             this.texto.kill()
             this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
-            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
+           this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.texto.fill = "white";
+            this.texto.font = "Press Start 2P";
+            this.texto.fontSize = 6;
+            this.texto.align = "center";
             if(this.bombs<=0){this.objects[1]=0;} else if(this.bombs>0){this.objects[i]=1;}
         }
         
@@ -481,7 +489,11 @@ zelda.Inventory={
             this.keys+=1;
             this.texto.kill()
             this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
-            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+186,this.str);
+            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.texto.fill = "white";
+            this.texto.font = "Press Start 2P";
+            this.texto.fontSize = 6;
+            this.texto.align = "center";
         }
         //anillo q no se que hace pero tenemso los sprites creo
         else if(nameObject==4){
