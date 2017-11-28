@@ -1046,7 +1046,7 @@ zelda.overworld = {
         this.rupies.enableBody = true;
         
     },
-    loadRupies:function(){
+    loadBombs:function(){
         this.bombs = this.add.group(),
         this.bombs.enableBody = true;
         

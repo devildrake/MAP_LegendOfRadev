@@ -28,15 +28,15 @@ zelda.RupyPrefab.prototype.update = function(){
                 if(zelda.Inventory.rupies!=999){
                     if(rupy.type==0){
                         zelda.Inventory.rupies+=5;
-                        zelda.Inventory.GetObject:function(1);
-                        zelda.LinkPrefab.GrabObject();
+                        zelda.Inventory.GetObject(1);
+                        zelda.LinkPrefab.grabItemSound.play();
                         rupy.kill();
                        
                     }else{
                         zelda.Inventory.rupies+=1;
-                        zelda.Inventory.GetObject:function(1);
-                        zelda.LinkPrefab.GrabObject();
-                        heart.kill();
+                        zelda.Inventory.GetObject(1);
+                        zelda.LinkPrefab.grabItemSound.play();
+                        rupy.kill();
                         
                     }
                 }
