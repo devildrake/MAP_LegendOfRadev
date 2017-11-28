@@ -2,10 +2,8 @@ var zelda = zelda || {};
 
 zelda.RupyPrefab = function(game,x,y,level,type){
 
-if(type==0)
 	Phaser.Sprite.call(this,game,x,y,"rupia");    
-else
-    Phaser.Sprite.call(this,game,x,y,"rupia");    
+ 
 
     
     this.scale.setTo(1);
@@ -13,6 +11,10 @@ else
 	this.game.physics.arcade.enable(this);
     this.level = level;
     this.type = type;
+     if(this.type==0){
+        this.frame = 0;
+    }else 
+        this.frame = 1;
 }
 
 

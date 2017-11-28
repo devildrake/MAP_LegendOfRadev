@@ -1203,6 +1203,10 @@ zelda.overworld = {
             this.rupies.add(rupy);
         }else{
             rupy.reset(posX,posY);
+            if(which==0)
+                heart.frame = 0;
+            else heart.frame = 1;
+		}
         }
     },
     
