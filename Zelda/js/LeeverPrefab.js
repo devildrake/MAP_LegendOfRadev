@@ -143,7 +143,7 @@ zelda.LeeverPrefab.prototype.update = function(){
                             zelda.LinkObject.calledNotMoveFromDamage=false;
                             zelda.LinkObject.currentHearts-=0.5;
                             if(enemy.body.velocity.y>0)
-                                zelda..s.GetHurt(linkInstance.LinkCollider,"Down");
+                                zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Down");
                             else if(enemy.body.velocity.y<0)
                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");
                             else if(enemy.body.velocity.x>0)
