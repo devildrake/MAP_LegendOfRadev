@@ -89,7 +89,6 @@ zelda.sala_espada = {
 				this.sword = this.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY+8, "sword", 1);
 				this.sword.anchor.setTo(.5);
 				this.sword.scale.setTo(1,-1);
-				
 				this.game.physics.arcade.enable(this.sword);
 			},this);
 			
@@ -110,6 +109,7 @@ zelda.sala_espada = {
         this.game.camera.y -= 47;
 		
 		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
+		zelda.Inventory.ScrollingInventory = true;
         
         this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
@@ -258,6 +258,7 @@ zelda.sala_espada = {
 				this.strCount++;
 				this.textTimer = 0;
 			}
+			if(this.strToPrint.length == this.str.length) zelda.Inventory.ScrollingInventory = false;
 			this.textTimer += zelda.game.time.elapsed;
 		}
         //botton I

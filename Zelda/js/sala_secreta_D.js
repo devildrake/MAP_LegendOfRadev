@@ -65,7 +65,7 @@ zelda.sala_secreta_D = {
 		},this);
 		this.game.physics.arcade.enable(this.fire2);
 		this.fire2.body.immovable = true;
-        
+		
         //npc
         this.npc = this.game.add.sprite(8*16, 4*16, "npc", 0);
         this.npc.anchor.setTo(.5,0);
@@ -84,10 +84,24 @@ zelda.sala_secreta_D = {
 			this.numeros.font = "Press Start 2P";
 			this.numeros.fontSize = 10;
 			this.numeros.align = "center";
+			
+			//TEXTOS EN PANTALLA
+			this.str  = "PAY ME FOR THE DOOR\nREPAIR CHARGE.";
+			this.strToPrint = "";
+			this.strCount = 0;
+			this.textTimer = 0;
+			this.textUpdateTime = 50;
+
+			this.texto = this.game.add.text(3*16,16*2+4,this.str);
+			this.texto.fill = "white";
+			this.texto.font = "Press Start 2P";
+			this.texto.fontSize = 8;
+			this.texto.align = "center";
 		}
 		this.game.camera.y -= 47;
 		
 		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
+		zelda.Inventory.ScrollingInventory = true;
 		
 		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
@@ -226,30 +240,47 @@ zelda.sala_secreta_D = {
 
         }
 		 if(!this.InvButton.isDown ){
-                             zelda.Inventory.released = true;
-             }
-        
-         if(this.ObjbButton.isDown && this.ObjbButton.downDuration(1)){
-            if(zelda.Inventory.InvON==true){
-             zelda.Inventory.SelecObjB();
-             zelda.Inventory.PintarObjB();
-             console.log(zelda.Inventory.ObjectB);}
-             else{
-                 
-             }
-             }
+							 zelda.Inventory.released = true;
+			 }
+
+		 if(this.ObjbButton.isDown && this.ObjbButton.downDuration(1)){
+			if(zelda.Inventory.InvON==true){
+			 zelda.Inventory.SelecObjB();
+			 zelda.Inventory.PintarObjB();
+			 console.log(zelda.Inventory.ObjectB);}
+			 else{
+
+			 }
+		 }
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){
 			zelda.gameOptions.Pause(this);
 		}
 		
 		if(!this.roomDone1&&zelda.LinkObject.currentZone == 29 || !this.roomDone2&&zelda.LinkObject.currentZone==24){
-			if(zelda.LinkObject.currentZone == 29)zelda.sala_secreta_D.roomDone1 = true;
-			if(zelda.LinkObject.currentZone == 24)zelda.sala_secreta_D.roomDone2 = true;
+			
 			zelda.Inventory.rupies -= 10;
 			if(zelda.Inventory.rupies<0) zelda.Inventory.rupies = 0;
+			
+			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
+				this.strToPrint += this.str[this.strCount];
+				this.texto.setText(this.strToPrint);
+				this.strCount++;
+				this.textTimer = 0;
+			}
+			//cuando acaba de pintar el texto.
+			if(this.str.length == this.strToPrint.length){
+				if(zelda.LinkObject.currentZone == 29)zelda.sala_secreta_D.roomDone1 = true;
+				else if(zelda.LinkObject.currentZone == 24)zelda.sala_secreta_D.roomDone2 = true;
+				zelda.Inventory.ScrollingInventory = false;
+			}
+			this.textTimer += zelda.game.time.elapsed;
+
 		}
+		
+		
     },
+	
     ScrollInventario(){
             
                   if(zelda.Inventory.HasSword &&zelda.Inventory.equippedSword=="Bronze"){

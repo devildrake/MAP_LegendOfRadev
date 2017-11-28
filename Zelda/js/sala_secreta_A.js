@@ -92,11 +92,25 @@ zelda.sala_secreta_A = {
 				zelda.sala_secreta_A.pocion.animations.add("despawn",[0,1],6,true);
 				
 			});
+			
+			//TEXTOS EN PANTALLA
+			this.str  = "TAKE ANY ONE YOU WANT.";
+			this.strToPrint = "";
+			this.strCount = 0;
+			this.textTimer = 0;
+			this.textUpdateTime = 50;
+
+			this.texto = this.game.add.text(3*16-8,16*2+4,this.strToPrint);
+			this.texto.fill = "white";
+			this.texto.font = "Press Start 2P";
+			this.texto.fontSize = 8;
+			this.texto.align = "center";
 		}
 		
 		this.game.camera.y -= 47;
 		
 		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
+		zelda.Inventory.ScrollingInventory = true;
 		
 		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
@@ -257,7 +271,21 @@ zelda.sala_secreta_A = {
 				else if(zelda.LinkObject.currentZone==34) zelda.sala_secreta_A.roomDone2 = true;
 				zelda.Inventory.GetObject(10);
 			});
+			
+			//aparición del texto
+			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime && (!this.roomDone1&&zelda.LinkObject.currentZone == 11) || (!this.roomDone2&&zelda.LinkObject.currentZone==34)){
+				this.strToPrint += this.str[this.strCount];
+				this.texto.setText(this.strToPrint);
+				this.strCount++;
+				this.textTimer = 0;
+
+			}
+			this.textTimer += zelda.game.time.elapsed;
+			if(this.strToPrint.length != this.str.length) zelda.Inventory.ScrollingInventory = false;
 		}
+		
+		
+		
 		//botton I
         if(this.InvButton.isDown && zelda.Inventory.released && this.InvButton.downDuration(1)){
              //console.log(this.inventario.position.y);

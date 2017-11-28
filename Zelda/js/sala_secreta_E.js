@@ -97,6 +97,19 @@ zelda.sala_secreta_E = {
 				zelda.sala_secreta_E.game.physics.arcade.enable(zelda.sala_secreta_E.papel);
 				zelda.sala_secreta_E.papel.animations.add("despawn",[0,1],6,true);
 			});
+			
+			//TEXTOS EN PANTALLA
+			this.str  = "BUY MEDICINE BEFORE\nYOU GO.";
+			this.strToPrint = "";
+			this.strCount = 0;
+			this.textTimer = 0;
+			this.textUpdateTime = 50;
+
+			this.texto = this.game.add.text(3*16,16*2+4,this.str);
+			this.texto.fill = "white";
+			this.texto.font = "Press Start 2P";
+			this.texto.fontSize = 8;
+			this.texto.align = "center";
 		}
 		
 		//-------------------------------------------
@@ -104,6 +117,7 @@ zelda.sala_secreta_E = {
 		this.game.camera.y -= 47;
 		
 		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
+		zelda.Inventory.ScrollingInventory = true;
 		
 		this.inventario = this.game.add.sprite(0,-zelda.gameOptions.gameHeight+47, "inventario");
         this.inventario.fixedToCamera = true;
@@ -241,7 +255,6 @@ zelda.sala_secreta_E = {
 					zelda.sala_secreta_E.papel.destroy();
 					zelda.sala_secreta_E.npc.destroy();
 				},this);
-				zelda.sala_secreta_E.roomDone = true;
 				zelda.Inventory.GetObject(10);
 			});
 
@@ -275,7 +288,22 @@ zelda.sala_secreta_E = {
 				zelda.sala_secreta_E.roomDone = true;
 				zelda.Inventory.GetObject(16);
 			});
+			
+			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
+				this.strToPrint += this.str[this.strCount];
+				this.texto.setText(this.strToPrint);
+				this.strCount++;
+				this.textTimer = 0;
+			}
+			//cuando acaba de pintar el texto.
+			if(this.str.length == this.strToPrint.length){
+				if(zelda.LinkObject.currentZone == 29)zelda.sala_secreta_D.roomDone1 = true;
+				else if(zelda.LinkObject.currentZone == 24)zelda.sala_secreta_D.roomDone2 = true;
+				zelda.Inventory.ScrollingInventory = false;
+			}
+			this.textTimer += zelda.game.time.elapsed;
 		}
+		
 		//botton I
         if(this.InvButton.isDown && zelda.Inventory.released && this.InvButton.downDuration(1)){
              //console.log(this.inventario.position.y);
