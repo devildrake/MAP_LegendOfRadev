@@ -165,7 +165,7 @@ zelda.FileScene = {
         else if(this.CurrentPosition==3){
             this.heart.position.x=33;
             this.heart.position.y=137;
-            if(this.space.isDown && this.space.downDuration(.5)){
+            if(this.space.isDown && this.space.downDuration(1)){
                 this.slotSelected=3;
                 this.CurrentPosition=4;
                 
@@ -183,7 +183,7 @@ zelda.FileScene = {
         else if(this.CurrentPosition==4){
             this.heart.position.x=33;
             this.heart.position.y=165;
-            if(this.space.isDown && this.space.downDuration(.5)){
+            if(this.space.isDown && this.space.downDuration(1)){
                 this.register=true;
                 this.select=false;
                 this.background.kill();
@@ -246,22 +246,11 @@ zelda.FileScene = {
             this.heart.position.y=107;
             if(this.space.isDown && this.space.downDuration(1)){
                 //poner register
-                    if(this.slotSelected==1){
+                  
 
-                        console.log(this.str1);
-
-                    }
-
-                    else if(this.slotSelected==2){
-
-
-
-                     }
-                    else if(this.slotSelected==3){
-
-
-
-                    }
+                    /*    zelda.gameOptions.save("save"+this.slotSelected);
+                zelda.game.state.start("overworld");*/
+                  
             }
         }
         else if(this.CurrentPosition==2 && this.Keyboard==false){
@@ -278,6 +267,7 @@ zelda.FileScene = {
                 this.heart= zelda.game.add.sprite(33,90, "corazon");
                 this.CurrentPosition=1;
                 this.slotSelected=0;
+                //aqui faltara poner q se muevan los nombres de los files ya existentes
             }
         }
         //añadir controles teclado
@@ -473,24 +463,39 @@ zelda.FileScene = {
                 
             console.log("click");
             
-            //pintar el string pertinente
+           
+        }
+            
+             //pintar el string pertinente
             if(this.slotSelected==1){
                   
-                console.log(this.str1);
+                this.texto1 = zelda.game.add.text(100,45, this.str1);
+                this.texto1.fill = "white";
+                this.texto1.font = "Press Start 2P";
+                this.texto1.fontSize =7;
+                this.texto1.align = "center";
                 
             }
             
             else if(this.slotSelected==2){
-
+                
+                this.texto2 = zelda.game.add.text(100,68, this.str2);
+                this.texto2.fill = "white";
+                this.texto2.font = "Press Start 2P";
+                this.texto2.fontSize =7;
+                this.texto2.align = "center";
                 
                 
              }
             else if(this.slotSelected==3){
 
-               
+               this.texto3 = zelda.game.add.text(100,90, this.str3);
+                this.texto3.fill = "white";
+                this.texto3.font = "Press Start 2P";
+                this.texto3.fontSize =7;
+                this.texto3.align = "center";
                 
             }
-        }
         }
         
     },
