@@ -543,14 +543,14 @@ zelda.LinkPrefab.createSword = function(obj){
 			obj.sword.frame = 1;
 			obj.sword.scale.y = 1;
 			obj.sword.scale.x = 1;
-			obj.sword.reset(obj.position.x,obj.position.y+16);
+			obj.sword.reset(obj.position.x+2,obj.position.y+12);
 		}
 		// up
 		else if(obj.frame == 10 || obj.frame==24){
 			obj.sword.frame = 1;
 			obj.sword.scale.y= -1;
 			obj.sword.scale.x = 1;
-			obj.sword.reset(obj.position.x,obj.position.y-16);
+			obj.sword.reset(obj.position.x-2,obj.position.y-12);
 
 		}
 
@@ -560,14 +560,14 @@ zelda.LinkPrefab.createSword = function(obj){
 			obj.sword.frame = 0;
 			obj.sword.scale.x = 1 ;
 			obj.sword.scale.y = 1 ;  
-			obj.sword.reset(obj.position.x-16,obj.position.y);
+			obj.sword.reset(obj.position.x-11,obj.position.y+2);
 
 			}
 			else{
 			obj.sword.frame = 0;
 			obj.sword.scale.x= -1;
 			obj.sword.scale.y = 1;  
-			obj.sword.reset(obj.position.x+16,obj.position.y);
+			obj.sword.reset(obj.position.x+11,obj.position.y+2);
 
 			}
 		}
