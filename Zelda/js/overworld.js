@@ -1200,10 +1200,16 @@ zelda.overworld = {
 			this.hearts.add(heart);
 		}else{
 			heart.reset(posX,posY);
-            if(which==0)
+            heart.Alive = true
+            if(which==0){
                 heart.frame = 0;
-            else heart.frame = 1;
-		}
+                heart.type = 0;
+            }
+            else{ 
+                heart.frame = 1;
+                heart.type = 1;
+                }
+            }
     },
     
     createRupy:function(posX,posY,which){
@@ -1214,9 +1220,14 @@ zelda.overworld = {
             this.rupies.add(rupy);
         }else{
             rupy.reset(posX,posY);
-            if(which==0)
+            if(which==0){
                 rupy.frame = 0;
-            else rupy.frame = 1;
+                rupy.type = 0;
+            }
+            else {
+                rupy.frame = 1;
+                rupy.type = 1;
+            }
 		}
         
     },
