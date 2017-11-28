@@ -850,7 +850,7 @@ zelda.Inventory={
         
         if(zelda.Inventory.ObjectB=="bombs"){
             
-            
+           // Phaser.Sprite.call(this,game,,y,"bomba"); 
     
         }
         else if(zelda.Inventory.ObjectB=="vela"){
