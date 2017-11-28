@@ -171,8 +171,8 @@ zelda.overworld = {
         //this.tektite = new zelda.TektitePrefab(this.game,620,840,1,this,30);
         //this.game.add.existing(this.tektite);
         
-        this.moblin = new zelda.MoblinPrefab(this.game,640,850,1,this,1);
-        this.game.add.existing(this.moblin);
+        //this.moblin = new zelda.MoblinPrefab(this.game,640,850,1,this,1);
+        //this.game.add.existing(this.moblin);
         
         //this.peahat = new zelda.PeaHatPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.peahat);
@@ -923,14 +923,14 @@ zelda.overworld = {
 		
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_E, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_E.position.x - 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
+            zelda.LinkObject.lastPositionY = zelda.overworld.trigger_E.position.y;
             zelda.overworld.overworldMusic.stop();
             zelda.game.state.start("secret_room_E");
 		});
 		
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_D_2, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_D_2.position.x - 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
+            zelda.LinkObject.lastPositionY = zelda.overworld.trigger_D_2.position.y;
             zelda.overworld.overworldMusic.stop();
 
             zelda.game.state.start("secret_room_D");
@@ -938,13 +938,13 @@ zelda.overworld = {
 		
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_M_2, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_M_2.position.x - 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
+            zelda.LinkObject.lastPositionY = zelda.overworld.trigger_M_2.position.y;
             zelda.game.state.start("secret_room_M");
 		});
 		
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_I_2, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_I_2.position.x - 8;
-            zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
+            zelda.LinkObject.lastPositionY = zelda.overworld.trigger_I_2.position.y;
             zelda.overworld.overworldMusic.stop();
 
             zelda.game.state.start("secret_room_I");
