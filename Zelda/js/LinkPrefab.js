@@ -171,6 +171,7 @@ zelda.LinkPrefab.prototype.update = function(){
                 this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.setMoveFromDamageFalse, this.level);
             }
             this.game.physics.arcade.collide(this.LinkCollider,this.level.obstacles);
+            this.game.physics.arcade.collide(this.LinkCollider,this.level.water);
 
             //La barra espaciadora pone attacking en true
             if(this.space.isDown&&this.space.downDuration(1)&&zelda.Inventory.HasSword){
@@ -504,7 +505,7 @@ zelda.LinkPrefab.prototype.update = function(){
         
         
     }
-    console.log(zelda.LinkObject.currentHearts);
+    //console.log(zelda.LinkObject.currentHearts);
     
 }
 
