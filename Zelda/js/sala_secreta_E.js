@@ -149,6 +149,7 @@ zelda.sala_secreta_E = {
         this.ScrollInventario();
 		//SALIR DE LA SALA
 		this.game.physics.arcade.collide(this.link.LinkCollider,this.trigger,function(){
+            zelda.overworld.mustCreateEnemies = true;
 			zelda.gameOptions.GoToOverworld();
 		});
 		//quitar corazon cuando pierde uno

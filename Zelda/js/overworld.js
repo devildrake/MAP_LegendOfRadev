@@ -5,7 +5,8 @@ zelda.overworld = {
         this.game.world.setBounds(0,0,112*16,60*16);
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
-        zelda.overworld.spawnStuff = true;
+        zelda.overworld.enabledSpawns = true;
+        zelda.overworld.mustCreateEnemies = false;
     },
     
     preload:function(){
@@ -191,7 +192,7 @@ zelda.overworld = {
         this.loadEnemies();
         
         this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
-        
+        this.spawnDisablerButton = this.game.input.keyboard.addKey(Phaser.Keyboard.O)
         this.InvButton = this.game.input.keyboard.addKey(Phaser.Keyboard.I); 
         this.ObjbButton = this.game.input.keyboard.addKey(Phaser.Keyboard.F); 
 
@@ -245,6 +246,11 @@ zelda.overworld = {
     
     update:function(){
         
+        if(this.mustCreateEnemies){
+            this.mustCreateEnemies = false;
+            this.createEnemiesOfCurrentZone();
+        }
+        
         this.ScrollInventario();
 		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.Q)){
 			//this.riverZola.Alive = true;
@@ -252,11 +258,11 @@ zelda.overworld = {
 			console.log("Zona = " + zelda.LinkObject.currentZone + " Posicion = " + this.linkInstance.body.position);
 		}
 
-		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.O)){
+		if(this.spawnDisablerButton.isDown&&this.spawnDisablerButton.downDuration(1)){
 			//this.riverZola.Alive = true;
 			//this.createEnemy("Oktorok",this.game,640,850,this,1,1);
-			zelda.overworld.spawnStuff = !zelda.overworld.spawnStuff;
-			console.log(zelda.overworld.spawnStuff);
+			zelda.overworld.enabledSpawns = !zelda.overworld.enabledSpawns;
+			console.log(zelda.overworld.enabledSpawns);
 		}
 
 		if(this.muteButton.isDown&&this.muteButton.downDuration(1)){
@@ -1230,7 +1236,7 @@ zelda.overworld = {
     },
     
     createEnemiesOfCurrentZone:function(){
-        if(zelda.overworld.spawnStuff){
+        if(zelda.overworld.enabledSpawns){
         var j = 0;
             for(var i = 0;i<zelda.enemySpawns.zones[zelda.LinkObject.currentZone].length;++i){
                 if(zelda.enemySpawns.zones[zelda.LinkObject.currentZone][i]==true){

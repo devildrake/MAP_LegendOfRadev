@@ -151,7 +151,7 @@ zelda.sala_secreta_K = {
             if(zelda.LinkObject.currentZone==12)
                 zelda.LinkPrefab.stairWayUp(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
 
-                
+            zelda.overworld.mustCreateEnemies = true;
 			zelda.gameOptions.GoToOverworld();
 		});
 		//quitar corazon cuando pierde uno
