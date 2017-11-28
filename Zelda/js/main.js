@@ -1167,7 +1167,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 //Escena que se pinta
 //zelda.game.state.start("main");
 
-zelda.game.state.start("overworld");
+zelda.game.state.start("main");
 
 //Para la fuente
 WebFontConfig = {
