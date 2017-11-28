@@ -5,7 +5,7 @@ zelda.gameOptions = {
 	gameHeight:11*16 + 47,//176 + 47 = 223
     linkSpeed:100,
     lastCameraPosX: 2*16*16+8*16,
-    lastCameraPosY: 4*11*16 + 9*16,
+    lastCameraPosY: 4*11*16 + 9*16+4,
     cameraPosToGoX: 0,
     cameraPosToGoY: 0,
     borderToSet: "None",

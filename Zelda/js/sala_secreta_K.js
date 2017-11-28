@@ -110,6 +110,10 @@ zelda.sala_secreta_K = {
 	update:function(){
 		//SALIR DE LA SALA
 		this.game.physics.arcade.collide(this.link.LinkCollider,this.trigger,function(){
+            if(zelda.LinkObject.currentZone==12)
+                zelda.LinkPrefab.stairWayUp(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
+
+                
 			zelda.gameOptions.GoToOverworld();
 		});
 		
