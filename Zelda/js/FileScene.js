@@ -246,7 +246,22 @@ zelda.FileScene = {
             this.heart.position.y=107;
             if(this.space.isDown && this.space.downDuration(1)){
                 //poner register
-                
+                    if(this.slotSelected==1){
+
+                        console.log(this.str1);
+
+                    }
+
+                    else if(this.slotSelected==2){
+
+
+
+                     }
+                    else if(this.slotSelected==3){
+
+
+
+                    }
             }
         }
         else if(this.CurrentPosition==2 && this.Keyboard==false){
@@ -254,7 +269,15 @@ zelda.FileScene = {
             this.heart.position.y=107;
             if(this.space.isDown && this.space.downDuration(1)){
                 //poner "funcion" end
-                
+                this.register=false;
+                this.select=true;
+                this.background.kill();
+                this.background = this.game.add.sprite(0,0, "select");
+                this.background.scale.setTo(1);
+                this.heart.kill();
+                this.heart= zelda.game.add.sprite(33,90, "corazon");
+                this.CurrentPosition=1;
+                this.slotSelected=0;
             }
         }
         //añadir controles teclado
