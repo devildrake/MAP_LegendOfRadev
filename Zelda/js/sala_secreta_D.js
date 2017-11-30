@@ -155,6 +155,8 @@ zelda.sala_secreta_D = {
 			}
 			this.textTimer += zelda.game.time.elapsed;
 
+		}else{
+			zelda.Inventory.ScrollingInventory = false;
 		}
 		
 		

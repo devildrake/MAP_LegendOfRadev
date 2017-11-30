@@ -40,6 +40,8 @@ zelda.sala_espada = {
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
+		this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
+		//this.t.tint = "0xffffff";
 		this.game.load.script('webfont','http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
     
@@ -50,7 +52,7 @@ zelda.sala_espada = {
         this.obstacles = this.map.createLayer("Rocas");
 		this.map.setCollisionBetween(1,2,true,"Rocas");
         //-------------------------------------------
-        
+		
         //fuego y animacion de este
         this.fire1 = this.game.add.sprite(zelda.secretLayout.fireX1,zelda.secretLayout.fireY,"fuego",0);
 		this.fire1.animations.add("spawn",[0,1,2],6,false);
@@ -96,10 +98,8 @@ zelda.sala_espada = {
 			this.textTimer = 0;
 			this.textUpdateTime = 50;
 
-			this.texto = this.game.add.text(3*16,16*2+4,this.strToPrint);
-			this.texto.fill = "white";
-			this.texto.font = "Press Start 2P";
-			this.texto.fontSize = 8;
+			this.texto = this.game.add.bitmapText(3*16,16*2+4,"zelda_font","omg",8);
+			//this.texto = this.game.add.text(3*16,16*2+4,this.strToPrint);
 			this.texto.align = "center";
 		}
         
