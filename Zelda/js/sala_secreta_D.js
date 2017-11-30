@@ -36,7 +36,7 @@ zelda.sala_secreta_D = {
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
-		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+		this.game.load.script('webfont','http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
     
     create:function(){

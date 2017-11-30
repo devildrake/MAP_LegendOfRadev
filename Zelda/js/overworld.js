@@ -59,7 +59,7 @@ zelda.overworld = {
         this.load.spritesheet("Stalfos","img/StalfosSpriteSheet.png",16,16);
         this.load.spritesheet("Keese","img/KeeseSpriteSheet.png",16,16);
         this.load.spritesheet("Goriya","img/GoriyaSpriteSheet.png",16,16);
-        this.game.load.script('webfont','http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+       	this.game.load.script('webfont','http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
         this.load.spritesheet("Gel","img/GelSpriteSheet.png",16,16);
         this.load.spritesheet("Boomerang","img/Boomerang.png",16,16);
         this.load.spritesheet("rupia", "img/RupiaSpriteSheet.png",16,16);
