@@ -37,7 +37,7 @@ zelda.sala_secreta_G = {
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
-		this.game.load.script('webfont','http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+		this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
 	},
 	
 	create:function(){
@@ -71,6 +71,7 @@ zelda.sala_secreta_G = {
 		
 		if(!this.roomDone){
 			zelda.Inventory.ScrollingInventory = true;
+			
 			//npc
 			this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc",3);
 			this.npc.anchor.setTo(.5,0);
@@ -83,16 +84,13 @@ zelda.sala_secreta_G = {
 				zelda.sala_secreta_G.moneda.anchor.setTo(.5,0);
 				zelda.game.physics.arcade.enable(zelda.sala_secreta_G.moneda);
 				//TEXTO
-				zelda.sala_secreta_G.numeros = zelda.game.add.text(zelda.secretLayout.item2X, zelda.secretLayout.itemY+16, "");
+				zelda.sala_secreta_G.numeros = zelda.game.add.bitmapText(zelda.secretLayout.item2X, zelda.secretLayout.itemY+16+3,"zelda_font", "",10);
 				zelda.sala_secreta_G.numeros.anchor.setTo(.5,0)
-				zelda.sala_secreta_G.numeros.fill = "white";
-				zelda.sala_secreta_G.numeros.font = "Press Start 2P";
-				zelda.sala_secreta_G.numeros.fontSize = 10;
 				
 				//ESTA SHIT ES PARA QUE LINK SALGA POR ENCIMA DEL LOS OBJETOS QUE SE AÑADEN EN
 				//ESTE EVENTO DE TIEMPO.
 				zelda.sala_secreta_G.link.destroy();
-				zelda.sala_secreta_G.link = new zelda.LinkPrefab(zelda.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
+				zelda.sala_secreta_G.link = new zelda.LinkPrefab(zelda.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,zelda.sala_secreta_G);
 			});
 			//-------------------------------------------
       
@@ -103,10 +101,7 @@ zelda.sala_secreta_G = {
 			this.textTimer = 0;
 			this.textUpdateTime = 50;
 
-			this.texto = this.game.add.text(5*16-8,16*2+4,this.str);
-			this.texto.fill = "white";
-			this.texto.font = "Press Start 2P";
-			this.texto.fontSize = 8;
+			this.texto = this.game.add.bitmapText(5*16-8,16*2+4,"zelda_font","",8);
 			this.texto.align = "center";
 		}
 		
@@ -145,6 +140,7 @@ zelda.sala_secreta_G = {
 		if(!this.roomDone){
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.moneda, function(){
 				zelda.sala_secreta_G.numeros.setText("10");
+				//console.log("10");
 				zelda.sala_secreta_G.roomDone = true;
 				zelda.Inventory.rupies += 10;
 			});

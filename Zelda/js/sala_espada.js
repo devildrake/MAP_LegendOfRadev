@@ -41,8 +41,6 @@ zelda.sala_espada = {
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
 		this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
-		//this.t.tint = "0xffffff";
-		this.game.load.script('webfont','http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
     
     create:function(){

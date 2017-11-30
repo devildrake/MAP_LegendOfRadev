@@ -120,7 +120,7 @@ zelda.sala_secreta_D = {
         //SALIR DE LA SALA
 		this.game.physics.arcade.collide(this.link.LinkCollider,this.trigger,function(){
             if(zelda.LinkObject.currentZone==29)
-            zelda.LinkPrefab.stairWayUp(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
+           	zelda.LinkPrefab.stairWayUp(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
             
             zelda.gameOptions.mustCreateEnemies = true;
             
@@ -152,6 +152,8 @@ zelda.sala_secreta_D = {
 				if(zelda.LinkObject.currentZone == 29)zelda.sala_secreta_D.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone == 24)zelda.sala_secreta_D.roomDone2 = true;
 				zelda.Inventory.ScrollingInventory = false;
+				zelda.Inventory.rupies -= 10;
+				if(zelda.Inventory.rupies<0) zelda.Inventory.rupies = 0;
 			}
 			this.textTimer += zelda.game.time.elapsed;
 
