@@ -15,9 +15,9 @@ zelda.HeartPrefab = function(game,x,y,level,type){
     this.level = level;
     this.type = type;
     if(this.type==0){
-        this.frame = 0;
-    }else 
         this.frame = 1;
+    }else 
+        this.frame = 0;
 }
 
 

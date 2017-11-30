@@ -15,6 +15,7 @@ zelda.gameOptions = {
     chancesToSpawnRupy: 80,
     loadedsave:false,
     StrSave:"Link",
+    mustCreateEnemies: true,
     //chancesToSpawnBomb: 100,
 	GoToOverworld:function(){
 		zelda.game.state.start("overworld");

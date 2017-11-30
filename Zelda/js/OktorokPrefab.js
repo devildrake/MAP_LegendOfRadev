@@ -221,9 +221,10 @@ zelda.OktorokPrefab.prototype.update = function(){
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.linkInstance,function(projectile,linkInstance){
                     if(!zelda.LinkObject.hurt&&!zelda.LinkObject.invincible){
-                        if(linkInstance.LinkCollider.body.velocity.x!=0||linkInstance.LinkCollider.body.velocity.y!=0||linkInstance.attacking){
+                        if(linkInstance.LinkCollider.body.velocity.x!=0||linkInstance.LinkCollider.body.velocity.y!=0||zelda.LinkObject.attacking){
                             zelda.LinkObject.hurt = true;
                             zelda.LinkObject.currentHearts-=0.5;
+                            console.log("bRUH");
                             zelda.LinkObject.moveFromDmg=true;
                             zelda.LinkObject.calledNotMoveFromDamage=false;
                             if(projectile.body.velocity.x>0){
@@ -241,14 +242,14 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");   
                                 
                             }
-                        }else if(linkInstance.LinkCollider.body.velocity.x==0&&linkInstance.LinkCollider.body.velocity.y==0){
+                        }else if(linkInstance.LinkCollider.body.velocity.x==0&&linkInstance.LinkCollider.body.velocity.y==0&&!zelda.LinkObject.attacking){
                             if(projectile.body.velocity.x>0){
                                 if(!zelda.LinkObject.lookingLeft){
                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right"); 
                                 zelda.LinkObject.hurt = true;
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
-
+                                zelda.LinkObject.currentHearts-=0.5;
                                 }else{
                                     console.log(linkInstance);
                                     zelda.LinkPrefab.blockSound.play();
@@ -259,6 +260,7 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 zelda.LinkObject.hurt = true;
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
+                                zelda.LinkObject.currentHearts-=0.5;
 
                                 }else{
                                     zelda.LinkPrefab.blockSound.play();
@@ -269,6 +271,7 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 zelda.LinkObject.hurt = true;
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
+                                zelda.LinkObject.currentHearts-=0.5;
 
                                 }else{
                                     zelda.LinkPrefab.blockSound.play();
@@ -279,6 +282,8 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 zelda.LinkObject.hurt = true;
                                 zelda.LinkObject.moveFromDmg=true;
                                 zelda.LinkObject.calledNotMoveFromDamage=false;
+                                zelda.LinkObject.currentHearts-=0.5;
+
                                 }else{
                                     zelda.LinkPrefab.blockSound.play();
                                 }
