@@ -14,6 +14,8 @@ zelda.dungeon = {
 		this.load.image("LinkCollider", "img/link/LinkCollider.png");
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
+        this.load.spritesheet("llave", "img/llave.png",16,16);
+
     },
 
     create:function(){
@@ -77,5 +79,89 @@ zelda.dungeon = {
     
     update:function(){
 		this.game.physics.arcade.collide(this.Link.LinkCollider,this.background);
-    }
+    },
+    
+    //===========================================================================================================CARGANDO GRUPOS===========================================================================================================
+    loadHearts:function(){
+		this.hearts = this.add.group();
+		this.hearts.enableBody = true;
+	},
+    
+    loadKeys:function(){
+		this.keys = this.add.group();
+		this.keys.enableBody = true;
+	},
+    
+    loadRupies:function(){
+        this.rupies = this.add.group(),
+        this.rupies.enableBody = true;
+        
+    },
+    //===========================================================================================================INSTANCIADORES DE ITEMS===========================================================================================================
+    
+    creteKey: function(posX,posY){
+        var key = this.keys.getFirstExists(false);
+        if(!key){
+            key = new zelda.KeyPrefab(this.game,posX,posY,this);
+            this.keys.add(key);
+        }else{
+            key.reset(posX,posY);
+            key.Alive = true;
+        }
+    },
+    
+    
+    createHeart:function(posX,posY,which){
+		var heart = this.hearts.getFirstExists(false);
+		if(!heart){
+            heart = new zelda.HeartPrefab(this.game,posX,posY,this,which);
+			this.hearts.add(heart);
+		}else{
+			heart.reset(posX,posY);
+            heart.Alive = true
+            if(which==0){
+                heart.frame = 0;
+                heart.type = 1;
+            }
+            else{ 
+                heart.frame = 1;
+                heart.type = 0;
+                }
+            }
+    },
+    
+    createRupy:function(posX,posY,which){
+        console.log("Creating Rupy");
+        var rupy = this.rupies.getFirstExists(false);
+        if(!rupy){
+            rupy = new zelda.RupyPrefab(this.game,posX,posY,this,which);
+            this.rupies.add(rupy);
+        }else{
+            rupy.reset(posX,posY);
+            if(which==0){
+                rupy.frame = 0;
+                rupy.type = 0;
+            }
+            else {
+                rupy.frame = 1;
+                rupy.type = 1;
+            }
+		}
+        
+    },
+    createBomb:function(posX,posY,which){
+        console.log("Creating Rupy");
+        var bomb= this.bombs.getFirstExists(false);
+        if(!bomb){
+            bomb = new zelda.BombPrefab(this.game,posX,posY,this,which);
+            this.bombs.add(bomb);
+        }else{
+            bomb.reset(posX,posY);
+            if(which==0)
+                bomb.frame = 0;
+            else bomb.frame = 1;
+		}
+        
+    },
+    
 }
