@@ -9,7 +9,7 @@ zelda.dungeon = {
     preload:function(){
         this.load.tilemap("dungeonMap", "json/Dungeon1.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("DungeonGround", "img/Dungeon/DungeonGround.png");
-        this.load.image("Dungeon1NoFloor", "img/Dungeon/Dungeon1NoFloor.png");
+        this.load.image("walls_dungeon", "img/tilesets/walls_dungeon.png");
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16);
 		this.load.image("LinkCollider", "img/link/LinkCollider.png");
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
@@ -21,16 +21,20 @@ zelda.dungeon = {
     create:function(){
         this.map = this.game.add.tilemap("dungeonMap");
         this.map.addTilesetImage("DungeonGround");
-        this.map.addTilesetImage("Dungeon1NoFloor");
+        this.map.addTilesetImage("walls_dungeon");
         ///Ya se crean las dos capas, Obstacles y ground
+        this.map.createLayer("ladrillicos");
         this.map.createLayer("suelo");
-        this.obstacles = this.map.createLayer("salas");
-		this.map.setCollisionBetween(1,100,true,"salas");
+        this.map.createLayer("obstaculos");
+        this.map.createLayer("walls_top");
+        this.map.createLayer("walls_right");
+        this.map.createLayer("walls_bot");
+        this.map.createLayer("walls_left");
 		
 		
-		this.background = this.game.add.sprite(0,0, "Dungeon1NoFloor");
-		this.game.physics.arcade.enable(this.background);
-		this.background.body.immovable = true;
+		//this.background = this.game.add.sprite(0,0, "Dungeon1NoFloor");
+		//this.game.physics.arcade.enable(this.background);
+		//this.background.body.immovable = true;
         
 		this.Link = new zelda.LinkPrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16,this);
 		
