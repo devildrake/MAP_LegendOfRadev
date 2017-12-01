@@ -143,7 +143,13 @@ zelda.LinkPrefab.prototype.constructor = zelda.LinkPrefab;
 //PRINCIPIO DEL UPDATE=========================================================================================================================================
 
 zelda.LinkPrefab.prototype.update = function(){
-    
+    if(this.level == zelda.dungeon){
+		this.game.physics.arcade.collide(this.LinkCollider, this.level.obstacles1);
+		this.game.physics.arcade.collide(this.LinkCollider, this.level.obstacles2);
+		this.game.physics.arcade.collide(this.LinkCollider, this.level.obstacles3);
+		this.game.physics.arcade.collide(this.LinkCollider, this.level.obstacles4);
+	}
+	
     if(zelda.LinkObject.currentHearts==0.5){
         if(!zelda.LinkPrefab.lowHpSound.isPlaying)
         zelda.LinkPrefab.lowHpSound.play();

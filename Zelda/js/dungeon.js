@@ -15,7 +15,9 @@ zelda.dungeon = {
         this.load.spritesheet("swordProjectile","img/arrow.png",16,16);
         this.load.spritesheet("Sword","img/Swords.png",16,16);
         this.load.spritesheet("llave", "img/llave.png",16,16);
-
+		
+		this.load.spritesheet("puerta_normal","img/puerta_normal.png",32,32);
+		this.load.spritesheet("puerta_llave","img/puerta_llave.png",32,32);
     },
 
     create:function(){
@@ -26,18 +28,23 @@ zelda.dungeon = {
         this.map.createLayer("ladrillicos");
         this.map.createLayer("suelo");
         this.obstacles = this.map.createLayer("obstaculos");
-        this.map.createLayer("walls_top");
-        this.map.createLayer("walls_right");
-        this.map.createLayer("walls_bot");
-        this.map.createLayer("walls_left");
+        this.obstacles1 = this.map.createLayer("walls_top");
+        this.obstacles2 = this.map.createLayer("walls_right");
+        this.obstacles3 = this.map.createLayer("walls_bot");
+        this.obstacles4 = this.map.createLayer("walls_left");
 		
 		this.map.setCollisionBetween(0,20,true,"obstaculos");
+		this.map.setCollisionBetween(0,200,true,"walls_top");
+		this.map.setCollisionBetween(0,200,true,"walls_right");
+		this.map.setCollisionBetween(0,200,true,"walls_bot");
+		this.map.setCollisionBetween(0,200,true,"walls_left");
 		
 		//this.background = this.game.add.sprite(0,0, "Dungeon1NoFloor");
 		//this.game.physics.arcade.enable(this.background);
 		//this.background.body.immovable = true;
         
 		this.Link = new zelda.LinkPrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16,this);
+		this.map.createLayer("ocultar");
 		
         //Inputs, flechas para andar y Space para atacar por ahora
         /*
@@ -75,17 +82,136 @@ zelda.dungeon = {
         this.game.physics.arcade.enable(this.Link);
         */
 		
+		//pintado de las puertas de la dungeon.
+		this.drawDoors();
+		
         //Camara
-        this.camera.follow(this.Link, Phaser.Camera.FOLLOW_PLATFORMER);
-        
+        this.camera.focusOnXY(this.Link.LinkCollider.x, this.Link.LinkCollider.y);
+		
 		//Prefab del inventario
 		this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);   
     },
     
     update:function(){
-		//this.game.physics.arcade.collide(this.Link.LinkCollider,this.background);
+		//MOVER LA CAMARA PARA DEBUGAR (con el WASD)
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
+            zelda.game.camera.y -= 10;
+        }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.S)){
+            zelda.game.camera.y +=10;
+        }
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.D)){
+            zelda.game.camera.x += 10;
+        }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.A)){
+            zelda.game.camera.x -= 10;
+        }
+		
+		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.U))this.camera.follow(this.Link, Phaser.Camera.FOLLOW_PLATFORMER);
     },
-    
+	
+	//Metodo que encapsula el pintado de las puertas.
+	drawDoors:function(){
+		this.allDoors = [];
+		//0
+		this.allDoors.push(this.game.add.sprite(2*16*16-16, 5*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[0].angle = 90;
+		//1
+		this.allDoors.push(this.game.add.sprite(2*16*16+16, 5*11*16+5*16+8,"puerta_normal",1));//izquierda
+		this.allDoors[1].angle = -90;
+		//2
+		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 5*11*16+16+1,"puerta_llave",0));//arriba
+		//3
+		this.allDoors.push(this.game.add.sprite(2*16*16+15*16, 5*11*16+5*16+8,"puerta_normal",1));//derecha
+		this.allDoors[3].angle = 90;
+		//4
+		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 5*11*16+10*16, "puerta_normal",1));//abajo
+		this.allDoors[4].angle = 180;
+		//5
+		this.allDoors.push(this.game.add.sprite(3*16*16+16,5*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[5].angle = -90;
+		//6
+		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 4*11*16+10*16, "puerta_normal",1));
+		this.allDoors[6].angle = 180;
+		//7
+		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 4*11*16+16+1,"puerta_normal",1));
+		//8
+		this.allDoors.push(this.game.add.sprite(1*16*16+8*16, 3*11*16+16+1,"puerta_normal",1));
+		//9
+		this.allDoors.push(this.game.add.sprite(1*16*16+15*16, 3*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[9].angle = 90;
+		//10
+		this.allDoors.push(this.game.add.sprite(2*16*16+16, 3*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[10].angle = -90;
+		//11
+		this.allDoors.push(this.game.add.sprite(2*16*16+15*16, 3*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[11].angle = 90;
+		//12
+		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 3*11*16+10*16, "puerta_normal",1));
+		this.allDoors[12].angle = 180;
+		//13
+		this.allDoors.push(this.game.add.sprite(3*16*16+16, 3*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[13].angle = -90;
+		//14
+		this.allDoors.push(this.game.add.sprite(0*16*16+15*16, 2*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[14].angle = 90;
+		//15
+		this.allDoors.push(this.game.add.sprite(1*16*16+16, 2*11*16+5*16+8,"puerta_normal",0));
+		this.allDoors[15].angle = -90;
+		//16
+		this.allDoors.push(this.game.add.sprite(1*16*16+15*16, 2*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[16].angle = 90;
+		//17
+		this.allDoors.push(this.game.add.sprite(1*16*16+8*16, 2*11*16+10*16, "puerta_normal",1));
+		this.allDoors[17].angle = 180;
+		//18
+		this.allDoors.push(this.game.add.sprite(2*16*16+16, 2*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[18].angle = -90;
+		//19
+		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 2*11*16+16+1,"puerta_normal",1));
+		//20
+		this.allDoors.push(this.game.add.sprite(2*16*16+15*16, 2*11*16+5*16+8,"puerta_llave",0));
+		this.allDoors[20].angle = 90;
+		//21
+		this.allDoors.push(this.game.add.sprite(3*16*16+16, 2*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[21].angle = -90;
+		//22
+		this.allDoors.push(this.game.add.sprite(3*16*16+15*16, 2*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[22].angle = 90;
+		//23
+		this.allDoors.push(this.game.add.sprite(4*16*16+16, 2*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[23].angle = -90;
+		//24
+		this.allDoors.push(this.game.add.sprite(4*16*16+8*16, 2*11*16+16+1,"puerta_normal",1));
+		//25
+		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 1*11*16+16+1,"puerta_llave",0));
+		//26
+		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 1*11*16+10*16, "puerta_normal",1));
+		this.allDoors[26].angle = 180;
+		//27
+		this.allDoors.push(this.game.add.sprite(4*16*16+15*16, 1*11*16+5*16+8,"puerta_normal",0));
+		this.allDoors[27].angle = 90;
+		//28
+		this.allDoors.push(this.game.add.sprite(4*16*16+8*16, 1*11*16+10*16, "puerta_normal",1));
+		this.allDoors[28].angle = 180;
+		//29
+		this.allDoors.push(this.game.add.sprite(5*16*16+16, 1*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[29].angle = -90;
+		//30
+		this.allDoors.push(this.game.add.sprite(1*16*16+15*16, 0*11*16+5*16+8,"puerta_normal",1));
+		this.allDoors[30].angle = 90;
+		//31
+		this.allDoors.push(this.game.add.sprite(2*16*16+16, 0*11*16+5*16+8,"puerta_llave",0));
+		this.allDoors[31].angle = -90;
+		//32
+		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 0*11*16+10*16, "puerta_normal",1));
+		this.allDoors[32].angle = 180;
+		
+		
+		//muevo el ancla a todas las puertas y les activo las fisicas
+		for(var i = 0; i<this.allDoors.length; i++){
+			this.allDoors[i].anchor.setTo(.5);
+			this.game.physics.arcade.enable(this.allDoors[i]);
+		}
+	},
     //===========================================================================================================CARGANDO GRUPOS===========================================================================================================
     loadHearts:function(){
 		this.hearts = this.add.group();

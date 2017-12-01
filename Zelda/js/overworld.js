@@ -261,7 +261,7 @@ zelda.overworld = {
 			zelda.gameOptions.Pause(this);
 		}
 
-                //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
+        //MOVER LA CAMARA PARA DEBUGAR (con el WASD)
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
             zelda.game.camera.y -= 10;
         }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.S)){
