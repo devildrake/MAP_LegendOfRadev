@@ -93,6 +93,11 @@ zelda.dungeon = {
     },
     
     update:function(){
+		/*if(this.allDoors[1].frame = 1){
+			this.game.physics.arcade.collide(this.Link.LinkCollider, this.allDoors[1]);	
+		}*/
+		this.CollisionWithDoors();
+		
 		//MOVER LA CAMARA PARA DEBUGAR (con el WASD)
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
             zelda.game.camera.y -= 10;
@@ -205,11 +210,47 @@ zelda.dungeon = {
 		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 0*11*16+10*16, "puerta_normal",1));
 		this.allDoors[32].angle = 180;
 		
-		
 		//muevo el ancla a todas las puertas y les activo las fisicas
 		for(var i = 0; i<this.allDoors.length; i++){
 			this.allDoors[i].anchor.setTo(.5);
 			this.game.physics.arcade.enable(this.allDoors[i]);
+			this.allDoors[i].body.immovable = true;
+		}
+	},
+	
+	OpenAllDoors:function(){
+		for(var i = 0; i<this.allDoors.length; i++){
+			this.allDoors[i].frame = 1;
+		}	
+	},
+	
+	CloseAllDoors:function(){
+		for(var i = 0; i<this.allDoors.length; i++){
+			this.allDoors[i].frame = 0;
+		}
+	},
+	
+	OpenDoors:function(doors){
+		for(var i = 0; i<doors.length; i++){
+			this.allDoors[doors[i]].frame = 1;
+		}
+	},
+	
+	CloseDoors:function(doors){
+		for(var i = 0; i<doors.length; i++){
+			this.allDoors[doors[i]].frame = 0;
+		}
+	},
+	
+	//Controla la colison con las puertas dependiendo de si están abiertas
+	//o cerradas
+	CollisionWithDoors:function(){
+		for(var i = 0; i<this.allDoors.length; i++){
+			if(this.allDoors[i].frame == 0){
+				this.game.physics.arcade.collide(this.Link.LinkCollider,this.allDoors[i],function(){
+					console.log("GETCOLLIDED");
+				});
+			}
 		}
 	},
     //===========================================================================================================CARGANDO GRUPOS===========================================================================================================
