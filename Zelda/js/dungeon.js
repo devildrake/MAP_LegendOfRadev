@@ -2,7 +2,7 @@ var zelda = zelda || {}
 
 zelda.dungeon = {
 	init:function(){
-		this.game.world.setBounds(0,-47,6*16*16,6*11*16);
+		this.game.world.setBounds(0,-47,6*16*16,66*16+16*3);
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 	},
@@ -25,12 +25,13 @@ zelda.dungeon = {
         ///Ya se crean las dos capas, Obstacles y ground
         this.map.createLayer("ladrillicos");
         this.map.createLayer("suelo");
-        this.map.createLayer("obstaculos");
+        this.obstacles = this.map.createLayer("obstaculos");
         this.map.createLayer("walls_top");
         this.map.createLayer("walls_right");
         this.map.createLayer("walls_bot");
         this.map.createLayer("walls_left");
 		
+		this.map.setCollisionBetween(0,20,true,"obstaculos");
 		
 		//this.background = this.game.add.sprite(0,0, "Dungeon1NoFloor");
 		//this.game.physics.arcade.enable(this.background);
@@ -82,7 +83,7 @@ zelda.dungeon = {
     },
     
     update:function(){
-		this.game.physics.arcade.collide(this.Link.LinkCollider,this.background);
+		//this.game.physics.arcade.collide(this.Link.LinkCollider,this.background);
     },
     
     //===========================================================================================================CARGANDO GRUPOS===========================================================================================================

@@ -149,7 +149,7 @@ zelda.LinkPrefab.prototype.update = function(){
         zelda.LinkPrefab.lowHpSound.play();
     }
     
-                this.position = this.LinkCollider.position;
+	this.position = this.LinkCollider.position;
 
 
 	//Se reinicia la velocidad a 0 a cada frame           
