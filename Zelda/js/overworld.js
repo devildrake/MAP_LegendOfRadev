@@ -69,7 +69,9 @@ zelda.overworld = {
     create:function(){
         
         this.overworldMusic = this.add.audio("OverWorldMusic");
-        //this.overworldMusic.play();
+        this.overworldMusic.play();
+        this.overworldMusic.loop = true;
+
         //this.getItemMusic = this.add.audio("getItem");
 
         this.map = this.game.add.tilemap("map");
@@ -248,12 +250,12 @@ zelda.overworld = {
 			if(!this.playMusic)   {
 				this.playMusic = true;
 				this.overworldMusic.play();
-                this.music.loop = true;
+                this.overworldMusic.loop = true;
 
 			}else{
 				this.playMusic = false;
 				this.overworldMusic.stop();
-                this.music.loop = false;
+                this.overworldMusic.loop = false;
 
 			}
 
