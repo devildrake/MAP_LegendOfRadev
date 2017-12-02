@@ -38,6 +38,7 @@ zelda.TriforcePrefab.prototype.update = function(){
             if(zelda.LinkPrefab.grabItemSound!=undefined){
                 zelda.LinkPrefab.grabItemSound.play();
             }
+                        triforce.level.music.stop();
                         zelda.TriforcePrefab.TriforceMusic.play();
                         zelda.LinkObject.grabbingObject = true;
                 //triforce

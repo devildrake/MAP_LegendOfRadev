@@ -21,8 +21,8 @@ zelda.dungeon = {
         this.load.image("inventario", "img/inventario.png");
         this.load.image("corazon", "img/corazon.png");
         this.load.image("GroundTile","img/GroundSprite.png");
-        this.load.image("camaraHorizontal", "img/camara_horizontal.png");
-        this.load.image("camaraVertical", "img/camara_vertical.png");
+        this.load.image("camaraHorizontal", "img/camara_horizontal_trans.png");
+        this.load.image("camaraVertical", "img/camara_vertical_trans.png");
         this.load.image("Triforce","img/Triforce_Piece.png");
         this.load.audio("TriforceSound","sounds/Music/Triforce_Theme.mp3");
         this.load.image("Black","img/Blackout.png");
@@ -35,6 +35,8 @@ zelda.dungeon = {
         this.music =  this.game.add.audio("DungeonMusic");
         this.music.loop = true;
         this.music.play();
+        this.music.volume = 0.2;
+        console.log(this.music);    
         
         this.map = this.game.add.tilemap("dungeonMap");
         this.map.addTilesetImage("DungeonGround");
@@ -465,9 +467,9 @@ zelda.dungeon = {
 
                 zelda.gameOptions.borderToSet = "Upwards";
 
-                zelda.dungeon.linkInstance.position.y -= 4;
+                zelda.dungeon.linkInstance.position.y -= 19;
 
-                zelda.dungeon.linkInstance.LinkCollider.body.y-=4;
+                zelda.dungeon.linkInstance.LinkCollider.body.y-=19;
 
                 zelda.LinkObject.currentDungeonZone-=6;
 
@@ -496,8 +498,8 @@ zelda.dungeon = {
                 //OFFSET
                 zelda.dungeon.cameraBot.body.position.y -=800;
 
-                zelda.dungeon.linkInstance.position.y += 4;
-                zelda.dungeon.linkInstance.LinkCollider.body.y+=4;
+                zelda.dungeon.linkInstance.position.y += 19;
+                zelda.dungeon.linkInstance.LinkCollider.body.y+=19;
                 zelda.LinkObject.currentDungeonZone+=6;
                 zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
                 zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
@@ -520,8 +522,8 @@ zelda.dungeon = {
 
                 //OFFSET
                 zelda.dungeon.cameraRight.body.position.x -=800;
-                zelda.dungeon.linkInstance.position.x += 4;
-                zelda.dungeon.linkInstance.LinkCollider.body.x+=4;
+                zelda.dungeon.linkInstance.position.x += 19;
+                zelda.dungeon.linkInstance.LinkCollider.body.x+=19;
                 zelda.LinkObject.currentDungeonZone++;
                 zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
                 zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
@@ -543,8 +545,8 @@ zelda.dungeon = {
             //OFFSET
             zelda.dungeon.cameraLeft.body.position.x -=800;
             
-            zelda.dungeon.linkInstance.position.x -= 4;
-            zelda.dungeon.linkInstance.LinkCollider.body.x-=4;
+            zelda.dungeon.linkInstance.position.x -= 19;
+            zelda.dungeon.linkInstance.LinkCollider.body.x-=19;
             zelda.LinkObject.currentDungeonZone--;
             zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
             zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
