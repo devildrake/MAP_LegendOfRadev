@@ -26,11 +26,15 @@ zelda.dungeon = {
         this.load.image("Triforce","img/Triforce_Piece.png");
         this.load.audio("TriforceSound","sounds/Music/Triforce_Theme.mp3");
         this.load.image("Black","img/Blackout.png");
+        this.load.audio("DungeonMusic","sounds/Music/DungeonTheme.mp3");
 
     },
 
     create:function(){
-
+        this.music =  this.game.add.audio("DungeonMusic");
+        this.music.loop = true;
+        this.music.play();
+        
         this.map = this.game.add.tilemap("dungeonMap");
         this.map.addTilesetImage("DungeonGround");
         this.map.addTilesetImage("walls_dungeon");
@@ -48,6 +52,7 @@ zelda.dungeon = {
 		this.map.setCollisionBetween(0,200,true,"walls_right");
 		this.map.setCollisionBetween(0,200,true,"walls_bot");
 		this.map.setCollisionBetween(0,200,true,"walls_left");
+        
 		
 		//this.background = this.game.add.sprite(0,0, "Dungeon1NoFloor");
 		//this.game.physics.arcade.enable(this.background);

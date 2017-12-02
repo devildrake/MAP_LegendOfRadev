@@ -248,9 +248,13 @@ zelda.overworld = {
 			if(!this.playMusic)   {
 				this.playMusic = true;
 				this.overworldMusic.play();
+                this.music.loop = true;
+
 			}else{
 				this.playMusic = false;
 				this.overworldMusic.stop();
+                this.music.loop = false;
+
 			}
 
 		}
