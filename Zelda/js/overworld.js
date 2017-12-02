@@ -63,14 +63,15 @@ zelda.overworld = {
         this.load.spritesheet("Gel","img/GelSpriteSheet.png",16,16);
         this.load.spritesheet("Boomerang","img/Boomerang.png",16,16);
         this.load.spritesheet("rupia", "img/RupiaSpriteSheet.png",16,16);
+        this.load.audio("DieMusic","sounds/Music/DeathMusic.mp3");
         
     },
 
     create:function(){
         
-        this.overworldMusic = this.add.audio("OverWorldMusic");
-        this.overworldMusic.play();
-        this.overworldMusic.loop = true;
+        this.music = this.add.audio("OverWorldMusic");
+        this.music.play();
+        this.music.loop = true;
 
         //this.getItemMusic = this.add.audio("getItem");
 
@@ -249,13 +250,13 @@ zelda.overworld = {
 		if(this.muteButton.isDown&&this.muteButton.downDuration(1)){
 			if(!this.playMusic)   {
 				this.playMusic = true;
-				this.overworldMusic.play();
-                this.overworldMusic.loop = true;
+				this.music.play();
+                this.music.loop = true;
 
 			}else{
 				this.playMusic = false;
-				this.overworldMusic.stop();
-                this.overworldMusic.loop = false;
+				this.music.stop();
+                this.music.loop = false;
 
 			}
 
@@ -499,7 +500,7 @@ zelda.overworld = {
 
                 zelda.LinkObject.lastPositionX = zelda.overworld.trigger_espada.body.position.x+8;
                 zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+9;
-                zelda.overworld.overworldMusic.stop();
+                zelda.overworld.music.stop();
                 //zelda.game.state.start("sword_room");
                 var posToSpawnSprite = zelda.overworld.trigger_espada.body.position;
                 zelda.LinkPrefab.stairWayDown(posToSpawnSprite,"sword_room");
@@ -511,7 +512,7 @@ zelda.overworld = {
                 zelda.overworld.linkInstance.LinkCollider.body.position.x = zelda.overworld.trigger_D.body.position.x+4;
                 zelda.LinkObject.lastPositionX = zelda.overworld.trigger_D.body.position.x+8;
                 zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+9;
-                zelda.overworld.overworldMusic.stop();
+                zelda.overworld.music.stop();
 
                 //zelda.game.state.start("secret_room_D");
                 var posToSpawnSprite = zelda.overworld.trigger_D.body.position;
@@ -524,7 +525,7 @@ zelda.overworld = {
                 zelda.overworld.linkInstance.LinkCollider.body.position.x = zelda.overworld.trigger_M.body.position.x+4;
                 zelda.LinkObject.lastPositionX = zelda.overworld.trigger_M.body.position.x+8;
                 zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+9;
-                zelda.overworld.overworldMusic.stop();
+                zelda.overworld.music.stop();
 
                 //zelda.game.state.start("secret_room_M");
                 var posToSpawnSprite = zelda.overworld.trigger_M.body.position;
@@ -535,7 +536,7 @@ zelda.overworld = {
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_I, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_I.position.x - 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.trigger_I.position.y + 8;
-            zelda.overworld.overworldMusic.stop();
+            zelda.overworld.music.stop();
 
             zelda.game.state.start("secret_room_I");
 		});
@@ -543,7 +544,7 @@ zelda.overworld = {
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_L, function(){
 			zelda.LinkObject.lastPositionY = zelda.overworld.trigger_L.body.position.y + 8 ;
             zelda.LinkObject.lastPositionX =  zelda.overworld.trigger_L.body.position.x - 8;
-            zelda.overworld.overworldMusic.stop();
+            zelda.overworld.music.stop();
 
             zelda.game.state.start("secret_room_L");
 		});
@@ -551,14 +552,14 @@ zelda.overworld = {
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_E, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_E.position.x - 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.trigger_E.position.y;
-            zelda.overworld.overworldMusic.stop();
+            zelda.overworld.music.stop();
             zelda.game.state.start("secret_room_E");
 		});
 		
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_D_2, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_D_2.position.x - 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.trigger_D_2.position.y;
-            zelda.overworld.overworldMusic.stop();
+            zelda.overworld.music.stop();
 
             zelda.game.state.start("secret_room_D");
 		});
@@ -566,13 +567,14 @@ zelda.overworld = {
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_M_2, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_M_2.position.x - 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.trigger_M_2.position.y;
+            zelda.overworld.music.stop();
             zelda.game.state.start("secret_room_M");
 		});
 		
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_I_2, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_I_2.position.x - 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.trigger_I_2.position.y;
-            zelda.overworld.overworldMusic.stop();
+            zelda.overworld.music.stop();
 
             zelda.game.state.start("secret_room_I");
 		});
@@ -580,7 +582,7 @@ zelda.overworld = {
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_A, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_A.position.x - 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
-            zelda.overworld.overworldMusic.stop();
+            zelda.overworld.music.stop();
 
             zelda.game.state.start("secret_room_A");
 		});
@@ -588,14 +590,14 @@ zelda.overworld = {
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_H, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_H.position.x - 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
-            zelda.overworld.overworldMusic.stop();
+            zelda.overworld.music.stop();
             zelda.game.state.start("secret_room_H");
 		});
 		
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_G, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_G.position.x - 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
-            zelda.overworld.overworldMusic.stop();
+            zelda.overworld.music.stop();
             zelda.game.state.start("secret_room_G");
 		});
 		
@@ -605,7 +607,7 @@ zelda.overworld = {
                 zelda.LinkObject.lastPositionX = zelda.overworld.trigger_K.body.position.x+8;
                 zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+9;
 
-                zelda.overworld.overworldMusic.stop();
+                zelda.overworld.music.stop();
                 //zelda.game.state.start("secret_room_K");
                 var posToSpawnSprite = zelda.overworld.trigger_K.body.position;
                 zelda.LinkPrefab.stairWayDown(posToSpawnSprite,"secret_room_K");
@@ -615,7 +617,7 @@ zelda.overworld = {
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_I_3, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.linkInstance.position.x + 8;
             zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+16;
-            zelda.overworld.overworldMusic.stop();
+            zelda.overworld.music.stop();
             zelda.game.state.start("secret_room_I");
 		});
 		
@@ -624,7 +626,7 @@ zelda.overworld = {
                 zelda.overworld.linkInstance.LinkCollider.body.position.x = zelda.overworld.trigger_A_2.body.position.x+4;
                 zelda.LinkObject.lastPositionX = zelda.overworld.trigger_A_2.body.position.x+8;
                 zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+9;
-                zelda.overworld.overworldMusic.stop();
+                zelda.overworld.music.stop();
                 //zelda.game.state.start("secret_room_A");
                 var posToSpawnSprite = zelda.overworld.trigger_A_2.body.position;
                 zelda.LinkPrefab.stairWayDown(posToSpawnSprite,"secret_room_A");
@@ -635,7 +637,7 @@ zelda.overworld = {
 			zelda.LinkObject.lastPositionX = zelda.overworld.linkInstance.position.x + 16;
             			zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y;
 
-            zelda.overworld.overworldMusic.stop();
+            zelda.overworld.music.stop();
             zelda.game.state.start("secret_room_K");
 		});
         }

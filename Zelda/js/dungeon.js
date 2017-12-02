@@ -27,6 +27,7 @@ zelda.dungeon = {
         this.load.audio("TriforceSound","sounds/Music/Triforce_Theme.mp3");
         this.load.image("Black","img/Blackout.png");
         this.load.audio("DungeonMusic","sounds/Music/DungeonTheme.mp3");
+        this.load.audio("DieMusic","sounds/Music/DeathMusic.mp3");
 
     },
 

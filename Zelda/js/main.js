@@ -149,6 +149,8 @@ zelda.LinkObject = {
     lastPositionX: 2*16*16+8*16,
     lastPositionY: 4*11*16 + 8*16,
     
+    dying: false,
+    
     //Tiene 4 bools para saber a donde esta y estaba mirando para el tema orientación
     lookingUp: false,
     lookingDown: false,
@@ -1196,6 +1198,7 @@ zelda.game.state.add("secret_room_E", zelda.sala_secreta_E);
 zelda.game.state.add("secret_room_H", zelda.sala_secreta_H);
 zelda.game.state.add("secret_room_K", zelda.sala_secreta_K);
 zelda.game.state.add("secret_room_G", zelda.sala_secreta_G);
+zelda.game.state.add("game_over",zelda.game_over);
 zelda.game.state.add("overworld", zelda.overworld);
 zelda.game.state.add("dungeon", zelda.dungeon);
 

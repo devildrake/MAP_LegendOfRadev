@@ -17,6 +17,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.animations.add("movingDownHurt", [14,15], 5, true);
 	this.animations.add("movingUpHurt", [16], 5, true);
 	this.animations.add("movingSideWaysHurt", [17,18],5,true); 
+    this.animations.add("Die",[0+14,0,4+14,4,2+14,2],10,true);
     zelda.LinkObject.calledNotHurt = false;
     this.grabbingObject = false;
     zelda.LinkObject.invincible = false;
@@ -67,6 +68,10 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.sword);
 
+    if(zelda.LinkPrefab.dieMusic==undefined){
+        zelda.LinkPrefab.dieMusic = this.game.add.audio("DieMusic");
+    }
+    
     if(zelda.LinkPrefab.getSpecialItemSound==undefined)
     zelda.LinkPrefab.getSpecialItemSound =  this.game.add.audio("getSpecialItem");
     
@@ -156,363 +161,387 @@ zelda.LinkPrefab.prototype.update = function(){
     }
     
 	this.position = this.LinkCollider.position;
-
-
+    
+    if(zelda.LinkObject.currentHearts<=0){
+        zelda.LinkObject.dying = true;
+    }
+    
 	//Se reinicia la velocidad a 0 a cada frame           
 	//this.Link.body.velocity.setTo(0);
-    if(!zelda.LinkObject.goingDownStairWay&&!zelda.LinkObject.goingUpStairWay){
-        if(!zelda.Inventory.ScrollingInventory){
-                if(this.wasPaused&&!zelda.Inventory.InvON){
-                    this.wasPaused = false;
+    if(!zelda.LinkObject.dying){
 
-                    if(this.projectile.Alive){
-                        this.projectile.body.velocity.x = this.projectile.previousVelocityX;
-                        this.projectile.body.velocity.y = this.projectile.previousVelocityY;
-                    }
-                }
-            if(!zelda.LinkObject.moveFromDmg){
-               this.LinkCollider.body.velocity.setTo(0);
-            }else if(!zelda.LinkObject.calledNotMoveFromDamage){
-                zelda.LinkObject.calledNotMoveFromDamage = true;
-                this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.setMoveFromDamageFalse, this.level);
-            }
-            this.game.physics.arcade.collide(this.LinkCollider,this.level.obstacles);
-            this.game.physics.arcade.collide(this.LinkCollider,this.level.water);
+        
+        
+        if(!zelda.LinkObject.goingDownStairWay&&!zelda.LinkObject.goingUpStairWay){
+            if(!zelda.Inventory.ScrollingInventory){
+                    if(this.wasPaused&&!zelda.Inventory.InvON){
+                        this.wasPaused = false;
 
-            //La barra espaciadora pone attacking en true
-            if(this.space.isDown&&this.space.downDuration(1)&&zelda.Inventory.HasSword&&zelda.gameOptions.cameraArrivedPos){
-                if(!zelda.LinkObject.attacking){
-                    if(zelda.LinkObject.currentHearts==zelda.LinkObject.maxHearts){
-                        if(zelda.LinkObject.lookingDown){
-                            zelda.LinkPrefab.createProjectile(0,this);
-                        }
-                        else if(zelda.LinkObject.lookingUp){
-                            zelda.LinkPrefab.createProjectile(1,this);
-                        }else if(zelda.LinkObject.lookingLeft){
-                            zelda.LinkPrefab.createProjectile(2,this);
-                        }else {
-                            zelda.LinkPrefab.createProjectile(3,this);
+                        if(this.projectile.Alive){
+                            this.projectile.body.velocity.x = this.projectile.previousVelocityX;
+                            this.projectile.body.velocity.y = this.projectile.previousVelocityY;
                         }
                     }
+                if(!zelda.LinkObject.moveFromDmg){
+                   this.LinkCollider.body.velocity.setTo(0);
+                }else if(!zelda.LinkObject.calledNotMoveFromDamage){
+                    zelda.LinkObject.calledNotMoveFromDamage = true;
+                    this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.setMoveFromDamageFalse, this.level);
                 }
-                if(!zelda.LinkObject.attacking)
-                zelda.LinkPrefab.attackSound.play();
-                zelda.LinkObject.attacking = true;
+                this.game.physics.arcade.collide(this.LinkCollider,this.level.obstacles);
+                this.game.physics.arcade.collide(this.LinkCollider,this.level.water);
 
-            }
-
-            if(zelda.LinkObject.hurt&&!zelda.LinkObject.calledNotHurt){
-                if(!zelda.LinkPrefab.getHurtSound.isPlaying)
-                zelda.LinkPrefab.getHurtSound.play();
-                this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.NotHurt , this.level);
-                zelda.LinkObject.calledNotHurt = true;
-            }
-
-            if(this.particlesA[0].Alive){
-
-                if(!this.particlesA[0].calledBeDestroyed){
-                for(var i=0;i<4;i++)
-                this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.AIMethods.BeDestroyed, this.level,this.particlesA[i]);
-                    this.particlesA[0].calledBeDestroyed = true;
-                }
-            }
-            if(this.particlesB[0].Alive){
-                if(!this.particlesB[0].calledBeDestroyed){
-                for(var i=0;i<4;i++)
-                this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.AIMethods.BeDestroyed, this.level,this.particlesB[i]);
-                    this.particlesB[0].calledBeDestroyed = true;
-                }
-            }
-
-            if(this.projectile.prevAlive&&!this.projectile.Alive){
-                this.projectile.prevAlive=false;
-
-                if(!this.particlesA[0].Alive){
-                    this.particlesA[0].reset(this.projectile.position.x,this.projectile.position.y);
-                    this.particlesA[1].reset(this.projectile.position.x,this.projectile.position.y);
-                    this.particlesA[2].reset(this.projectile.position.x,this.projectile.position.y);
-                    this.particlesA[3].reset(this.projectile.position.x,this.projectile.position.y);
-                    for(var i=0;i<4;i++)
-                        this.particlesA[i].Alive = true;
-                        this.particlesA[0].thePos = this.projectile.position;
-                    this.particlesA[0].body.velocity.x=-30;
-                    this.particlesA[0].body.velocity.y=-30;
-
-                    this.particlesA[1].body.velocity.x=30;
-                    this.particlesA[1].body.velocity.y=-30;           
-
-                    this.particlesA[3].body.velocity.x=30;
-                    this.particlesA[3].body.velocity.y=30;     
-
-                    this.particlesA[2].body.velocity.x=-30;
-                    this.particlesA[2].body.velocity.y=30;
-                    //this.particlesA[0].reset(this.projectile.position);
-
-
-
-                }else if(!this.particlesB[0].Alive){
-                    this.particlesB[0].reset(this.projectile.position.x,this.projectile.position.y);
-                    this.particlesB[1].reset(this.projectile.position.x,this.projectile.position.y);
-                    this.particlesB[2].reset(this.projectile.position.x,this.projectile.position.y);
-                    this.particlesB[3].reset(this.projectile.position.x,this.projectile.position.y);
-
-                    for(var i=0;i<4;i++)
-                        this.particlesB[i].Alive = true;
-
-                    this.particlesB[0].body.velocity.x=-30;
-                    this.particlesB[0].body.velocity.y=-30;
-
-                    this.particlesB[1].body.velocity.x=30;
-                    this.particlesB[1].body.velocity.y=-30;           
-
-                    this.particlesB[3].body.velocity.x=30;
-                    this.particlesB[3].body.velocity.y=30;     
-
-                    this.particlesB[2].body.velocity.x=-30;
-                    this.particlesB[2].body.velocity.y=30;
-                    //this.particlesA[0].reset(this.projectile.position);
-
-                }else{
-                    this.particlesA[0].reset(this.projectile.position.x,this.projectile.position.y);
-                    this.particlesA[1].reset(this.projectile.position.x,this.projectile.position.y);
-                    this.particlesA[2].reset(this.projectile.position.x,this.projectile.position.y);
-                    this.particlesA[3].reset(this.projectile.position.x,this.projectile.position.y);
-                    for(var i=0;i<4;i++)
-                        this.particlesA[i].Alive = true;
-
-                    this.particlesA[0].body.velocity.x=-30;
-                    this.particlesA[0].body.velocity.y=-30;
-
-                    this.particlesA[1].body.velocity.x=30;
-                    this.particlesA[1].body.velocity.y=-30;           
-
-                    this.particlesA[3].body.velocity.x=30;
-                    this.particlesA[3].body.velocity.y=30;     
-
-                    this.particlesA[2].body.velocity.x=-30;
-                    this.particlesA[2].body.velocity.y=30;
-                    //this.particlesA[0].reset(this.projectile.position);
-                }
-
-
-
-            }
-
-            //Comportamiento si attacking es false, es el movimiento con las flechas 
-            if(!zelda.LinkObject.attacking&&!zelda.LinkObject.grabbingObject){
-                if(zelda.gameOptions.cameraArrivedPos){
-                    if(this.cursors.left.isDown){
-
-                        //this.Link.body.velocity.x = -zelda.gameOptions.linkSpeed;
-                        this.LinkCollider.body.velocity.x= -zelda.gameOptions.linkSpeed;
-
-                        if(zelda.LinkObject.hurt)
-                            this.animations.play("movingSideWaysHurt");
-                        else
-                            this.animations.play("movingSideWays");
-
-                        this.scale.x = -1;
-                        zelda.LinkObject.ResetLooking();
-                        zelda.LinkObject.lookingLeft = true;
-                    }else if(this.cursors.right.isDown){
-
-                        if(zelda.LinkObject.hurt)
-                            this.animations.play("movingSideWaysHurt");
-                        else
-                            this.animations.play("movingSideWays");
-
-                        this.scale.setTo(1);
-                        this.LinkCollider.body.velocity.x = zelda.gameOptions.linkSpeed;
-
-                        zelda.LinkObject.ResetLooking();
-                        zelda.LinkObject.lookingRight = true;
-                    }else if(this.cursors.up.isDown){
-                            //console.log(zelda.LinkObject.switched);
-
-
-                        if(!zelda.LinkObject.switched){
-                            zelda.LinkObject.switched = true;
-                            this.game.time.events.add(Phaser.Timer.SECOND * 0.15,zelda.LinkPrefab.switchLinkScale , this.level,this);
-
+                //La barra espaciadora pone attacking en true
+                if(this.space.isDown&&this.space.downDuration(1)&&zelda.Inventory.HasSword&&zelda.gameOptions.cameraArrivedPos){
+                    if(!zelda.LinkObject.attacking){
+                        if(zelda.LinkObject.currentHearts==zelda.LinkObject.maxHearts){
+                            if(zelda.LinkObject.lookingDown){
+                                zelda.LinkPrefab.createProjectile(0,this);
+                            }
+                            else if(zelda.LinkObject.lookingUp){
+                                zelda.LinkPrefab.createProjectile(1,this);
+                            }else if(zelda.LinkObject.lookingLeft){
+                                zelda.LinkPrefab.createProjectile(2,this);
+                            }else {
+                                zelda.LinkPrefab.createProjectile(3,this);
+                            }
                         }
-                        this.LinkCollider.body.velocity.y = -zelda.gameOptions.linkSpeed;
-
-                        if(zelda.LinkObject.hurt)
-                            this.animations.play("movingUpHurt");
-                        else
-                            this.animations.play('movingUp');
-
-                        zelda.LinkObject.ResetLooking();
-                        zelda.LinkObject.lookingUp = true;
-
-                    }else if(this.cursors.down.isDown){
-                        this.scale.setTo(1);
-                        this.LinkCollider.body.velocity.y = zelda.gameOptions.linkSpeed;
-
-                        if(zelda.LinkObject.hurt)
-                            this.animations.play("movingDownHurt");
-                        else
-                            this.animations.play('movingDown');
-
-                        zelda.LinkObject.ResetLooking();
-                        zelda.LinkObject.lookingDown = true;
                     }
-                    else {
-                        if(zelda.LinkObject.lookingUp){
-                            this.animations.stop();
-                        }else if(zelda.LinkObject.lookingLeft){
+                    if(!zelda.LinkObject.attacking)
+                    zelda.LinkPrefab.attackSound.play();
+                    zelda.LinkObject.attacking = true;
+
+                }
+
+                if(zelda.LinkObject.hurt&&!zelda.LinkObject.calledNotHurt){
+                    if(!zelda.LinkPrefab.getHurtSound.isPlaying)
+                    zelda.LinkPrefab.getHurtSound.play();
+                    this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.NotHurt , this.level);
+                    zelda.LinkObject.calledNotHurt = true;
+                }
+
+                if(this.particlesA[0].Alive){
+
+                    if(!this.particlesA[0].calledBeDestroyed){
+                    for(var i=0;i<4;i++)
+                    this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.AIMethods.BeDestroyed, this.level,this.particlesA[i]);
+                        this.particlesA[0].calledBeDestroyed = true;
+                    }
+                }
+                if(this.particlesB[0].Alive){
+                    if(!this.particlesB[0].calledBeDestroyed){
+                    for(var i=0;i<4;i++)
+                    this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.AIMethods.BeDestroyed, this.level,this.particlesB[i]);
+                        this.particlesB[0].calledBeDestroyed = true;
+                    }
+                }
+
+                if(this.projectile.prevAlive&&!this.projectile.Alive){
+                    this.projectile.prevAlive=false;
+
+                    if(!this.particlesA[0].Alive){
+                        this.particlesA[0].reset(this.projectile.position.x,this.projectile.position.y);
+                        this.particlesA[1].reset(this.projectile.position.x,this.projectile.position.y);
+                        this.particlesA[2].reset(this.projectile.position.x,this.projectile.position.y);
+                        this.particlesA[3].reset(this.projectile.position.x,this.projectile.position.y);
+                        for(var i=0;i<4;i++)
+                            this.particlesA[i].Alive = true;
+                            this.particlesA[0].thePos = this.projectile.position;
+                        this.particlesA[0].body.velocity.x=-30;
+                        this.particlesA[0].body.velocity.y=-30;
+
+                        this.particlesA[1].body.velocity.x=30;
+                        this.particlesA[1].body.velocity.y=-30;           
+
+                        this.particlesA[3].body.velocity.x=30;
+                        this.particlesA[3].body.velocity.y=30;     
+
+                        this.particlesA[2].body.velocity.x=-30;
+                        this.particlesA[2].body.velocity.y=30;
+                        //this.particlesA[0].reset(this.projectile.position);
+
+
+
+                    }else if(!this.particlesB[0].Alive){
+                        this.particlesB[0].reset(this.projectile.position.x,this.projectile.position.y);
+                        this.particlesB[1].reset(this.projectile.position.x,this.projectile.position.y);
+                        this.particlesB[2].reset(this.projectile.position.x,this.projectile.position.y);
+                        this.particlesB[3].reset(this.projectile.position.x,this.projectile.position.y);
+
+                        for(var i=0;i<4;i++)
+                            this.particlesB[i].Alive = true;
+
+                        this.particlesB[0].body.velocity.x=-30;
+                        this.particlesB[0].body.velocity.y=-30;
+
+                        this.particlesB[1].body.velocity.x=30;
+                        this.particlesB[1].body.velocity.y=-30;           
+
+                        this.particlesB[3].body.velocity.x=30;
+                        this.particlesB[3].body.velocity.y=30;     
+
+                        this.particlesB[2].body.velocity.x=-30;
+                        this.particlesB[2].body.velocity.y=30;
+                        //this.particlesA[0].reset(this.projectile.position);
+
+                    }else{
+                        this.particlesA[0].reset(this.projectile.position.x,this.projectile.position.y);
+                        this.particlesA[1].reset(this.projectile.position.x,this.projectile.position.y);
+                        this.particlesA[2].reset(this.projectile.position.x,this.projectile.position.y);
+                        this.particlesA[3].reset(this.projectile.position.x,this.projectile.position.y);
+                        for(var i=0;i<4;i++)
+                            this.particlesA[i].Alive = true;
+
+                        this.particlesA[0].body.velocity.x=-30;
+                        this.particlesA[0].body.velocity.y=-30;
+
+                        this.particlesA[1].body.velocity.x=30;
+                        this.particlesA[1].body.velocity.y=-30;           
+
+                        this.particlesA[3].body.velocity.x=30;
+                        this.particlesA[3].body.velocity.y=30;     
+
+                        this.particlesA[2].body.velocity.x=-30;
+                        this.particlesA[2].body.velocity.y=30;
+                        //this.particlesA[0].reset(this.projectile.position);
+                    }
+
+
+
+                }
+
+                //Comportamiento si attacking es false, es el movimiento con las flechas 
+                if(!zelda.LinkObject.attacking&&!zelda.LinkObject.grabbingObject){
+                    if(zelda.gameOptions.cameraArrivedPos){
+                        if(this.cursors.left.isDown){
+
+                            //this.Link.body.velocity.x = -zelda.gameOptions.linkSpeed;
+                            this.LinkCollider.body.velocity.x= -zelda.gameOptions.linkSpeed;
+
+                            if(zelda.LinkObject.hurt)
+                                this.animations.play("movingSideWaysHurt");
+                            else
+                                this.animations.play("movingSideWays");
+
                             this.scale.x = -1;
+                            zelda.LinkObject.ResetLooking();
+                            zelda.LinkObject.lookingLeft = true;
+                        }else if(this.cursors.right.isDown){
+
                             if(zelda.LinkObject.hurt)
-                                this.frame = 14;
-                            else 
-                                this.frame = 4;
-                        }else if(zelda.LinkObject.lookingDown){
+                                this.animations.play("movingSideWaysHurt");
+                            else
+                                this.animations.play("movingSideWays");
+
+                            this.scale.setTo(1);
+                            this.LinkCollider.body.velocity.x = zelda.gameOptions.linkSpeed;
+
+                            zelda.LinkObject.ResetLooking();
+                            zelda.LinkObject.lookingRight = true;
+                        }else if(this.cursors.up.isDown){
+                                //console.log(zelda.LinkObject.switched);
+
+
+                            if(!zelda.LinkObject.switched){
+                                zelda.LinkObject.switched = true;
+                                this.game.time.events.add(Phaser.Timer.SECOND * 0.15,zelda.LinkPrefab.switchLinkScale , this.level,this);
+
+                            }
+                            this.LinkCollider.body.velocity.y = -zelda.gameOptions.linkSpeed;
+
                             if(zelda.LinkObject.hurt)
-                                this.frame = 14;
-                            else    
-                                this.frame = 0;
-                        }else{
+                                this.animations.play("movingUpHurt");
+                            else
+                                this.animations.play('movingUp');
+
+                            zelda.LinkObject.ResetLooking();
+                            zelda.LinkObject.lookingUp = true;
+
+                        }else if(this.cursors.down.isDown){
+                            this.scale.setTo(1);
+                            this.LinkCollider.body.velocity.y = zelda.gameOptions.linkSpeed;
+
                             if(zelda.LinkObject.hurt)
-                                this.frame = 18;
-                            else 
-                                this.frame = 4;
+                                this.animations.play("movingDownHurt");
+                            else
+                                this.animations.play('movingDown');
+
+                            zelda.LinkObject.ResetLooking();
+                            zelda.LinkObject.lookingDown = true;
                         }
+                        else {
+                            if(zelda.LinkObject.lookingUp){
+                                this.animations.stop();
+                            }else if(zelda.LinkObject.lookingLeft){
+                                this.scale.x = -1;
+                                if(zelda.LinkObject.hurt)
+                                    this.frame = 14;
+                                else 
+                                    this.frame = 4;
+                            }else if(zelda.LinkObject.lookingDown){
+                                if(zelda.LinkObject.hurt)
+                                    this.frame = 14;
+                                else    
+                                    this.frame = 0;
+                            }else{
+                                if(zelda.LinkObject.hurt)
+                                    this.frame = 18;
+                                else 
+                                    this.frame = 4;
+                            }
 
 
-                    }
-            }else{
-                this.animations.stop();
-            }
-            }
-            //Comportamiento si aun no se ha hecho invoke al método que pone attacking en false
-            else if(!zelda.LinkObject.calledNotAttack&&zelda.LinkObject.attacking){
-                if(zelda.LinkObject.lookingDown){
-                    this.scale.setTo(1);
-
-                    if(zelda.LinkObject.hurt)
-                        this.frame = 23;
-                    else    
-                        this.frame = 9;
-
-                }else if(zelda.LinkObject.lookingUp){
-                    this.scale.setTo(1);
-
-                    if(zelda.LinkObject.hurt)
-                        this.frame = 24;
-                    else
-                        this.frame = 10;
-
-                }else if(zelda.LinkObject.lookingLeft){
-                    this.scale.x = -1;
-                    if(zelda.LinkObject.hurt)
-                        this.frame = 25;
-                    else
-                        this.frame = 11;
-                }else{this.scale.setTo(1);
-                    if(zelda.LinkObject.hurt)
-                        this.frame = 25;
-                    else
-                        this.frame = 11;
-                }
-
-                this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.LinkPrefab.makeLinkNotAttack , this.level, this);
-                zelda.LinkObject.calledNotAttack = true;
-
-                zelda.LinkPrefab.createSword(this);
-            }
-            //Comportamiento si ya se ha hecho el invoke al método que pone attacking en false pero aun no se ha llamado a dicho método
-            else{
-                if(zelda.LinkObject.lookingDown){
-                    if(zelda.LinkObject.hurt)
-                        this.frame = 23;
-                    else
-                        this.frame = 9;
-                }else if(zelda.LinkObject.lookingUp){
-                    this.scale.setTo(1);
-                    if(zelda.LinkObject.hurt)
-                        this.frame = 24;
-                    else
-                        this.frame = 10;
-                }else if(zelda.LinkObject.lookingLeft){
-                    if(zelda.LinkObject.hurt)
-                        this.frame = 25;
-                    else
-                        this.frame = 11;
+                        }
                 }else{
-                    if(zelda.LinkObject.hurt)
-                        this.frame = 25;
-                    else
-                        this.frame = 11;
+                    this.animations.stop();
                 }
-                //this.createSword();
-            }
+                }
+                //Comportamiento si aun no se ha hecho invoke al método que pone attacking en false
+                else if(!zelda.LinkObject.calledNotAttack&&zelda.LinkObject.attacking){
+                    if(zelda.LinkObject.lookingDown){
+                        this.scale.setTo(1);
 
-            if(zelda.LinkObject.grabbingObject&&!zelda.LinkObject.hasTriforce){
-                this.game.time.events.add(Phaser.Timer.SECOND * 1,zelda.LinkPrefab.StopGrabbing , this.level);
-                this.frame = 13;
-            }else if(zelda.LinkObject.grabbingObject){
-                this.frame = 13;
+                        if(zelda.LinkObject.hurt)
+                            this.frame = 23;
+                        else    
+                            this.frame = 9;
+
+                    }else if(zelda.LinkObject.lookingUp){
+                        this.scale.setTo(1);
+
+                        if(zelda.LinkObject.hurt)
+                            this.frame = 24;
+                        else
+                            this.frame = 10;
+
+                    }else if(zelda.LinkObject.lookingLeft){
+                        this.scale.x = -1;
+                        if(zelda.LinkObject.hurt)
+                            this.frame = 25;
+                        else
+                            this.frame = 11;
+                    }else{this.scale.setTo(1);
+                        if(zelda.LinkObject.hurt)
+                            this.frame = 25;
+                        else
+                            this.frame = 11;
+                    }
+
+                    this.game.time.events.add(Phaser.Timer.SECOND * 0.2,zelda.LinkPrefab.makeLinkNotAttack , this.level, this);
+                    zelda.LinkObject.calledNotAttack = true;
+
+                    zelda.LinkPrefab.createSword(this);
+                }
+                //Comportamiento si ya se ha hecho el invoke al método que pone attacking en false pero aun no se ha llamado a dicho método
+                else{
+                    if(zelda.LinkObject.lookingDown){
+                        if(zelda.LinkObject.hurt)
+                            this.frame = 23;
+                        else
+                            this.frame = 9;
+                    }else if(zelda.LinkObject.lookingUp){
+                        this.scale.setTo(1);
+                        if(zelda.LinkObject.hurt)
+                            this.frame = 24;
+                        else
+                            this.frame = 10;
+                    }else if(zelda.LinkObject.lookingLeft){
+                        if(zelda.LinkObject.hurt)
+                            this.frame = 25;
+                        else
+                            this.frame = 11;
+                    }else{
+                        if(zelda.LinkObject.hurt)
+                            this.frame = 25;
+                        else
+                            this.frame = 11;
+                    }
+                    //this.createSword();
+                }
+
+                if(zelda.LinkObject.grabbingObject&&!zelda.LinkObject.hasTriforce){
+                    this.game.time.events.add(Phaser.Timer.SECOND * 1,zelda.LinkPrefab.StopGrabbing , this.level);
+                    this.frame = 13;
+                }else if(zelda.LinkObject.grabbingObject){
+                    this.frame = 13;
+                }
+            }else{
+                    if(!this.wasPaused){
+                        this.wasPaused = true;
+                        this.projectile.previousVelocityX = this.projectile.body.velocity.x; 
+                        this.projectile.previousVelocityY = this.projectile.body.velocity.y; 
+                        this.animations.stop();
+                        this.body.velocity.setTo(0);
+                        this.LinkCollider.body.velocity.setTo(0);
+
+                        this.projectile.body.velocity.setTo(0);
+                        this.prevVelocity = this.body.velocity;
+
+                        this.body.velocity.setTo(0);
+                        this.animations.stop();
+                    }
+
+
+
+            }
+            if(this.spriteSueloEscaleras.Alive){
+                this.spriteSueloEscaleras.kill();
+                this.spriteSueloEscaleras.Alive = false;
             }
         }else{
-                if(!this.wasPaused){
-                    this.wasPaused = true;
-                    this.projectile.previousVelocityX = this.projectile.body.velocity.x; 
-                    this.projectile.previousVelocityY = this.projectile.body.velocity.y; 
-                    this.animations.stop();
-                    this.body.velocity.setTo(0);
-                    this.LinkCollider.body.velocity.setTo(0);
-
-                    this.projectile.body.velocity.setTo(0);
-                    this.prevVelocity = this.body.velocity;
-
-                    this.body.velocity.setTo(0);
-                    this.animations.stop();
+            if(zelda.LinkObject.goingDownStairWay&&!zelda.LinkObject.calledChangeLater){
+                if(!zelda.LinkObject.switched){
+                    zelda.LinkObject.switched = true;
+                    this.game.time.events.add(Phaser.Timer.SECOND * 0.15,zelda.LinkPrefab.switchLinkScale , this.level,this);
                 }
+                this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround.x,zelda.LinkObject.whereToPlaceStairWayGround.y+16);
+                this.spriteSueloEscaleras.Alive = true;
+                this.LinkCollider.body.velocity.x = 0;
+                this.LinkCollider.body.velocity.y = 15;
+                this.game.time.events.add(Phaser.Timer.SECOND * 0.94,zelda.LinkPrefab.changeScene, this.level);
+                if(!zelda.LinkPrefab.stairsSound.isPlaying)
+                zelda.LinkPrefab.stairsSound.play();
 
+            }else if(zelda.LinkObject.goingUpStairWay){
+                //console.log(this.spriteSueloEscaleras);
+                //this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.changeScene, this.level);
+                this.spriteSueloEscaleras.reset(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
+                //this.LinkCollider.body.velocity.x = 0;
+                this.LinkCollider.body.velocity.y = -12;
+                this.animations.play("movingDown");
+
+                if(!zelda.LinkPrefab.stairsSound.isPlaying)
+                zelda.LinkPrefab.stairsSound.play();
+
+
+                if(this.position.y+8<this.spriteSueloEscaleras.position.y&&this.spriteSueloEscaleras.Alive){
+                    zelda.LinkObject.goingUpStairWay = false;
+                    zelda.overworld.createEnemiesOfCurrentZone();
+                }
+                this.spriteSueloEscaleras.Alive = true;
+            }
 
 
         }
-        if(this.spriteSueloEscaleras.Alive){
-            this.spriteSueloEscaleras.kill();
-            this.spriteSueloEscaleras.Alive = false;
-        }
+        //console.log(zelda.LinkObject.currentHearts);
     }else{
-        if(zelda.LinkObject.goingDownStairWay&&!zelda.LinkObject.calledChangeLater){
-            if(!zelda.LinkObject.switched){
-                zelda.LinkObject.switched = true;
-                this.game.time.events.add(Phaser.Timer.SECOND * 0.15,zelda.LinkPrefab.switchLinkScale , this.level,this);
-            }
-            this.spriteSueloEscaleras.reset(zelda.LinkObject.whereToPlaceStairWayGround.x,zelda.LinkObject.whereToPlaceStairWayGround.y+16);
-            this.spriteSueloEscaleras.Alive = true;
-            this.LinkCollider.body.velocity.x = 0;
-            this.LinkCollider.body.velocity.y = 15;
-            this.game.time.events.add(Phaser.Timer.SECOND * 0.94,zelda.LinkPrefab.changeScene, this.level);
-            if(!zelda.LinkPrefab.stairsSound.isPlaying)
-            zelda.LinkPrefab.stairsSound.play();
+        if(!zelda.LinkPrefab.dieMusic.isPlaying){
+            if(!this.playedDeathMusicOnce){
+                zelda.LinkPrefab.dieMusic.play();
+                this.playedDeathMusicOnce = true;
+            }else{
+                //CAMBIO DE ESCENA
+                zelda.game.state.start("game_over");
 
-        }else if(zelda.LinkObject.goingUpStairWay){
-            //console.log(this.spriteSueloEscaleras);
-            //this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.changeScene, this.level);
-            this.spriteSueloEscaleras.reset(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY);
-            //this.LinkCollider.body.velocity.x = 0;
-            this.LinkCollider.body.velocity.y = -12;
-            this.animations.play("movingDown");
-            
-            if(!zelda.LinkPrefab.stairsSound.isPlaying)
-            zelda.LinkPrefab.stairsSound.play();
-            
-            
-            if(this.position.y+8<this.spriteSueloEscaleras.position.y&&this.spriteSueloEscaleras.Alive){
-                zelda.LinkObject.goingUpStairWay = false;
-                zelda.overworld.createEnemiesOfCurrentZone();
             }
-            this.spriteSueloEscaleras.Alive = true;
-        }
+        }       
         
         
+        console.log(zelda.LinkPrefab.dieMusic);
+        this.level.music.stop();
+        this.LinkCollider.body.velocity.setTo(0);
+        this.animations.play("Die");
     }
-    //console.log(zelda.LinkObject.currentHearts);
-    
 }
 
 //FINAL DEL UPDATE=========================================================================================================================================
