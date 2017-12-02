@@ -447,13 +447,13 @@ zelda.LinkPrefab.prototype.update = function(){
                 //this.createSword();
             }
 
-            if(zelda.LinkObject.grabbingObject){
+            if(zelda.LinkObject.grabbingObject&&!zelda.LinkObject.hasTriforce){
                 this.game.time.events.add(Phaser.Timer.SECOND * 1,zelda.LinkPrefab.StopGrabbing , this.level);
+                this.frame = 13;
+            }else if(zelda.LinkObject.grabbingObject){
                 this.frame = 13;
             }
         }else{
-
-
                 if(!this.wasPaused){
                     this.wasPaused = true;
                     this.projectile.previousVelocityX = this.projectile.body.velocity.x; 

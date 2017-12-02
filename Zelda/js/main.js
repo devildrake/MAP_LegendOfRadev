@@ -157,6 +157,7 @@ zelda.LinkObject = {
     
     goingDownStairWay:false,
     goingUpStairWay:false,
+    hasTriforce:false,
     whereToPlaceStairWayGround: 0,
     sceneToGo : "none",
     calledChangeLater: false,
