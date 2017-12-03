@@ -64,6 +64,7 @@ zelda.overworld = {
         this.load.spritesheet("Boomerang","img/Boomerang.png",16,16);
         this.load.spritesheet("rupia", "img/RupiaSpriteSheet.png",16,16);
         this.load.audio("DieMusic","sounds/Music/DeathMusic.mp3");
+        this.load.image("SpikesTrap","img/SpikesTrap.png");
         
     },
 
@@ -186,6 +187,9 @@ zelda.overworld = {
         
         //this.goriya = new zelda.GoriyaPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.goriya);
+        
+        //this.trap = new zelda.SpikesTrapPrefab(this.game,640,850,1,this,1,30,0);
+        //this.game.add.existing(this.trap);
         
         this.loadHearts();
         this.loadRupies();
