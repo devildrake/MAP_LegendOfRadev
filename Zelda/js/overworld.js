@@ -65,6 +65,7 @@ zelda.overworld = {
         this.load.spritesheet("rupia", "img/RupiaSpriteSheet.png",16,16);
         this.load.audio("DieMusic","sounds/Music/DeathMusic.mp3");
         this.load.image("SpikesTrap","img/SpikesTrap.png");
+        this.load.spritesheet("Aquamentus","img/AquamentusSpriteSheet.png",32,32);
         
     },
 
@@ -221,6 +222,9 @@ zelda.overworld = {
         //this.keese = new zelda.KeesePrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.keese);
 
+        this.aquamentus = new zelda.AquamentusPrefab(this.game,640,850,1,this,1);
+        this.game.add.existing(this.aquamentus);
+        
         this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
         
         
@@ -237,7 +241,7 @@ zelda.overworld = {
         
         this.LinkSecretRoomColision();
         
-        console.log(this.mustCreateEnemies);
+        //console.log(this.mustCreateEnemies);
         
         if(zelda.gameOptions.mustCreateEnemies){
             zelda.gameOptions.mustCreateEnemies = false;
