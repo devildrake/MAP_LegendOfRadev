@@ -11,7 +11,7 @@ zelda.game_over = {
     preload:function(){
         //this.game.stage.backgroundColor = "#ff0000";
         this.game.stage.backgroundColor = "#black";
-        this.load.image("radef","img/meme_radef.png",640,560);
+        this.load.image("radev","img/meme_radev.png",640,560);
     },
     
     create:function(){
@@ -19,7 +19,7 @@ zelda.game_over = {
     },
     
     update:function(){
-        this.background = this.game.add.sprite(0,0, "radef");
+        this.background = this.game.add.sprite(0,0, "radev");
 		this.background.scale.setTo(0.4);
         
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -29,17 +29,17 @@ zelda.game_over = {
         if(this.space.isDown ){
             
             this.selected=1;
-            this.DiedIn="dungeon";
+            //this.DiedIn="dungeon";
         }
         
         if(this.selected==1){
                 
-            if(this.DiedIn=="dungeon"){
+            if(this.level=="dungeon"){
                 zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
                 zelda.LinkObject.dying = false;
                 zelda.game.state.start("dungeon");
             }
-            else if(this.DiedIn=="overworld"){
+            else if(this.level=="overworld"){
                 
                 zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
                 zelda.LinkObject.dying = false;
