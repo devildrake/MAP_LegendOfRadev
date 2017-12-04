@@ -25,21 +25,21 @@ zelda.game_over = {
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         
         this.cursors = this.game.input.keyboard.createCursorKeys();
-        
+        //seleccionar cosas
         if(this.space.isDown ){
             
             this.selected=1;
             //this.DiedIn="dungeon";
         }
-        
+        //continuar
         if(this.selected==1){
                 
-            if(this.level=="dungeon"){
+            if(zelda.LinkObject.DiedIn=="dungeon"){
                 zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
                 zelda.LinkObject.dying = false;
                 zelda.game.state.start("dungeon");
             }
-            else if(this.level=="overworld"){
+            else if(zelda.LinkObject.DiedIn=="overworld"){
                 
                 zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
                 zelda.LinkObject.dying = false;
@@ -47,7 +47,18 @@ zelda.game_over = {
             }
             
         }
-        
+        //continuar desde origen
+        else if(this.selected==2){
+            
+            zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
+            zelda.LinkObject.dying = false;
+            zelda.game.state.start("overworld");
+        }
+        //guardar
+        else if(this.selected==3){
+            
+            
+        }
         
     }
   

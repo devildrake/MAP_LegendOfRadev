@@ -117,6 +117,9 @@ zelda.dungeon = {
         
         this.triforce = new zelda.TriforcePrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16-16,this);
         this.game.add.existing(this.triforce);
+        
+        //guardar en que escena esta por si muere
+        zelda.Linkobject.DiedIn="dungeon";
 
     },
     

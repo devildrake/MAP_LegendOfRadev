@@ -145,7 +145,7 @@ zelda.LinkObject = {
     currentHearts: 3,
     currentZone: 7*4+2,
     currentDungeonZone: 6*6+2,
-    
+    DiedIn:"none",    
     lastPositionX: 2*16*16+8*16,
     lastPositionY: 4*11*16 + 8*16,
     
