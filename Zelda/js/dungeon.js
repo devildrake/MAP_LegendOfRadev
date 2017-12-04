@@ -146,7 +146,9 @@ zelda.dungeon = {
         
         this.LinkBorderColision();
         
-        
+        if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.x)){
+            zelda.LinkObject.currentHearts -= 0.5;
+        }
     },
 	
 	//Metodo que encapsula el pintado de las puertas.
