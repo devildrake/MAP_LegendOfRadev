@@ -63,7 +63,7 @@ zelda.overworld = {
         this.load.spritesheet("Gel","img/GelSpriteSheet.png",16,16);
         this.load.spritesheet("Boomerang","img/Boomerang.png",16,16);
         this.load.spritesheet("rupia", "img/RupiaSpriteSheet.png",16,16);
-        this.load.audio("DieMusic","sounds/Music/DeathMusic.mp3");
+        this.load.audio("DieMusic","sounds/Music/DeathMusic.wav");
         this.load.image("SpikesTrap","img/SpikesTrap.png");
         this.load.spritesheet("Aquamentus","img/AquamentusSpriteSheet.png",32,32);
         
