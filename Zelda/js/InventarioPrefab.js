@@ -133,7 +133,6 @@ zelda.InventarioPrefab = function(game,x,y,level){
     }
     //comprobar si la camara se esta moviendo    
     if(this.movingCamera){
-        console.log("Shat");
 
         //poner aqui actualizacion objetos HUD para cuando se mueva
         //y cuando digo aqui no me refiero al for

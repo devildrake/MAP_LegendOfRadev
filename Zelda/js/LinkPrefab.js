@@ -41,6 +41,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 	game.add.existing(this);
 	this.cursors = game.input.keyboard.createCursorKeys();
 	this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);        
+    this.debugPosKey = this.game.input.keyboard.addKey(Phaser.Keyboard.L);
 
 	this.sword = this.game.add.sprite(0,0,"Sword");
 	this.sword.anchor.setTo(0.5);
@@ -148,6 +149,13 @@ zelda.LinkPrefab.prototype.constructor = zelda.LinkPrefab;
 //PRINCIPIO DEL UPDATE=========================================================================================================================================
 
 zelda.LinkPrefab.prototype.update = function(){
+    
+    
+    if(this.debugPosKey.isDown&&this.debugPosKey.downDuration(1)){
+        console.log(this.level.linkInstance.position);
+        console.log("Current zone = " + zelda.LinkObject.currentDungeonZone);
+    }
+    
     if(this.level == zelda.dungeon){
 		this.game.physics.arcade.collide(this.LinkCollider, this.level.obstacles1);
 		this.game.physics.arcade.collide(this.LinkCollider, this.level.obstacles2);

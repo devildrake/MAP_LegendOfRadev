@@ -38,6 +38,12 @@ zelda.AquamentusPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray)
     
     this.previousVelocity = this.body.velocity;
 
+    this.hitBox = game.add.sprite(this.body.position.x,this.body.position.y-16,"trigger");
+    this.hitBox.anchor.setTo(0.5);
+    this.hitBox.scale.setTo(1);
+    this.game.physics.arcade.enable(this.hitBox);
+    this.hitBox.parentObject = this;
+    
     
     this.projectile = game.add.sprite(this.body.position.x,this.body.position.y,"AquamentusProjectile");
     this.projectile.previousVelocityX=0;
@@ -123,10 +129,7 @@ zelda.AquamentusPrefab.prototype.update = function(){
             
             
             this.magnitude = (this.body.position.x - this.originalPos.x) * (this.body.position.x - this.originalPos.x);
-            this.magnitude = Math.sqrt(this.magnitude);
-
-            console.log(this.magnitude);
-            
+            this.magnitude = Math.sqrt(this.magnitude);            
             if(this.magnitude>50||this.magnitude<16.16){
                 this.body.velocity.x *=-1;
             }
@@ -293,95 +296,104 @@ zelda.AquamentusPrefab.prototype.update = function(){
                 });
 
                 this.animations.play("move");
+                
+                    if(this.projectile.Alive){
+                        this.game.physics.arcade.overlap(this.projectile,this.level.linkInstance,function(projectile,linkInstance){
+                            if(!zelda.LinkObject.hurt){
+                                    zelda.LinkObject.hurt = true;
+                                    zelda.LinkObject.moveFromDmg=true;
+                                    zelda.LinkObject.calledNotMoveFromDamage=false;
+                                    zelda.LinkObject.currentHearts-=0.5;
+                                    if(projectile.body.velocity.x>0){
+                                         zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right");   
+                                    }else if(projectile.body.velocity.x<0){
+                                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");   
 
-                this.game.physics.arcade.overlap(this.projectile,this.level.linkInstance,function(projectile,linkInstance){
-                    if(!zelda.LinkObject.hurt){
-                        if(linkInstance.LinkCollider.body.velocity.x!=0||linkInstance.LinkCollider.body.velocity.y!=0){
-                            zelda.LinkObject.hurt = true;
-                            zelda.LinkObject.moveFromDmg=true;
-                            zelda.LinkObject.calledNotMoveFromDamage=false;
-                            if(projectile.body.velocity.x>0){
-                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right");   
-                            }else if(projectile.body.velocity.x<0){
-                                zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");   
+                                    }else if(projectile.body.velocity.y>0){
+                                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Down");   
 
-                            }else if(projectile.body.velocity.y>0){
-                                zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Down");   
+                                    }else if(projectile.body.velocity.y<0){
+                                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");   
 
-                            }else if(projectile.body.velocity.y<0){
-                                zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");   
-
+                                    }
                             }
-                        }else if(linkInstance.LinkCollider.body.velocity.x==0&&linkInstance.LinkCollider.body.velocity.y==0){
-                            if(projectile.body.velocity.x>0){
-                                if(!zelda.LinkObject.lookingLeft){
-                                 zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right"); 
-                                zelda.LinkObject.hurt = true;
-                                zelda.LinkObject.moveFromDmg=true;
-                                zelda.LinkObject.calledNotMoveFromDamage=false;
 
-                                }else{
-                                    zelda.LinkPrefab.blockSound.play();
+                            projectile.Alive = false;
+                            projectile.kill();
 
-                                }
-                            }else if(projectile.body.velocity.x<0){
-                                if(!zelda.LinkObject.lookingRight){
-                                zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");  
-                                zelda.LinkObject.hurt = true;
-                                zelda.LinkObject.moveFromDmg=true;
-                                zelda.LinkObject.calledNotMoveFromDamage=false;
-
-                                }else{
-                                    zelda.LinkPrefab.blockSound.play();
-
-                                }
-                            }else if(projectile.body.velocity.y>0){
-                                if(!zelda.LinkObject.lookingUp){
-                                zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Down");
-                                zelda.LinkObject.hurt = true;
-                                zelda.LinkObject.moveFromDmg=true;
-                                zelda.LinkObject.calledNotMoveFromDamage=false;
-
-                                }else{
-                                    zelda.LinkPrefab.blockSound.play();
-
-                                }
-                            }else if(projectile.body.velocity.y<0){
-                                if(!zelda.LinkObject.lookingDown){
-                                zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");
-                                zelda.LinkObject.hurt = true;
-                                zelda.LinkObject.moveFromDmg=true;
-                                zelda.LinkObject.calledNotMoveFromDamage=false;
-                                }else{
-                                    zelda.LinkPrefab.blockSound.play();
-
-                                }
-                            }
-                        }
+                        });
                     }
+                
+                    if(this.projectile1.Alive){
+                        this.game.physics.arcade.overlap(this.projectile1,this.level.linkInstance,function(projectile,linkInstance){
+                            if(!zelda.LinkObject.hurt){
+                                    zelda.LinkObject.hurt = true;
+                                    zelda.LinkObject.moveFromDmg=true;
+                                    zelda.LinkObject.calledNotMoveFromDamage=false;
+                                    zelda.LinkObject.currentHearts-=0.5;
+                                    if(projectile.body.velocity.x>0){
+                                         zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right");   
+                                    }else if(projectile.body.velocity.x<0){
+                                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");   
 
-                    projectile.Alive = false;
-                    projectile.kill();
+                                    }else if(projectile.body.velocity.y>0){
+                                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Down");   
 
-                });
+                                    }else if(projectile.body.velocity.y<0){
+                                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");   
 
-                if(this.level.linkInstance.sword.Alive&&!this.hurtBySword){
-                        this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
-                            if(!npc.hurt){
-                                npc.lives--;
-                                npc.hurtSound.play();
+                                    }
                             }
-                            console.log(npc.lives);
-                            if(npc.lives==0){
+
+                            projectile.Alive = false;
+                            projectile.kill();
+
+                        });
+                    }
+                
+                    if(this.projectile2.Alive){
+                        this.game.physics.arcade.overlap(this.projectile2,this.level.linkInstance,function(projectile,linkInstance){
+                            if(!zelda.LinkObject.hurt){
+                                    zelda.LinkObject.hurt = true;
+                                    zelda.LinkObject.moveFromDmg=true;
+                                    zelda.LinkObject.calledNotMoveFromDamage=false;
+                                    zelda.LinkObject.currentHearts-=0.5;
+                                    if(projectile.body.velocity.x>0){
+                                         zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Right");   
+                                    }else if(projectile.body.velocity.x<0){
+                                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");   
+
+                                    }else if(projectile.body.velocity.y>0){
+                                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Down");   
+
+                                    }else if(projectile.body.velocity.y<0){
+                                        zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Up");   
+
+                                    }
+                            }
+
+                            projectile.Alive = false;
+                            projectile.kill();
+
+                        });
+                    }
+                if(this.level.linkInstance.sword.Alive&&!this.hurtBySword){
+                        this.game.physics.arcade.overlap(this.hitBox,this.level.linkInstance.sword,function(npc,linkSword){
+                            if(!npc.parentObject.hurt){
+                                npc.parentObject.lives--;
+                                npc.parentObject.hurtSound.play();
+                            }
+                            console.log(npc.parentObject.lives);
+                            if(npc.parentObject.lives==0){
                                 //npc.kill();
                                 //npc.Alive = false;
 
-                                zelda.AIMethods.Die(npc);
+                                zelda.AIMethods.Die(npc.parentObject);
 
                             }else{
-                                npc.previousVelocity = npc.body.velocity;
-                                npc.hurt = true;
-                                npc.calledNotHurt = false;
+                                npc.parentObject.previousVelocity = npc.parentObject.body.velocity;
+                                npc.parentObject.hurt = true;
+                                npc.parentObject.calledNotHurt = false;
                                 var whereTo = "Right";
 
                                 if(zelda.LinkObject.lookingDown){
@@ -391,8 +403,8 @@ zelda.AquamentusPrefab.prototype.update = function(){
                                 }else if(zelda.LinkObject.lookingUp){
                                     whereTo="Up";
                                 }
-                                npc.previousVelocity = npc.body.velocity;
-                                zelda.AIMethods.GetHurt(npc,whereTo);
+                                npc.parentObject.previousVelocity = npc.parentObject.body.velocity;
+                                //zelda.AIMethods.GetHurt(npc.parentObject,whereTo);
                             }
                         });
                     }else{
@@ -401,24 +413,24 @@ zelda.AquamentusPrefab.prototype.update = function(){
 
 
                 if(this.level.linkInstance.projectile.Alive){
-                        this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
-                            npc.level.linkInstance.projectile.kill();
-                            npc.level.linkInstance.projectile.Alive = false;
+                        this.game.physics.arcade.overlap(this.hitBox,this.level.linkInstance.projectile,function(npc,projectile){
+                            npc.parentObject.level.linkInstance.projectile.kill();
+                            npc.parentObject.level.linkInstance.projectile.Alive = false;
 
                             if(!npc.hurt){
-                            npc.lives--;
-                            npc.hurtSound.play();
+                            npc.parentObject.lives--;
+                            npc.parentObject.hurtSound.play();
                             }
-                            console.log(npc.lives);
-                            if(npc.lives==0){
+                            console.log(npc.parentObject.lives);
+                            if(npc.parentObject.lives==0){
                                 //npc.kill();
                                 //npc.Alive = false;
 
-                                zelda.AIMethods.Die(npc);
+                                zelda.AIMethods.Die(npc.parentObject);
                             }else{
-                                    npc.previousVelocity = npc.body.velocity;
-                                npc.hurt = true;
-                                npc.calledNotHurt = false;
+                                    npc.parentObject.previousVelocity = npc.parentObject.body.velocity;
+                                npc.parentObject.hurt = true;
+                                npc.parentObject.calledNotHurt = false;
 
                                 var whereTo = "Right";
 
@@ -432,8 +444,8 @@ zelda.AquamentusPrefab.prototype.update = function(){
                                 }
 
 
-                                npc.previousVelocity = npc.body.velocity;
-                                zelda.AIMethods.GetHurt(npc,whereTo);
+                                npc.parentObject.previousVelocity = npc.parentObject.body.velocity;
+                                //zelda.AIMethods.GetHurt(npc.parentObject,whereTo);
                             }
                         });
                 }
@@ -464,7 +476,8 @@ zelda.AquamentusPrefab.prototype.update = function(){
     else{
         zelda.AIMethods.Spawning(this,true);
     }
-    
+    this.hitBox.body.position.x = this.body.position.x+4;
+    this.hitBox.body.position.y = this.body.position.y;
 }
 
 

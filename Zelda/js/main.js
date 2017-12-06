@@ -192,13 +192,17 @@ zelda.LinkObject = {
     },
 }
 
+zelda.dungeonEnemySpawns = {
+    
+}
+
 //Crear 10 bools por zona?
 zelda.enemySpawns = {
-zones: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-posicionesEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-especieEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-tipoEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-initialSpeedEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+zones: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+posicionesEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+especieEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+tipoEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+initialSpeedEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 
     
 InitZones:function(){
@@ -237,7 +241,14 @@ InitZones:function(){
     zelda.enemySpawns.zones[32] = [true,true,true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.zones[33] = [true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.zones[34] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-    
+    zelda.enemySpawns.zones[35] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+    zelda.enemySpawns.zones[36] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+    zelda.enemySpawns.zones[37] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+    zelda.enemySpawns.zones[38] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+    zelda.enemySpawns.zones[39] = [true,true,true,true]; //Stalfos - Stalfos - Stalfos - Stalfos
+    zelda.enemySpawns.zones[40] = []; 
+    zelda.enemySpawns.zones[41] = []; 
+
     
 
     
@@ -277,6 +288,14 @@ InitZones:function(){
     zelda.enemySpawns.posicionesEnemigos[33] = [1345,820,1382,824,1365,896,1416,883]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.posicionesEnemigos[34] = [1655,841,1657,862,1568,856,1722,842,1738,823,1678,900]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar 
     
+    zelda.enemySpawns.posicionesEnemigos[35] = [438,837,400,902,346,908,361,827]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
+    zelda.enemySpawns.posicionesEnemigos[36] = []; 
+    zelda.enemySpawns.posicionesEnemigos[37] = [1007,891,1007,891,1007,891,1007,891,1007,891,1007,891];
+    zelda.enemySpawns.posicionesEnemigos[38] = [1170,860,1128,864,1170,817,1196,871,1219,896]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.posicionesEnemigos[39] = [1345,820,1382,824,1365,896,1416,883]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.posicionesEnemigos[40] = [873,1016,903,982,903,951,968,936,968,998];
+    zelda.enemySpawns.posicionesEnemigos[41] = [1655,841,1657,862,1568,856,1722,842,1738,823,1678,900]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja -  
+
     zelda.enemySpawns.especieEnemigos[0] = [];
     zelda.enemySpawns.especieEnemigos[1] = [];
     zelda.enemySpawns.especieEnemigos[2] = ["Oktorok"];                           //OktorokNaranja
@@ -311,7 +330,14 @@ InitZones:function(){
     zelda.enemySpawns.especieEnemigos[31] = ["Oktorok","Oktorok","Oktorok","Oktorok","Oktorok"];
     zelda.enemySpawns.especieEnemigos[32] = ["Tektite","Tektite","Tektite","Tektite","Tektite","Tektite"]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.especieEnemigos[33] = ["Tektite","Tektite","Tektite","Tektite"]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    zelda.enemySpawns.especieEnemigos[34] = ["Leever","Leever","Leever","Leever","Leever","RiverZola"]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar    
+    zelda.enemySpawns.especieEnemigos[34] = ["Leever","Leever","Leever","Leever","Leever","RiverZola"]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar   
+    zelda.enemySpawns.especieEnemigos[35] = ["RiverZola","Leever","Peahat","Leever"]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
+    zelda.enemySpawns.especieEnemigos[36] = ["Tektite","Tektite","Tektite","Tektite"]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
+    zelda.enemySpawns.especieEnemigos[37] = []; 
+    zelda.enemySpawns.especieEnemigos[38] = ["Oktorok","Oktorok","Oktorok","Oktorok","Oktorok"];
+    zelda.enemySpawns.especieEnemigos[39] = ["Stalfos","Stalfos","Stalfos","Stalfos","Stalfos"]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.especieEnemigos[40] = ["Tektite","Tektite","Tektite","Tektite"]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.especieEnemigos[41] = ["Leever","Leever","Leever","Leever","Leever","RiverZola"]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja -     
     
     zelda.enemySpawns.tipoEnemigos[0] = [];
     zelda.enemySpawns.tipoEnemigos[1] = [];
@@ -348,6 +374,13 @@ InitZones:function(){
     zelda.enemySpawns.tipoEnemigos[32] = [1,1,1,1,1,1]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.tipoEnemigos[33] = [1,1,1,1]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.tipoEnemigos[34] = [0,0,0,0,0,0]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+    zelda.enemySpawns.tipoEnemigos[35] = [0,1,0,1]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
+    zelda.enemySpawns.tipoEnemigos[36] = [0,0,0,0]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
+    zelda.enemySpawns.tipoEnemigos[37] = []; 
+    zelda.enemySpawns.tipoEnemigos[38] = [0,0,0,0,0];
+    zelda.enemySpawns.tipoEnemigos[39] = [0,0,0,0,0]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.tipoEnemigos[40] = [1,1,1,1]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.tipoEnemigos[41] = [0,0,0,0,0,0]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
     
     zelda.enemySpawns.initialSpeedEnemigos[0] = [];
     zelda.enemySpawns.initialSpeedEnemigos[1] = [];
@@ -384,7 +417,14 @@ InitZones:function(){
     zelda.enemySpawns.initialSpeedEnemigos[32] = [30,30,30,30,30,30]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.initialSpeedEnemigos[33] = [30,30,30,30]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.initialSpeedEnemigos[34] = [1,1,1,1,1,1]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-    
+    zelda.enemySpawns.initialSpeedEnemigos[35] = [30,30,30,30]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
+    zelda.enemySpawns.initialSpeedEnemigos[36] = []; 
+    zelda.enemySpawns.initialSpeedEnemigos[37] = [1,1,1,1,1];
+    zelda.enemySpawns.initialSpeedEnemigos[38] = [30,30,30,30,30,30]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.initialSpeedEnemigos[39] = [0,0,0,0,0]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
+    zelda.enemySpawns.initialSpeedEnemigos[40] = [1,1,1,1,1,1]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+    zelda.enemySpawns.initialSpeedEnemigos[41] = [1,1,1,1,1,1]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
+
     /*
     zelda.enemySpawns.posicionesEnemigos[31] = [1007,891,1007,891,1007,891,1007,891,1007,891];
     zelda.enemySpawns.especieEnemigos[31] = ["Oktorok","Oktorok","Oktorok","Oktorok","Oktorok"];
@@ -1204,7 +1244,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 
 
 //Escena que se pinta
-zelda.game.state.start("overworld");
+zelda.game.state.start("dungeon");
 
 //zelda.game.state.start("dungeon");
 

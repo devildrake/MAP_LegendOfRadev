@@ -28,7 +28,7 @@ zelda.overworld = {
         this.load.spritesheet("sword", "img/Swords.png", 16,16);
         //this.load.image("arco","img/bow.png");
         this.load.image("shield","img/escudo.png");
-        //this.load.image("trigger", "img/trigger_salas_color.png");
+        this.load.image("triggerColor", "img/trigger_salas_color.png");
         this.load.image("trigger", "img/trigger_salas.png"); //trigger invisible
         this.load.image("rockProjectile","img/RockProjectile.png");
         this.load.spritesheet("riverZolaProjectile","img/ProyectilRiverZola.png",16,16);
@@ -164,7 +164,8 @@ zelda.overworld = {
 		this.trigger_K_2 = this.game.add.sprite(6*16*16+11*16, 16*11+2*16+5*16    , "trigger");
 		this.game.physics.arcade.enable(this.trigger_K_2);
         
-        
+        this.trigger_Dungeon = this.game.add.sprite(624,144, "trigger");
+        this.game.physics.arcade.enable(this.trigger_Dungeon);
         
         
         //this.oktorok = new zelda.OktorokPrefab(this.game,640,850,1,this,1);
@@ -224,8 +225,8 @@ zelda.overworld = {
         //this.keese = new zelda.KeesePrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.keese);
 
-        this.aquamentus = new zelda.AquamentusPrefab(this.game,640,850,1,this,1);
-        this.game.add.existing(this.aquamentus);
+        //this.aquamentus = new zelda.AquamentusPrefab(this.game,640,850,1,this,1);
+        //this.game.add.existing(this.aquamentus);
         
         this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
         
@@ -516,6 +517,17 @@ zelda.overworld = {
                 zelda.LinkPrefab.stairWayDown(posToSpawnSprite,"sword_room");
             }
         });
+            
+        this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_Dungeon, function(){
+            if(zelda.LinkObject.lookingUp){
+                zelda.overworld.linkInstance.LinkCollider.body.position.x = zelda.overworld.trigger_Dungeon.body.position.x+4;
+                zelda.LinkObject.lastPositionX = zelda.overworld.trigger_Dungeon.body.position.x+8;
+                zelda.LinkObject.lastPositionY = zelda.overworld.linkInstance.position.y+9;
+                zelda.overworld.music.stop();
+                var posToSpawnSprite = zelda.overworld.trigger_Dungeon.body.position;
+                zelda.LinkPrefab.stairWayDown(posToSpawnSprite,"dungeon");
+            }
+		});
         
         this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_D, function(){
             if(zelda.LinkObject.lookingUp){
@@ -580,6 +592,7 @@ zelda.overworld = {
             zelda.overworld.music.stop();
             zelda.game.state.start("secret_room_M");
 		});
+		
 		
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger_I_2, function(){
 			zelda.LinkObject.lastPositionX = zelda.overworld.trigger_I_2.position.x - 8;

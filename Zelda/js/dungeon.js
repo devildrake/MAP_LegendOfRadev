@@ -119,7 +119,7 @@ zelda.dungeon = {
         this.game.add.existing(this.triforce);
         
         //guardar en que escena esta por si muere
-        zelda.Linkobject.DiedIn="dungeon";
+        zelda.LinkObject.DiedIn="dungeon";
 
     },
     
