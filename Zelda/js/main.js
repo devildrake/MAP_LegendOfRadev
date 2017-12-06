@@ -194,15 +194,241 @@ zelda.LinkObject = {
 
 zelda.dungeonEnemySpawns = {
     
-}
+    zones: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    posicionesEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    especieEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    tipoEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    initialSpeedEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 
+    
+InitZones:function(){
+    zelda.dungeonEnemySpawns.zones[0] = [];
+    zelda.dungeonEnemySpawns.zones[1] = [];
+    zelda.dungeonEnemySpawns.zones[2] = [];    
+    zelda.dungeonEnemySpawns.zones[3] = []; 
+    zelda.dungeonEnemySpawns.zones[4] = [];
+    zelda.dungeonEnemySpawns.zones[5] = [];      
+    zelda.dungeonEnemySpawns.zones[6] = [];
+    zelda.dungeonEnemySpawns.zones[7] = [];
+    zelda.dungeonEnemySpawns.zones[8] = [];                     
+    zelda.dungeonEnemySpawns.zones[9] = [];           
+    zelda.dungeonEnemySpawns.zones[10] = [];    
+    zelda.dungeonEnemySpawns.zones[11] = []; 
+    zelda.dungeonEnemySpawns.zones[12] = []; 
+    zelda.dungeonEnemySpawns.zones[13] = []; 
+    zelda.dungeonEnemySpawns.zones[14] = [];             
+    zelda.dungeonEnemySpawns.zones[15] = [];    
+    zelda.dungeonEnemySpawns.zones[16] = [];      
+    zelda.dungeonEnemySpawns.zones[17] = [];     
+    zelda.dungeonEnemySpawns.zones[18] = [];           
+    zelda.dungeonEnemySpawns.zones[19] = [];     
+    zelda.dungeonEnemySpawns.zones[20] = [];              
+    zelda.dungeonEnemySpawns.zones[21] = [];         
+    zelda.dungeonEnemySpawns.zones[22] = [];          
+    zelda.dungeonEnemySpawns.zones[23] = [];        
+    zelda.dungeonEnemySpawns.zones[24] = [];           
+    zelda.dungeonEnemySpawns.zones[25] = [];      
+    zelda.dungeonEnemySpawns.zones[26] = [];     
+    zelda.dungeonEnemySpawns.zones[27] = [];      
+    zelda.dungeonEnemySpawns.zones[28] = []; 
+    zelda.dungeonEnemySpawns.zones[29] = []; 
+    zelda.dungeonEnemySpawns.zones[30] = []; 
+    zelda.dungeonEnemySpawns.zones[31] = []; 
+    zelda.dungeonEnemySpawns.zones[32] = [true,true,true]; //Stalfos-Stalfos-Stalfos
+    zelda.dungeonEnemySpawns.zones[33] = [];
+    zelda.dungeonEnemySpawns.zones[34] = []; 
+    zelda.dungeonEnemySpawns.zones[35] = []; 
+    zelda.dungeonEnemySpawns.zones[36] = []; 
+    zelda.dungeonEnemySpawns.zones[37] = [true,true,true]; //Keese - Keese - Keese
+    zelda.dungeonEnemySpawns.zones[38] = []; 
+    zelda.dungeonEnemySpawns.zones[39] = [true,true,true,true]; //Stalfos - Stalfos - Stalfos - Stalfos
+    zelda.dungeonEnemySpawns.zones[40] = []; 
+    zelda.dungeonEnemySpawns.zones[41] = []; 
+
+    
+
+    
+    zelda.dungeonEnemySpawns.posicionesEnemigos[0] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[1] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[2] = [];                           
+    zelda.dungeonEnemySpawns.posicionesEnemigos[3] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[4] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[5] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[6] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[7] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[8] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[9] = [];               
+    zelda.dungeonEnemySpawns.posicionesEnemigos[10] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[11] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[12] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[13] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[14] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[15] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[16] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[17] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[18] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[19] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[20] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[21] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[22] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[23] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[24] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[25] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[26] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[27] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[28] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[29] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[30] = []; 
+    zelda.dungeonEnemySpawns.posicionesEnemigos[31] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[32] = [616,774,663,774,680,740]; //Stalfos-Stalfos-Stalfos
+    zelda.dungeonEnemySpawns.posicionesEnemigos[33] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[34] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[35] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[36] = []; 
+    zelda.dungeonEnemySpawns.posicionesEnemigos[37] = [345,948,344,982,376,948];//Keese - Keese - Keese
+    zelda.dungeonEnemySpawns.posicionesEnemigos[38] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[39] = [1345,820,1382,824,1365,896,1416,883]; //Stalfos - Stalfos - Stalfos - Stalfos
+    zelda.dungeonEnemySpawns.posicionesEnemigos[40] = [];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[41] = [];
+    
+    zelda.dungeonEnemySpawns.especieEnemigos[0] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[1] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[2] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[3] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[4] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[5] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[6] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[7] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[8] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[9] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[10] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[11] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[12] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[13] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[14] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[15] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[16] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[17] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[18] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[19] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[20] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[21] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[22] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[23] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[24] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[25] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[26] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[27] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[28] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[29] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[30] = []; 
+    zelda.dungeonEnemySpawns.especieEnemigos[31] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[32] = ["Stalfos","Stalfos","Stalfos","Stalfos","Stalfos","Stalfos"];  //Stalfos-Stalfos-Stalfos
+    zelda.dungeonEnemySpawns.especieEnemigos[33] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[34] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[35] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[36] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[37] = ["Keese","Keese","Keese"]; //Keese - Keese - Keese
+    zelda.dungeonEnemySpawns.especieEnemigos[38] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[39] = ["Stalfos","Stalfos","Stalfos","Stalfos","Stalfos"]; //Stalfos - Stalfos - Stalfos - Stalfos
+    zelda.dungeonEnemySpawns.especieEnemigos[40] = [];
+    zelda.dungeonEnemySpawns.especieEnemigos[41] = [];
+    
+    zelda.dungeonEnemySpawns.tipoEnemigos[0] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[1] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[2] = [];                        
+    zelda.dungeonEnemySpawns.tipoEnemigos[3] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[4] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[5] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[6] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[7] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[8] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[9] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[10] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[11] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[12] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[13] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[14] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[15] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[16] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[17] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[18] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[19] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[20] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[21] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[22] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[23] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[24] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[25] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[26] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[27] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[28] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[29] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[30] = []; 
+    zelda.dungeonEnemySpawns.tipoEnemigos[31] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[32] = [1,1,1];  //Stalfos-Stalfos-Stalfos
+    zelda.dungeonEnemySpawns.tipoEnemigos[33] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[34] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[35] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[36] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[37] = [0,0,0]; //Keese - Keese - Keese
+    zelda.dungeonEnemySpawns.tipoEnemigos[38] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[39] = [0,0,0,0,0]; //Stalfos - Stalfos - Stalfos - Stalfos
+    zelda.dungeonEnemySpawns.tipoEnemigos[40] = [];
+    zelda.dungeonEnemySpawns.tipoEnemigos[41] = [];
+    
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[0] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[1] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[2] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[3] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[4] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[5] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[6] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[7] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[8] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[9] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[10] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[11] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[12] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[13] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[14] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[15] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[16] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[17] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[18] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[19] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[20] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[21] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[22] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[23] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[24] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[25] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[26] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[27] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[28] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[29] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[30] = []; 
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[31] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[32] = [1,1,1]; //Stalfos-Stalfos-Stalfos
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[33] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[34] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[35] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[36] = []; 
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[37] = [1,1,1];//Keese - Keese - Keese
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[38] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[39] = [0,0,0,0,0]; //Stalfos - Stalfos - Stalfos - Stalfos
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[40] = [];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[41] = [];
+    
+}
+}
 //Crear 10 bools por zona?
 zelda.enemySpawns = {
-zones: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-posicionesEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-especieEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-tipoEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-initialSpeedEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+zones: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+posicionesEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+especieEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+tipoEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+initialSpeedEnemigos: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 
     
 InitZones:function(){
@@ -241,14 +467,7 @@ InitZones:function(){
     zelda.enemySpawns.zones[32] = [true,true,true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.zones[33] = [true,true,true,true]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.zones[34] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-    zelda.enemySpawns.zones[35] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-    zelda.enemySpawns.zones[36] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-    zelda.enemySpawns.zones[37] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-    zelda.enemySpawns.zones[38] = [true,true,true,true,true,true]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-    zelda.enemySpawns.zones[39] = [true,true,true,true]; //Stalfos - Stalfos - Stalfos - Stalfos
-    zelda.enemySpawns.zones[40] = []; 
-    zelda.enemySpawns.zones[41] = []; 
-
+    
     
 
     
@@ -288,14 +507,6 @@ InitZones:function(){
     zelda.enemySpawns.posicionesEnemigos[33] = [1345,820,1382,824,1365,896,1416,883]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.posicionesEnemigos[34] = [1655,841,1657,862,1568,856,1722,842,1738,823,1678,900]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar 
     
-    zelda.enemySpawns.posicionesEnemigos[35] = [438,837,400,902,346,908,361,827]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
-    zelda.enemySpawns.posicionesEnemigos[36] = []; 
-    zelda.enemySpawns.posicionesEnemigos[37] = [1007,891,1007,891,1007,891,1007,891,1007,891,1007,891];
-    zelda.enemySpawns.posicionesEnemigos[38] = [1170,860,1128,864,1170,817,1196,871,1219,896]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    zelda.enemySpawns.posicionesEnemigos[39] = [1345,820,1382,824,1365,896,1416,883]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    zelda.enemySpawns.posicionesEnemigos[40] = [873,1016,903,982,903,951,968,936,968,998];
-    zelda.enemySpawns.posicionesEnemigos[41] = [1655,841,1657,862,1568,856,1722,842,1738,823,1678,900]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja -  
-
     zelda.enemySpawns.especieEnemigos[0] = [];
     zelda.enemySpawns.especieEnemigos[1] = [];
     zelda.enemySpawns.especieEnemigos[2] = ["Oktorok"];                           //OktorokNaranja
@@ -330,14 +541,7 @@ InitZones:function(){
     zelda.enemySpawns.especieEnemigos[31] = ["Oktorok","Oktorok","Oktorok","Oktorok","Oktorok"];
     zelda.enemySpawns.especieEnemigos[32] = ["Tektite","Tektite","Tektite","Tektite","Tektite","Tektite"]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.especieEnemigos[33] = ["Tektite","Tektite","Tektite","Tektite"]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    zelda.enemySpawns.especieEnemigos[34] = ["Leever","Leever","Leever","Leever","Leever","RiverZola"]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar   
-    zelda.enemySpawns.especieEnemigos[35] = ["RiverZola","Leever","Peahat","Leever"]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
-    zelda.enemySpawns.especieEnemigos[36] = ["Tektite","Tektite","Tektite","Tektite"]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
-    zelda.enemySpawns.especieEnemigos[37] = []; 
-    zelda.enemySpawns.especieEnemigos[38] = ["Oktorok","Oktorok","Oktorok","Oktorok","Oktorok"];
-    zelda.enemySpawns.especieEnemigos[39] = ["Stalfos","Stalfos","Stalfos","Stalfos","Stalfos"]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    zelda.enemySpawns.especieEnemigos[40] = ["Tektite","Tektite","Tektite","Tektite"]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    zelda.enemySpawns.especieEnemigos[41] = ["Leever","Leever","Leever","Leever","Leever","RiverZola"]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja -     
+    zelda.enemySpawns.especieEnemigos[34] = ["Leever","Leever","Leever","Leever","Leever","RiverZola"]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar    
     
     zelda.enemySpawns.tipoEnemigos[0] = [];
     zelda.enemySpawns.tipoEnemigos[1] = [];
@@ -374,13 +578,6 @@ InitZones:function(){
     zelda.enemySpawns.tipoEnemigos[32] = [1,1,1,1,1,1]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.tipoEnemigos[33] = [1,1,1,1]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.tipoEnemigos[34] = [0,0,0,0,0,0]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-    zelda.enemySpawns.tipoEnemigos[35] = [0,1,0,1]; //Bichomar - Subterraneo azul - Volador naranja - Subterraneo azul
-    zelda.enemySpawns.tipoEnemigos[36] = [0,0,0,0]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
-    zelda.enemySpawns.tipoEnemigos[37] = []; 
-    zelda.enemySpawns.tipoEnemigos[38] = [0,0,0,0,0];
-    zelda.enemySpawns.tipoEnemigos[39] = [0,0,0,0,0]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    zelda.enemySpawns.tipoEnemigos[40] = [1,1,1,1]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    zelda.enemySpawns.tipoEnemigos[41] = [0,0,0,0,0,0]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
     
     zelda.enemySpawns.initialSpeedEnemigos[0] = [];
     zelda.enemySpawns.initialSpeedEnemigos[1] = [];
@@ -417,14 +614,7 @@ InitZones:function(){
     zelda.enemySpawns.initialSpeedEnemigos[32] = [30,30,30,30,30,30]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.initialSpeedEnemigos[33] = [30,30,30,30]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
     zelda.enemySpawns.initialSpeedEnemigos[34] = [1,1,1,1,1,1]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-    zelda.enemySpawns.initialSpeedEnemigos[35] = [30,30,30,30]; //Tektite naranja - Tektite naranja - Tektite naranja - Tektite naranja
-    zelda.enemySpawns.initialSpeedEnemigos[36] = []; 
-    zelda.enemySpawns.initialSpeedEnemigos[37] = [1,1,1,1,1];
-    zelda.enemySpawns.initialSpeedEnemigos[38] = [30,30,30,30,30,30]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    zelda.enemySpawns.initialSpeedEnemigos[39] = [0,0,0,0,0]; //Tektite azul - Tektite azul - Tektite azul - Tektite azul
-    zelda.enemySpawns.initialSpeedEnemigos[40] = [1,1,1,1,1,1]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-    zelda.enemySpawns.initialSpeedEnemigos[41] = [1,1,1,1,1,1]; //Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - Subterraneo naranja - BichoMar
-
+    
     /*
     zelda.enemySpawns.posicionesEnemigos[31] = [1007,891,1007,891,1007,891,1007,891,1007,891];
     zelda.enemySpawns.especieEnemigos[31] = ["Oktorok","Oktorok","Oktorok","Oktorok","Oktorok"];
