@@ -11,18 +11,19 @@ zelda.AquamentusPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray)
     this.scale.setTo(1);
     this.anchor.setTo(.5);
     this.prevVelocity = new Phaser.Point(0,0);
-    this.maxVelocity = 50;
+    this.maxVelocity = 10;
     this.wasPaused = false;
     this.spawned  = false;
     this.calledSpawn = false;
     this.initialSpeed = initSpeed;
     this.hurtSound = this.game.add.audio("EnemyHurt");
-
-
-        this.lives = 6;
+    
+    this.originalPos = new Phaser.Point(x,y);
+    
+    this.lives = 6;
     
 
-        this.animations.add("move", [0,1,2,3], 5, true);
+    this.animations.add("move", [0,1,2,3], 5, true);
     
     this.animations.add("Spawn",[4,5,6],15,false);
 
@@ -38,7 +39,7 @@ zelda.AquamentusPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray)
     this.previousVelocity = this.body.velocity;
 
     
-    this.projectile = game.add.sprite(this.body.position.x,this.body.position.y,"Boomerang");
+    this.projectile = game.add.sprite(this.body.position.x,this.body.position.y,"AquamentusProjectile");
     this.projectile.previousVelocityX=0;
     this.projectile.previousVelocityY=0;
 	this.projectile.anchor.setTo(0.5);
@@ -47,26 +48,31 @@ zelda.AquamentusPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray)
     this.projectile.level = this.level;
     this.projectile.wasPaused = false;
     this.game.physics.arcade.enable(this.projectile);
+    this.projectile.animations.add("Go",[0,1],15,true);
     this.projectile.kill();
     
-    this.projectile1 = game.add.sprite(this.body.position.x,this.body.position.y,"Boomerang");
+    this.projectile1 = game.add.sprite(this.body.position.x,this.body.position.y,"AquamentusProjectile");
     this.projectile1.previousVelocityX=0;
     this.projectile1.previousVelocityY=0;
 	this.projectile1.anchor.setTo(0.5);
 	this.projectile1.scale.setTo(1);
     this.projectile1.Alive = false;
     this.projectile1.level = this.level;
+    this.projectile1.animations.add("Go",[0,1],15,true);
+
     this.projectile.wasPaused = false;
     this.game.physics.arcade.enable(this.projectile1);
     this.projectile1.kill();
     
-    this.projectile2 = game.add.sprite(this.body.position.x,this.body.position.y,"Boomerang");
+    this.projectile2 = game.add.sprite(this.body.position.x,this.body.position.y,"AquamentusProjectile");
     this.projectile2.previousVelocityX=0;
     this.projectile2.previousVelocityY=0;
 	this.projectile2.anchor.setTo(0.5);
 	this.projectile2.scale.setTo(1);
     this.projectile2.Alive = false;
     this.projectile2.level = this.level;
+    this.projectile2.animations.add("Go",[0,1],15,true);
+
     this.projectile2.wasPaused = false;
     this.game.physics.arcade.enable(this.projectile2);
     this.projectile2.kill();
@@ -99,7 +105,6 @@ zelda.AquamentusPrefab.prototype.constructor = zelda.AquamentusPrefab;
 
 
 zelda.AquamentusPrefab.prototype.update = function(){
-        
     if(this.spawned){
         if(!zelda.Inventory.InvON&&!zelda.Inventory.ScrollingInventory){
             
@@ -117,25 +122,21 @@ zelda.AquamentusPrefab.prototype.update = function(){
             }
             
             
-            if(this.body.velocity.x==0&&this.body.velocity.y==0&&!this.projectile.Alive){
-                zelda.AIMethods.changeDir(this,4,false);
+            this.magnitude = (this.body.position.x - this.originalPos.x) * (this.body.position.x - this.originalPos.x);
+            this.magnitude = Math.sqrt(this.magnitude);
+
+            console.log(this.magnitude);
+            
+            if(this.magnitude>50||this.magnitude<16.16){
+                this.body.velocity.x *=-1;
             }
+            
             this.game.physics.arcade.collide(this,this.level.obstacles);
             this.game.physics.arcade.collide(this,this.level.water);
 
 
             if(!this.hurt){
-                if(this.prevVelocity.y<0&&this.body.blocked.up){
-                    zelda.AIMethods.changeDir(this,0,false);
-                }else if(this.prevVelocity.y>0&&this.body.blocked.down){
-                        zelda.AIMethods.changeDir(this,1,false);
 
-                }else if(this.prevVelocity.x>0&&this.body.blocked.right){
-                        zelda.AIMethods.changeDir(this,2,false);
-
-                }else if(this.prevVelocity.x<0&&this.body.blocked.left){
-                        zelda.AIMethods.changeDir(this,3,false);
-                }
 
 
                 if(this.body.velocity.x!=0||this.body.velocity.y!=0){
@@ -143,11 +144,7 @@ zelda.AquamentusPrefab.prototype.update = function(){
                     this.prevVelocity.y = this.body.velocity.y;
                 }
 
-                var chancesOfChangingDir = zelda.randomDataGen.between(0,200);
-                    if(chancesOfChangingDir<2){
 
-                        zelda.AIMethods.changeDir(this,zelda.randomDataGen.between(0,3,false));
-                    }
 
 
                 this.game.physics.arcade.overlap(this,this.level.linkInstance,
@@ -167,20 +164,69 @@ zelda.AquamentusPrefab.prototype.update = function(){
                             zelda.AIMethods.GetHurt(linkInstance.LinkCollider,"Left");
                     }
                 } );
+                
+                if(this.projectile1.Alive){
+                    
+                    this.game.physics.arcade.overlap(this.projectile1,this.level.cameraBot,function(projectile, a){
+                    projectile.Alive = false;
+                    projectile.kill();  
+                    });
+
+                    this.game.physics.arcade.overlap(this.projectile1,this.level.cameraTop,function(projectile, a){
+                    projectile.Alive = false;
+                    projectile.kill();  
+                    });    
+
+                    this.game.physics.arcade.overlap(this.projectile1,this.level.cameraLeft,function(projectile, a){
+                    projectile.Alive = false;
+                    projectile.kill();  
+                    });    
+
+                    this.game.physics.arcade.overlap(this.projectile1,this.level.cameraRight,function(projectile, a){
+                    projectile.Alive = false;
+                    projectile.kill();  
+                    });
+                    
+
+
+                    if(this.projectile1.body.velocity.x==0&&this.projectile1.body.velocity.y==0){
+                        this.projectile1.Alive = false;
+                        this.projectile1.kill();
+                    }
+                }
+                
+                
+                if(this.projectile2.Alive){
+                    
+                    this.game.physics.arcade.overlap(this.projectile2,this.level.cameraBot,function(projectile, a){
+                    projectile.Alive = false;
+                    projectile.kill();  
+                    });
+
+                    this.game.physics.arcade.overlap(this.projectile2,this.level.cameraTop,function(projectile, a){
+                    projectile.Alive = false;
+                    projectile.kill();  
+                    });    
+
+                    this.game.physics.arcade.overlap(this.projectile2,this.level.cameraLeft,function(projectile, a){
+                    projectile.Alive = false;
+                    projectile.kill();  
+                    });    
+
+                    this.game.physics.arcade.overlap(this.projectile2,this.level.cameraRight,function(projectile, a){
+                    projectile.Alive = false;
+                    projectile.kill();  
+                    });
+                
+
+                    if(this.projectile2.body.velocity.x==0&&this.projectile2.body.velocity.y==0){
+                        this.projectile2.Alive = false;
+                        this.projectile2.kill();
+                    }
+                }
+                
 
                 if(this.projectile.Alive){
-                    this.body.velocity.setTo(0);
-                    var distanceFromOriginX = this.body.position.x - this.projectile.body.position.x;
-                    var distanceFromOriginY = this.body.position.y - this.projectile.body.position.y;
-                    var distanceFromOrigin = Math.sqrt((distanceFromOriginX*distanceFromOriginX)+(distanceFromOriginY*distanceFromOriginY));
-                    console.log(distanceFromOrigin);
-                    
-                    if(distanceFromOrigin>100&&!this.projectile.returning&&distanceFromOrigin<300){
-                        this.projectile.returning= true;
-                        this.projectile.body.velocity.x = -this.projectile.body.velocity.x;
-                        this.projectile.body.velocity.y = -this.projectile.body.velocity.y;
-                    }
-                    
                     
                     this.game.physics.arcade.overlap(this.projectile,this.level.cameraBot,function(projectile, a){
                     projectile.Alive = false;
@@ -202,18 +248,32 @@ zelda.AquamentusPrefab.prototype.update = function(){
                     projectile.kill();  
                     });
                     
-                    if(this.projectile.returning){
-                                            
-                    this.game.physics.arcade.overlap(this.projectile,this,function(projectile, a){
-                    projectile.Alive = false;
-                    projectile.kill();  
-                    });
-                    }
 
                     if(this.projectile.body.velocity.x==0&&this.projectile.body.velocity.y==0){
                         this.projectile.Alive = false;
                         this.projectile.kill();
                     }
+                }else if(!this.projectile.Alive&&this.Alive&&!this.projectile1.Alive&&!this.projectile2.Alive){
+                    this.randomNumber = zelda.randomDataGen.between(0,4000);
+                    if(this.randomNumber<20){
+                        zelda.AIMethods.CreateProjectile(this,this.body.velocity);
+                        this.projectile1.reset(this.projectile.position.x,this.projectile.position.y+5);
+                        this.projectile2.reset(this.projectile.position.x,this.projectile.position.y-5);
+                        this.projectile1.Alive = true;
+                        this.projectile2.Alive = true;
+                        
+                        this.projectile1.body.velocity.x = this.projectile2.body.velocity.x = this.projectile.body.velocity.x = -20;
+                        this.projectile1.body.velocity.x = this.projectile2.body.velocity.x = this.projectile.body.velocity.x*=2.5;
+                        this.projectile1.body.velocity.y = 5 * 2.5;
+                        this.projectile2.body.velocity.y = -5 * 2.5;
+                        
+                        this.projectile.animations.play("Go");
+                        this.projectile1.animations.play("Go");
+                        this.projectile2.animations.play("Go");
+
+                    }
+                }else{
+                    console.log("NONE");
                 }
                 this.game.physics.arcade.overlap(this,this.level.cameraRight,function(npc, a){
                 npc.body.velocity.x = -npc.body.velocity.x;

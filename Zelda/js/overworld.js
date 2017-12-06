@@ -66,6 +66,7 @@ zelda.overworld = {
         this.load.audio("DieMusic","sounds/Music/DeathMusic.wav");
         this.load.image("SpikesTrap","img/SpikesTrap.png");
         this.load.spritesheet("Aquamentus","img/AquamentusSpriteSheet.png",32,32);
+        this.load.spritesheet("AquamentusProjectile","img/ProyectilAquamentus.png",16,16);
         
     },
 
