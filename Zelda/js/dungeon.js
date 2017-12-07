@@ -67,6 +67,7 @@ zelda.dungeon = {
 		this.map.setCollisionBetween(0,200,true,"walls_left");
         
         this.loadHearts();
+        this.loadKeys();
         this.loadRupies();
         //this.loadBombs();
     
@@ -130,7 +131,7 @@ zelda.dungeon = {
 		//Prefab del inventario
 		this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);   
         
-        this.triforce = new zelda.TriforcePrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16-16,this);
+        this.triforce = new zelda.TriforcePrefab(this.game,5*16*16 + 8*16 ,16*16-8,this);
         this.game.add.existing(this.triforce);
         
         //guardar en que escena esta por si muere
