@@ -138,6 +138,29 @@ zelda.dungeon = {
 
     },
     
+        ProjectileBorderColision:function(){
+            
+            
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraBot,function(){
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraLeft,function(){
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraTop,function(){
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraRight,function(){
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
+                    console.log(zelda.dungeon.linkInstance);
+
+        });
+    },
+    
     update:function(){
         
         if(zelda.gameOptions.mustCreateEnemies){
@@ -168,6 +191,8 @@ zelda.dungeon = {
         this.SetBorders();
         
         this.LinkBorderColision();
+        
+        this.ProjectileBorderColision();
         
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.x)){
             zelda.LinkObject.currentHearts -= 0.5;
