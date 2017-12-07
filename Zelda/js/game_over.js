@@ -14,6 +14,7 @@ zelda.game_over = {
         this.load.image("radev","img/meme_radev.png",640,560);
         this.load.image("selector","img/GameO_selec.png",152,49);
         this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
+        this.load.audio("Music","sounds/Music/GameOver.wav",true);
     },
     
     create:function(){
@@ -37,11 +38,17 @@ zelda.game_over = {
         this.texto3 = this.game.add.bitmapText(197,196,"zelda_font","omg",8);
         this.texto3.scale.setTo(1);
         this.texto3.align = "center";
-        
+
+        this.music = this.game.add.audio("Music",true);
+        this.music.play();
+        this.music.loop = true;
+        console.log(this.music);
     },
     
     update:function(){
         
+        if(!this.music.isPlaying)
+            this.music.play();
         
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         
