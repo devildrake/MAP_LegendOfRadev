@@ -1399,14 +1399,18 @@ zelda.AIMethods = {
         npc.Alive = false;
         npc.kill();
         console.log("Eliminando enemigo en zona " +npc.currentZone + " en la posicion " + npc.posInArray);
-        zelda.enemySpawns.zones[npc.currentZone][npc.posInArray] = false;
-        var randomChance = zelda.randomDataGen.between(0,99);
-        if(randomChance<zelda.gameOptions.chancesToSpawnRupy&&randomChance>zelda.gameOptions.chancesToSpawnHeart){
-            zelda.overworld.createRupy(npc.body.position.x+8,npc.body.position.y+8,zelda.randomDataGen.between(0,1));
+            if(npc.level==zelda.overworld){
+            zelda.enemySpawns.zones[npc.currentZone][npc.posInArray] = false;
+            var randomChance = zelda.randomDataGen.between(0,99);
+            if(randomChance<zelda.gameOptions.chancesToSpawnRupy&&randomChance>zelda.gameOptions.chancesToSpawnHeart){
+                zelda.overworld.createRupy(npc.body.position.x+8,npc.body.position.y+8,zelda.randomDataGen.between(0,1));
+            }else{
+                zelda.overworld.createHeart(npc.body.position.x+8,npc.body.position.y+8,zelda.randomDataGen.between(0,1));
+            }
         }else{
-            zelda.overworld.createHeart(npc.body.position.x+8,npc.body.position.y+8,zelda.randomDataGen.between(0,1));
+            zelda.dungeonEnemySpawns.zones[npc.currentDungeonZone][npc.posInArray] = false;
+
         }
-        
     },
         
     BeDestroyed:function(something){
