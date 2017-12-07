@@ -38,6 +38,9 @@ zelda.game_over = {
         this.texto3.scale.setTo(1);
         this.texto3.align = "center";
         
+        
+        zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
+        
     },
     
     update:function(){
