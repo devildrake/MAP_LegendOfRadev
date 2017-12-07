@@ -34,7 +34,7 @@ zelda.gameOptions = {
         console.log("guardado");
         // package everything you need into an object.
         var saveObject = {
-	       Lifes: zelda.LinkObject.currentHearts,
+	       Lifes: zelda.LinkObject.maxHearts,
 	       FileName: zelda.Inventory.StrSave,
             Bombs: zelda.Inventory.bombs,
             keys:zelda.Inventory.keys,
