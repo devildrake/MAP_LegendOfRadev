@@ -2,7 +2,7 @@ var zelda = zelda || {};
 
 zelda.SpikesTrapPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.posInArray = posInArray
-    this.currentZone=zone;
+    this.currentDungeonZone=zone;
     this.Alive = true;
 	Phaser.Sprite.call(this,game,x,y,"SpikesTrap");    
     this.type = type;

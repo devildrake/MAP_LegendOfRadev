@@ -2,7 +2,7 @@ var zelda = zelda || {};
 
 zelda.KeesePrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.posInArray = posInArray
-    this.currentZone=zone;
+    this.currentDungeonZone=zone;
     this.hurt = false;
     this.calledNotHurt = true;
     this.Alive = true;
@@ -47,10 +47,20 @@ zelda.KeesePrefab.prototype = Object.create(Phaser.Sprite.prototype);
 
 zelda.KeesePrefab.prototype.constructor = zelda.KeesePrefab;
 
+zelda.KeesePrefab.Respawn = function (obj){
+
+    obj.lives = 3;
+    obj.hurt = false;
+    obj.calledNotHurt = true;
+    obj.Alive = true;
+    obj.spawned  = false;
+    obj.calledSpawn = false;
+    obj.previousVelocity = obj.body.velocity;
+
+}
 
 
 zelda.KeesePrefab.prototype.update = function(){
-            
     if(this.spawned){
         if(this.Alive){
             if(!zelda.Inventory.ScrollingInventory&&!zelda.Inventory.InvON){

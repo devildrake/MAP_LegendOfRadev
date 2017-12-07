@@ -8,6 +8,7 @@ zelda.intro = {
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         //this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
         zelda.enemySpawns.InitZones();
+        zelda.dungeonEnemySpawns.InitZones();
 
 	},
     

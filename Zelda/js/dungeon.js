@@ -27,7 +27,17 @@ zelda.dungeon = {
         this.load.audio("TriforceSound","sounds/Music/Triforce_Theme.mp3");
         this.load.image("Black","img/Blackout.png");
         this.load.audio("DungeonMusic","sounds/Music/DungeonTheme.mp3");
-        this.load.audio("DieMusic","sounds/Music/DeathMusic.mp3");
+        this.load.spritesheet("Stalfos","img/StalfosSpriteSheet.png",16,16);
+        this.load.spritesheet("Keese","img/KeeseSpriteSheet.png",16,16);
+        this.load.spritesheet("Goriya","img/GoriyaSpriteSheet.png",16,16);
+       	this.game.load.script('webfont','http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+        this.load.spritesheet("Gel","img/GelSpriteSheet.png",16,16);
+        this.load.spritesheet("Boomerang","img/Boomerang.png",16,16);
+        this.load.spritesheet("rupia", "img/RupiaSpriteSheet.png",16,16);
+        this.load.audio("DieMusic","sounds/Music/DeathMusic.wav");
+        this.load.image("SpikesTrap","img/SpikesTrap.png");
+        this.load.spritesheet("Aquamentus","img/AquamentusSpriteSheet.png",32,32);
+        this.load.spritesheet("AquamentusProjectile","img/ProyectilAquamentus.png",16,16);
 
     },
 
@@ -56,6 +66,11 @@ zelda.dungeon = {
 		this.map.setCollisionBetween(0,200,true,"walls_bot");
 		this.map.setCollisionBetween(0,200,true,"walls_left");
         
+        this.loadHearts();
+        this.loadRupies();
+        //this.loadBombs();
+    
+        this.loadEnemies();
 		
 		//this.background = this.game.add.sprite(0,0, "Dungeon1NoFloor");
 		//this.game.physics.arcade.enable(this.background);
@@ -124,6 +139,11 @@ zelda.dungeon = {
     },
     
     update:function(){
+        
+        if(zelda.gameOptions.mustCreateEnemies){
+            zelda.gameOptions.mustCreateEnemies = false;
+            this.createEnemiesOfCurrentZone();
+        }
 		/*if(this.allDoors[1].frame = 1){
 			this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.allDoors[1]);	
 		}*/
@@ -422,7 +442,7 @@ zelda.dungeon = {
             if(zelda.gameOptions.cameraArrivedPos==false){
                 zelda.gameOptions.cameraArrivedPos=true;
                  zelda.gameOptions.setBorders=false;   
-                //zelda.dungeon.createEnemiesOfCurrentZone();
+                zelda.dungeon.createEnemiesOfCurrentZone();
                 this.inventario.movingCamera=false;
 
             }
@@ -463,7 +483,7 @@ zelda.dungeon = {
 		
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraTop, function(){
             if(zelda.LinkObject.lookingUp){
-                //zelda.dungeon.despawnEnemiesOfPreviousZone();
+                zelda.dungeon.despawnEnemiesOfPreviousZone();
 
                 zelda.gameOptions.cameraArrivedPos = false;
                 zelda.gameOptions.cameraPosToGoX = zelda.dungeon.camera.x;
@@ -492,7 +512,7 @@ zelda.dungeon = {
 		});
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraBot, function(){
             if(zelda.LinkObject.lookingDown&&zelda.LinkObject.currentDungeonZone!=38){
-                //zelda.dungeon.despawnEnemiesOfPreviousZone();
+                zelda.dungeon.despawnEnemiesOfPreviousZone();
                 zelda.gameOptions.borderToSet = "Downwards";
                 zelda.gameOptions.cameraArrivedPos = false;
                 zelda.gameOptions.cameraPosToGoX = zelda.dungeon.camera.x;
@@ -518,7 +538,7 @@ zelda.dungeon = {
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraRight,function(){
             if(zelda.LinkObject.lookingRight){
-                //zelda.dungeon.despawnEnemiesOfPreviousZone();
+                zelda.dungeon.despawnEnemiesOfPreviousZone();
                 zelda.gameOptions.borderToSet = "Right";
                 zelda.gameOptions.cameraArrivedPos = false;
                 zelda.gameOptions.cameraPosToGoX = zelda.dungeon.camera.x;
@@ -540,7 +560,7 @@ zelda.dungeon = {
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraLeft,function(){
             if(zelda.LinkObject.lookingLeft){
-            //zelda.dungeon.despawnEnemiesOfPreviousZone();
+            zelda.dungeon.despawnEnemiesOfPreviousZone();
             zelda.gameOptions.borderToSet = "Left";
             zelda.gameOptions.cameraArrivedPos = false;
             zelda.gameOptions.cameraPosToGoX = zelda.dungeon.camera.x;
@@ -562,6 +582,235 @@ zelda.dungeon = {
             }
         });
         
+    },
+        createEnemiesOfCurrentZone:function(){
+            zelda.dungeon.enabledSpawns = true;
+        if(zelda.dungeon.enabledSpawns){
+        var j = 0;
+            for(var i = 0;i<zelda.dungeonEnemySpawns.zones[zelda.LinkObject.currentDungeonZone].length;++i){
+                if(zelda.dungeonEnemySpawns.zones[zelda.LinkObject.currentDungeonZone][i]==true){
+                    zelda.dungeon.createEnemy(zelda.dungeonEnemySpawns.especieEnemigos[zelda.LinkObject.currentDungeonZone][i],this.game,zelda.dungeonEnemySpawns.posicionesEnemigos[zelda.LinkObject.currentDungeonZone][j],zelda.dungeonEnemySpawns.posicionesEnemigos[zelda.LinkObject.currentDungeonZone][j+1],zelda.dungeon,zelda.dungeonEnemySpawns.tipoEnemigos[zelda.LinkObject.currentDungeonZone][i],zelda.dungeonEnemySpawns.initialSpeedEnemigos[zelda.LinkObject.currentDungeonZone][i],zelda.LinkObject.currentDungeonZone,i);
+                   // console.log("Spawning a " + zelda.dungeonEnemySpawns.especieEnemigos[zelda.LinkObject.currentDungeonZone][i]);
+                //    console.log("at " + zelda.dungeonEnemySpawns.posicionesEnemigos[zelda.LinkObject.currentDungeonZone][j] + ", " +zelda.dungeonEnemySpawns.posicionesEnemigos[zelda.LinkObject.currentDungeonZone][j+1]);
+                }
+                            j+=2;
+        }
+        }
+    },
+    
+    despawnEnemiesOfPreviousZone:function(){
+        for(var i=0;i<this.stalfoses.children.length;i++){
+            if(this.stalfoses.children[i].Alive){
+                this.stalfoses.children[i].Alive = false;
+                this.stalfoses.children[i].kill();
+            }
+        }
+        
+        for(var i=0;i<this.goriyas.children.length;i++){
+            if(this.goriyas.children[i].Alive){
+                this.goriyas.children[i].Alive = false;
+                this.goriyas.children[i].kill();
+                this.goriyas.children[i].projectile.Alive = false;
+                this.goriyas.children[i].projectile.kill()
+            }
+        }
+        
+        for(var i=0;i<this.gels.children.length;i++){
+            if(this.gels.children[i].Alive){
+                this.gels.children[i].Alive = false;
+                this.gels.children[i].kill();
+                //this.moblins.children[i].projectile.Alive = false;
+                //this.moblins.children[i].projectile.kill()
+            }
+        }
+        
+        for(var i=0;i<this.keeses.children.length;i++){
+            if(this.keeses.children[i].Alive){
+                this.keeses.children[i].Alive = false;
+                this.keeses.children[i].kill();
+            }
+        }
+        
+        for(var i=0;i<this.wallmasters.children.length;i++){
+            if(this.wallmasters.children[i].Alive){
+                this.wallmasters.children[i].Alive = false;
+                this.wallmasters.children[i].kill();
+            }
+        }
+        
+        for(var i=0;i<this.spikeTraps.children.length;i++){
+            if(this.spikeTraps.children[i].Alive){
+                this.spikeTraps.children[i].Alive = false;
+                this.spikeTraps.children[i].kill();
+            }
+        }
+        
+        for(var i=0;i<this.Aquamentuses.children.length;i++){
+            if(this.Aquamentuses.children[i].Alive){
+                this.Aquamentuses.children[i].Alive = false;
+                this.Aquamentuses.children[i].kill();
+                this.Aquamentuses.children[i].projectile.Alive = false;
+                this.Aquamentuses.children[i].projectile.kill()
+                this.Aquamentuses.children[i].projectile1.Alive = false;
+                this.Aquamentuses.children[i].projectile1.kill()                
+                this.Aquamentuses.children[i].projectile2.Alive = false;
+                this.Aquamentuses.children[i].projectile2.kill()
+            }
+        }
+        
+        
+    },
+    loadEnemies:function(){
+        this.stalfoses = this.add.group();
+        this.stalfoses.enableBody = true;
+
+        this.goriyas = this.add.group();
+        this.goriyas.enableBody = true;
+
+        this.gels = this.add.group();
+        this.gels.enableBody = true;
+
+        this.keeses = this.add.group();
+        this.keeses.enableBody = true;
+
+        this.wallmasters = this.add.group();
+        this.wallmasters.enableBody = true;
+
+        this.Aquamentuses = this.add.group();
+        this.Aquamentuses.enableBody = true;
+        
+        this.spikeTraps = this.add.group();
+        this.spikeTraps.enableBody = true;
+        },
+    
+    createEnemy:function(enemy, Agame, posX, posY, level, type, movingTowards, currentDungeonZone, posInArray){
+        console.log(enemy);
+            if(enemy== "Stalfos"){
+                var stalfos = this.stalfoses.getFirstExists(false);
+                if(!stalfos){
+                    stalfos = new zelda.StalfosPrefab(this.game,posX,posY,type,level,movingTowards,currentDungeonZone,posInArray);
+                    this.stalfoses.add(stalfos);
+                }else{
+                    stalfos.type = type;
+                    stalfos.reset(posX,posY);
+                    stalfos.currentDungeonZone = currentDungeonZone;
+                    stalfos.posInArray = posInArray;
+                    zelda.StalfosPrefab.Respawn(stalfos);
+                    stalfos.initialSpeed = movingTowards;
+                }
+                console.log(stalfos.currentDungeonZone);
+            }
+            
+            if(enemy== "Goriya"){
+                var goriya = this.goriyas.getFirstExists(false);
+                if(!goriya){
+                    goriya = new zelda.GoriyaPrefab(this.game,posX,posY,type,level,movingTowards,currentDungeonZone,posInArray);
+                    this.goriyas.add(goriya);
+                }else{
+                    goriya.reset(posX,posY);
+                    goriya.initialSpeed = movingTowards;
+                    goriya.type = type;
+                    goriya.Alive = true;
+                    goriya.spawned = false;
+                    goriya.calledSpawn = false;
+                    goriya.firstFewFrames = false;
+                    goriya.lives = 3;
+                    goriya.currentDungeonZone = currentDungeonZone;
+                    goriya.posInArray = posInArray;
+
+
+                }
+            }
+            
+            if(enemy== "Gel"){
+                var gel = this.gels.getFirstExists(false);
+                if(!gel){
+                    //En este caso movinTowards tiene que ser el offsetMaximo, 30 es un buen numero
+                    gel = new zelda.GelPrefab(this.game,posX,posY,type,level,movingTowards,currentDungeonZone,posInArray);
+                    this.gels.add(gel);
+                }else{
+                    gel.currentDungeonZone = currentDungeonZone;
+                    gel.reset(posX,posY);
+                    gel.hurt = false;
+                    gel.calledNotHurt = true;
+                    gel.Alive = true;
+                    gel.type = type;
+                    gel.jumping = false;
+                    gel.calledStopJumping = false;
+                    gel.lives = 3;
+                    gel.spawned  = false;
+                    gel.calledSpawn = false;
+                    gel.posInArray = posInArray;
+
+                }
+            }
+            
+            if(enemy == "Keese"){
+
+                var keese = this.keeses.getFirstExists(false);
+                if(!keese){
+                    keese = new zelda.KeesePrefab(this.game,posX,posY,type,level,currentDungeonZone,posInArray);
+                    this.keeses.add(keese);
+                    console.log(keese);
+                }else{
+                    keese.currentDungeonZone = currentDungeonZone;
+                    keese.reset(posX,posY);
+                    keese.type = type;
+                    keese.posInArray = posInArray;
+
+                    zelda.KeesePrefab.Respawn(keese);
+                    
+                }
+            }
+            
+            if(enemy== "Wallmaster"){
+                /*var riverZola = this.riverZolas.getFirstExists(false);
+                if(!riverZola){
+                    riverZola = new zelda.RiverZolaPrefab(this.game,posX,posY,level,currentDungeonZone,posInArray);
+                    this.riverZolas.add(riverZola);
+                }else{
+                    riverZola.reset(posX,posY);
+                    riverZola.Alive = true;
+                    riverZola.currentDungeonZone = currentDungeonZone;
+                    riverZola.posInArray = posInArray;
+
+                    riverZola.lives = 3;
+                }*/
+            }
+            
+            if(enemy== "Aquamentus"){
+                var aquamentus = this.Aquamentuses.getFirstExists(false);
+                if(!aquamentus){
+                    aquamentus = new zelda.AquamentusPrefab(this.game,posX,posY,type,level,movingTowards,currentDungeonZone,posInArray);
+                    this.Aquamentuses.add(aquamentus);
+                }
+                else{
+                    aquamentus.currentDungeonZone = currentDungeonZone;
+                    aquamentus.type = type;
+                    aquamentus.reset(posX,posY);
+                    zelda.AquamentusPrefab.Respawn(aquamentus);
+                    aquamentus.posInArray = posInArray;
+                    aquamentus.initialSpeed = movingTowards;
+                }
+            }
+        
+                    
+            if(enemy== "SpikeTrap"){
+                var spikeTrap = this.spikeTraps.getFirstExists(false);
+                if(!spikeTrap){
+                    spikeTrap = new zelda.SpikesTrapPrefab(this.game,posX,posY,type,level,movingTowards,currentDungeonZone,posInArray);
+                    this.spikeTraps.add(spikeTrap);
+                }
+                else{
+                    spikeTrap.currentDungeonZone = currentDungeonZone;
+                    spikeTrap.type = type;
+                    spikeTrap.reset(posX,posY);
+                    zelda.SpikesTrapPrefab.Respawn(spikeTrap);
+                    spikeTrap.posInArray = posInArray;
+                    spikeTrap.initialSpeed = movingTowards;
+                }
+            }
+            
     }
     
 }

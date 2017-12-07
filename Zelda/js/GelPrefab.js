@@ -2,7 +2,7 @@ var zelda = zelda || {};
 
 zelda.GelPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
     this.posInArray = posInArray
-    this.currentZone=zone;
+    this.currentDungeonZone=zone;
     this.hurt = false;
     this.calledNotHurt = true;
     this.Alive = true;
