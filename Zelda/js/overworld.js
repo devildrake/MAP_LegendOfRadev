@@ -273,6 +273,12 @@ zelda.overworld = {
 
 		}
         
+        //objeto b
+        this.ObjBKey=zelda.game.input.keyboard.addKey(Phaser.Keyboard.R);
+        if( this.ObjBKey.isDown && this.ObjBKey.downDuration(1)){
+            console.log("o");
+            zelda.Inventory.UseObjectB();
+        }
         
 		//pausar el juego con la P
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.P)){

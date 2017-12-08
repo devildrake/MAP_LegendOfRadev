@@ -637,7 +637,7 @@ zelda.Inventory={
     
     hasSword: false,
     equippedSword: "Bronze",
-    bombs: 0,
+    bombs: 2,
     keys:0,
     rupies:0,
     ring:false,
@@ -649,6 +649,7 @@ zelda.Inventory={
     HasSword:false,
     healed:false,
     escudo:false,
+    plantedBomb:true,
     //el [0] sera el boomerang
     //el [1] sera las bombas
     //el [2] sera el arco
@@ -1088,10 +1089,28 @@ zelda.Inventory={
         
     UseObjectB:function(){
         
-        if(zelda.Inventory.ObjectB=="bombs"){
-            
+        if(zelda.Inventory.ObjectB=="bombs" && this.bombs>0){
+            console.log("entra");
            // Phaser.Sprite.call(this,game,,y,"bomba"); 
-    
+            
+            if(zelda.LinkObject.lookingUp){
+                zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,"bomba");
+            }
+            else if(zelda.LinkObject.lookingDown){
+                zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y,"bomba");
+            }
+            else if(zelda.LinkObject.lookingRight){
+                zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x,zelda.overworld.linkInstance.position.y-8,"bomba");
+            }
+            else if(zelda.LinkObject.lookingLeft){
+                zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,"bomba");
+            }
+            
+           
+            setTimeout(function(){
+                zelda.Inventory.plantedBomb.kill();
+                
+            }, 2000);
         }
         else if(zelda.Inventory.ObjectB=="vela"){
                 
@@ -1443,7 +1462,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 
 
 //Escena que se pinta
-zelda.game.state.start("main");
+zelda.game.state.start("overworld");
 
 //zelda.game.state.start("dungeon");
 
