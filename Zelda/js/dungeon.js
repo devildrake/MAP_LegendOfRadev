@@ -18,6 +18,13 @@ zelda.dungeon = {
 		this.load.spritesheet("puerta_normal","img/puerta_normal.png",32,32);
 		this.load.spritesheet("puerta_llave","img/puerta_llave.png",32,32);
         this.load.spritesheet("Particles","img/ProjectileParticles.png",16,16);
+        this.load.image("bomba", "img/bomba.png");
+        this.load.spritesheet("explosion","img/bombaSpriteSheet.png",16,16);
+        this.load.image("area","img/Explosion.png");
+        this.load.image("vela", "img/vela.png");
+        this.load.image("potion", "img/pocion_vida.png");
+        this.load.image("corazon", "img/corazon.png");
+        this.load.image("cursor","img/inventario/selector.png");
         this.load.image("inventario", "img/inventario.png");
         this.load.image("corazon", "img/corazon.png");
         this.load.image("GroundTile","img/GroundSprite.png");
@@ -197,6 +204,14 @@ zelda.dungeon = {
         
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.x)){
             zelda.LinkObject.currentHearts -= 0.5;
+        }
+        
+        
+         this.ObjBKey=zelda.game.input.keyboard.addKey(Phaser.Keyboard.R);
+        if( this.ObjBKey.isDown && this.ObjBKey.downDuration(1)){
+            //console.log("o");
+            zelda.Inventory.scene="dungeon";
+            zelda.Inventory.UseObjectB();
         }
     },
 	

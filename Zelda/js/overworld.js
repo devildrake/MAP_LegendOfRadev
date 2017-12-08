@@ -21,11 +21,13 @@ zelda.overworld = {
         this.load.image("camaraVertical", "img/camara_vertical.png");
         this.load.image("inventario", "img/inventario.png");
         this.load.image("bomba", "img/bomba.png");
+        this.load.spritesheet("explosion","img/bombaSpriteSheet.png",16,16)
         this.load.image("vela", "img/vela.png");
         this.load.image("potion", "img/pocion_vida.png");
         this.load.image("corazon", "img/corazon.png");
         this.load.image("cursor","img/inventario/selector.png");
         this.load.spritesheet("sword", "img/Swords.png", 16,16);
+        this.load.image("area","img/Explosion.png");
         //this.load.image("arco","img/bow.png");
         this.load.image("shield","img/escudo.png");
         this.load.image("triggerColor", "img/trigger_salas_color.png");
@@ -276,7 +278,8 @@ zelda.overworld = {
         //objeto b
         this.ObjBKey=zelda.game.input.keyboard.addKey(Phaser.Keyboard.R);
         if( this.ObjBKey.isDown && this.ObjBKey.downDuration(1)){
-            console.log("o");
+            //console.log("o");
+            zelda.Inventory.scene="overworld";
             zelda.Inventory.UseObjectB();
         }
         
@@ -295,6 +298,26 @@ zelda.overworld = {
             zelda.game.camera.x += 10;
         }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.A)){
             zelda.game.camera.x -= 10;
+        }
+        
+        
+        //overlaps con la explosion
+        if(zelda.Inventory.ExplosionOn){
+            
+            if(zelda.overworld.enabledSpawns){
+                
+                for(var i = 0;i<zelda.enemySpawns.zones[zelda.LinkObject.currentZone].length;++i){
+                    if(zelda.enemySpawns.zones[zelda.LinkObject.currentZone][i]==true){
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(this,this.oktoroks.children[i],
+                        function(rupy,Enemy){
+                                 this.oktoroks.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                           
+                    }
+                
+                }
+            }
         }
         
     }, 

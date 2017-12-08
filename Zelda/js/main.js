@@ -650,6 +650,7 @@ zelda.Inventory={
     healed:false,
     escudo:false,
     plantedBomb:true,
+    bombOn:false,
     //el [0] sera el boomerang
     //el [1] sera las bombas
     //el [2] sera el arco
@@ -722,7 +723,7 @@ zelda.Inventory={
             this.texto.font = "Press Start 2P";
             this.texto.fontSize = 6;
             this.texto.align = "center";
-            if(this.bombs<=0){this.objects[1]=0;} else if(this.bombs>0){this.objects[i]=1;}
+            if(this.bombs<=0){this.objects[1]=0;} else if(this.bombs>0){this.objects[1]=1;}
         }
         
         //numero de llaves
@@ -1085,32 +1086,82 @@ zelda.Inventory={
     },
     
     
-    
+    scene:"",
+    ExplosionInstance:false,
+    ExplosionOn:false,
         
     UseObjectB:function(){
         
         if(zelda.Inventory.ObjectB=="bombs" && this.bombs>0){
-            console.log("entra");
-           // Phaser.Sprite.call(this,game,,y,"bomba"); 
-            
-            if(zelda.LinkObject.lookingUp){
-                zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,"bomba");
+            if(!this.bombOn){
+               
+               // Phaser.Sprite.call(this,game,,y,"bomba"); 
+                if(zelda.Inventory.scene=="overworld"){
+                    this.bombOn=true;
+                    //posicion bomba
+                    if(zelda.LinkObject.lookingUp){
+                        zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,"explosion");
+                        //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,"explosion");
+                    }
+                    else if(zelda.LinkObject.lookingDown){
+                        zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y,"explosion");
+                        //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y,"explosion");
+                    }
+                    else if(zelda.LinkObject.lookingRight){
+                        zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x,zelda.overworld.linkInstance.position.y-8,"explosion");
+                         //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x,zelda.overworld.linkInstance.position.y-8,"explosion");
+                    }
+                    else if(zelda.LinkObject.lookingLeft){
+                        zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,"explosion");
+                         //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,"explosion");
+                    }
+                }
+                else if(zelda.Inventory.scene=="dungeon"){
+                     this.bombOn=true;
+                    if(zelda.LinkObject.lookingUp){
+                        zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.dungeon.linkInstance.position.x-8,zelda.dungeon.linkInstance.position.y-20,"explosion");
+                        //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,"explosion");
+                    }
+                    else if(zelda.LinkObject.lookingDown){
+                        zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.dungeon.linkInstance.position.x-8,zelda.dungeon.linkInstance.position.y,"explosion");
+                        //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y,"explosion");
+                    }
+                    else if(zelda.LinkObject.lookingRight){
+                        zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.dungeon.linkInstance.position.x,zelda.dungeon.linkInstance.position.y-8,"explosion");
+                         //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x,zelda.overworld.linkInstance.position.y-8,"explosion");
+                    }
+                    else if(zelda.LinkObject.lookingLeft){
+                        zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.dungeon.linkInstance.position.x-20,zelda.dungeon.linkInstance.position.y-8,"explosion");
+                         //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,"explosion");
+                    }
+                    
+                }
+
+                setTimeout(function(){
+                    //zelda.Inventory.plantedBomb=Phaser.Sprite.call(this,game,x,y,"explosion");
+                    zelda.Inventory.plantedBomb.animations.add("explode", [0,1,2,3], 7, false);
+                    zelda.Inventory.plantedBomb.animations.play("explode");
+                   // zelda.Inventory.plantedBomb.kill();
+                    if(zelda.Inventory.scene=="dungeon"){
+                    zelda.Inventory.ExplosionInstance = new zelda.ExplosionPrefab(zelda.dungeon.game,zelda.Inventory.plantedBomb.position.x,zelda.Inventory.plantedBomb.position.y,this);}
+                    if(zelda.Inventory.scene=="overworld"){
+                    zelda.Inventory.ExplosionInstance = new zelda.ExplosionPrefab(zelda.overworld.game,zelda.Inventory.plantedBomb.position.x,zelda.Inventory.plantedBomb.position.y,this);}
+                    zelda.Inventory.ExplosionOn=true;
+                }, 2000);
+                setTimeout(function(){
+                    //zelda.Inventory.plantedBomb=Phaser.Sprite.call(this,game,x,y,"explosion");
+                    /*zelda.Inventory.plantedBomb.animations.add("explode", [0,1,2,3], 5, true);
+                    zelda.Inventory.plantedBomb.animations.play("explode");*/
+                   zelda.Inventory.plantedBomb.kill();
+                    zelda.Inventory.bombOn=false;
+                    console.log("kill");
+                    if(zelda.Inventory.scene=="dungeon"){
+                    zelda.Inventory.ExplosionInstance.kill();}
+                    if(zelda.Inventory.scene=="overworld"){
+                    zelda.Inventory.ExplosionInstance.kill();}
+                    zelda.Inventory.ExplosionOn=false;
+                }, 2700);
             }
-            else if(zelda.LinkObject.lookingDown){
-                zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y,"bomba");
-            }
-            else if(zelda.LinkObject.lookingRight){
-                zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x,zelda.overworld.linkInstance.position.y-8,"bomba");
-            }
-            else if(zelda.LinkObject.lookingLeft){
-                zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,"bomba");
-            }
-            
-           
-            setTimeout(function(){
-                zelda.Inventory.plantedBomb.kill();
-                
-            }, 2000);
         }
         else if(zelda.Inventory.ObjectB=="vela"){
                 
@@ -1462,7 +1513,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 
 
 //Escena que se pinta
-zelda.game.state.start("overworld");
+zelda.game.state.start("main");
 
 //zelda.game.state.start("dungeon");
 
