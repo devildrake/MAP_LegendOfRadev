@@ -213,6 +213,56 @@ zelda.dungeon = {
             zelda.Inventory.scene="dungeon";
             zelda.Inventory.UseObjectB();
         }
+        
+        //overlaps con la explosion
+        if(zelda.Inventory.ExplosionOn){
+            
+            if(zelda.dungeon.enabledSpawns){
+                
+                for(var i = 0;i<zelda.enemySpawns.zones[zelda.LinkObject.currentZone].length;++i){
+                    if(zelda.enemySpawns.zones[zelda.LinkObject.currentZone][i]==true){
+                        //stalfos
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.stalfoses.children[i],
+                        function(rupy,Enemy){
+                                 zelda.dungeon.stalfoses.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                        //wallmasters
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.wallmasters.children[i],
+                        function(rupy,Enemy){
+                                 zelda.dungeon.wallmasters.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                        //goriya
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.goriyas.children[i],
+                        function(rupy,Enemy){
+                                 zelda.dungeon.goriyas.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                        //gel
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.gels.children[i],
+                        function(rupy,Enemy){
+                                 zelda.dungeon.gels.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                        //keese
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.keeses.children[i],
+                        function(rupy,Enemy){
+                                 zelda.dungeon.keeses.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                        //spiketraps
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.spikeTraps.children[i],
+                        function(rupy,Enemy){
+                                 zelda.dungeon.spikeTraps.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                           
+                    }
+                
+                }
+            }
+        }
     },
 	
 	//Metodo que encapsula el pintado de las puertas.

@@ -308,9 +308,40 @@ zelda.overworld = {
                 
                 for(var i = 0;i<zelda.enemySpawns.zones[zelda.LinkObject.currentZone].length;++i){
                     if(zelda.enemySpawns.zones[zelda.LinkObject.currentZone][i]==true){
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(this,this.oktoroks.children[i],
+                        //oktorok
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.oktoroks.children[i],
                         function(rupy,Enemy){
-                                 this.oktoroks.children[i].kill();
+                                 zelda.overworld.oktoroks.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                        //tektites
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.tektites.children[i],
+                        function(rupy,Enemy){
+                                 zelda.overworld.tektites.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                        //moblins
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.moblins.children[i],
+                        function(rupy,Enemy){
+                                 zelda.overworld.moblins.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                        //leevers
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.leevers.children[i],
+                        function(rupy,Enemy){
+                                 zelda.overworld.leevers.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                        //peahats
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.peahats.children[i],
+                        function(rupy,Enemy){
+                                 zelda.overworld.peahats.children[i].kill();
+                                console.log("bomb hit");
+                        } );
+                        //riverzolas
+                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.riverZolas.children[i],
+                        function(rupy,Enemy){
+                                 zelda.overworld.riverZolas.children[i].kill();
                                 console.log("bomb hit");
                         } );
                            

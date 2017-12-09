@@ -1094,7 +1094,7 @@ zelda.Inventory={
         
         if(zelda.Inventory.ObjectB=="bombs" && this.bombs>0){
             if(!this.bombOn){
-               
+               zelda.Inventory.bombs-=1;
                // Phaser.Sprite.call(this,game,,y,"bomba"); 
                 if(zelda.Inventory.scene=="overworld"){
                     this.bombOn=true;
