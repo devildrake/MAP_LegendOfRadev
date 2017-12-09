@@ -61,11 +61,11 @@ zelda.TektitePrefab = function(game,x,y,type,level,offsetMax,zone,posInArray){
             var randomNum = zelda.randomDataGen.between(0,100);
                     
 
-            if(randomNum>50){
+        if(randomNum>50){
                 obj.posToJump.x+=randomMov;
-            }else{
+        }else{
                 obj.posToJump.x-=randomMov;
-            }
+        }
         
         if(randomNum%2==0){
             obj.posToJump.y+=randomMov;
@@ -74,19 +74,20 @@ zelda.TektitePrefab = function(game,x,y,type,level,offsetMax,zone,posInArray){
         }
             
             
-            if(obj.posToJump.x>obj.level.cameraRight.body.position.x){
+            if(obj.posToJump.x>obj.level.cameraRight.body.position.x-16){
                 obj.posToJump.x = obj.level.cameraBot.body.position.x-32;
-            }else if(obj.posToJump.x<obj.level.cameraLeft.body.position.x){
-                obj.posToJump.x = obj.level.cameraBot.body.position.x-32;
+            }if(obj.posToJump.x<obj.level.cameraLeft.body.position.x+16){
+                obj.posToJump.x = obj.level.cameraBot.body.position.x+32;
             }
             
-            if(obj.posToJump.y>obj.level.cameraTop.body.position.y){
+            if(obj.posToJump.y<obj.level.cameraTop.body.position.y+32){
                 obj.posToJump.y = obj.level.cameraBot.body.position.y+64;
                 
-            }else if(obj.posToJump.y<obj.level.cameraBot.body.position.y){
+            }if(obj.posToJump.y>obj.level.cameraBot.body.position.y-32){
                 obj.posToJump.y = obj.level.cameraBot.body.position.y-64;
             }
         
+
 
         
     }
@@ -215,7 +216,7 @@ zelda.TektitePrefab.prototype.update = function(){
                     if(!this.jumping){
                         this.animations.play("UpDown");
                         var chanceToJump = zelda.randomDataGen.between(0,100);
-                        if(chanceToJump<1){
+                        if(chanceToJump<2){
                             this.jumping = true;
                             zelda.TektitePrefab.CalculateRandomPos(this);
 
