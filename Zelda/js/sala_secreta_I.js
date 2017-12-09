@@ -41,6 +41,7 @@ zelda.sala_secreta_I = {
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
 		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+		this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
     },
     
     create:function(){
@@ -73,6 +74,8 @@ zelda.sala_secreta_I = {
 		this.fire2.body.immovable = true;
         
 		if(!this.roomDone1&&zelda.LinkObject.currentZone == 15 || !this.roomDone2&&zelda.LinkObject.currentZone==20 || !this.roomDone3&&zelda.LinkObject.currentZone == 32){
+			zelda.Inventory.ScrollingInventory = true;
+			
 			//npc
 			this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
 			this.npc.anchor.setTo(.5,0);
@@ -85,13 +88,24 @@ zelda.sala_secreta_I = {
 				zelda.sala_secreta_I.rupia = zelda.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY, "rupia");
 				zelda.sala_secreta_I.rupia.anchor.setTo(.5,0);
 				zelda.game.physics.arcade.enable(this.rupia);
+				
+				//ESTA SHIT ES PARA QUE LINK SALGA POR ENCIMA DEL LOS OBJETOS QUE SE AÑADEN EN
+				//ESTE EVENTO DE TIEMPO.
+				zelda.sala_secreta_I.link.destroy();
+				zelda.sala_secreta_I.link = new zelda.LinkPrefab(zelda.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,zelda.sala_secreta_G);
 			},this);
 			//TEXTO
-			this.numeros = zelda.game.add.text(zelda.secretLayout.item2X, zelda.secretLayout.itemY+16, "");
-			this.numeros.anchor.setTo(.5,0)
-			this.numeros.fill = "white";
-			this.numeros.font = "Press Start 2P";
-			this.numeros.fontSize = 10;
+			this.numeros = this.game.add.bitmapText(zelda.secretLayout.item2X, zelda.secretLayout.itemY+16, "zelda_font","",8);
+			this.numeros.anchor.setTo(.5,0);
+			
+			//TEXTOS EN PANTALLA
+			this.str  = "IT'S A SECRET\nTO EVERYBODY.";
+			this.strToPrint = "";
+			this.strCount = 0;
+			this.textTimer = 0;
+			this.textUpdateTime = 50;
+			this.texto = this.game.add.bitmapText(5*16-8,16*2+4,"zelda_font","",8);
+			this.texto.align = "center";
 		}
 		
 		this.game.camera.y -= 47;
@@ -125,6 +139,7 @@ zelda.sala_secreta_I = {
 		this.game.physics.arcade.collide(this.link.LinkCollider, this.npc);
 		this.game.physics.arcade.collide(this.link.LinkCollider, this.fire1);
 		this.game.physics.arcade.collide(this.link.LinkCollider, this.fire2);
+		this.game.physics.arcade.collide(this.link.LinkCollider, this.obstacles);
 		
 		
 		if(!this.roomDone1&&zelda.LinkObject.currentZone == 15 || !this.roomDone2&&zelda.LinkObject.currentZone==20 || !this.roomDone3&&zelda.LinkObject.currentZone == 32){
@@ -135,6 +150,19 @@ zelda.sala_secreta_I = {
 				else if(zelda.LinkObject.currentZone == 32)zelda.sala_secreta_I.roomDone3 = true;
 				zelda.Inventory.rupies+=100;
 			});
+			
+			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
+				this.strToPrint += this.str[this.strCount];
+				this.texto.setText(this.strToPrint);
+				this.strCount++;
+				this.textTimer = 0;
+			}
+			
+			//cuando acaba de pintar el texto.
+			if(this.str.length == this.strToPrint.length){
+				zelda.Inventory.ScrollingInventory = false;
+			}
+			this.textTimer += zelda.game.time.elapsed;
 		}
 		
 		//pausar el juego con la P

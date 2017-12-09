@@ -41,6 +41,7 @@ zelda.sala_secreta_K = {
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
 		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+		this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
 	},
 	
 	create:function(){
@@ -71,8 +72,9 @@ zelda.sala_secreta_K = {
 		this.game.physics.arcade.enable(this.fire2);
 		this.fire2.body.immovable = true;
         
-
+		zelda.LinkObject.currentZone = 12;
 		if(!this.roomDone1&&zelda.LinkObject.currentZone==12 || !this.roomDone2&&zelda.LinkObject.currentZone==13){
+			zelda.Inventory.ScrollingInventory = true;
 			//npc
 			this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
 			this.npc.anchor.setTo(.5,0);
@@ -96,12 +98,20 @@ zelda.sala_secreta_K = {
 				zelda.sala_secreta_K.flecha.animations.add("despawn",[3,4],6,true);
 			},this);
 			//-------------------------------------------
+			
+			//TEXTOS EN PANTALLA
+			this.str  = "BUY SOMETHIN' WILL YA!";
+			this.strToPrint = "";
+			this.strCount = 0;
+			this.textTimer = 0;
+			this.textUpdateTime = 50;
+			this.texto = this.game.add.bitmapText(2*16+8,16*2+4,"zelda_font","",8);
+			this.texto.align = "center";
 		}
 		
 		this.game.camera.y -= 47;
 		
 		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
-
 		
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
 		
@@ -182,6 +192,20 @@ zelda.sala_secreta_K = {
 				else if(zelda.LinkObject.currentZone == 13) zelda.sala_secreta_K.roomDone2 = true;
 				zelda.Inventory.GetObject(11);
 			});
+			
+			//FUNCIONAMIENTO DE LOS TEXTOS
+			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
+				this.strToPrint += this.str[this.strCount];
+				this.texto.setText(this.strToPrint);
+				this.strCount++;
+				this.textTimer = 0;
+			}
+			
+			//cuando acaba de pintar el texto.
+			if(this.str.length == this.strToPrint.length){
+				zelda.Inventory.ScrollingInventory = false;
+			}
+			this.textTimer += zelda.game.time.elapsed;
 		}
 
 		//pausar el juego con la P
