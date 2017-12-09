@@ -46,7 +46,7 @@ zelda.dungeon = {
         this.load.image("SpikesTrap","img/SpikesTrap.png");
         this.load.spritesheet("Aquamentus","img/AquamentusSpriteSheet.png",32,32);
         this.load.spritesheet("AquamentusProjectile","img/ProyectilAquamentus.png",16,16);
-
+        this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
     },
 
     create:function(){
