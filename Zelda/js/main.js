@@ -40,10 +40,11 @@ zelda.gameOptions = {
             keys:zelda.Inventory.keys,
             rupies:zelda.Inventory.rupies,
             arco:0,
-            vela:0,
-            potion:0,
+            vela:zelda.Inventory.objects[3],
+            potion:zelda.Inventory.objects[4],
             hasSword:false,
             boomerang:0,
+            Deaths:zelda.Inventory.Deaths,
             SecretA1Done:zelda.sala_secreta_A.roomDone1,
             SecretA2Done:zelda.sala_secreta_A.roomDone2,
             SecretD1Done:zelda.sala_secreta_D.roomDone1,
@@ -94,6 +95,7 @@ zelda.gameOptions = {
 			zelda.Inventory.array[4]=this.obj.potion;
 			zelda.Inventory.hasSword=this.obj.hasSword;
 			zelda.Inventory.array[0]=this.obj.boomerang;
+            zelda.Inventory.Deaths=this.obj.Deaths;
 			zelda.sala_secreta_A.roomDone1=this.obj.SecretA1Done;
 			zelda.sala_secreta_A.roomDone2=this.obj.SecretA2Done;
 			zelda.sala_secreta_D.roomDone1=this.obj.SecretD1Done;
@@ -650,6 +652,7 @@ zelda.Inventory={
     healed:false,
     escudo:false,
     plantedBomb:true,
+    Deaths:0,
     bombOn:false,
     //el [0] sera el boomerang
     //el [1] sera las bombas

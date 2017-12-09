@@ -6,6 +6,7 @@ zelda.game_over = {
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.selected=0;
         this.DiedIn="";
+        zelda.Inventory.Deaths+=1;
 	},
 	
     preload:function(){
