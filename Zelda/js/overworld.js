@@ -72,6 +72,7 @@ zelda.overworld = {
         this.load.audio("PlaceBomb","sounds/Sfx/place_bomb.mp3");
         this.load.audio("BlowBomb","sounds/Sfx/blow_bomb.mp3");
         this.load.audio("UsePotion","sounds/Sfx/use_potion.wav");
+        this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
     },
 
     create:function(){
