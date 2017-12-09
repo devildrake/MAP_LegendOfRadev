@@ -68,7 +68,9 @@ zelda.GelPrefab.prototype.update = function(){
     if(!zelda.Inventory.ScrollingInventory&&!zelda.Inventory.InvON){
         if(this.spawned){
             
-            
+            if(this.lives==0&&this.Alive){
+                zelda.AIMethods.Die(this);
+            }
             
             
             

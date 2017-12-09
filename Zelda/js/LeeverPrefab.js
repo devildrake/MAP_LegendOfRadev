@@ -71,6 +71,10 @@ zelda.LeeverPrefab.prototype.update = function(){
                     this.body.velocity = this.prevVelocity;
                 }
             
+            if(this.lives==0&&this.Alive){
+                zelda.AIMethods.Die(this);
+            }
+            
             
             if(!this.Awake)   {
                 this.frame = 10;

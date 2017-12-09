@@ -654,8 +654,10 @@ zelda.Inventory={
     healed:false,
     escudo:false,
     plantedBomb:true,
+    plantedFire:true,
     Deaths:0,
     bombOn:false,
+    fireOn:false,
     //el [0] sera el boomerang
     //el [1] sera las bombas
     //el [2] sera el arco
@@ -663,7 +665,7 @@ zelda.Inventory={
     //el [4] sera la poti vida(roja)
     //el [5] sera el escudo
     // el [6] sera la pocion azul
-    objects:[0,0,0,0,1,0,0],
+    objects:[0,0,0,1,1,0,0],
     flechas:0,
     Cuadrado:0,
     SlotCorazon:0,
@@ -1108,9 +1110,9 @@ zelda.Inventory={
                     //borrar objB de la casilla de objeto B equipada
                     this.PintObj.kill();
                 }
+                this.bombOn=true;
                // Phaser.Sprite.call(this,game,,y,"bomba"); 
                 if(zelda.Inventory.scene=="overworld"){
-                    this.bombOn=true;
                     //posicion bomba
                     if(zelda.LinkObject.lookingUp){
                         zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,"explosion");
@@ -1133,7 +1135,6 @@ zelda.Inventory={
                     zelda.LinkPrefab.placeBombSound.play();
                 }
                 else if(zelda.Inventory.scene=="dungeon"){
-                     this.bombOn=true;
                     if(zelda.LinkObject.lookingUp){
                         zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.dungeon.linkInstance.position.x-8,zelda.dungeon.linkInstance.position.y-20,"explosion");
                         //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,"explosion");
@@ -1188,7 +1189,85 @@ zelda.Inventory={
             
         }
         else if(zelda.Inventory.ObjectB=="vela"){
+            if(!this.fireOn){
+                this.fireOn = true;
+                if(zelda.Inventory.scene=="overworld"){
+                    //posicion bomba
+                    if(zelda.Inventory.plantedFire==true){
+                        if(zelda.LinkObject.lookingUp){
+                            zelda.Inventory.plantedFire = new zelda.FirePrefab(zelda.overworld.game,zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,zelda.overworld,2);
+                            //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,"explosion");
+                        }
+                        else if(zelda.LinkObject.lookingDown){
+                            zelda.Inventory.plantedFire = new zelda.FirePrefab(zelda.overworld.game,zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y,zelda.overworld,3);
+                            //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y,"explosion");
+                        }
+                        else if(zelda.LinkObject.lookingRight){
+                            zelda.Inventory.plantedFire = new zelda.FirePrefab(zelda.overworld.game,zelda.overworld.linkInstance.position.x,zelda.overworld.linkInstance.position.y-8,zelda.overworld,0);
+                             //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x,zelda.overworld.linkInstance.position.y-8,"explosion");
+                        }
+                        else if(zelda.LinkObject.lookingLeft){
+                            zelda.Inventory.plantedFire = new zelda.FirePrefab(zelda.overworld.game,zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,zelda.overworld,1);
+                            //zelda.Inventory.plantedFire=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,"FireSpriteSheet");
+                            //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,"explosion");
+                        }
+                    }else{
+                        
+                        if(zelda.LinkObject.lookingUp){
+                            zelda.Inventory.plantedFire.Alive = true;
+                            zelda.Inventory.plantedFire.sprite.reset(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20);
+                            zelda.Inventory.plantedFire.going = "Up";
+                            zelda.Inventory.plantedFire.whereTo = 2;
+                            zelda.FirePrefab.Restart(zelda.Inventory.plantedFire);
+                        }
+                        else if(zelda.LinkObject.lookingDown){
+                            zelda.Inventory.plantedFire.Alive = true;
+                            zelda.Inventory.plantedFire.sprite.reset(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y);
+                            zelda.Inventory.plantedFire.going = "Down";
+                            zelda.Inventory.plantedFire.whereTo = 3;
+
+                            zelda.FirePrefab.Restart(zelda.Inventory.plantedFire);
+                        }
+                        else if(zelda.LinkObject.lookingRight){
+                            zelda.Inventory.plantedFire.Alive = true;
+                            zelda.Inventory.plantedFire.sprite.reset (zelda.overworld.linkInstance.position.x,zelda.overworld.linkInstance.position.y-8);
+                            zelda.Inventory.plantedFire.going = "Right";
+                            zelda.Inventory.plantedFire.whereTo = 0;
+                            zelda.FirePrefab.Restart(zelda.Inventory.plantedFire);
+                        }
+                        else if(zelda.LinkObject.lookingLeft){
+                            zelda.Inventory.plantedFire.Alive = true;
+                            zelda.Inventory.plantedFire.sprite.reset (zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8);
+                            zelda.Inventory.plantedFire.going = "Left";
+                            zelda.Inventory.plantedFire.whereTo = 1;
+                            zelda.FirePrefab.Restart(zelda.Inventory.plantedFire);
+                        }
+                    }
+                    
+                    zelda.LinkPrefab.placeBombSound.play();
+                }
+                else if(zelda.Inventory.scene=="dungeon"){
+                    if(zelda.LinkObject.lookingUp){
+                        //zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.dungeon.linkInstance.position.x-8,zelda.dungeon.linkInstance.position.y-20,"explosion");
+                        //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y-20,"explosion");
+                    }
+                    else if(zelda.LinkObject.lookingDown){
+                        //zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.dungeon.linkInstance.position.x-8,zelda.dungeon.linkInstance.position.y,"explosion");
+                        //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-8,zelda.overworld.linkInstance.position.y,"explosion");
+                    }
+                    else if(zelda.LinkObject.lookingRight){
+                        //zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.dungeon.linkInstance.position.x,zelda.dungeon.linkInstance.position.y-8,"explosion");
+                         //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x,zelda.overworld.linkInstance.position.y-8,"explosion");
+                    }
+                    else if(zelda.LinkObject.lookingLeft){
+                        //zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.dungeon.linkInstance.position.x-20,zelda.dungeon.linkInstance.position.y-8,"explosion");
+                         //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,"explosion");
+                    }
+                    //zelda.LinkPrefab.placeFireSound.play();
+
+                }
                 
+            }
                 
         }
         else if(zelda.Inventory.ObjectB=="potion"){

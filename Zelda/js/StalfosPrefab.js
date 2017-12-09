@@ -83,6 +83,10 @@ zelda.StalfosPrefab.prototype.update = function(){
             this.game.physics.arcade.collide(this,this.level.obstacles);
             this.game.physics.arcade.collide(this,this.level.water);
 
+            if(this.lives==0&&this.Alive){
+                zelda.AIMethods.Die(this);
+            }
+            
 
             if(!this.hurt){
                 if(this.prevVelocity.y<0&&this.body.blocked.up){

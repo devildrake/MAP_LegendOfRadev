@@ -105,7 +105,10 @@ zelda.TektitePrefab.prototype.constructor = zelda.TektitePrefab;
 zelda.TektitePrefab.prototype.update = function(){
     if(this.spawned){
         if(this.Alive){     
-            
+            if(this.lives==0){
+                zelda.AIMethods.Die(this);
+            }
+
             if(!zelda.Inventory.ScrollingInventory&&!zelda.Inventory.InvON){
 
                 if(this.wasPaused){

@@ -104,7 +104,9 @@ zelda.MoblinPrefab.prototype.update = function(){
 
                 }
             }
-            
+            if(this.lives==0&&this.Alive){
+                zelda.AIMethods.Die(this);
+            }
             
             if(this.body.velocity.x==0&&this.body.velocity.y==0&&!this.hurtBySword){
                 zelda.AIMethods.changeDir(this,4,false);

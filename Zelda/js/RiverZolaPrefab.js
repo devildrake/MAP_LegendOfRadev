@@ -75,6 +75,10 @@ zelda.RiverZolaPrefab.prototype.update = function(){
         }
         if(this.Alive){
 
+            if(this.lives==0){
+                zelda.AIMethods.Die(this);
+            }
+            
                 if(this.wasPaused){
                 this.wasPaused = false;
                 

@@ -72,6 +72,10 @@ zelda.overworld = {
         this.load.audio("PlaceBomb","sounds/Sfx/place_bomb.mp3");
         this.load.audio("BlowBomb","sounds/Sfx/blow_bomb.mp3");
         this.load.audio("UsePotion","sounds/Sfx/use_potion.wav");
+        this.load.spritesheet("AquamentusProjectile","img/ProyectilAquamentus.png",16,16);
+        this.load.spritesheet("FireSpriteSheet","img/fuego.png",16,16);
+
+
     },
 
     create:function(){
@@ -238,11 +242,15 @@ zelda.overworld = {
         //this.game.add.existing(this.aquamentus);
         
         this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
-        
-        
+
     },
     
     update:function(){   
+        //console.log(zelda.Inventory.plantedFire);
+        //console.log(this.linkInstance);
+        if(zelda.Inventory.plantedFire!=true)
+        zelda.FirePrefab.Update(zelda.Inventory.plantedFire);
+        
         this.MoveCamera();
         
         this.SetBorders();
@@ -265,8 +273,7 @@ zelda.overworld = {
 			//this.createEnemy("Oktorok",this.game,640,850,this,1,1);
 			zelda.overworld.enabledSpawns = !zelda.overworld.enabledSpawns;
 			console.log(zelda.overworld.enabledSpawns);
-		}
-
+		}        
 		if(this.muteButton.isDown&&this.muteButton.downDuration(1)){
 			if(!this.playMusic)   {
 				this.playMusic = true;
@@ -315,57 +322,132 @@ zelda.overworld = {
         
         //overlaps con la explosion
         if(zelda.Inventory.ExplosionOn){
-            if(zelda.overworld.enabledSpawns){
-                for(var i = 0;i<zelda.enemySpawns.zones[zelda.LinkObject.currentZone].length;++i){
-                    if(zelda.enemySpawns.zones[zelda.LinkObject.currentZone][i]==true){
-                        //oktorok
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.oktoroks.children[i],
+            
+        for(var i=0;i<this.oktoroks.children.length;i++){
+            if(this.oktoroks.children[i].Alive){
+                    zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.oktoroks.children[i],
                         function(rupy,Enemy){
-                                 zelda.overworld.oktoroks.children[i].kill();
-                                console.log("bomb hit");
+                        zelda.overworld.oktoroks.children[i].lives = 0;
                         } );
-                        //tektites
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.tektites.children[i],
-                        function(rupy,Enemy){
-                                 zelda.overworld.tektites.children[i].kill();
-                                console.log("bomb hit");
-                        } );
-                        //moblins
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.moblins.children[i],
-                        function(rupy,Enemy){
-                                 zelda.overworld.moblins.children[i].kill();
-                                console.log("bomb hit");
-                        } );
-                        //leevers
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.leevers.children[i],
-                        function(rupy,Enemy){
-                                 zelda.overworld.leevers.children[i].kill();
-                                console.log("bomb hit");
-                        } );
-                        //peahats
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.peahats.children[i],
-                        function(rupy,Enemy){
-                                 zelda.overworld.peahats.children[i].kill();
-                                console.log("bomb hit");
-                        } );
-                        //riverzolas
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.riverZolas.children[i],
-                        function(rupy,Enemy){
-                                 zelda.overworld.riverZolas.children[i].kill();
-                                console.log("bomb hit");
-                        } );
-                        
-                        //PA LAS SALAS SECRETAS HAZ UN GRUPO DE OBJETOS A ROMPER Y YA
-                        
-                    }
-                
-                }
+
             }
         }
         
+        for(var i=0;i<this.tektites.children.length;i++){
+            if(this.tektites.children[i].Alive){
+                zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.tektites.children[i],
+                function(rupy,Enemy){
+                        zelda.overworld.tektites.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.moblins.children.length;i++){
+            if(this.moblins.children[i].Alive){
+                zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.moblins.children[i],
+                function(rupy,Enemy){
+                        zelda.overworld.moblins.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.leevers.children.length;i++){
+            if(this.leevers.children[i].Alive){
+                zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.leevers.children[i],
+                function(rupy,Enemy){
+                        zelda.overworld.leevers.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.peahats.children.length;i++){
+            if(this.peahats.children[i].Alive){
+                zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.peahats.children[i],
+                function(rupy,Enemy){
+                        zelda.overworld.peahats.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.riverZolas.children.length;i++){
+            if(this.riverZolas.children[i].Alive){
+                zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.riverZolas.children[i],
+                function(rupy,Enemy){
+                        zelda.overworld.riverZolas.children[i].lives = 0;
+                } );
+            }
+        }
+            
+                        
+                        
+                        //PA LAS SALAS SECRETAS HAZ UN GRUPO DE OBJETOS A ROMPER Y YA
+                        
+    }
+            
+        if(zelda.Inventory.fireOn){
+            
+        for(var i=0;i<this.oktoroks.children.length;i++){
+            if(this.oktoroks.children[i].Alive){
+                console.log(zelda.Inventory.plantedFire);
+                    this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.oktoroks.children[i],
+                        function(rupy,Enemy){
+                        zelda.overworld.oktoroks.children[i].lives = 0;
+                        } );
+
+            }
+        }
+        
+        for(var i=0;i<this.tektites.children.length;i++){
+            if(this.tektites.children[i].Alive){
+                this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.tektites.children[i],
+                function(rupy,Enemy){
+                        zelda.overworld.tektites.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.moblins.children.length;i++){
+            if(this.moblins.children[i].Alive){
+                this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.moblins.children[i],
+                function(rupy,Enemy){
+                        zelda.overworld.moblins.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.leevers.children.length;i++){
+            if(this.leevers.children[i].Alive){
+                this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.leevers.children[i],
+                function(rupy,Enemy){
+                        zelda.overworld.leevers.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.peahats.children.length;i++){
+            if(this.peahats.children[i].Alive){
+                this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.peahats.children[i],
+                function(rupy,Enemy){
+                        zelda.overworld.peahats.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.riverZolas.children.length;i++){
+            if(this.riverZolas.children[i].Alive){
+                this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.riverZolas.children[i],
+                function(rupy,Enemy){
+                        zelda.overworld.riverZolas.children[i].lives = 0;
+                } );
+            }
+        }
+                        //PA LAS SALAS SECRETAS HAZ UN GRUPO DE OBJETOS A ROMPER Y YA
+                        
+        }
+    
     }, 
     //======================FINAL DEL UPDATE===========================
-    
+
         
     
     SetCamera:function(){
