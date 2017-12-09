@@ -658,7 +658,7 @@ zelda.Inventory={
     //el [4] sera la poti vida(roja)
     //el [5] sera el escudo
     // el [6] sera la pocion azul
-    objects:[0,0,0,0,0,0,0],
+    objects:[0,0,0,0,1,0,0],
     flechas:0,
     Cuadrado:0,
     SlotCorazon:0,
@@ -1094,7 +1094,15 @@ zelda.Inventory={
         
         if(zelda.Inventory.ObjectB=="bombs" && this.bombs>0){
             if(!this.bombOn){
-               zelda.Inventory.bombs-=1;
+                zelda.Inventory.bombs-=1;
+                //cambiar texto
+                this.texto.kill();
+                zelda.Inventory.startHUD();
+                if(zelda.Inventory.Bombs==0){
+                    zelda.Inventory.ObjectB="nothing";
+                    //borrar objB de la casilla de objeto B equipada
+                    this.PintObj.kill();
+                }
                // Phaser.Sprite.call(this,game,,y,"bomba"); 
                 if(zelda.Inventory.scene=="overworld"){
                     this.bombOn=true;
@@ -1162,19 +1170,30 @@ zelda.Inventory={
                     zelda.Inventory.ExplosionOn=false;
                 }, 2700);
             }
+           
+            
         }
         else if(zelda.Inventory.ObjectB=="vela"){
                 
                 
         }
         else if(zelda.Inventory.ObjectB=="potion"){
-                
-                
+            zelda.Inventory.objects[4]=0;
+            if(zelda.LinkObject.currentHearts!=zelda.LinkObject.maxHearts){
+                    
+                        zelda.LinkObject.currentHearts+=3;
+                        if(zelda.LinkObject.currentHearts>zelda.LinkObject.maxHearts){
+                            zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
+                        }
+                        zelda.Inventory.healed=true;
+                   
+            }
+            zelda.Inventory.ObjectB="nothing";
+            //borrar objB de la casilla de objeto B equipada
+            this.PintObj.kill();
         }
     
-    
-    }
-    
+}
 },
     
     
