@@ -215,55 +215,135 @@ zelda.dungeon = {
             zelda.Inventory.UseObjectB();
         }
         
+  
         //overlaps con la explosion
         if(zelda.Inventory.ExplosionOn){
             
-            if(zelda.dungeon.enabledSpawns){
-                
-                for(var i = 0;i<zelda.enemySpawns.zones[zelda.LinkObject.currentZone].length;++i){
-                    if(zelda.enemySpawns.zones[zelda.LinkObject.currentZone][i]==true){
-                        //stalfos
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.stalfoses.children[i],
+        for(var i=0;i<this.stalfoses.children.length;i++){
+            if(this.stalfoses.children[i].Alive){
+                    zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.stalfoses.children[i],
                         function(rupy,Enemy){
-                                 zelda.dungeon.stalfoses.children[i].kill();
-                                console.log("bomb hit");
+                        zelda.dungeon.stalfoses.children[i].lives = 0;
                         } );
-                        //wallmasters
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.wallmasters.children[i],
-                        function(rupy,Enemy){
-                                 zelda.dungeon.wallmasters.children[i].kill();
-                                console.log("bomb hit");
-                        } );
-                        //goriya
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.goriyas.children[i],
-                        function(rupy,Enemy){
-                                 zelda.dungeon.goriyas.children[i].kill();
-                                console.log("bomb hit");
-                        } );
-                        //gel
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.gels.children[i],
-                        function(rupy,Enemy){
-                                 zelda.dungeon.gels.children[i].kill();
-                                console.log("bomb hit");
-                        } );
-                        //keese
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.keeses.children[i],
-                        function(rupy,Enemy){
-                                 zelda.dungeon.keeses.children[i].kill();
-                                console.log("bomb hit");
-                        } );
-                        //spiketraps
-                        zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.spikeTraps.children[i],
-                        function(rupy,Enemy){
-                                 zelda.dungeon.spikeTraps.children[i].kill();
-                                console.log("bomb hit");
-                        } );
-                           
-                    }
-                
-                }
+
             }
         }
+        
+        for(var i=0;i<this.gels.children.length;i++){
+            if(this.gels.children[i].Alive){
+                zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.gels.children[i],
+                function(rupy,Enemy){
+                        zelda.dungeon.gels.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.goriyas.children.length;i++){
+            if(this.goriyas.children[i].Alive){
+                zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.goriyas.children[i],
+                function(rupy,Enemy){
+                        zelda.dungeon.goriyas.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.keeses.children.length;i++){
+            if(this.keeses.children[i].Alive){
+                zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.keeses.children[i],
+                function(rupy,dungeon){
+                        zelda.overworld.keeses.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.wallmasters.children.length;i++){
+            if(this.wallmasters.children[i].Alive){
+                zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.wallmasters.children[i],
+                function(rupy,Enemy){
+                        zelda.dungeon.wallmasters.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.Aquamentuses.children.length;i++){
+            if(this.Aquamentuses.children[i].Alive){
+                zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.Aquamentuses.children[i],
+                function(rupy,Enemy){
+                        zelda.dungeon.Aquamentuses.children[i].lives = 0;
+                } );
+            }
+        }
+            
+                        
+                        
+                        //PA LAS SALAS SECRETAS HAZ UN GRUPO DE OBJETOS A ROMPER Y YA
+                        
+    }
+            
+        
+        //overlaps fuego
+        
+        if(zelda.Inventory.fireOn){
+            
+        for(var i=0;i<this.stalfoses.children.length;i++){
+            if(this.stalfoses.children[i].Alive){
+                console.log(zelda.Inventory.plantedFire);
+                    this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.stalfoses.children[i],
+                        function(rupy,Enemy){
+                        zelda.dungeon.stalfoses.children[i].lives = 0;
+                        } );
+
+            }
+        }
+        
+        for(var i=0;i<this.gels.children.length;i++){
+            if(this.gels.children[i].Alive){
+                this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.gels.children[i],
+                function(rupy,Enemy){
+                        zelda.dungeon.gels.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.goriyas.children.length;i++){
+            if(this.goriyas.children[i].Alive){
+                this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.goriyas.children[i],
+                function(rupy,Enemy){
+                        zelda.dungeon.goriyas.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.keeses.children.length;i++){
+            if(this.keeses.children[i].Alive){
+                this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.keeses.children[i],
+                function(rupy,Enemy){
+                        zelda.dungeon.keeses.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.wallmasters.children.length;i++){
+            if(this.wallmasters.children[i].Alive){
+                this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.wallmasters.children[i],
+                function(rupy,Enemy){
+                        zelda.dungeon.wallmasters.children[i].lives = 0;
+                } );
+            }
+        }
+        
+        for(var i=0;i<this.Aquamentuses.children.length;i++){
+            if(this.Aquamentuses.children[i].Alive){
+                this.game.physics.arcade.overlap(zelda.Inventory.plantedFire.sprite,this.Aquamentuses.children[i],
+                function(rupy,Enemy){
+                        zelda.dungeon.Aquamentuses.children[i].lives = 0;
+                } );
+            }
+        }
+                        //PA LAS SALAS SECRETAS HAZ UN GRUPO DE OBJETOS A ROMPER Y YA
+                        
+        }
+    
     },
 	
 	//Metodo que encapsula el pintado de las puertas.

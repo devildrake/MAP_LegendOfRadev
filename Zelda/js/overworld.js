@@ -384,6 +384,9 @@ zelda.overworld = {
                         
     }
             
+        
+        //overlaps fuego
+        
         if(zelda.Inventory.fireOn){
             
         for(var i=0;i<this.oktoroks.children.length;i++){
