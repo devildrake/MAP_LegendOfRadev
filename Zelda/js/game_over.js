@@ -7,6 +7,7 @@ zelda.game_over = {
         this.selected=0;
         this.DiedIn="";
         zelda.Inventory.Deaths+=1;
+        this.Died=true;
 	},
 	
     preload:function(){
@@ -79,11 +80,15 @@ zelda.game_over = {
                     zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
                     zelda.LinkObject.dying = false;
                     zelda.game.state.start("dungeon");
+                    
                 }
                 else if(zelda.LinkObject.DiedIn=="overworld"){
 
                     zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
                     zelda.LinkObject.dying = false;
+                    
+                    
+                    
                     zelda.game.state.start("overworld");
                 }
 
