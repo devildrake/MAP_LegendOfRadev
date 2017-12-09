@@ -68,6 +68,7 @@ zelda.overworld = {
         this.load.audio("DieMusic","sounds/Music/DeathMusic.wav");
         this.load.image("SpikesTrap","img/SpikesTrap.png");
         this.load.spritesheet("Aquamentus","img/AquamentusSpriteSheet.png",32,32);
+        this.load.spritesheet("DeathParticles","img/DeathParticles.png",16,16);
         this.load.spritesheet("AquamentusProjectile","img/ProyectilAquamentus.png",16,16);
         this.load.audio("PlaceBomb","sounds/Sfx/place_bomb.mp3");
         this.load.audio("BlowBomb","sounds/Sfx/blow_bomb.mp3");
@@ -211,7 +212,7 @@ zelda.overworld = {
         this.loadRupies();
         this.loadBombs();
         this.createHeart(620,840,this,1);
-    
+        this.loadDeathParticles();
         this.loadEnemies();
         
         this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
@@ -848,14 +849,19 @@ zelda.overworld = {
 	},
     
     loadRupies:function(){
-        this.rupies = this.add.group(),
+        this.rupies = this.add.group();
         this.rupies.enableBody = true;
         
     },
     loadBombs:function(){
-        this.bombs = this.add.group(),
+        this.bombs = this.add.group();
         this.bombs.enableBody = true;
         
+    },
+    
+    loadDeathParticles:function(){
+        this.deathParticles = this.add.group();
+        this.deathParticles.enableBody = true;
     },
     
     loadEnemies:function(){
@@ -877,6 +883,19 @@ zelda.overworld = {
         this.leevers = this.add.group();
         this.leevers.enableBody = true;
         },
+    
+    createDeathParticles:function(posX,posY,level){
+        var particles = this.deathParticles.getFirstExists(false);
+        if(!particles){
+            console.log(this.deathParticles);
+            particles = new zelda.DeathParticlesPrefab(this.game,posX,posY,level);
+            this.deathParticles.add(particles);
+        }else{
+            particles.frame = 0;
+            particles.Alive = true;
+            particles.reset(posX,posY);
+        }
+    },
     
     createEnemy:function(enemy, Agame, posX, posY, level, type, movingTowards, currentZone, posInArray){
             if(enemy== "Oktorok"){

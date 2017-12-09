@@ -1582,6 +1582,8 @@ zelda.AIMethods = {
         npc.kill();
         console.log("Eliminando enemigo en zona " +npc.currentZone + " en la posicion " + npc.posInArray);
             if(npc.level==zelda.overworld){
+            zelda.overworld.createDeathParticles(npc.body.position.x,npc.body.position.y,zelda.overworld);
+                console.log(npc.body.position.x);
             zelda.enemySpawns.zones[npc.currentZone][npc.posInArray] = false;
             var randomChance = zelda.randomDataGen.between(0,99);
             if(randomChance<zelda.gameOptions.chancesToSpawnRupy&&randomChance>zelda.gameOptions.chancesToSpawnHeart){
