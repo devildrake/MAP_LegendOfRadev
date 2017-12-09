@@ -98,7 +98,10 @@ zelda.overworld = {
         //Camara
         this.game.camera.focusOnXY(zelda.gameOptions.lastCameraPosX,zelda.gameOptions.lastCameraPosY);
         //console.log("Focusing on" + zelda.gameOptions.lastCameraPosX,zelda.gameOptions.lastCameraPosY);
-        
+        if(zelda.game_over.Died){
+        this.game.camera.focusOnXY(zelda.gameOptions.originalCameraPosX,zelda.gameOptions.originalCameraPosY);
+        zelda.game_over.Died=false;
+        }
         //this.game.camera.position.y-=4;
         
         this.SetCamera();
