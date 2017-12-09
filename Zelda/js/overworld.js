@@ -275,6 +275,10 @@ zelda.overworld = {
 
 		}
         
+        if(!this.music.isPlaying&&this.playMusic){
+            this.music.play();
+        }
+        
         //objeto b
         this.ObjBKey=zelda.game.input.keyboard.addKey(Phaser.Keyboard.R);
         if( this.ObjBKey.isDown && this.ObjBKey.downDuration(1)){

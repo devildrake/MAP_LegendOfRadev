@@ -74,16 +74,16 @@ zelda.TektitePrefab = function(game,x,y,type,level,offsetMax,zone,posInArray){
         }
             
             
-            if(obj.posToJump.x+16>obj.level.cameraRight.body.position.x){
-                obj.posToJump.x = obj.level.cameraBot.body.position.x-16;
-            }else if(obj.posToJump.x-16<obj.level.cameraLeft.body.position.x){
-                obj.posToJump.x = obj.level.cameraBot.body.position.x+16;
+            if(obj.posToJump.x>obj.level.cameraRight.body.position.x){
+                obj.posToJump.x = obj.level.cameraBot.body.position.x-32;
+            }else if(obj.posToJump.x<obj.level.cameraLeft.body.position.x){
+                obj.posToJump.x = obj.level.cameraBot.body.position.x-32;
             }
             
-            if(obj.posToJump.y<obj.level.cameraTop.body.position.y+16){
+            if(obj.posToJump.y>obj.level.cameraTop.body.position.y){
                 obj.posToJump.y = obj.level.cameraBot.body.position.y+64;
                 
-            }else if(obj.posToJump.y>obj.level.cameraBot.body.position.y-16){
+            }else if(obj.posToJump.y<obj.level.cameraBot.body.position.y){
                 obj.posToJump.y = obj.level.cameraBot.body.position.y-64;
             }
         
@@ -257,19 +257,32 @@ zelda.TektitePrefab.prototype.update = function(){
                 }
 
                 this.game.physics.arcade.overlap(this,this.level.cameraRight,function(npc, a){
-                npc.body.velocity.x = -npc.body.velocity.x;
+                //npc.body.velocity.x = -npc.body.velocity.x;
+                    npc.posToJump.x = npc.position.x;
+                    npc.posToJump.y = npc.position.y;
+                    console.log("DoingShit");
+                    //npc.jumping=false;
 
                 });
                 this.game.physics.arcade.overlap(this,this.level.cameraLeft,function(npc, a){
-                npc.body.velocity.x = -npc.body.velocity.x;
+                //npc.body.velocity.x = -npc.body.velocity.x;
+                    npc.posToJump.x = npc.position.x;
+                    npc.posToJump.y = npc.position.y;
+                    console.log("DoingShit");
 
                 });
                 this.game.physics.arcade.overlap(this,this.level.cameraTop,function(npc, a){
-                npc.body.velocity.y = -npc.body.velocity.y;
+                //npc.body.velocity.y = -npc.body.velocity.y;
+                    npc.posToJump.x = npc.position.x;
+                    npc.posToJump.y = npc.position.y;
+                    console.log("DoingShit");
 
                 });
                 this.game.physics.arcade.overlap(this,this.level.cameraBot,function(npc, a){
-                npc.body.velocity.y = -npc.body.velocity.y;
+                //npc.body.velocity.y = -npc.body.velocity.y;
+                    npc.posToJump.x = npc.position.x;
+                    npc.posToJump.y = npc.position.y;
+                    console.log("DoingShit");
 
                 });
                 

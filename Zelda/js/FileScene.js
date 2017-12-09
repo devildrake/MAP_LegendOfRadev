@@ -97,7 +97,7 @@ zelda.FileScene = {
         //mover el cursor/corazon
         if(this.cursors.up.isDown && this.cursors.up.downDuration(.5) && this.CurrentPosition!=4 && this.CurrentPosition!=5){
             this.SfxMenu.play();
-            if(this.CurrentPosition!=0){
+            if(this.CurrentPosition!=1){
                 this.CurrentPosition-=1;
             }else{
                 this.CurrentPosition=3;
@@ -108,7 +108,7 @@ zelda.FileScene = {
              if(this.CurrentPosition!=3){
                 this.CurrentPosition+=1;
             }else{
-                this.CurrentPosition=0;
+                this.CurrentPosition=1;
             }
             
             
