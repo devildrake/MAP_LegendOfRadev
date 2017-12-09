@@ -87,8 +87,8 @@ zelda.game_over = {
                     zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
                     zelda.LinkObject.dying = false;
                     
-                    
-                    
+                
+                    //zelda.overworld.game.camera.focusOnXY(zelda.gameOptions.originalCameraPosX,zelda.gameOptions.originalCameraPosY);
                     zelda.game.state.start("overworld");
                 }
 

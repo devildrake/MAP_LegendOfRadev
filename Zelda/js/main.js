@@ -713,22 +713,22 @@ zelda.Inventory={
         else if(nameObject==1){
             //this.rupies+=1;
             this.texto.kill()
-            this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
-            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.str  = "X"+zelda.Inventory.rupies+"\n"+"\n"+"X"+zelda.Inventory.keys+"\n"+"X"+zelda.Inventory.bombs+"\n";
+            this.texto = zelda.game.add.bitmapText(zelda.game.camera.x+104,zelda.game.camera.y+10,"zelda_font",this.str,7);
             this.texto.fill = "white";
-            this.texto.font = "Press Start 2P";
-            this.texto.fontSize = 6;
+            //this.texto.font = "Press Start 2P";
+            //this.texto.fontSize = 6;
             this.texto.align = "center";
         }
         //numero bombas
         else if(nameObject==2){
             this.bombs+=1;
             this.texto.kill()
-            this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
-           this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.str  = "X"+zelda.Inventory.rupies+"\n"+"\n"+"X"+zelda.Inventory.keys+"\n"+"X"+zelda.Inventory.bombs+"\n";
+           this.texto = zelda.game.add.bitmapText(zelda.game.camera.x+104,zelda.game.camera.y+10,"zelda_font",this.str,7);
             this.texto.fill = "white";
-            this.texto.font = "Press Start 2P";
-            this.texto.fontSize = 6;
+            //this.texto.font = "Press Start 2P";
+            //this.texto.fontSize = 6;
             this.texto.align = "center";
             if(this.bombs<=0){this.objects[1]=0;} else if(this.bombs>0){this.objects[1]=1;}
         }
@@ -737,11 +737,11 @@ zelda.Inventory={
         else if(nameObject==3){
             this.keys+=1;
             this.texto.kill()
-            this.str  = "x"+zelda.Inventory.rupies+"\n"+"x"+zelda.Inventory.keys+"\n"+"x"+zelda.Inventory.bombs+"\n";
-            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.str  = "X"+zelda.Inventory.rupies+"\n"+"\n"+"X"+zelda.Inventory.keys+"\n"+"X"+zelda.Inventory.bombs+"\n";
+            this.texto = zelda.game.add.bitmapText(zelda.game.camera.x+104,zelda.game.camera.y+10,"zelda_font",this.str,7);
             this.texto.fill = "white";
-            this.texto.font = "Press Start 2P";
-            this.texto.fontSize = 6;
+            //this.texto.font = "Press Start 2P";
+            //this.texto.fontSize = 6;
             this.texto.align = "center";
         }
         //anillo q no se que hace pero tenemso los sprites creo
@@ -804,16 +804,16 @@ zelda.Inventory={
        startHUD:function(){
            
             this.heart=[zelda.LinkObject.maxHearts];
-            this.str  = "X"+zelda.Inventory.rupies+"\n"+"X"+zelda.Inventory.keys+"\n"+"X"+zelda.Inventory.bombs+"\n";
+            this.str  = "X"+zelda.Inventory.rupies+"\n"+"\n"+"X"+zelda.Inventory.keys+"\n"+"X"+zelda.Inventory.bombs+"\n";
             this.strToPrint = "";
             this.strCount = 0;
             this.textTimer = 0;
             this.textUpdateTime = 50;
 		
-            this.texto = zelda.game.add.text(zelda.game.camera.x+104,zelda.game.camera.y+10,this.str);
+            this.texto = zelda.game.add.bitmapText(zelda.game.camera.x+104,zelda.game.camera.y+10,"zelda_font",this.str,7);
             this.texto.fill = "white";
-            this.texto.font = "Press Start 2P";
-            this.texto.fontSize = 6;
+           // this.texto.font = "Press Start 2P";
+           // this.texto.fontSize = 6;
             this.texto.align = "center";
        },
         
@@ -958,8 +958,8 @@ zelda.Inventory={
         
 		
 		
-		zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
-        zelda.Inventory.texto.position.y=zelda.game.camera.y+185;   
+		zelda.Inventory.texto.x=zelda.game.camera.x+104;
+        zelda.Inventory.texto.y=zelda.game.camera.y+185;   
         
          
     },

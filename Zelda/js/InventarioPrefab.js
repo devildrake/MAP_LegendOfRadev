@@ -136,8 +136,8 @@ zelda.InventarioPrefab = function(game,x,y,level){
 
         //poner aqui actualizacion objetos HUD para cuando se mueva
         //y cuando digo aqui no me refiero al for
-        zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
-        zelda.Inventory.texto.position.y=zelda.game.camera.y+10;  
+        zelda.Inventory.texto.x=zelda.game.camera.x+104;
+        zelda.Inventory.texto.y=zelda.game.camera.y+10;  
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
             zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
             zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
@@ -214,8 +214,8 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
                 }
             }
                 
-            zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
-            zelda.Inventory.texto.position.y=inventario.position.y+10; 
+            zelda.Inventory.texto.x=zelda.game.camera.x+104;
+            zelda.Inventory.texto.y=inventario.position.y+10; 
             //pintar espada
             if(zelda.Inventory.HasSword){ 
                 zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
@@ -276,8 +276,8 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
                         }
                     }
                     //mover texto
-                    zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
-                    zelda.Inventory.texto.position.y=zelda.game.camera.y+10;
+                    zelda.Inventory.texto.x=zelda.game.camera.x+104;
+                    zelda.Inventory.texto.y=zelda.game.camera.y+10;
                     //mover espada
                     if(zelda.Inventory.HasSword){
                         zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
@@ -327,8 +327,8 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
                         zelda.Inventory.sword.position.y=inventario.position.y+202;
                     }
                 
-                 zelda.Inventory.texto.position.x=zelda.game.camera.x+104;
-                  zelda.Inventory.texto.position.y=inventario.position.y+10; 
+                 zelda.Inventory.texto.x=zelda.game.camera.x+104;
+                  zelda.Inventory.texto.y=inventario.position.y+10; 
                 
                   if(zelda.Inventory.ObjectB!="nothing"){
                 zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
