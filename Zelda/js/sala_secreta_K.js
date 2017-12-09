@@ -24,8 +24,9 @@ zelda.sala_secreta_K = {
 		this.load.image("inventario", "img/inventario.png");
 		this.load.image("collider", "img/camara_horizontal.png");
 		this.load.image("collider_inv", "img/collider_invisible.png");
-		   //-----------Inventario
-		
+        this.load.image("rupia","img/rupia.png");
+        
+        //-----------Inventario
         //this.load.image("bomba", "img/bomba.png");
         this.load.image("vela", "img/vela.png");
         this.load.image("potion", "img/pocion_vida.png");
@@ -72,7 +73,6 @@ zelda.sala_secreta_K = {
 		this.game.physics.arcade.enable(this.fire2);
 		this.fire2.body.immovable = true;
         
-		zelda.LinkObject.currentZone = 12;
 		if(!this.roomDone1&&zelda.LinkObject.currentZone==12 || !this.roomDone2&&zelda.LinkObject.currentZone==13){
 			zelda.Inventory.ScrollingInventory = true;
 			//npc
@@ -96,6 +96,14 @@ zelda.sala_secreta_K = {
 				zelda.sala_secreta_K.escudo.animations.add("despawn",[0,1],6,true);
 				zelda.sala_secreta_K.bomba.animations.add("despawn",[0,1],6,true);
 				zelda.sala_secreta_K.flecha.animations.add("despawn",[3,4],6,true);
+                
+                //PRECIOS DE LOS ITEMS
+                zelda.sala_secreta_K.precio1 = zelda.sala_secreta_K.game.add.bitmapText(zelda.secretLayout.item1X-5, zelda.secretLayout.itemY+18,"zelda_font","130",8);
+                zelda.sala_secreta_K.precio2 = zelda.sala_secreta_K.game.add.bitmapText(zelda.secretLayout.item2X-8, zelda.secretLayout.itemY+18,"zelda_font","20",8);
+                zelda.sala_secreta_K.precio3 = zelda.sala_secreta_K.game.add.bitmapText(zelda.secretLayout.item3X, zelda.secretLayout.itemY+18,"zelda_font","80",8);
+                zelda.sala_secreta_K.rupia = zelda.sala_secreta_K.game.add.sprite(3*16,zelda.secretLayout.itemY+16+3,"rupia");
+                zelda.sala_secreta_K.rupia.anchor.setTo(0,.5);
+                zelda.sala_secreta_K.X = zelda.sala_secreta_K.game.add.bitmapText(3*16+14,zelda.secretLayout.itemY+16+2,"zelda_font","x",8);
 			},this);
 			//-------------------------------------------
 			
@@ -156,6 +164,11 @@ zelda.sala_secreta_K = {
 					zelda.sala_secreta_K.bomba.destroy();
 					zelda.sala_secreta_K.npc.destroy();
 				});
+                zelda.sala_secreta_K.precio1.destroy();
+                zelda.sala_secreta_K.precio2.destroy();
+                zelda.sala_secreta_K.precio3.destroy();
+                zelda.sala_secreta_K.rupia.destroy();
+                zelda.sala_secreta_K.X.destroy();
 				if(zelda.LinkObject.currentZone == 12) zelda.sala_secreta_K.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone == 13) zelda.sala_secreta_K.roomDone2 = true;
 				zelda.Inventory.GetObject(12);
@@ -172,6 +185,11 @@ zelda.sala_secreta_K = {
 					zelda.sala_secreta_K.bomba.destroy();
 					zelda.sala_secreta_K.npc.destroy();
 				});
+                zelda.sala_secreta_K.precio1.destroy();
+                zelda.sala_secreta_K.precio2.destroy();
+                zelda.sala_secreta_K.precio3.destroy();
+                zelda.sala_secreta_K.rupia.destroy();
+                zelda.sala_secreta_K.X.destroy();
 				if(zelda.LinkObject.currentZone == 12) zelda.sala_secreta_K.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone == 13) zelda.sala_secreta_K.roomDone2 = true;
 				zelda.Inventory.GetObject(2);
@@ -188,6 +206,11 @@ zelda.sala_secreta_K = {
 					zelda.sala_secreta_K.bomba.destroy();
 					zelda.sala_secreta_K.npc.destroy();
 				});
+                zelda.sala_secreta_K.precio1.destroy();
+                zelda.sala_secreta_K.precio2.destroy();
+                zelda.sala_secreta_K.precio3.destroy();
+                zelda.sala_secreta_K.rupia.destroy();
+                zelda.sala_secreta_K.X.destroy();
 				if(zelda.LinkObject.currentZone == 12) zelda.sala_secreta_K.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone == 13) zelda.sala_secreta_K.roomDone2 = true;
 				zelda.Inventory.GetObject(11);

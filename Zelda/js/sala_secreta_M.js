@@ -25,6 +25,8 @@ zelda.sala_secreta_M = {
 		this.load.image("inventario", "img/inventario.png");
 		this.load.image("collider", "img/camara_horizontal.png");
 		this.load.image("collider_inv", "img/collider_invisible.png");
+        this.load.image("rupia","img/rupia.png");
+        
 		   //-----------Inventario
 		
         this.load.image("bomba", "img/bomba.png");
@@ -42,6 +44,7 @@ zelda.sala_secreta_M = {
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
 		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+        this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
     },
     
     create:function(){
@@ -72,8 +75,12 @@ zelda.sala_secreta_M = {
 		this.game.physics.arcade.enable(this.fire2);
 		this.fire2.body.immovable = true;
         
-		
+		//---ESTOY HAY QUE ELIMINARLO---
+        zelda.LinkObject.currentZone = 22;
+        //------------------------------
+        
 		if(!this.roomDone1&&zelda.LinkObject.currentZone==22 || !this.roomDone2&&zelda.LinkObject.currentZone==17){
+            zelda.Inventory.ScrollingInventory = true;
 			//npc
 			this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
 			this.npc.anchor.setTo(.5,0);
@@ -95,7 +102,24 @@ zelda.sala_secreta_M = {
 				zelda.sala_secreta_M.escudo.animations.add("despawn",[0,1], 6, true);
 				zelda.sala_secreta_M.llave.animations.add("despawn",[0,1], 6, true);
 				zelda.sala_secreta_M.vela.animations.add("despawn",[0,1], 6, true);
+                
+                //PRECIOS DE LOS ITEMS
+                zelda.sala_secreta_M.precio1 = zelda.sala_secreta_M.game.add.bitmapText(zelda.secretLayout.item1X-5, zelda.secretLayout.itemY+18,"zelda_font","130",8);
+                zelda.sala_secreta_M.precio2 = zelda.sala_secreta_M.game.add.bitmapText(zelda.secretLayout.item2X-8, zelda.secretLayout.itemY+18,"zelda_font","20",8);
+                zelda.sala_secreta_M.precio3 = zelda.sala_secreta_M.game.add.bitmapText(zelda.secretLayout.item3X, zelda.secretLayout.itemY+18,"zelda_font","80",8);
+                zelda.sala_secreta_M.rupia = zelda.sala_secreta_M.game.add.sprite(3*16,zelda.secretLayout.itemY+16+3,"rupia");
+                zelda.sala_secreta_M.rupia.anchor.setTo(0,.5);
+                zelda.sala_secreta_M.X = zelda.sala_secreta_M.game.add.bitmapText(3*16+14,zelda.secretLayout.itemY+16+2,"zelda_font","x",8);
 			});
+            
+            //TEXTOS EN PANTALLA
+			this.str  = "BUY SOMETHIN' WILL YA!";
+			this.strToPrint = "";
+			this.strCount = 0;
+			this.textTimer = 0;
+			this.textUpdateTime = 50;
+			this.texto = this.game.add.bitmapText(2*16+8,16*2+4,"zelda_font","",8);
+			this.texto.align = "center";
 		}
         
 		this.game.camera.y -= 47;
@@ -133,6 +157,8 @@ zelda.sala_secreta_M = {
 		this.game.physics.arcade.collide(this.link.LinkCollider, this.fire1);
 		this.game.physics.arcade.collide(this.link.LinkCollider, this.fire2);
 		
+        
+        
 		if(!this.roomDone1&&zelda.LinkObject.currentZone==22 || !this.roomDone2&&zelda.LinkObject.currentZone==17){
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(link, escudo){
 				zelda.LinkPrefab.GrabObject();
@@ -146,6 +172,11 @@ zelda.sala_secreta_M = {
 					zelda.sala_secreta_M.npc.destroy();
 					zelda.sala_secreta_M.vela.destroy();
 				});
+                zelda.sala_secreta_M.precio1.destroy();
+                zelda.sala_secreta_M.precio2.destroy();
+                zelda.sala_secreta_M.precio3.destroy();
+                zelda.sala_secreta_M.rupia.destroy();
+                zelda.sala_secreta_M.X.destroy();
 				if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
 				zelda.Inventory.GetObject(12);
@@ -162,6 +193,11 @@ zelda.sala_secreta_M = {
 					zelda.sala_secreta_M.npc.destroy();
 					zelda.sala_secreta_M.vela.destroy();
 				});
+                zelda.sala_secreta_M.precio1.destroy();
+                zelda.sala_secreta_M.precio2.destroy();
+                zelda.sala_secreta_M.precio3.destroy();
+                zelda.sala_secreta_M.rupia.destroy();
+                zelda.sala_secreta_M.X.destroy();
 				if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
 				zelda.Inventory.GetObject(3);
@@ -178,10 +214,29 @@ zelda.sala_secreta_M = {
 					zelda.sala_secreta_M.npc.destroy();
 					zelda.sala_secreta_M.vela.destroy();
 				});
+                zelda.sala_secreta_M.precio1.destroy();
+                zelda.sala_secreta_M.precio2.destroy();
+                zelda.sala_secreta_M.precio3.destroy();
+                zelda.sala_secreta_M.rupia.destroy();
+                zelda.sala_secreta_M.X.destroy();
 				if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
 				zelda.Inventory.GetObject(9);
 			});
+            
+            //FUNCIONAMIENTO DE LOS TEXTOS
+			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
+				this.strToPrint += this.str[this.strCount];
+				this.texto.setText(this.strToPrint);
+				this.strCount++;
+				this.textTimer = 0;
+			}
+			
+			//cuando acaba de pintar el texto.
+			if(this.str.length == this.strToPrint.length){
+				zelda.Inventory.ScrollingInventory = false;
+			}
+			this.textTimer += zelda.game.time.elapsed;
 		}
 			
 		//pausar el juego con la P
