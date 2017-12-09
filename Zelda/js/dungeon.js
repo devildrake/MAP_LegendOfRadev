@@ -78,7 +78,8 @@ zelda.dungeon = {
         this.loadKeys();
         this.loadRupies();
         //this.loadBombs();
-    
+         this.loadDeathParticles();
+
         this.loadEnemies();
 		
 		//this.background = this.game.add.sprite(0,0, "Dungeon1NoFloor");
@@ -833,6 +834,25 @@ zelda.dungeon = {
         
         
     },
+    
+     loadDeathParticles:function(){
+        this.deathParticles = this.add.group();
+        this.deathParticles.enableBody = true;
+    },
+    
+        createDeathParticles:function(posX,posY,level){
+        var particles = this.deathParticles.getFirstExists(false);
+        if(!particles){
+            console.log(this.deathParticles);
+            particles = new zelda.DeathParticlesPrefab(this.game,posX,posY,level);
+            this.deathParticles.add(particles);
+        }else{
+            particles.frame = 0;
+            particles.Alive = true;
+            particles.reset(posX,posY);
+        }
+    },
+    
     loadEnemies:function(){
         this.stalfoses = this.add.group();
         this.stalfoses.enableBody = true;
