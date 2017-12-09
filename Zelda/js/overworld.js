@@ -69,7 +69,9 @@ zelda.overworld = {
         this.load.image("SpikesTrap","img/SpikesTrap.png");
         this.load.spritesheet("Aquamentus","img/AquamentusSpriteSheet.png",32,32);
         this.load.spritesheet("AquamentusProjectile","img/ProyectilAquamentus.png",16,16);
-        
+        this.load.audio("PlaceBomb","sounds/Sfx/place_bomb.mp3");
+        this.load.audio("BlowBomb","sounds/Sfx/blow_bomb.mp3");
+        this.load.audio("UsePotion","sounds/Sfx/use_potion.wav");
     },
 
     create:function(){
@@ -77,6 +79,8 @@ zelda.overworld = {
         this.music = this.add.audio("OverWorldMusic");
         this.music.play();
         this.music.loop = true;
+        
+
 
         //this.getItemMusic = this.add.audio("getItem");
 
@@ -275,8 +279,9 @@ zelda.overworld = {
 
 		}
         
-        if(!this.music.isPlaying&&this.playMusic){
-            this.music.play();
+        if(!this.music.isPlaying&&this.playMusic&&!zelda.LinkObject.goingDownStairWay&&!zelda.LinkObject.goingUpStairWay){
+            //this.music.play();
+            
         }
         
         //objeto b
@@ -307,9 +312,7 @@ zelda.overworld = {
         
         //overlaps con la explosion
         if(zelda.Inventory.ExplosionOn){
-            
             if(zelda.overworld.enabledSpawns){
-                
                 for(var i = 0;i<zelda.enemySpawns.zones[zelda.LinkObject.currentZone].length;++i){
                     if(zelda.enemySpawns.zones[zelda.LinkObject.currentZone][i]==true){
                         //oktorok
@@ -348,7 +351,9 @@ zelda.overworld = {
                                  zelda.overworld.riverZolas.children[i].kill();
                                 console.log("bomb hit");
                         } );
-                           
+                        
+                        //PA LAS SALAS SECRETAS HAZ UN GRUPO DE OBJETOS A ROMPER Y YA
+                        
                     }
                 
                 }
@@ -907,7 +912,8 @@ zelda.overworld = {
 			this.hearts.add(heart);
 		}else{
 			heart.reset(posX,posY);
-            heart.Alive = true
+            heart.calledKill=false;
+            heart.Alive = true;
             if(which==0){
                 heart.frame = 0;
                 heart.type = 1;

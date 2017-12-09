@@ -69,6 +69,19 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.sword);
 
+    if(zelda.LinkPrefab.usePotionSound==undefined){
+        zelda.LinkPrefab.usePotionSound = this.game.add.audio("UsePotion");
+    }
+    
+    if(zelda.LinkPrefab.placeBombSound==undefined){
+        zelda.LinkPrefab.placeBombSound = this.game.add.audio("PlaceBomb");
+    }
+        
+    if(zelda.LinkPrefab.blowUpBombSound==undefined){
+        zelda.LinkPrefab.blowUpBombSound = this.game.add.audio("BlowBomb");
+
+    }
+    
     if(zelda.LinkPrefab.dieMusic==undefined){
         zelda.LinkPrefab.dieMusic = this.game.add.audio("DieMusic");
     }
@@ -137,6 +150,8 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.spriteSueloEscaleras.Alive = false;
     this.spriteSueloEscaleras.kill();
     //this.spriteSueloEscaleras.immovable = true;
+    
+
 };
 
 zelda.LinkPrefab.prototype = Object.create(Phaser.Sprite.prototype);

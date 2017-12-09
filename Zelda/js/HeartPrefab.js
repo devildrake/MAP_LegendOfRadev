@@ -4,8 +4,8 @@ zelda.HeartPrefab = function(game,x,y,level,type){
 
 	Phaser.Sprite.call(this,game,x,y,"HeartSpriteSheet");    
     
-    this.animations.add("HeartDissappear",[1,2],5,true);
-    this.animations.add("HalfHeartDissappear",[0,2],5,true);
+    this.animations.add("HeartDissappear",[0,2],5,true);
+    this.animations.add("HalfHeartDissappear",[1,2],5,true);
     this.calledKill = false;
     this.calledBlink = false;
     this.Alive = true;

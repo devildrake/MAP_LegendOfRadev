@@ -1128,6 +1128,9 @@ zelda.Inventory={
                         zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,"explosion");
                          //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,"explosion");
                     }
+                    
+                    
+                    zelda.LinkPrefab.placeBombSound.play();
                 }
                 else if(zelda.Inventory.scene=="dungeon"){
                      this.bombOn=true;
@@ -1147,10 +1150,16 @@ zelda.Inventory={
                         zelda.Inventory.plantedBomb=zelda.game.add.sprite(zelda.dungeon.linkInstance.position.x-20,zelda.dungeon.linkInstance.position.y-8,"explosion");
                          //zelda.overworld.createBomb(zelda.overworld.linkInstance.position.x-20,zelda.overworld.linkInstance.position.y-8,"explosion");
                     }
-                    
+                                            //CREO QUE ES AQUI
+                    zelda.LinkPrefab.placeBombSound.play();
+
                 }
 
                 setTimeout(function(){
+                    zelda.LinkPrefab.blowUpBombSound.play();
+
+                    
+                    
                     //zelda.Inventory.plantedBomb=Phaser.Sprite.call(this,game,x,y,"explosion");
                     zelda.Inventory.plantedBomb.animations.add("explode", [0,1,2,3], 7, false);
                     zelda.Inventory.plantedBomb.animations.play("explode");
@@ -1185,17 +1194,17 @@ zelda.Inventory={
         else if(zelda.Inventory.ObjectB=="potion"){
             zelda.Inventory.objects[4]=0;
             if(zelda.LinkObject.currentHearts!=zelda.LinkObject.maxHearts){
-                    
+                        zelda.LinkPrefab.usePotionSound.play();
                         zelda.LinkObject.currentHearts+=3;
                         if(zelda.LinkObject.currentHearts>zelda.LinkObject.maxHearts){
                             zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
                         }
                         zelda.Inventory.healed=true;
-                   
+                        zelda.Inventory.ObjectB="nothing";
+                        //borrar objB de la casilla de objeto B equipada
+                        this.PintObj.kill();
             }
-            zelda.Inventory.ObjectB="nothing";
-            //borrar objB de la casilla de objeto B equipada
-            this.PintObj.kill();
+
         }
     
 }

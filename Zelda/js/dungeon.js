@@ -442,6 +442,7 @@ zelda.dungeon = {
 			this.hearts.add(heart);
 		}else{
 			heart.reset(posX,posY);
+            heart.calledKill=false;
             heart.Alive = true
             if(which==0){
                 heart.frame = 0;

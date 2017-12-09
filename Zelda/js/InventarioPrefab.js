@@ -191,7 +191,7 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
         //comprobar si el inventario esta bajado
         if(zelda.Inventory.InvON==true){
             inventario.fixedToCamera = false;
-            inventario.position.y-=1;
+            inventario.position.y-=4;
             inventario.position.y+=-zelda.game.camera.y;
             inventario.position.x+=-zelda.game.camera.x;
             inventario.fixedToCamera = true;
@@ -302,7 +302,7 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
         }
         else{
             inventario.fixedToCamera = false;
-            inventario.position.y+=1;
+            inventario.position.y+=4;
             inventario.position.y+=-zelda.game.camera.y;
             inventario.position.x+=-zelda.game.camera.x;
             inventario.fixedToCamera = true;  
