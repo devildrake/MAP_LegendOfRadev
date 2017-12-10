@@ -1,6 +1,6 @@
 var zelda = zelda || {}
 
-zelda.overworld = {
+zelda.overworld = {    
     init:function(){
         this.game.world.setBounds(0,0,112*16,60*16);
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -84,8 +84,6 @@ zelda.overworld = {
         this.music = this.add.audio("OverWorldMusic");
         this.music.play();
         this.music.loop = true;
-        
-
 
         //this.getItemMusic = this.add.audio("getItem");
 
@@ -243,6 +241,8 @@ zelda.overworld = {
         //this.game.add.existing(this.aquamentus);
         
         this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
+        
+        
 
     },
     
