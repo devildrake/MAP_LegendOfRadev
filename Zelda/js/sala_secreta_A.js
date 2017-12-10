@@ -41,6 +41,10 @@ zelda.sala_secreta_A = {
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
 		this.game.load.script('webfont','http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+		this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
+		
+		this.load.audio("text_sound", "sounds/Sfx/text.wav");
+		
     },
     
     create:function(){
@@ -69,6 +73,10 @@ zelda.sala_secreta_A = {
 		},this);
 		this.game.physics.arcade.enable(this.fire2);
 		this.fire2.body.immovable = true;
+		
+		//---ESTO SE TIENE QUE ELIMINAR---
+		zelda.LinkObject.currentZone = 11;
+		//--------------------------------
 
 		if(!this.roomDone1&&zelda.LinkObject.currentZone == 11 || !this.roomDone2&&zelda.LinkObject.currentZone==34){
 			//npc
@@ -81,7 +89,7 @@ zelda.sala_secreta_A = {
 			this.npc.body.immovable = true;
 			this.npc.animations.currentAnim.onComplete.add(function(){
 				//objetos cuando acaba de spawnear el npc
-				zelda.sala_secreta_A.corazon = zelda.game.add.sprite(6*16, 6*16,"corazon",0);
+				zelda.sala_secreta_A.corazon = zelda.game.add.sprite(6*16, 6*16,"slotcorazon",0);
 				zelda.sala_secreta_A.pocion = zelda.game.add.sprite(9*16, 6*16, "pocion",0);
 				zelda.game.physics.arcade.enable(zelda.sala_secreta_A.corazon);
 				zelda.game.physics.arcade.enable(zelda.sala_secreta_A.pocion);
@@ -97,11 +105,11 @@ zelda.sala_secreta_A = {
 			this.textTimer = 0;
 			this.textUpdateTime = 50;
 
-			this.texto = this.game.add.text(3*16-8,16*2+4,this.strToPrint);
-			this.texto.fill = "white";
-			this.texto.font = "Press Start 2P";
-			this.texto.fontSize = 8;
+			this.texto = this.game.add.bitmapText(3*16-8,16*2+4,"zelda_font","omg",8);
 			this.texto.align = "center";
+			
+			//Sonido de cuando aparecen los textos
+			this.textSound = this.game.add.audio("text_sound");
 		}
 		
 		this.game.camera.y -= 47;
@@ -152,7 +160,7 @@ zelda.sala_secreta_A = {
 				});
 				if(zelda.LinkObject.currentZone==11) zelda.sala_secreta_A.roomDone1 = true;
 				else if(zelda.LinkObject.currentZone==34) zelda.sala_secreta_A.roomDone2 = true;
-				zelda.Inventory.GetObject(0);
+				zelda.LinkObject.maxHearts++;
 			});
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.pocion, function(link,pocion){
 				zelda.LinkPrefab.GrabObject();
@@ -176,6 +184,7 @@ zelda.sala_secreta_A = {
 				this.texto.setText(this.strToPrint);
 				this.strCount++;
 				this.textTimer = 0;
+				this.textSound.play();
 
 			}
 			this.textTimer += zelda.game.time.elapsed;
