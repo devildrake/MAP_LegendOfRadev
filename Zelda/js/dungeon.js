@@ -7,7 +7,7 @@ zelda.dungeon = {
         this.scale.setGameSize(zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
 	},
     preload:function(){
-        this.load.tilemap("dungeonMap", "json/Dungeon1.json", null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap("dungeonMap", "json/Dungeon1_Devildra.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("DungeonGround", "img/Dungeon/DungeonGround.png");
         this.load.image("walls_dungeon", "img/tilesets/walls_dungeon.png");
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16);
@@ -60,19 +60,13 @@ zelda.dungeon = {
         this.map.addTilesetImage("DungeonGround");
         this.map.addTilesetImage("walls_dungeon");
         ///Ya se crean las dos capas, Obstacles y ground
-        this.map.createLayer("ladrillicos");
-        this.map.createLayer("suelo");
-        this.obstacles = this.map.createLayer("obstaculos");
-        this.obstacles1 = this.map.createLayer("walls_top");
-        this.obstacles2 = this.map.createLayer("walls_right");
-        this.obstacles3 = this.map.createLayer("walls_bot");
-        this.obstacles4 = this.map.createLayer("walls_left");
-		
-		this.map.setCollisionBetween(0,20,true,"obstaculos");
-		this.map.setCollisionBetween(0,200,true,"walls_top");
-		this.map.setCollisionBetween(0,200,true,"walls_right");
-		this.map.setCollisionBetween(0,200,true,"walls_bot");
-		this.map.setCollisionBetween(0,200,true,"walls_left");
+        
+        this.map.createLayer("Background");
+        this.map.createLayer("Ground");
+        this.obstacles = this.map.createLayer("Obstacles");
+        
+		this.map.setCollisionBetween(0,200,true,"Obstacles");
+
         
         this.loadHearts();
         this.loadKeys();
@@ -87,7 +81,7 @@ zelda.dungeon = {
 		//this.background.body.immovable = true;
 
         
-		this.map.createLayer("ocultar");
+		this.map.createLayer("Hide");
 		
         //Inputs, flechas para andar y Space para atacar por ahora
         /*
@@ -666,9 +660,9 @@ zelda.dungeon = {
 
                 zelda.gameOptions.borderToSet = "Upwards";
 
-                zelda.dungeon.linkInstance.position.y -= 19;
+                zelda.dungeon.linkInstance.position.y -= 20;
 
-                zelda.dungeon.linkInstance.LinkCollider.body.y-=19;
+                zelda.dungeon.linkInstance.LinkCollider.body.y-=20;
 
                 zelda.LinkObject.currentDungeonZone-=6;
 
@@ -697,8 +691,8 @@ zelda.dungeon = {
                 //OFFSET
                 zelda.dungeon.cameraBot.body.position.y -=800;
 
-                zelda.dungeon.linkInstance.position.y += 19;
-                zelda.dungeon.linkInstance.LinkCollider.body.y+=19;
+                zelda.dungeon.linkInstance.position.y += 21;
+                zelda.dungeon.linkInstance.LinkCollider.body.y+=21;
                 zelda.LinkObject.currentDungeonZone+=6;
                 zelda.gameOptions.lastCameraPosX = zelda.gameOptions.cameraPosToGoX+128;
                 zelda.gameOptions.lastCameraPosY = zelda.gameOptions.cameraPosToGoY +112;
