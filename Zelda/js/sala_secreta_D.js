@@ -37,6 +37,9 @@ zelda.sala_secreta_D = {
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
 		this.game.load.script('webfont','http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+		this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
+		
+		this.load.audio("text_sound", "sounds/Sfx/text.wav");
     },
     
     create:function(){
@@ -76,10 +79,7 @@ zelda.sala_secreta_D = {
 		
 		if(!this.roomDone1&&zelda.LinkObject.currentZone == 29 || !this.roomDone2&&zelda.LinkObject.currentZone==24){
 			//TEXTO
-			this.numeros = this.game.add.text(8*16-8,7*16-8,"-10");
-			this.numeros.fill = "white";
-			this.numeros.font = "Press Start 2P";
-			this.numeros.fontSize = 10;
+			this.numeros = this.game.add.bitmapText(8*16-8,7*16-8,"zelda_font","-10",8);
 			this.numeros.align = "center";
 			
 			//TEXTOS EN PANTALLA
@@ -89,11 +89,11 @@ zelda.sala_secreta_D = {
 			this.textTimer = 0;
 			this.textUpdateTime = 50;
 
-			this.texto = this.game.add.text(3*16,16*2+4,this.str);
-			this.texto.fill = "white";
-			this.texto.font = "Press Start 2P";
-			this.texto.fontSize = 8;
+			this.texto = this.game.add.bitmapText(3*16+4,16*2+4,"zelda_font","",8);
 			this.texto.align = "center";
+			
+			//Sonido de cuando aparecen los textos
+			this.textSound = this.game.add.audio("text_sound");
 		}
 		this.game.camera.y -= 47;
 		
@@ -146,6 +146,7 @@ zelda.sala_secreta_D = {
 				this.texto.setText(this.strToPrint);
 				this.strCount++;
 				this.textTimer = 0;
+				this.textSound.play();
 			}
 			//cuando acaba de pintar el texto.
 			if(this.str.length == this.strToPrint.length){

@@ -43,6 +43,8 @@ zelda.sala_secreta_K = {
 		
 		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 		this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
+		
+		this.load.audio("text_sound", "sounds/Sfx/text.wav");
 	},
 	
 	create:function(){
@@ -72,6 +74,10 @@ zelda.sala_secreta_K = {
 		},this);
 		this.game.physics.arcade.enable(this.fire2);
 		this.fire2.body.immovable = true;
+		
+		//---ESTOY HAY QUE BORRARLO---
+		zelda.LinkObject.currentZone = 12;
+		//----------------------------
         
 		if(!this.roomDone1&&zelda.LinkObject.currentZone==12 || !this.roomDone2&&zelda.LinkObject.currentZone==13){
 			zelda.Inventory.ScrollingInventory = true;
@@ -115,6 +121,9 @@ zelda.sala_secreta_K = {
 			this.textUpdateTime = 50;
 			this.texto = this.game.add.bitmapText(2*16+8,16*2+4,"zelda_font","",8);
 			this.texto.align = "center";
+			
+			//Sonido de cuando aparecen los textos
+			this.textSound = this.game.add.audio("text_sound");
 		}
 		
 		this.game.camera.y -= 47;
@@ -222,6 +231,7 @@ zelda.sala_secreta_K = {
 				this.texto.setText(this.strToPrint);
 				this.strCount++;
 				this.textTimer = 0;
+				this.textSound.play();
 			}
 			
 			//cuando acaba de pintar el texto.

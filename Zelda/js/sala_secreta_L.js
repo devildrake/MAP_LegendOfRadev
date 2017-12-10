@@ -43,6 +43,8 @@ zelda.sala_secreta_L = {
 		
 		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
         this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
+		
+		this.load.audio("text_sound", "sounds/Sfx/text.wav");
 	},
 	
 	create:function(){
@@ -114,6 +116,9 @@ zelda.sala_secreta_L = {
 			this.textUpdateTime = 50;
 			this.texto = this.game.add.bitmapText(4*16,16*2+4,"zelda_font","",8);
 			this.texto.align = "center";
+			
+			//Sonido de cuando aparecen los textos
+			this.textSound = this.game.add.audio("text_sound");
 		}
 		
 		this.game.camera.y -= 47;
@@ -215,6 +220,7 @@ zelda.sala_secreta_L = {
 				this.texto.setText(this.strToPrint);
 				this.strCount++;
 				this.textTimer = 0;
+				this.textSound.play();
 			}
 			
 			//cuando acaba de pintar el texto.
