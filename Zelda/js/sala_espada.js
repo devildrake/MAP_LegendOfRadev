@@ -41,6 +41,8 @@ zelda.sala_espada = {
         this.load.spritesheet("Sword","img/Swords.png",16,16);
 		
 		this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
+		
+		this.load.audio("text_sound", "sounds/Sfx/text.wav");
     },
     
     create:function(){
@@ -99,6 +101,8 @@ zelda.sala_espada = {
 			this.texto = this.game.add.bitmapText(3*16,16*2+4,"zelda_font","omg",8);
 			//this.texto = this.game.add.text(3*16,16*2+4,this.strToPrint);
 			this.texto.align = "center";
+			
+			this.textSound = this.game.add.audio("text_sound");
 		}
         
         this.game.camera.y -= 47;
@@ -152,11 +156,12 @@ zelda.sala_espada = {
 			});
 			
 			//animacion de aparicion de los textos
-			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime && !this.roomDone){
+			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
 				this.strToPrint += this.str[this.strCount];
 				this.texto.setText(this.strToPrint);
 				this.strCount++;
 				this.textTimer = 0;
+				this.textSound.play();
 			}
 			if(this.strToPrint.length == this.str.length) zelda.Inventory.ScrollingInventory = false;
 			this.textTimer += zelda.game.time.elapsed;
