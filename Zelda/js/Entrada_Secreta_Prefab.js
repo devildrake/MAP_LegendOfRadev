@@ -10,7 +10,6 @@ zelda.EntradaSecreta = function(game,x,y,type){
     Phaser.Sprite.call(this,game,x,y,type);
     
     this.game.physics.arcade.enable(this);
-    this.level = zelda.overworld;
     this.abierta = false;
 }
 

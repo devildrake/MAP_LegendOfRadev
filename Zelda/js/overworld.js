@@ -76,7 +76,11 @@ zelda.overworld = {
         this.load.spritesheet("AquamentusProjectile","img/ProyectilAquamentus.png",16,16);
         this.load.spritesheet("FireSpriteSheet","img/fuego.png",16,16);
         this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
-
+        
+        //sprites para bloquear las entradas secretas
+        this.load.image("arbol","img/arbol.png");
+        this.load.image("pared_verde","img/pared_verde.png");
+        this.load.image("pared_marron","img/pared_marron.png");
     },
 
     create:function(){
@@ -242,7 +246,7 @@ zelda.overworld = {
         
         this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
         
-        
+        this.CreateBlocks();
 
     },
     
@@ -452,7 +456,9 @@ zelda.overworld = {
     }, 
     //======================FINAL DEL UPDATE===========================
 
-        
+    CreateBlocks:function(){
+       	this.s = new zelda.EntradaSecreta(this.game,zelda.LinkObject.lastPositionX, zelda.LinkObject.lastPositionY,"arbol");
+    },
     
     SetCamera:function(){
         this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y + 47, "camaraHorizontal");
