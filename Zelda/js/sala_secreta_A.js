@@ -103,7 +103,7 @@ zelda.sala_secreta_A = {
 			this.strToPrint = "";
 			this.strCount = 0;
 			this.textTimer = 0;
-			this.textUpdateTime = 50;
+			this.textUpdateTime = 80;
 
 			this.texto = this.game.add.bitmapText(3*16-8,16*2+4,"zelda_font","omg",8);
 			this.texto.align = "center";
