@@ -49,6 +49,7 @@ zelda.dungeon = {
         this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
         //mapa
         this.load.image("minimap","img/Dungeon/Minimapa.png");
+        this.load.image("pointMap","img/pointMap.png");
     },
 
     create:function(){
@@ -141,7 +142,11 @@ zelda.dungeon = {
         
         //guardar en que escena esta por si muere
         zelda.LinkObject.DiedIn="dungeon";
-
+        
+        //iniciar punto en mapa
+        this.point= zelda.game.add.sprite(zelda.game.camera.x+36,zelda.game.camera.y+38, "pointMap");
+        this.pointCurrentX=zelda.game.camera.x+36;
+        this.pointCurrentY=zelda.game.camera.y+38;
     },
     
         ProjectileBorderColision:function(){
@@ -678,6 +683,9 @@ zelda.dungeon = {
                 //console.log(zelda.gameOptions.lastCameraPosY);
                    // console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
                 //zelda.overworld.createEnemiesOfCurrentZone();
+                
+                zelda.dungeon.point.position.y-=12;
+                zelda.dungeon.pointCurrentY-=12;
             }
 		});
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraBot, function(){
@@ -704,6 +712,8 @@ zelda.dungeon = {
 
                 //console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
                         //zelda.overworld.createEnemiesOfCurrentZone();
+                zelda.dungeon.point.position.y+=12;
+                zelda.dungeon.pointCurrentY+=12;
             }
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraRight,function(){
@@ -726,6 +736,10 @@ zelda.dungeon = {
                 //console.log(zelda.gameOptions.lastCameraPosX);
                 //console.log(zelda.gameOptions.lastCameraPosY);
                         //zelda.overworld.createEnemiesOfCurrentZone();
+                
+                 //iniciar punto en mapa
+                zelda.dungeon.point.position.x+=12;
+                zelda.dungeon.pointCurrentX+=12;
             }
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraLeft,function(){
@@ -749,6 +763,10 @@ zelda.dungeon = {
             //console.log(zelda.gameOptions.lastCameraPosX);
             //console.log(zelda.gameOptions.lastCameraPosY);
             //zelda.overworld.createEnemiesOfCurrentZone();
+                
+            //iniciar punto en mapa
+            zelda.dungeon.point.position.x-=12;
+            zelda.dungeon.pointCurrentX-=12;
             }
         });
         

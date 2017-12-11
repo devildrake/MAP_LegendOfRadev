@@ -144,6 +144,9 @@ zelda.InventarioPrefab = function(game,x,y,level){
         zelda.Inventory.texto.y=zelda.game.camera.y+10;
         zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
         zelda.Inventory.mapa.position.y=zelda.game.camera.y+5;
+        
+        zelda.overworld.point.position.x=zelda.game.camera.x+38-12;
+        zelda.overworld.pointCurrentX=zelda.game.camera.x+38-12;
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
             zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
             zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;

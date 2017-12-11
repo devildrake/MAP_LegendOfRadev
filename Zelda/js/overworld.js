@@ -263,6 +263,11 @@ zelda.overworld = {
         //this.game.add.existing(this.aquamentus);
         
         this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
+        
+         //iniciar punto en mapa
+        this.point= zelda.game.add.sprite(zelda.game.camera.x+36,zelda.game.camera.y+38, "pointMap");
+        this.pointCurrentX=zelda.game.camera.x+36;
+        this.pointCurrentY=zelda.game.camera.y+38;
     },
     
     update:function(){   
@@ -609,6 +614,8 @@ zelda.overworld = {
                 //console.log(zelda.gameOptions.lastCameraPosY);
                    // console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
                 //zelda.overworld.createEnemiesOfCurrentZone();
+                
+                
             }
 		});
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraBot, function(){
