@@ -84,15 +84,14 @@ zelda.overworld = {
         this.load.image("arbol","img/arbol.png");
         this.load.image("pared_verde","img/pared_verde.png");
         this.load.image("pared_marron","img/pared_marron.png");
-<<<<<<< HEAD
+
         
         //mapa
         this.load.image("minimap","img/Minimapa.png");
         this.load.image("pointMap","img/pointMap.png");
-=======
 		this.load.image("suelo","img/suelo.png");
 		this.load.image("roca","img/roca.png");
->>>>>>> 59c34187bb583af8de86f204235ac70f095e63be
+
     },
 
     create:function(){
