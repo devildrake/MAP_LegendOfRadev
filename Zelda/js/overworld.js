@@ -194,6 +194,10 @@ zelda.overworld = {
         
         this.trigger_Dungeon = this.game.add.sprite(624,144, "trigger");
         this.game.physics.arcade.enable(this.trigger_Dungeon);
+		
+		//bloqueos de las entradas secretas
+		this.CreateBlocks();
+		this.BlocksAlive();//Metodo que controla si los bloques ya han sido destruidos.
         
         
         //this.oktorok = new zelda.OktorokPrefab(this.game,640,850,1,this,1);
@@ -260,10 +264,6 @@ zelda.overworld = {
         //this.game.add.existing(this.aquamentus);
         
         this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
-        
-        //bloqueos de las entradas secretas
-		this.CreateBlocks();
-
     },
     
     update:function(){   
@@ -468,29 +468,35 @@ zelda.overworld = {
                         //PA LAS SALAS SECRETAS HAZ UN GRUPO DE OBJETOS A ROMPER Y YA
                         
         }
+		
+		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.blockGroup);
     
     }, 
     //======================FINAL DEL UPDATE===========================
     
 	//funcion que crea los sprites que forman los bloqueos para las entradas secretas
 	CreateBlocks:function(){
-       	this.game.add.sprite(16*16+6*16, 48+4*11*16+3*16,"pared_verde");//0
-		this.game.add.sprite(16*16+7*16, 48+3*11*16+3*16,"pared_verde");//1
-		this.game.add.sprite(16*16+10*16, 48+2*11*16+8*16,"arbol");//2
-		this.game.add.sprite(16*16+9*16,48+11*16+9*16,"arbol");//3
-		this.game.add.sprite(3*16*16+4*16, 48+4*11*16+8*16,"arbol");//4
-		this.game.add.sprite(3*16*16+2*16, 48+3*11*16+8*16,"arbol")//5
-		this.game.add.sprite(3*16*16+6*16, 48+2*11*16+7*16,"arbol");//6
-		this.game.add.sprite(4*16*16+5*16, 48+1*11*16+5*16,"arbol");//7
-		this.game.add.sprite(4*16*16+9*16, 48+4*11*16+7*16,"suelo");//8
-		this.game.add.sprite(5*16*16+12*16, 48+3*11*16+8*16,"arbol");//9
-		this.game.add.sprite(6*16*16+2*16, 48+2*11*16+8*16,"arbol");//10
-		this.game.add.sprite(5*16*16+11*16, 48+1*11*16+3*16,"pared_verde");//11
-		this.game.add.sprite(6*16*16+9*16, 48+4*11*16+3*16,"pared_marron");//12
-		this.game.add.sprite(4*16*16+8*16, 48+4*11*16+7*16,"roca");//13
-		this.game.add.sprite(4*16*16+9*16, 48+4*11*16+6*16,"roca");//14
-		this.game.add.sprite(4*16*16+10*16, 48+4*11*16+7*16,"roca");//15
-		this.game.add.sprite(4*16*16+9*16, 48+4*11*16+8*16,"roca");//16
+		this.blockGroup = this.game.add.group();
+		
+       	this.blockGroup.add(this.game.add.sprite(16*16+6*16, 48+4*11*16+3*16,"pared_verde"));//0
+		this.blockGroup.add(this.game.add.sprite(16*16+7*16, 48+3*11*16+3*16,"pared_verde"));//1
+		this.blockGroup.add(this.game.add.sprite(16*16+10*16, 48+2*11*16+8*16,"arbol"));//2
+		this.blockGroup.add(this.game.add.sprite(16*16+9*16,48+11*16+9*16,"arbol"));//3
+		this.blockGroup.add(this.game.add.sprite(3*16*16+4*16, 48+4*11*16+8*16,"arbol"));//4
+		this.blockGroup.add(this.game.add.sprite(3*16*16+2*16, 48+3*11*16+8*16,"arbol"));//5
+		this.blockGroup.add(this.game.add.sprite(3*16*16+6*16, 48+2*11*16+7*16,"arbol"));//6
+		this.blockGroup.add(this.game.add.sprite(4*16*16+5*16, 48+1*11*16+5*16,"arbol"));//7
+		this.blockGroup.add(this.game.add.sprite(4*16*16+9*16, 48+4*11*16+7*16,"suelo"));//8
+		this.blockGroup.add(this.game.add.sprite(5*16*16+12*16, 48+3*11*16+8*16,"arbol"));//9
+		this.blockGroup.add(this.game.add.sprite(6*16*16+2*16, 48+2*11*16+8*16,"arbol"));//10
+		this.blockGroup.add(this.game.add.sprite(5*16*16+11*16, 48+1*11*16+3*16,"pared_verde"));//11
+		this.blockGroup.add(this.game.add.sprite(6*16*16+9*16, 48+4*11*16+3*16,"pared_marron"));//12
+		this.blockGroup.add(this.game.add.sprite(4*16*16+8*16, 48+4*11*16+7*16,"roca"));//13
+		this.blockGroup.add(this.game.add.sprite(4*16*16+9*16, 48+4*11*16+6*16,"roca"));//14
+		this.blockGroup.add(this.game.add.sprite(4*16*16+10*16, 48+4*11*16+7*16,"roca"));//15
+		this.blockGroup.add(this.game.add.sprite(4*16*16+9*16, 48+4*11*16+8*16,"roca"));//16
+		this.game.physics.arcade.enable(this.blockGroup);
+		this.blockGroup.setAll("body.immovable",true);
     },
 	
     SetCamera:function(){
