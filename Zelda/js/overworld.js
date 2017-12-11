@@ -1,6 +1,8 @@
 var zelda = zelda || {}
 
-zelda.overworld = {    
+zelda.overworld = { 
+	entradaAbierta:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+	
     init:function(){
         this.game.world.setBounds(0,0,112*16,60*16);
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -82,10 +84,15 @@ zelda.overworld = {
         this.load.image("arbol","img/arbol.png");
         this.load.image("pared_verde","img/pared_verde.png");
         this.load.image("pared_marron","img/pared_marron.png");
+<<<<<<< HEAD
         
         //mapa
         this.load.image("minimap","img/Minimapa.png");
         this.load.image("pointMap","img/pointMap.png");
+=======
+		this.load.image("suelo","img/suelo.png");
+		this.load.image("roca","img/roca.png");
+>>>>>>> 59c34187bb583af8de86f204235ac70f095e63be
     },
 
     create:function(){
@@ -254,7 +261,8 @@ zelda.overworld = {
         
         this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
         
-        this.CreateBlocks();
+        //bloqueos de las entradas secretas
+		this.CreateBlocks();
 
     },
     
@@ -463,11 +471,28 @@ zelda.overworld = {
     
     }, 
     //======================FINAL DEL UPDATE===========================
-
-    CreateBlocks:function(){
-       	this.s = new zelda.EntradaSecreta(this.game,zelda.LinkObject.lastPositionX, zelda.LinkObject.lastPositionY,"arbol");
-    },
     
+	//funcion que crea los sprites que forman los bloqueos para las entradas secretas
+	CreateBlocks:function(){
+       	this.game.add.sprite(16*16+6*16, 48+4*11*16+3*16,"pared_verde");//0
+		this.game.add.sprite(16*16+7*16, 48+3*11*16+3*16,"pared_verde");//1
+		this.game.add.sprite(16*16+10*16, 48+2*11*16+8*16,"arbol");//2
+		this.game.add.sprite(16*16+9*16,48+11*16+9*16,"arbol");//3
+		this.game.add.sprite(3*16*16+4*16, 48+4*11*16+8*16,"arbol");//4
+		this.game.add.sprite(3*16*16+2*16, 48+3*11*16+8*16,"arbol")//5
+		this.game.add.sprite(3*16*16+6*16, 48+2*11*16+7*16,"arbol");//6
+		this.game.add.sprite(4*16*16+5*16, 48+1*11*16+5*16,"arbol");//7
+		this.game.add.sprite(4*16*16+9*16, 48+4*11*16+7*16,"suelo");//8
+		this.game.add.sprite(5*16*16+12*16, 48+3*11*16+8*16,"arbol");//9
+		this.game.add.sprite(6*16*16+2*16, 48+2*11*16+8*16,"arbol");//10
+		this.game.add.sprite(5*16*16+11*16, 48+1*11*16+3*16,"pared_verde");//11
+		this.game.add.sprite(6*16*16+9*16, 48+4*11*16+3*16,"pared_marron");//12
+		this.game.add.sprite(4*16*16+8*16, 48+4*11*16+7*16,"roca");//13
+		this.game.add.sprite(4*16*16+9*16, 48+4*11*16+6*16,"roca");//14
+		this.game.add.sprite(4*16*16+10*16, 48+4*11*16+7*16,"roca");//15
+		this.game.add.sprite(4*16*16+9*16, 48+4*11*16+8*16,"roca");//16
+    },
+	
     SetCamera:function(){
         this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y + 47, "camaraHorizontal");
         this.cameraTop.anchor.setTo(0,1); 
@@ -656,10 +681,7 @@ zelda.overworld = {
         
     },
     
-    LinkSecretRoomColision:function(){
-        
-        
-          
+    LinkSecretRoomColision:function(){  
         /* //Escaleras
 		this.game.physics.arcade.enable(this.trigger_I);
 		this.game.physics.arcade.enable(this.trigger_L);
@@ -672,8 +694,6 @@ zelda.overworld = {
         this.game.physics.arcade.enable(this.trigger_G);
 		this.game.physics.arcade.enable(this.trigger_K);
 		this.game.physics.arcade.enable(this.trigger_I_3);*/
-        
-        
         
         //TRIGGERS PARA CAMBIOS DE PANTALLA
         if(!zelda.LinkObject.goingUpStairWay){
@@ -857,7 +877,7 @@ zelda.overworld = {
         });
     },
     
-    	loadHearts:function(){
+    loadHearts:function(){
 		this.hearts = this.add.group();
 		this.hearts.enableBody = true;
 	},
@@ -1142,11 +1162,6 @@ zelda.overworld = {
                 this.riverZolas.children[i].projectile.Alive = false;
                 this.riverZolas.children[i].projectile.kill()
             }
-        }
-        
-        
+        }       
     }
 }
-    
-
-
