@@ -1,7 +1,7 @@
 var zelda = zelda || {}
 
 zelda.overworld = { 
-	entradaAbierta:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+	entradaAbierta:[true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
 	
     init:function(){
         this.game.world.setBounds(0,0,112*16,60*16);
@@ -84,15 +84,13 @@ zelda.overworld = {
         this.load.image("arbol","img/arbol.png");
         this.load.image("pared_verde","img/pared_verde.png");
         this.load.image("pared_marron","img/pared_marron.png");
-<<<<<<< HEAD
         
         //mapa
         this.load.image("minimap","img/Minimapa.png");
         this.load.image("pointMap","img/pointMap.png");
-=======
 		this.load.image("suelo","img/suelo.png");
 		this.load.image("roca","img/roca.png");
->>>>>>> 59c34187bb583af8de86f204235ac70f095e63be
+
     },
 
     create:function(){
@@ -499,7 +497,14 @@ zelda.overworld = {
 		this.blockGroup.setAll("body.immovable",true);
     },
 	
-    SetCamera:function(){
+	BlocksAlive:function(){
+		for(var i = 0; i<this.blockGroup.children.length; i++){
+			if(this.entradaAbierta[i])this.blockGroup.children[i].kill();
+		}
+		
+	},
+    
+	SetCamera:function(){
         this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y + 47, "camaraHorizontal");
         this.cameraTop.anchor.setTo(0,1); 
         this.game.physics.arcade.enable(this.cameraTop);
