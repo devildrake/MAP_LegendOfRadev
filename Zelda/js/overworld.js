@@ -473,7 +473,9 @@ zelda.overworld = {
                         
         }
 		
-		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.blockGroup);
+		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.blockGroup, function(l,o){
+			console.log(o.key);
+		});
     
     }, 
     //======================FINAL DEL UPDATE===========================
@@ -503,7 +505,14 @@ zelda.overworld = {
 		this.blockGroup.setAll("body.immovable",true);
     },
 	
-    SetCamera:function(){
+	BlocksAlive:function(){
+		for(var i = 0; i<this.blockGroup.children.length; i++){
+			if(this.entradaAbierta[i])this.blockGroup.children[i].kill();
+		}
+		
+	},
+    
+	SetCamera:function(){
         this.cameraTop = this.game.add.sprite(this.camera.x, this.camera.y + 47, "camaraHorizontal");
         this.cameraTop.anchor.setTo(0,1); 
         this.game.physics.arcade.enable(this.cameraTop);
