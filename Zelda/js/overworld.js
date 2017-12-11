@@ -1,7 +1,7 @@
 var zelda = zelda || {}
 
 zelda.overworld = { 
-	entradaAbierta:[true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+	entradaAbierta:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
 	
     init:function(){
         this.game.world.setBounds(0,0,112*16,60*16);
@@ -468,7 +468,9 @@ zelda.overworld = {
                         
         }
 		
-		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.blockGroup);
+		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.blockGroup, function(l,o){
+			console.log(o.key);
+		});
     
     }, 
     //======================FINAL DEL UPDATE===========================
