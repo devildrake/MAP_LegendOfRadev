@@ -168,7 +168,7 @@ zelda.LinkPrefab.prototype.update = function(){
     
     if(this.debugPosKey.isDown&&this.debugPosKey.downDuration(1)){
         console.log(this.level.linkInstance.position);
-        console.log("Current zone = " + zelda.LinkObject.currentDungeonZone);
+        console.log("Current zone = " + zelda.LinkObject.currentZone);
     }
     
     if(this.level == zelda.dungeon){
@@ -554,6 +554,9 @@ zelda.LinkPrefab.prototype.update = function(){
                 this.playedDeathMusicOnce = true;
             }else{
                 //CAMBIO DE ESCENA
+                if(this.level==zelda.overworld)
+                zelda.LinkObject.currentZone = 30;
+                else zelda.LinkObject.currentDungeonZone = 38;
                 zelda.game.state.start("game_over");
 
             }
