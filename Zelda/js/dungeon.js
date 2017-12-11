@@ -950,19 +950,24 @@ zelda.dungeon = {
                 }
             }
             
-            if(enemy== "Wallmaster"){
-                /*var riverZola = this.riverZolas.getFirstExists(false);
-                if(!riverZola){
-                    riverZola = new zelda.RiverZolaPrefab(this.game,posX,posY,level,currentDungeonZone,posInArray);
-                    this.riverZolas.add(riverZola);
-                }else{
-                    riverZola.reset(posX,posY);
-                    riverZola.Alive = true;
-                    riverZola.currentDungeonZone = currentDungeonZone;
-                    riverZola.posInArray = posInArray;
-
-                    riverZola.lives = 3;
-                }*/
+            if(enemy== "WallMaster"){
+                var wallmaster = this.wallmasters.getFirstExists(false);
+                if(!wallmaster){
+                    wallmaster = new zelda.WallMasterPrefab(this.game,posX,posY,type,level,movingTowards,currentDungeonZone,posInArray);
+                    this.wallmasters.add(wallmaster);                }
+                else{
+                    wallmaster.reset(posX,posY);
+                    wallmaster.Alive = true;
+                    wallmaster.currentDungeonZone = currentDungeonZone;
+                    wallmaster.posInArray = posInArray;
+                    wallmaster.initialSpeed = movingTowards;  
+                    wallmaster.isFree = false;
+                    wallmaster.body.velocity.setTo(0);
+                    wallmaster.lives = 3;
+                }
+                
+                
+                console.log(wallmaster.body.position);
             }
             
             if(enemy== "Aquamentus"){

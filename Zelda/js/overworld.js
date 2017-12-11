@@ -241,6 +241,9 @@ zelda.overworld = {
         //this.game.add.existing(this.stalfos);
         //this.keese = new zelda.KeesePrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.keese);
+        
+        //this.wallmaster = new zelda.WallMasterPrefab(this.game,640,850,1,this,3,2,2);
+        //this.game.add.existing(this.wallmaster);
 
         //this.aquamentus = new zelda.AquamentusPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.aquamentus);

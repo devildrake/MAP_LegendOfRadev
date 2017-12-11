@@ -407,7 +407,7 @@ InitZones:function(){
     zelda.dungeonEnemySpawns.initialSpeedEnemigos[19] = [0,0,0];
     zelda.dungeonEnemySpawns.initialSpeedEnemigos[20] = [0,0,0,0,0];
     zelda.dungeonEnemySpawns.initialSpeedEnemigos[21] = [0,0,0];
-    zelda.dungeonEnemySpawns.initialSpeedEnemigos[22] = [0,0,0];
+    zelda.dungeonEnemySpawns.initialSpeedEnemigos[22] = [0,2,3];
     zelda.dungeonEnemySpawns.initialSpeedEnemigos[23] = [];
     zelda.dungeonEnemySpawns.initialSpeedEnemigos[24] = [];
     zelda.dungeonEnemySpawns.initialSpeedEnemigos[25] = [0,0,0,0,0,0];
