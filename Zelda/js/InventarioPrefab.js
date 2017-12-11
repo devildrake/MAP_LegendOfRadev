@@ -13,6 +13,10 @@ zelda.InventarioPrefab = function(game,x,y,level){
     this.game.add.existing(this);
     this.fixedToCamera = true;
     zelda.Inventory.startHUD();
+    //pintar mapa
+    zelda.Inventory.mapa=zelda.game.add.sprite(zelda.game.camera.x+10,zelda.game.camera.y+10, "minimap");
+    zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
+    zelda.Inventory.mapa.position.y=zelda.game.camera.y+5;
     //for para pintar los corazones
     for(var i=0;i< zelda.LinkObject.currentHearts;i++){
         if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
@@ -137,7 +141,9 @@ zelda.InventarioPrefab = function(game,x,y,level){
         //poner aqui actualizacion objetos HUD para cuando se mueva
         //y cuando digo aqui no me refiero al for
         zelda.Inventory.texto.x=zelda.game.camera.x+104;
-        zelda.Inventory.texto.y=zelda.game.camera.y+10;  
+        zelda.Inventory.texto.y=zelda.game.camera.y+10;
+        zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
+        zelda.Inventory.mapa.position.y=zelda.game.camera.y+5;
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
             zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
             zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;

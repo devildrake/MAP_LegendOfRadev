@@ -809,7 +809,8 @@ zelda.Inventory={
             this.strCount = 0;
             this.textTimer = 0;
             this.textUpdateTime = 50;
-		
+            this.map="";
+            this.dot="";
             this.texto = zelda.game.add.bitmapText(zelda.game.camera.x+104,zelda.game.camera.y+10,"zelda_font",this.str,7);
             this.texto.fill = "white";
            // this.texto.font = "Press Start 2P";
