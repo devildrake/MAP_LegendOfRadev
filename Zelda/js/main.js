@@ -253,7 +253,8 @@ InitZones:function(){
     zelda.dungeonEnemySpawns.zones[40] = []; 
     zelda.dungeonEnemySpawns.zones[41] = []; 
 
-    
+    //for(var i=0;i<zelda.dungeonEnemySpawns.zones[zelda.LinkObject.currentDungeonZone].children.length;i++){
+    //}
 
     
     zelda.dungeonEnemySpawns.posicionesEnemigos[0] = [];
@@ -1640,7 +1641,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 
 
 //Escena que se pinta
-zelda.game.state.start("overworld");
+zelda.game.state.start("main");
 
 //zelda.game.state.start("dungeon");
 

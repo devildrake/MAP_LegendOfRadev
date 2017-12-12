@@ -270,6 +270,8 @@ zelda.overworld = {
     },
     
     update:function(){   
+        //console.log(zelda.dungeonEnemySpawns.zones[zelda.LinkObject.currentDungeonZone].children.length);
+        
         //console.log(zelda.Inventory.plantedFire);
         //console.log(this.linkInstance);
         if(zelda.Inventory.plantedFire!=true)
@@ -1131,6 +1133,7 @@ zelda.overworld = {
             else bomb.frame = 1;
 		}
         
+
     },
     
     createEnemiesOfCurrentZone:function(){
