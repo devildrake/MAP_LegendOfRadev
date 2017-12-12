@@ -63,7 +63,8 @@ zelda.ExplosionPrefab.prototype.update = function(){
 
 zelda.FirePrefab.Update = function(s){
 	//esto es para que rompa los arbolicos
-	s.game.physics.arcade.overlap(s,zelda.overworld.blockGroup,function(s,o){
+
+	s.sprite.game.physics.arcade.overlap(s.sprite,zelda.overworld.blockGroup,function(s,o){
 		if(o.key == "arbol") o.kill();
 	});
 	
