@@ -541,13 +541,21 @@ zelda.overworld = {
         if((zelda.game.camera.y!=zelda.gameOptions.cameraPosToGoY||zelda.game.camera.x!=zelda.gameOptions.cameraPosToGoX)&&!zelda.gameOptions.cameraArrivedPos){
             if(zelda.gameOptions.borderToSet=="Upwards"){
                 zelda.game.camera.y-=2;
+                zelda.overworld.point.position.x=zelda.game.camera.x+36;
+                zelda.overworld.point.position.y=zelda.game.camera.y+38;
             }else if(zelda.gameOptions.borderToSet=="Downwards"){
                 zelda.game.camera.y+=2;
+                zelda.overworld.point.position.x=zelda.game.camera.x+36;
+                zelda.overworld.point.position.y=zelda.game.camera.y+38;
             }else if(zelda.gameOptions.borderToSet=="Right"){
                 zelda.game.camera.x+=2;
+                zelda.overworld.point.position.x=zelda.game.camera.x+36+12;
+                zelda.overworld.point.position.y=zelda.game.camera.y+38;
 
             }else{
                 zelda.game.camera.x-=2;
+                zelda.overworld.point.position.x=zelda.game.camera.x+36-12;
+                zelda.overworld.point.position.y=zelda.game.camera.y+38;
             }
                             this.inventario.movingCamera=true;
 
