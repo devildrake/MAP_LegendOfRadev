@@ -349,6 +349,7 @@ zelda.overworld = {
             
 			zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance, this.blockGroup, function(e,o){
 				if(o.key != "arbol") o.kill();
+                zelda.LinkPrefab.secretMusic.play();
 			})
 			
         for(var i=0;i<this.oktoroks.children.length;i++){

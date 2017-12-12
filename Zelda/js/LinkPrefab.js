@@ -113,6 +113,9 @@ zelda.LinkPrefab = function(game,x,y,level){
     if(zelda.LinkPrefab.lowHpSound==undefined)
     zelda.LinkPrefab.lowHpSound = this.game.add.audio("LowHp");
     
+    if(zelda.LinkPrefab.secretMusic==undefined)
+    zelda.LinkPrefab.secretMusic = this.game.add.audio("SecretFound");
+    
         //this.particlesA = game.add.sprite(0,0,"Particles");
     this.particlesA = [0,0,0,0];
         this.particlesA[0] = game.add.sprite(0,0,"Particles");
