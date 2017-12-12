@@ -141,48 +141,48 @@ zelda.overworld = {
 		this.game.physics.arcade.enable(this.trigger_M);
         
         //Escalera
-		this.trigger_I = this.game.add.sprite(16*16+10*16, 2*11*16 + 6*16+5*16, "trigger");
+		this.trigger_I = this.game.add.sprite(16*16+10*16+2, 2*11*16 + 6*16+5*16+2, "trigger");
 		this.game.physics.arcade.enable(this.trigger_I);
 		
         //Escalera
-        this.trigger_L = this.game.add.sprite(16*16+9*16, 11*16+7*16+5*16, "trigger");
+        this.trigger_L = this.game.add.sprite(16*16+9*16+2, 11*16+7*16+5*16+2, "trigger");
 		this.game.physics.arcade.enable(this.trigger_L);
         
         //Escalera
-		this.trigger_E = this.game.add.sprite(3*16*16+4*16, 4*11*16+6*16+5*16, "trigger");
+		this.trigger_E = this.game.add.sprite(3*16*16+4*16+2, 4*11*16+6*16+5*16+2, "trigger");
 		this.game.physics.arcade.enable(this.trigger_E);
         
         //Escalera
-		this.trigger_D_2 = this.game.add.sprite(3*16*16+2*16, 3*11*16+6*16+5*16, "trigger");
+		this.trigger_D_2 = this.game.add.sprite(3*16*16+2*16+2, 3*11*16+6*16+5*16+2, "trigger");
 		this.game.physics.arcade.enable(this.trigger_D_2);
         
         //Escalera
-		this.trigger_M_2 = this.game.add.sprite(3*16*16+6*16, 2*11*16+5*16+5*16, "trigger");
+		this.trigger_M_2 = this.game.add.sprite(3*16*16+6*16+2, 2*11*16+5*16+5*16+2, "trigger");
         this.game.physics.arcade.enable(this.trigger_M_2);
 
         //Escalera
-		this.trigger_I_2 = this.game.add.sprite(4*16*16+9*16, 4*11*16 + 5*16+5*16, "trigger");
+		this.trigger_I_2 = this.game.add.sprite(4*16*16+9*16+2, 4*11*16 + 5*16+5*16+2, "trigger");
 		this.game.physics.arcade.enable(this.trigger_I_2);
         
         //Escalera
-		this.trigger_A = this.game.add.sprite(4*16*16+5*16, 16*11+3*16+5*16, "trigger");
+		this.trigger_A = this.game.add.sprite(4*16*16+5*16+2, 16*11+3*16+5*16+2, "trigger");
 		this.game.physics.arcade.enable(this.trigger_A);
         
         
         //Escalera
-		this.trigger_H = this.game.add.sprite(5*16*16+6*16,5*16+5*16, "trigger");
+		this.trigger_H = this.game.add.sprite(5*16*16+6*16+2,5*16+5*16+2, "trigger");
 		this.game.physics.arcade.enable(this.trigger_H);
         
         //Escalera
-		this.trigger_G = this.game.add.sprite(5*16*16+12*16, 3*16*11+6*16+5*16, "trigger");
+		this.trigger_G = this.game.add.sprite(5*16*16+12*16+2, 3*16*11+6*16+5*16+2, "trigger");
         this.game.physics.arcade.enable(this.trigger_G);
 
         //Escalera
-		this.trigger_K = this.game.add.sprite(5*16*16+11*16, 16*11+1*16+5*16, "trigger");
+		this.trigger_K = this.game.add.sprite(5*16*16+11*16+2, 16*11+1*16+5*16+2, "trigger");
 		this.game.physics.arcade.enable(this.trigger_K);
         
         //Escalera
-		this.trigger_I_3 = this.game.add.sprite(6*16*16+2*16, 2*11*16+6*16+5*16, "trigger");
+		this.trigger_I_3 = this.game.add.sprite(6*16*16+2*16+2, 2*11*16+6*16+5*16+2, "trigger");
 		this.game.physics.arcade.enable(this.trigger_I_3);
         
 		this.trigger_A_2 = this.game.add.sprite(6*16*16+9*16, 4*11*16 + 1*16+5*16, "trigger");
