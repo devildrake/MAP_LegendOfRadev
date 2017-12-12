@@ -265,9 +265,9 @@ zelda.overworld = {
         this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
         
          //iniciar punto en mapa
-        this.point= zelda.game.add.sprite(zelda.game.camera.x+36,zelda.game.camera.y+38, "pointMap");
-        this.pointCurrentX=zelda.game.camera.x+36;
-        this.pointCurrentY=zelda.game.camera.y+38;
+        this.pointCurrentX=0;
+        this.pointCurrentY=0;
+        this.point= zelda.game.add.sprite(zelda.game.camera.x+36+12*this.pointCurrentX,zelda.game.camera.y+38+8*this.pointCurrentY, "pointMap");
     },
     
     update:function(){   
@@ -541,23 +541,20 @@ zelda.overworld = {
         if((zelda.game.camera.y!=zelda.gameOptions.cameraPosToGoY||zelda.game.camera.x!=zelda.gameOptions.cameraPosToGoX)&&!zelda.gameOptions.cameraArrivedPos){
             if(zelda.gameOptions.borderToSet=="Upwards"){
                 zelda.game.camera.y-=2;
-                zelda.overworld.point.position.x=zelda.game.camera.x+36;
-                zelda.overworld.point.position.y=zelda.game.camera.y+38;
+             
             }else if(zelda.gameOptions.borderToSet=="Downwards"){
                 zelda.game.camera.y+=2;
-                zelda.overworld.point.position.x=zelda.game.camera.x+36;
-                zelda.overworld.point.position.y=zelda.game.camera.y+38;
+               
             }else if(zelda.gameOptions.borderToSet=="Right"){
                 zelda.game.camera.x+=2;
-                zelda.overworld.point.position.x=zelda.game.camera.x+36+12;
-                zelda.overworld.point.position.y=zelda.game.camera.y+38;
-
+                
             }else{
                 zelda.game.camera.x-=2;
-                zelda.overworld.point.position.x=zelda.game.camera.x+36-12;
-                zelda.overworld.point.position.y=zelda.game.camera.y+38;
+                
             }
                             this.inventario.movingCamera=true;
+                            zelda.overworld.point.position.x=zelda.game.camera.x+36+(12*zelda.overworld.pointCurrentX);
+                            zelda.overworld.point.position.y=zelda.game.camera.y+38+(8*zelda.overworld.pointCurrentY);
 
         }
         //CUANDO LLEGA a la posición destinada se pone en false setBorders para ajustar los bordes de pantalla a la nueva escena
@@ -631,7 +628,7 @@ zelda.overworld = {
                 //console.log(zelda.gameOptions.lastCameraPosY);
                    // console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
                 //zelda.overworld.createEnemiesOfCurrentZone();
-                
+                zelda.overworld.pointCurrentY-=1;
                 
             }
 		});
@@ -659,6 +656,7 @@ zelda.overworld = {
 
                 //console.log("Camera trying to go to" + zelda.gameOptions.cameraPosToGoY);
                         //zelda.overworld.createEnemiesOfCurrentZone();
+                 zelda.overworld.pointCurrentY+=1;
             }
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraRight,function(){
@@ -682,6 +680,7 @@ zelda.overworld = {
                 //console.log(zelda.gameOptions.lastCameraPosX);
                 //console.log(zelda.gameOptions.lastCameraPosY);
                         //zelda.overworld.createEnemiesOfCurrentZone();
+                zelda.overworld.pointCurrentX+=1;
             }
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraLeft,function(){
@@ -705,6 +704,7 @@ zelda.overworld = {
             //console.log(zelda.gameOptions.lastCameraPosX);
             //console.log(zelda.gameOptions.lastCameraPosY);
             //zelda.overworld.createEnemiesOfCurrentZone();
+                zelda.overworld.pointCurrentX-=1;
             }
         });
         
