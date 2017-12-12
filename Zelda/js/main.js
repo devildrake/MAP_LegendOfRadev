@@ -671,6 +671,8 @@ zelda.Inventory={
     SlotCorazon:0,
     Comida:false,
 	trozoMapa:false,
+    pointCurrentX:0,
+    pointCurrentY:0,
      //posiciones
         ArrayPosObjX:[125,145,165,185,200
                           ,125,145,165,185,200],
@@ -1628,7 +1630,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 
 
 //Escena que se pinta
-zelda.game.state.start("dungeon");
+zelda.game.state.start("overworld");
 
 //zelda.game.state.start("dungeon");
 
