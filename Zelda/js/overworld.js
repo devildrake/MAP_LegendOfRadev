@@ -78,6 +78,7 @@ zelda.overworld = {
         this.load.spritesheet("AquamentusProjectile","img/ProyectilAquamentus.png",16,16);
         this.load.spritesheet("FireSpriteSheet","img/fuego.png",16,16);
         this.load.spritesheet("WallMaster","img/WallMasterSpriteSheet.png",16,16);
+        this.load.audio("SecretFound","sounds/Music/FoundASecret.mp3");
         this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
         
         //sprites para bloquear las entradas secretas

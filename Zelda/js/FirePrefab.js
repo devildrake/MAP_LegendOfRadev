@@ -17,6 +17,9 @@ zelda.FirePrefab = function(game,x,y,level,whereTo){
     this.sprite.animations.add("DO",[0,1],15,true);
     	this.game.physics.arcade.enable(this.sprite);
 
+    if(zelda.FirePrefab.secretMusic==undefined)
+    zelda.FirePrefab.secretMusic = this.game.add.audio("SecretFound");
+    
     this.arrived = false;
     this.calledOverlap = false;
     switch(whereTo){
@@ -65,7 +68,11 @@ zelda.FirePrefab.Update = function(s){
 	//esto es para que rompa los arbolicos
 
 	s.sprite.game.physics.arcade.overlap(s.sprite,zelda.overworld.blockGroup,function(s,o){
-		if(o.key == "arbol") o.kill();
+        
+		if(o.key == "arbol"){ 
+            o.kill();
+            zelda.FirePrefab.secretMusic.play();
+        }
 	});
 	
     if(s.Alive){
