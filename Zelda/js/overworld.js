@@ -272,9 +272,11 @@ zelda.overworld = {
     update:function(){   
         //console.log(zelda.Inventory.plantedFire);
         //console.log(this.linkInstance);
-        if(zelda.Inventory.plantedFire!=true)
+               // console.log(zelda.FirePrefab);
+
+        if(zelda.Inventory.plantedFire!=true){
         zelda.FirePrefab.Update(zelda.Inventory.plantedFire);
-        
+        }
         this.MoveCamera();
         
         this.SetBorders();
@@ -348,8 +350,11 @@ zelda.overworld = {
         if(zelda.Inventory.ExplosionOn){
             
 			zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance, this.blockGroup, function(e,o){
-				if(o.key != "arbol") o.kill();
-                zelda.LinkPrefab.secretMusic.play();
+				if(o.key != "arbol"){ 
+                    o.kill();
+                    zelda.overworld.entradaAbierta[o.id] = true;
+                    zelda.LinkPrefab.secretMusic.play();
+                }
 			})
 			
         for(var i=0;i<this.oktoroks.children.length;i++){
@@ -487,7 +492,6 @@ zelda.overworld = {
 	//funcion que crea los sprites que forman los bloqueos para las entradas secretas
 	CreateBlocks:function(){
 		this.blockGroup = this.game.add.group();
-		
        	this.blockGroup.add(this.game.add.sprite(16*16+6*16, 48+4*11*16+3*16,"pared_verde"));//0
 		this.blockGroup.add(this.game.add.sprite(16*16+7*16, 48+3*11*16+3*16,"pared_verde"));//1
 		this.blockGroup.add(this.game.add.sprite(16*16+10*16, 48+2*11*16+8*16,"arbol"));//2
@@ -506,7 +510,11 @@ zelda.overworld = {
 		this.blockGroup.add(this.game.add.sprite(4*16*16+10*16, 48+4*11*16+7*16,"roca"));//15
 		this.blockGroup.add(this.game.add.sprite(4*16*16+9*16, 48+4*11*16+8*16,"roca"));//16
 		this.game.physics.arcade.enable(this.blockGroup);
+        for(var i=0;i<this.blockGroup.children.length;i++){
+            this.blockGroup.children[i].id=i;
+        }
 		this.blockGroup.setAll("body.immovable",true);
+        //console.log(this.blockGroup);
     },
 	
 	BlocksAlive:function(){
