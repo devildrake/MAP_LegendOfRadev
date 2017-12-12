@@ -16,6 +16,8 @@ zelda.FirePrefab = function(game,x,y,level,whereTo){
     this.posToGoY = y;
     this.sprite.animations.add("DO",[0,1],15,true);
     	this.game.physics.arcade.enable(this.sprite);
+    
+    //this.sprite.kill();
 
     this.arrived = false;
     this.calledOverlap = false;
@@ -64,15 +66,26 @@ zelda.ExplosionPrefab.prototype.update = function(){
 zelda.FirePrefab.Update = function(s){
 	//esto es para que rompa los arbolicos
 
-	s.sprite.game.physics.arcade.overlap(s.sprite,zelda.overworld.blockGroup,function(s,o){
+
+	
+    if(s.Alive){
+        if(s.sprite.game==null){
+            s.sprite = s.game.add.sprite(s.position.x,s.position.y,"FireSpriteSheet");
+            s.sprite.game = s.game;
+            s.sprite.level = s.level;
+            s.sprite.animations.add("DO",[0,1],15,true);
+            s.game.physics.arcade.enable(s.sprite);
+        }
+            console.log(s.sprite.position);
+        	s.sprite.game.physics.arcade.overlap(s.sprite,s.level.blockGroup,function(s,o){
         
 		if(o.key == "arbol"){ 
             o.kill();
+            zelda.overworld.entradaAbierta[o.id] = true;
             zelda.LinkPrefab.secretMusic.play();
         }
 	});
-	
-    if(s.Alive){
+        
         s.sprite.position = s.position;
         s.animations.play("DO"); 
         s.sprite.animations.play("DO");    
@@ -116,9 +129,11 @@ zelda.FirePrefab.Dissappear = function(s){
     s.arrived = false;
     s.calledOverlap = false;
     s.sprite.kill();
+    s.kill();
 }
 
 zelda.FirePrefab.Restart = function(s){
+    s.sprite.reset(s.position.x,s.position.y);
     s.posToGoX = s.position.x;
     s.posToGoY = s.position.y;
     

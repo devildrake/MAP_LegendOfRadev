@@ -483,8 +483,21 @@ zelda.dungeon = {
 	CollisionWithDoors:function(){
 		for(var i = 0; i<this.allDoors.length; i++){
 			if(this.allDoors[i].frame == 0){
-				this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.allDoors[i],function(){
-					console.log("GETCOLLIDED");
+				this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.allDoors[i],function(l,d){
+					var enemies = false;
+					for(var i=0;i<zelda.dungeonEnemySpawns.zones[zelda.LinkObject.currentDungeonZone].length;i++){
+						if(zelda.dungeonEnemySpawns.zones[zelda.LinkObject.currentDungeonZone][i]){
+							enemies = true;
+						}
+					}
+					if(!enemies){
+						if(d.key == "puerta_llave"){
+							if(zelda.Inventory.keys < 0){
+								zelda.Inventory.keys--;
+								d.frame = 1;
+							}
+						}
+					}
 				});
 			}
 		}
