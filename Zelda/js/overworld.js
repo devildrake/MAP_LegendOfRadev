@@ -346,6 +346,10 @@ zelda.overworld = {
         //overlaps con la explosion
         if(zelda.Inventory.ExplosionOn){
             
+			zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance, this.blockGroup, function(e,o){
+				if(o.key != "arbol") o.kill();
+			})
+			
         for(var i=0;i<this.oktoroks.children.length;i++){
             if(this.oktoroks.children[i].Alive){
                     zelda.Inventory.ExplosionInstance.game.physics.arcade.overlap(zelda.Inventory.ExplosionInstance,this.oktoroks.children[i],
