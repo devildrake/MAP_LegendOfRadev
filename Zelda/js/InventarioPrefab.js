@@ -239,17 +239,17 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
             }
             //pintar bombas si tienes
             if(zelda.Inventory.CreateBombs==true){
-                zelda.Inventory.bomb.kill();
+                zelda.Inventory.bomb.destroy();
                 zelda.Inventory.CreateBombs=false;
             }
             //pintar pociones si tienes  
             if(zelda.Inventory.CreatePotion==true){
-                zelda.Inventory.potion.kill();
+                zelda.Inventory.potion.destroy();
                 zelda.Inventory.CreatePotion=false;
             }
             //pintar vela si tienes
             if(zelda.Inventory.CreateVela==true){
-                zelda.Inventory.vela.kill();
+                zelda.Inventory.vela.destroy();
                 zelda.Inventory.CreateVela=false;
             }
             //eliminar el seleccionador
@@ -265,7 +265,7 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
                 //things
                 console.log("cerrado");
                 zelda.Inventory.ScrollingInventory = false;
-                zelda.Inventory.selec.kill();
+                zelda.Inventory.selec.destroy();
                  
                 //"pintar" los objetos junto el inventario q sube y baja, pero los pinta debajo por x motivos
                 for(var i=0;i< zelda.LinkObject.currentHearts;i++){

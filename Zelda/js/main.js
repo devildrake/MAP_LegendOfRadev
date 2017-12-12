@@ -811,8 +811,7 @@ zelda.Inventory={
             this.strCount = 0;
             this.textTimer = 0;
             this.textUpdateTime = 50;
-            this.map="";
-            this.dot="";
+           
             this.texto = zelda.game.add.bitmapText(zelda.game.camera.x+104,zelda.game.camera.y+10,"zelda_font",this.str,7);
             this.texto.fill = "white";
            // this.texto.font = "Press Start 2P";
@@ -1106,12 +1105,23 @@ zelda.Inventory={
             if(!this.bombOn){
                 zelda.Inventory.bombs-=1;
                 //cambiar texto
-                this.texto.kill();
-                zelda.Inventory.startHUD();
-                if(zelda.Inventory.Bombs==0){
+                zelda.Inventory.texto.kill();
+                //zelda.Inventory.startHUD();
+                    zelda.Inventory.str  = "X"+zelda.Inventory.rupies+"\n"+"\n"+"X"+zelda.Inventory.keys+"\n"+"X"+zelda.Inventory.bombs+"\n";
+                    zelda.Inventory.strToPrint = "";
+                    zelda.Inventory.strCount = 0;
+                    zelda.Inventory.textTimer = 0;
+                    zelda.Inventory.textUpdateTime = 50;
+
+                    zelda.Inventory.texto = zelda.game.add.bitmapText(zelda.game.camera.x+104,zelda.game.camera.y+10,"zelda_font",this.str,7);
+                    zelda.Inventory.texto.fill = "white";
+                   // this.texto.font = "Press Start 2P";
+                   // this.texto.fontSize = 6;
+                    zelda.Inventory.texto.align = "center";
+                if(zelda.Inventory.bombs==0){
                     zelda.Inventory.ObjectB="nothing";
                     //borrar objB de la casilla de objeto B equipada
-                    this.PintObj.kill();
+                    zelda.Inventory.PintObj.destroy();
                 }
                 this.bombOn=true;
                // Phaser.Sprite.call(this,game,,y,"bomba"); 
@@ -1178,13 +1188,13 @@ zelda.Inventory={
                     //zelda.Inventory.plantedBomb=Phaser.Sprite.call(this,game,x,y,"explosion");
                     /*zelda.Inventory.plantedBomb.animations.add("explode", [0,1,2,3], 5, true);
                     zelda.Inventory.plantedBomb.animations.play("explode");*/
-                   zelda.Inventory.plantedBomb.kill();
+                   zelda.Inventory.plantedBomb.destroy();
                     zelda.Inventory.bombOn=false;
                     console.log("kill");
                     if(zelda.Inventory.scene=="dungeon"){
-                    zelda.Inventory.ExplosionInstance.kill();}
+                    zelda.Inventory.ExplosionInstance.destroy();}
                     if(zelda.Inventory.scene=="overworld"){
-                    zelda.Inventory.ExplosionInstance.kill();}
+                    zelda.Inventory.ExplosionInstance.destroy();}
                     zelda.Inventory.ExplosionOn=false;
                 }, 2700);
             }
@@ -1284,7 +1294,7 @@ zelda.Inventory={
                         zelda.Inventory.healed=true;
                         zelda.Inventory.ObjectB="nothing";
                         //borrar objB de la casilla de objeto B equipada
-                        this.PintObj.kill();
+                        this.PintObj.destroy();
             }
 
         }

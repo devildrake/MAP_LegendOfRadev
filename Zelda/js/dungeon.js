@@ -615,7 +615,7 @@ zelda.dungeon = {
             }
                             this.inventario.movingCamera=true;
                             zelda.dungeon.point.position.x=zelda.game.camera.x+36+(12*zelda.dungeon.pointCurrentX);
-                            zelda.dungeon.point.position.y=zelda.game.camera.y+38+(8*zelda.dungeon.pointCurrentY);
+                            zelda.dungeon.point.position.y=zelda.game.camera.y+38+(6*zelda.dungeon.pointCurrentY);
 
         }
         //CUANDO LLEGA a la posición destinada se pone en false setBorders para ajustar los bordes de pantalla a la nueva escena
