@@ -171,7 +171,7 @@ zelda.LinkPrefab.prototype.update = function(){
     
     if(this.debugPosKey.isDown&&this.debugPosKey.downDuration(1)){
         console.log(this.level.linkInstance.position);
-        console.log("Current zone = " + zelda.LinkObject.currentZone);
+        console.log("Current zone = " + zelda.LinkObject.currentDungeonZone);
     }
     
     if(this.level == zelda.dungeon){
