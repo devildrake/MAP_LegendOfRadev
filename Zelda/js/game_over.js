@@ -45,12 +45,22 @@ zelda.game_over = {
         this.music.play();
         this.music.loop = true;
         zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
-        
+        this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
+        this.playMusic = true;
     },
     
     update:function(){
-        if(!this.music.isPlaying)
+        
+        if(this.muteButton.isDown&&this.muteButton.downDuration(1)){
+            this.playMusic= !this.playMusic;
+            if(!this.playMusic)
+                this.music.stop();
+		}
+        
+        if(!this.music.isPlaying&&this.playMusic)
         this.music.play();
+        
+        
             
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         
@@ -79,6 +89,7 @@ zelda.game_over = {
                 if(zelda.LinkObject.DiedIn=="dungeon"){
                     zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
                     zelda.LinkObject.dying = false;
+                    this.music.stop();
                     zelda.game.state.start("dungeon");
                     
                 }
@@ -89,6 +100,7 @@ zelda.game_over = {
                     
                 
                     //zelda.overworld.game.camera.focusOnXY(zelda.gameOptions.originalCameraPosX,zelda.gameOptions.originalCameraPosY);
+                    this.music.stop();
                     zelda.game.state.start("overworld");
                 }
 
@@ -98,12 +110,14 @@ zelda.game_over = {
 
                 zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
                 zelda.LinkObject.dying = false;
+                this.music.stop();
                 zelda.game.state.start("overworld");
             }
             //guardar
             else if(this.selected==3){
 
                 zelda.gameOptions.save();
+                this.music.stop();
                 zelda.game.state.start("main");
             }
         }

@@ -35,7 +35,7 @@ zelda.FileScene = {
         this.load.image("fotoNegra","img/inicio_y_saveFiles/FondoNegroParaFade.png",256,240);
          this.load.image("corazon", "img/corazon.png");
         this.load.audio("keyboard","sounds/Sfx/selectKeyboard.WAV");
-        this.load.audio("menu","sounds/Sfx/moveMenu.WAV");
+        this.load.audio("menu","sounds/Sfx/moveMenu.mp3");
         
 		this.game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },

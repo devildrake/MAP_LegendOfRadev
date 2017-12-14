@@ -24,7 +24,7 @@ zelda.intro = {
     
     create:function(){
         this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
-        this.playMusic = false;
+        this.playMusic = true;
 
 
 
@@ -41,7 +41,7 @@ zelda.intro = {
    
         
         this.introMusic = this.add.audio("introMusic");
-        //this.introMusic.play();
+        this.introMusic.play();
 
 		this.fader = this.game.add.sprite(0,0,"fotoNegra");
 		this.fader.scale.setTo(1);
@@ -70,7 +70,6 @@ zelda.intro = {
 				this.playMusic = false;
 				this.introMusic.stop();
 			}
-
 		}
         
         this.background.animations.play("onward");

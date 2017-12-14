@@ -147,6 +147,8 @@ zelda.dungeon = {
         this.pointCurrentX=0;
         this.pointCurrentY=0;
         this.point= zelda.game.add.sprite(zelda.game.camera.x+36+12*this.pointCurrentX,zelda.game.camera.y+38+8*this.pointCurrentY, "pointMap");
+        this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
+        this.playMusic = true;
         
     },
     
@@ -174,6 +176,15 @@ zelda.dungeon = {
     },
     
     update:function(){
+        
+        if(this.muteButton.isDown&&this.muteButton.downDuration(1)){
+            this.playMusic= !this.playMusic;
+            if(!this.playMusic)
+                this.music.stop();
+		}
+        
+        if(!this.music.isPlaying&&this.playMusic)
+        this.music.play();
         
         if(zelda.gameOptions.mustCreateEnemies){
             zelda.gameOptions.mustCreateEnemies = false;
