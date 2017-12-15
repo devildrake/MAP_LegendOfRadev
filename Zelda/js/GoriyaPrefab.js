@@ -308,18 +308,21 @@ zelda.GoriyaPrefab.prototype.update = function(){
 
                 if(this.level.linkInstance.sword.Alive&&!this.hurtBySword){
                         this.game.physics.arcade.overlap(this,this.level.linkInstance.sword,function(npc,linkSword){
-                            if(!npc.hurt){
-                                npc.lives--;
-                                npc.hurtSound.play();
-                            }
-                            console.log(npc.lives);
+                            
                             if(npc.lives==0){
                                 //npc.kill();
                                 //npc.Alive = false;
 
                                 zelda.AIMethods.Die(npc);
 
-                            }else{
+                            }
+                            
+                            if(!npc.hurt){
+                                npc.lives--;
+                                npc.hurtSound.play();
+                            }
+                            console.log(npc.lives);
+                            else{
                                 npc.previousVelocity = npc.body.velocity;
                                 npc.hurt = true;
                                 npc.calledNotHurt = false;

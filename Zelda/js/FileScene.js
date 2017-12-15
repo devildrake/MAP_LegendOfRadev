@@ -60,10 +60,10 @@ zelda.FileScene = {
         this.KeyboardpositionX=[44,60,76,92,108,124,140,156,172,188,204,220]
         this.KeyboardpositionY=[120,137,153,167];
         this.Keyboard=false;
-        this.i=0;
-        this.j=0;
-        this.canSave=false;
-        this.goingDelete=false;
+        this.i = 0;
+        this.j = 0;
+        this.canSave = false;
+        this.goingDelete = false;
         this.SfxKeyboard = this.add.audio("keyboard");
         this.SfxMenu = this.add.audio("menu");
     },
