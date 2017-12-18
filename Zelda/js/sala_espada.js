@@ -96,7 +96,6 @@ zelda.sala_espada = {
 			this.strToPrint = "";
 			this.strCount = 0;
 			this.textTimer = 0;
-			this.textUpdateTime = 80;
 
 			this.texto = this.game.add.bitmapText(3*16,16*2+4,"zelda_font","omg",8);
 			//this.texto = this.game.add.text(3*16,16*2+4,this.strToPrint);
@@ -156,7 +155,7 @@ zelda.sala_espada = {
 			});
 			
 			//animacion de aparicion de los textos
-			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
+			if(this.strToPrint.length != this.str.length && this.textTimer>zelda.secretLayout.textSpeed){
 				this.strToPrint += this.str[this.strCount];
 				this.texto.setText(this.strToPrint);
 				this.strCount++;

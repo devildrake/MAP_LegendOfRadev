@@ -87,7 +87,6 @@ zelda.sala_secreta_D = {
 			this.strToPrint = "";
 			this.strCount = 0;
 			this.textTimer = 0;
-			this.textUpdateTime = 50;
 
 			this.texto = this.game.add.bitmapText(3*16+4,16*2+4,"zelda_font","",8);
 			this.texto.align = "center";
@@ -141,7 +140,7 @@ zelda.sala_secreta_D = {
 			zelda.Inventory.rupies -= 10;
 			if(zelda.Inventory.rupies<0) zelda.Inventory.rupies = 0;
 			
-			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
+			if(this.strToPrint.length != this.str.length && this.textTimer>zelda.secretLayout.textSpeed){
 				this.strToPrint += this.str[this.strCount];
 				this.texto.setText(this.strToPrint);
 				this.strCount++;
