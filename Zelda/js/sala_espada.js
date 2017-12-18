@@ -75,6 +75,7 @@ zelda.sala_espada = {
 		this.fire2.body.immovable = true;
         
 		if(!this.roomDone){
+			zelda.Inventory.ScrollingInventory = true;
 			//npc
 			this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
 			this.npc.anchor.setTo(.5,0);
@@ -107,7 +108,6 @@ zelda.sala_espada = {
         this.game.camera.y -= 47;
 		
 		this.link = new zelda.LinkPrefab(this.game,zelda.gameOptions.gameWidth/2,zelda.gameOptions.gameHeight-60,this);
-		zelda.Inventory.ScrollingInventory = true;
 		
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);
 		
