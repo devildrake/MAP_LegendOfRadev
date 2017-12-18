@@ -642,7 +642,7 @@ zelda.Inventory={
     
     hasSword: false,
     equippedSword: "Bronze",
-    bombs: 2,
+    bombs: 0,
     keys:0,
     rupies:0,
     ring:false,
@@ -666,7 +666,7 @@ zelda.Inventory={
     //el [4] sera la poti vida(roja)
     //el [5] sera el escudo
     // el [6] sera la pocion azul
-    objects:[0,0,0,1,1,0,0],
+    objects:[0,0,0,0,0,0,0],
     flechas:0,
     Cuadrado:0,
     SlotCorazon:0,
