@@ -18,6 +18,9 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.animations.add("movingUpHurt", [16,2,16,2], 20, true);
 	this.animations.add("movingSideWaysHurt", [17,3,17,3,18,4,18,4],20,true); 
     this.animations.add("Die",[0+14,0,4+14,4,2+14,2],0,true);
+    
+
+    
     zelda.LinkObject.calledNotHurt = false;
     this.grabbingObject = false;
     zelda.LinkObject.invincible = false;
@@ -42,7 +45,16 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.cursors = game.input.keyboard.createCursorKeys();
 	this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);        
     this.debugPosKey = this.game.input.keyboard.addKey(Phaser.Keyboard.L);
-
+    this.boomerang = game.add.sprite(0,0,"Boomerang");
+    this.boomerang.animations.add("Roll",[0,1,2,3,4,5,6,7],15,true);
+    this.boomerang.anchor.setTo(0.5);
+    this.boomerang.Alive = false;
+    this.boomerang.maxDistance = 30;
+    this.boomerang.destinedPosX = 0;
+    this.boomerang.destinedPosY = 0;
+    this.boomerang.returning = false;
+    this.boomerang.kill();
+    
 	this.sword = this.game.add.sprite(0,0,"Sword");
 	this.sword.anchor.setTo(0.5);
 	this.sword.kill();
@@ -68,6 +80,8 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.game.physics.arcade.enable(this.LinkCollider);
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.sword);
+    this.game.physics.arcade.enable(this.boomerang);
+
 
     if(zelda.LinkPrefab.usePotionSound==undefined){
         zelda.LinkPrefab.usePotionSound = this.game.add.audio("UsePotion");
@@ -196,8 +210,6 @@ zelda.LinkPrefab.prototype.update = function(){
 	//this.Link.body.velocity.setTo(0);
     if(!zelda.LinkObject.dying){
 
-        
-        
         if(!zelda.LinkObject.goingDownStairWay&&!zelda.LinkObject.goingUpStairWay){
             if(!zelda.Inventory.ScrollingInventory){
                     if(this.wasPaused&&!zelda.Inventory.InvON){
@@ -206,6 +218,11 @@ zelda.LinkPrefab.prototype.update = function(){
                         if(this.projectile.Alive){
                             this.projectile.body.velocity.x = this.projectile.previousVelocityX;
                             this.projectile.body.velocity.y = this.projectile.previousVelocityY;
+                        }
+                        if(this.boomerang.Alive){
+                            this.boomerang.body.velocity.x = this.boomerang.previousVelocityX;
+                            this.boomerang.body.velocity.y = this.boomerang.previousVelocityY;
+
                         }
                     }
                 if(!zelda.LinkObject.moveFromDmg){
@@ -494,11 +511,28 @@ zelda.LinkPrefab.prototype.update = function(){
                 }else if(zelda.LinkObject.grabbingObject){
                     this.frame = 13;
                 }
+                
+                if(this.boomerang.Alive){
+                    if(this.boomerang.returning){
+                        this.boomerang.body.velocity.x = (this.body.position.x - this.boomerang.body.position.x)/10;
+                        this.boomerang.body.velocity.y = (this.body.position.y - this.boomerang.body.position.y)/10;
+
+                     this.game.physics.arcade.collide(this,this.boomerang,
+                        function(link,boomerang){
+                         boomerang.Alive = false;
+                         boomerang.kill();
+                        
+                        } );
+                    }
+                }
+                
             }else{
                     if(!this.wasPaused){
                         this.wasPaused = true;
                         this.projectile.previousVelocityX = this.projectile.body.velocity.x; 
                         this.projectile.previousVelocityY = this.projectile.body.velocity.y; 
+                        this.boomerang.previousVelocityX = this.boomerang.body.velocity.x; 
+                        this.boomerang.previousVelocityY = this.boomerang.body.velocity.y; 
                         this.animations.stop();
                         this.body.velocity.setTo(0);
                         this.LinkCollider.body.velocity.setTo(0);
@@ -591,7 +625,7 @@ zelda.LinkPrefab.StopGrabbing = function(){
 }
 
 zelda.LinkPrefab.changeScene = function(){
-                    zelda.LinkPrefab.stairsSound.stop();
+    zelda.LinkPrefab.stairsSound.stop();
     zelda.LinkObject.calledChangeLater = false;
     zelda.LinkObject.goingDownStairWay = false;
     zelda.game.state.start(zelda.LinkObject.sceneToGo);
@@ -642,6 +676,49 @@ zelda.LinkPrefab.createSword = function(obj){
 
 	}
 }
+
+zelda.LinkPrefab.throwBoomerang = function(obj){
+    	if(!obj.boomerang.Alive){
+            if(obj.frame ==9||obj.frame==23){
+            //DOWN
+                obj.boomerang.frame = 0;
+                obj.boomerang.destinedPosX = obj.position.x;
+                obj.boomerang.destinedPosY = obj.position.y+obj.boomerang.maxDistance;
+                obj.boomerang.reset(obj.position.x+2,obj.position.y+12);
+                
+
+            }
+            // up
+            else if(obj.frame == 10 || obj.frame==24){
+                obj.boomerang.frame = 0;
+                obj.boomerang.destinedPosX = obj.position.x;
+                obj.boomerang.destinedPosY = obj.position.y-obj.boomerang.maxDistance;
+                obj.boomerang.reset(obj.position.x-2,obj.position.y-12);
+
+            }
+
+            else if(obj.frame == 11||obj.frame==25){
+                if(zelda.LinkObject.lookingLeft){                    
+                obj.boomerang.frame = 0;
+                obj.boomerang.destinedPosX = obj.position.x -obj.boomerang.maxDistance;
+                obj.boomerang.destinedPosY = obj.position.y;
+                obj.boomerang.reset(obj.position.x-11,obj.position.y+2);
+
+                }
+                else{
+                obj.boomerang.frame = 0;
+                obj.boomerang.destinedPosX = obj.position.x +obj.boomerang.maxDistance;
+                obj.boomerang.destinedPosY = obj.position.y;
+                obj.boomerang.reset(obj.position.x+11,obj.position.y+2);
+
+                }
+            }
+        obj.boomerang.Alive = true;
+        obj.boomerang.animations.play("Roll");
+        obj.boomerang.returning = false;
+        }
+}
+
 
 zelda.LinkPrefab.makeLinkNotAttack = function(){
 

@@ -42,7 +42,7 @@ zelda.GoriyaPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray){
 
     
     this.projectile = game.add.sprite(this.body.position.x,this.body.position.y,"Boomerang");
-        this.projectile.animations.add("Roll",[0,1,2,3,4,5,6,7],15,true);
+    this.projectile.animations.add("Roll",[0,1,2,3,4,5,6,7],15,true);
     this.projectile.returning = false;
     this.projectile.previousVelocityX=0;
     this.projectile.previousVelocityY=0;
@@ -321,7 +321,6 @@ zelda.GoriyaPrefab.prototype.update = function(){
                                 npc.lives--;
                                 npc.hurtSound.play();
                             }
-                            console.log(npc.lives);
                             else{
                                 npc.previousVelocity = npc.body.velocity;
                                 npc.hurt = true;
