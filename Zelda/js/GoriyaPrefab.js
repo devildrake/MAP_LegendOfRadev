@@ -135,7 +135,7 @@ zelda.GoriyaPrefab.prototype.update = function(){
 
                 this.game.physics.arcade.overlap(this,this.level.linkInstance,
                 function(enemy,linkInstance){
-                    if(!zelda.LinkObject.hurt){
+                    if(!zelda.LinkObject.hurt&&!zelda.LinkObject.invincible){
                         zelda.LinkObject.hurt = true;
                         zelda.LinkObject.moveFromDmg=true;
                         zelda.LinkObject.calledNotMoveFromDamage=false;
@@ -236,7 +236,7 @@ zelda.GoriyaPrefab.prototype.update = function(){
                 }
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.linkInstance,function(projectile,linkInstance){
-                    if(!zelda.LinkObject.hurt){
+                    if(!zelda.LinkObject.hurt&&!zelda.LinkObject.invincible){
                         if(linkInstance.LinkCollider.body.velocity.x!=0||linkInstance.LinkCollider.body.velocity.y!=0){
                             zelda.LinkObject.hurt = true;
                             zelda.LinkObject.moveFromDmg=true;

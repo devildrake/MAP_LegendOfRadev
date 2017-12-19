@@ -14,10 +14,10 @@ zelda.LinkPrefab = function(game,x,y,level){
 	this.animations.add("movingDown", [0,1], 5, true);
 	this.animations.add("movingUp", [2], 5, true);
 	this.animations.add("movingSideWays", [3,4],5,true);
-	this.animations.add("movingDownHurt", [14,15], 5, true);
-	this.animations.add("movingUpHurt", [16], 5, true);
-	this.animations.add("movingSideWaysHurt", [17,18],5,true); 
-    this.animations.add("Die",[0+14,0,4+14,4,2+14,2],10,true);
+	this.animations.add("movingDownHurt", [14,0,14,0,15,1,15,1], 20, true);
+	this.animations.add("movingUpHurt", [16,2,16,2], 20, true);
+	this.animations.add("movingSideWaysHurt", [17,3,17,3,18,4,18,4],20,true); 
+    this.animations.add("Die",[0+14,0,4+14,4,2+14,2],0,true);
     zelda.LinkObject.calledNotHurt = false;
     this.grabbingObject = false;
     zelda.LinkObject.invincible = false;
@@ -243,7 +243,10 @@ zelda.LinkPrefab.prototype.update = function(){
                     if(!zelda.LinkPrefab.getHurtSound.isPlaying)
                     zelda.LinkPrefab.getHurtSound.play();
                     this.game.time.events.add(Phaser.Timer.SECOND * 0.5,zelda.LinkPrefab.NotHurt , this.level);
+                    this.game.time.events.add(Phaser.Timer.SECOND * 1,zelda.LinkPrefab.NotInvicible , this.level);
+                    zelda.LinkObject.calledNotInvincible = true;
                     zelda.LinkObject.calledNotHurt = true;
+                    zelda.LinkObject.invincible = true;
                 }
 
                 if(this.particlesA[0].Alive){
@@ -344,7 +347,7 @@ zelda.LinkPrefab.prototype.update = function(){
                             //this.Link.body.velocity.x = -zelda.gameOptions.linkSpeed;
                             this.LinkCollider.body.velocity.x= -zelda.gameOptions.linkSpeed;
 
-                            if(zelda.LinkObject.hurt)
+                            if(zelda.LinkObject.invincible)
                                 this.animations.play("movingSideWaysHurt");
                             else
                                 this.animations.play("movingSideWays");
@@ -354,7 +357,7 @@ zelda.LinkPrefab.prototype.update = function(){
                             zelda.LinkObject.lookingLeft = true;
                         }else if(this.cursors.right.isDown){
 
-                            if(zelda.LinkObject.hurt)
+                            if(zelda.LinkObject.invincible)
                                 this.animations.play("movingSideWaysHurt");
                             else
                                 this.animations.play("movingSideWays");
@@ -375,7 +378,7 @@ zelda.LinkPrefab.prototype.update = function(){
                             }
                             this.LinkCollider.body.velocity.y = -zelda.gameOptions.linkSpeed;
 
-                            if(zelda.LinkObject.hurt)
+                            if(zelda.LinkObject.invincible)
                                 this.animations.play("movingUpHurt");
                             else
                                 this.animations.play('movingUp');
@@ -387,7 +390,7 @@ zelda.LinkPrefab.prototype.update = function(){
                             this.scale.setTo(1);
                             this.LinkCollider.body.velocity.y = zelda.gameOptions.linkSpeed;
 
-                            if(zelda.LinkObject.hurt)
+                            if(zelda.LinkObject.invincible)
                                 this.animations.play("movingDownHurt");
                             else
                                 this.animations.play('movingDown');
@@ -400,17 +403,17 @@ zelda.LinkPrefab.prototype.update = function(){
                                 this.animations.stop();
                             }else if(zelda.LinkObject.lookingLeft){
                                 this.scale.x = -1;
-                                if(zelda.LinkObject.hurt)
+                                if(zelda.LinkObject.invincible)
                                     this.frame = 14;
                                 else 
                                     this.frame = 4;
                             }else if(zelda.LinkObject.lookingDown){
-                                if(zelda.LinkObject.hurt)
+                                if(zelda.LinkObject.invincible)
                                     this.frame = 14;
                                 else    
                                     this.frame = 0;
                             }else{
-                                if(zelda.LinkObject.hurt)
+                                if(zelda.LinkObject.invincible)
                                     this.frame = 18;
                                 else 
                                     this.frame = 4;
@@ -427,7 +430,7 @@ zelda.LinkPrefab.prototype.update = function(){
                     if(zelda.LinkObject.lookingDown){
                         this.scale.setTo(1);
 
-                        if(zelda.LinkObject.hurt)
+                        if(zelda.LinkObject.invincible)
                             this.frame = 23;
                         else    
                             this.frame = 9;
@@ -435,19 +438,19 @@ zelda.LinkPrefab.prototype.update = function(){
                     }else if(zelda.LinkObject.lookingUp){
                         this.scale.setTo(1);
 
-                        if(zelda.LinkObject.hurt)
+                        if(zelda.LinkObject.invincible)
                             this.frame = 24;
                         else
                             this.frame = 10;
 
                     }else if(zelda.LinkObject.lookingLeft){
                         this.scale.x = -1;
-                        if(zelda.LinkObject.hurt)
+                        if(zelda.LinkObject.invincible)
                             this.frame = 25;
                         else
                             this.frame = 11;
                     }else{this.scale.setTo(1);
-                        if(zelda.LinkObject.hurt)
+                        if(zelda.LinkObject.invincible)
                             this.frame = 25;
                         else
                             this.frame = 11;
@@ -740,6 +743,12 @@ zelda.LinkPrefab.makeLinkNotAttack = function(obj){
         zelda.LinkObject.calledNotHurt = false;
         zelda.LinkObject.hurt = false;
         
+    }
+    
+    zelda.LinkPrefab.NotInvicible = function(){
+        zelda.LinkObject.invincible = false;
+        zelda.LinkObject.calledNotInvincible = false;
+
     }
     
     zelda.LinkPrefab.switchLinkScale = function(obj){
