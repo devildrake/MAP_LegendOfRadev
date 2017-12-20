@@ -254,6 +254,10 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
                 zelda.Inventory.vela.destroy();
                 zelda.Inventory.CreateVela=false;
             }
+            if(zelda.Inventory.CreateBoomerang==true){
+                zelda.Inventory.boomerang.destroy();
+                zelda.Inventory.CreateBoomerang=false;
+            }
             //eliminar el seleccionador
             zelda.Inventory.selec.kill();
             //pintar la espada si la tienes
@@ -306,6 +310,7 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
                          zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
                          zelda.Inventory.PintObj.position.x=zelda.Inventory.PosObjBX;
                          zelda.Inventory.PintObj.position.y=zelda.Inventory.PosObjBY;
+                       
                     }
                     //cambiar el bool del invOn
                     if(zelda.Inventory.InvON!=false){

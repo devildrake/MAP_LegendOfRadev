@@ -695,6 +695,7 @@ zelda.Inventory={
         CreateVela:false,
         CreatePotion:false,
         CreateArco:false,
+        CreateBoomerang:false,
     
     //posicion del cursor en la array
     Cursor:[1,0,0,0,0,
@@ -870,6 +871,27 @@ zelda.Inventory={
                 
                 zelda.Inventory.CreateVela=true;
                 zelda.Inventory.array[i]="vela";
+               
+            }
+            
+            //boomerang
+             else if(zelda.Inventory.objects[0]==1 && this.CreateBoomerang==false){
+                //console.log(i)
+                 //console.log("vela")
+                
+                if(i<5){
+                    this.boomerang=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row1, "boomerang");
+                    this.boomerang.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.boomerang.position.y=zelda.game.camera.y+zelda.Inventory.row1;
+                }
+                else{
+                    this.boomerang=zelda.game.add.sprite(this.ArrayPosObjX[i],this.row2, "boomerang");
+                    this.boomerang.position.x=zelda.game.camera.x+zelda.Inventory.ArrayPosObjX[i];
+                    this.boomerang.position.y=zelda.game.camera.y+zelda.Inventory.row2;
+                }
+                
+                zelda.Inventory.CreateBoomerang=true;
+                zelda.Inventory.array[i]="boomerang";
                
             }
             
@@ -1078,6 +1100,12 @@ zelda.Inventory={
             }
             else if(zelda.Inventory.ObjectB=="potion"){
                 this.PintObj=zelda.game.add.sprite(0,0, "potion");
+                this.PintObj.position.x=this.PosObjBX;
+                this.PintObj.position.y=this.PosObjBY;
+                 zelda.Inventory.ObjPintado=true;
+            }
+            else if(zelda.Inventory.ObjectB=="boomerang"){
+                this.PintObj=zelda.game.add.sprite(0,0, "boomerang");
                 this.PintObj.position.x=this.PosObjBX;
                 this.PintObj.position.y=this.PosObjBY;
                  zelda.Inventory.ObjPintado=true;
