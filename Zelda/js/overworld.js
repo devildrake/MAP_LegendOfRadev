@@ -325,7 +325,7 @@ zelda.overworld = {
         
         //objeto b
         this.ObjBKey=zelda.game.input.keyboard.addKey(Phaser.Keyboard.R);
-        if( this.ObjBKey.isDown && this.ObjBKey.downDuration(1)){
+        if( this.ObjBKey.isDown && this.ObjBKey.downDuration(1) && zelda.Inventory.InvON==false){
             //console.log("o");
             zelda.Inventory.scene="overworld";
             zelda.Inventory.UseObjectB();
