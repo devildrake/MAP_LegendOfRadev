@@ -678,7 +678,7 @@ zelda.Inventory={
     
     hasSword: false,
     equippedSword: "Bronze",
-    bombs: 0,
+    bombs: 3,
     keys:0,
     rupies:0,
     ring:false,
@@ -1214,6 +1214,7 @@ zelda.Inventory={
                     zelda.Inventory.texto.align = "center";
                 if(zelda.Inventory.bombs==0){
                     zelda.Inventory.ObjectB="nothing";
+                    zelda.Inventory.objects[1]=0;
                     //borrar objB de la casilla de objeto B equipada
                     zelda.Inventory.PintObj.destroy();
                 }
