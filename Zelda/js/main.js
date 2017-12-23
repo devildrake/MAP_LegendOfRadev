@@ -139,6 +139,7 @@ zelda.secretLayout = {
     npcX: 8*16,
     //la Y para todos los objetos
     npcY: 4*16,
+	textSpeed: 80
 };
 
 //Objeto que existe para manejar los booleanos de comportamiento de las animaciones de link, pretendia hacer que
@@ -1669,7 +1670,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 
 
 //Escena que se pinta
-zelda.game.state.start("main");
+zelda.game.state.start("secret_room_E");
 
 //zelda.game.state.start("dungeon");
 
