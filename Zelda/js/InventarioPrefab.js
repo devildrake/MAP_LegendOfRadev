@@ -13,6 +13,13 @@ zelda.InventarioPrefab = function(game,x,y,level){
     this.game.add.existing(this);
     this.fixedToCamera = true;
     zelda.Inventory.startHUD();
+    zelda.Inventory.PintarObjB();
+    if(zelda.Inventory.ObjectB!="nothing"){
+            zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
+            zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
+            zelda.Inventory.PintObj.position.x=zelda.Inventory.PosObjBX;
+            zelda.Inventory.PintObj.position.y=zelda.Inventory.PosObjBY;
+       }
     //pintar mapa
     zelda.Inventory.mapa=zelda.game.add.sprite(zelda.game.camera.x+10,zelda.game.camera.y+10, "minimap");
     zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
@@ -244,7 +251,7 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
             for(var i=0;i< zelda.LinkObject.maxHearts;i++){
                 //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
                 zelda.Inventory.hearts[i].position.x=zelda.game.camera.x+175+10*i;
-                zelda.Inventory.hearts[i].position.y=zelda.game.camera.y+15;
+                zelda.Inventory.hearts[i].position.y=inventario.position.y+15;
             }
             for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                 if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
@@ -372,7 +379,7 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
             for(var i=0;i< zelda.LinkObject.maxHearts;i++){
                 //zelda.Inventory.hearts[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
                 zelda.Inventory.hearts[i].position.x=zelda.game.camera.x+175+10*i;
-                zelda.Inventory.hearts[i].position.y=zelda.game.camera.y+15;
+                zelda.Inventory.hearts[i].position.y=inventario.position.y+15;
             }
             for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                 if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
