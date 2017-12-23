@@ -31,6 +31,9 @@ zelda.sala_espada = {
         this.load.image("potion", "img/pocion_vida.png");
         this.load.image("corazon", "img/corazon.png");
         this.load.image("cursor","img/inventario/selector.png");
+        this.load.image("emptyHeart","img/emptycorazon.png");
+        this.load.image("minimap","img/Minimapa.png");
+        this.load.image("pointMap","img/pointMap.png");
         
         //this.load.image("arco","img/bow.png");
         this.load.image("shield","img/escudo.png");

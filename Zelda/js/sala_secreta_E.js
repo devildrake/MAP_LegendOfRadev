@@ -35,6 +35,9 @@ zelda.sala_secreta_E = {
         //this.load.image("arco","img/bow.png");
         this.load.image("shield","img/escudo.png");
 		this.load.image("rupia","img/rupia.png");
+        this.load.image("emptyHeart","img/emptycorazon.png");
+        this.load.image("minimap","img/Minimapa.png");
+        this.load.image("pointMap","img/pointMap.png");
 		
         //-----------------------------
 		//para el prefab de link

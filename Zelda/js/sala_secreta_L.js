@@ -35,6 +35,9 @@ zelda.sala_secreta_L = {
         this.load.spritesheet("sword", "img/Swords.png", 16,16);
         //this.load.image("arco","img/bow.png");
         //this.load.image("shield","img/escudo.png");
+        this.load.image("emptyHeart","img/emptycorazon.png");
+        this.load.image("minimap","img/Minimapa.png");
+        this.load.image("pointMap","img/pointMap.png");
         //-----------------------------
 		//para el prefab de link
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
