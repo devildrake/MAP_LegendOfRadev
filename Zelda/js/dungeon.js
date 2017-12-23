@@ -56,6 +56,7 @@ zelda.dungeon = {
 
     create:function(){
         zelda.LinkObject.DiedIn="dungeon";
+        this.pointBossAlive=false;
         this.music =  this.game.add.audio("DungeonMusic");
         this.music.loop = true;
         this.music.play();
@@ -151,7 +152,12 @@ zelda.dungeon = {
         this.pointCurrentY=0;
         this.point= zelda.game.add.sprite(zelda.game.camera.x+36+12*this.pointCurrentX,zelda.game.camera.y+38+8*this.pointCurrentY, "pointMap");
         this.pointBoss= zelda.game.add.sprite(0,0, "pointBoss");
-        
+        if(zelda.LinkObject.hasCompass == true){
+            zelda.dungeon.pointBoss= zelda.game.add.sprite(0,0, "pointBoss");
+            zelda.dungeon.pointBoss.position.x=zelda.game.camera.x+36+10.7*2;
+            zelda.dungeon.pointBoss.position.y=zelda.game.camera.y+38+8.5*-3;
+            zelda.dungeon.pointBossAlive=true;                     
+        }
         //zelda.game.camera.x+36+10.7*2,zelda.game.camera.y+38+8.5*-3
         this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
         this.playMusic = true;

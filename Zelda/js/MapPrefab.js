@@ -21,6 +21,14 @@ zelda.MapPrefab.prototype.update = function(){
         zelda.Inventory.mapa=zelda.game.add.sprite(zelda.game.camera.x+10,zelda.game.camera.y+10, "minimap");
         zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
         zelda.Inventory.mapa.position.y=zelda.game.camera.y+5;
+        if(zelda.dungeon.pointBossAlive){
+            zelda.dungeon.pointBoss.kill();
+            zelda.dungeon.pointBoss= zelda.game.add.sprite(0,0, "pointBoss");
+            zelda.dungeon.pointBoss.position.x=zelda.game.camera.x+36+10.7*2;
+            zelda.dungeon.pointBoss.position.y=zelda.game.camera.y+38+8.5*-3;
+        }
+        zelda.dungeon.point.kill();
+        zelda.dungeon.point = zelda.game.add.sprite(zelda.game.camera.x+36+12*zelda.dungeon.pointCurrentX,zelda.game.camera.y+38+(6*zelda.dungeon.pointCurrentY), "pointMap");
         map.kill();
         zelda.LinkPrefab.grabItemSound.play();
 

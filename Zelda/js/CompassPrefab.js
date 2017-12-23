@@ -18,9 +18,10 @@ zelda.CompassPrefab.prototype.update = function(){
     this.game.physics.arcade.overlap(this,this.level.linkInstance,
         function(compass,linkInstance){
         
+        zelda.dungeon.pointBoss= zelda.game.add.sprite(0,0, "pointBoss");
         zelda.dungeon.pointBoss.position.x=zelda.game.camera.x+36+10.7*2;
         zelda.dungeon.pointBoss.position.y=zelda.game.camera.y+38+8.5*-3;
-                            
+        zelda.dungeon.pointBossAlive=true;                     
         zelda.LinkObject.hasCompass = true;
         compass.kill();
         zelda.LinkPrefab.grabItemSound.play();
