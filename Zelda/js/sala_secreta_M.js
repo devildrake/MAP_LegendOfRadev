@@ -164,68 +164,82 @@ zelda.sala_secreta_M = {
         
         
 		if(!this.roomDone1&&zelda.LinkObject.currentZone==22 || !this.roomDone2&&zelda.LinkObject.currentZone==17){
+			//overlap con el escudo
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(link, escudo){
-				zelda.LinkPrefab.GrabObject();
-				escudo.y -= 8;
-				zelda.sala_secreta_M.llave.animations.play("despawn");
-				zelda.sala_secreta_M.vela.animations.play("despawn");
-				zelda.sala_secreta_M.npc.animations.play("despawn");
-				zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-					zelda.sala_secreta_M.llave.destroy();
-					zelda.sala_secreta_M.escudo.destroy();
-					zelda.sala_secreta_M.npc.destroy();
-					zelda.sala_secreta_M.vela.destroy();
-				});
-                zelda.sala_secreta_M.precio1.destroy();
-                zelda.sala_secreta_M.precio2.destroy();
-                zelda.sala_secreta_M.precio3.destroy();
-                zelda.sala_secreta_M.rupia.destroy();
-                zelda.sala_secreta_M.X.destroy();
-				if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
-				else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
-				zelda.Inventory.GetObject(12);
+				if(zelda.Inventory.rupies>=160){
+					zelda.LinkPrefab.GrabObject();
+					escudo.y -= 8;
+					zelda.sala_secreta_M.llave.animations.play("despawn");
+					zelda.sala_secreta_M.vela.animations.play("despawn");
+					zelda.sala_secreta_M.npc.animations.play("despawn");
+					zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+						zelda.sala_secreta_M.llave.destroy();
+						zelda.sala_secreta_M.escudo.destroy();
+						zelda.sala_secreta_M.npc.destroy();
+						zelda.sala_secreta_M.vela.destroy();
+					});
+					zelda.sala_secreta_M.precio1.destroy();
+					zelda.sala_secreta_M.precio2.destroy();
+					zelda.sala_secreta_M.precio3.destroy();
+					zelda.sala_secreta_M.rupia.destroy();
+					zelda.sala_secreta_M.X.destroy();
+					if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
+					else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
+					zelda.Inventory.GetObject(12);
+					zelda.Inventory.rupies-=160;
+				}
 			});
+			
+			//overlap con la llave
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.llave, function(link, llave){
-				zelda.LinkPrefab.GrabObject();
-				llave.y -= 8;
-				zelda.sala_secreta_M.escudo.animations.play("despawn");
-				zelda.sala_secreta_M.vela.animations.play("despawn");
-				zelda.sala_secreta_M.npc.animations.play("despawn");
-				zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-					zelda.sala_secreta_M.llave.destroy();
-					zelda.sala_secreta_M.escudo.destroy();
-					zelda.sala_secreta_M.npc.destroy();
-					zelda.sala_secreta_M.vela.destroy();
-				});
-                zelda.sala_secreta_M.precio1.destroy();
-                zelda.sala_secreta_M.precio2.destroy();
-                zelda.sala_secreta_M.precio3.destroy();
-                zelda.sala_secreta_M.rupia.destroy();
-                zelda.sala_secreta_M.X.destroy();
-				if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
-				else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
-				zelda.Inventory.GetObject(3);
+				if(zelda.Inventory.rupies>=100){
+					zelda.LinkPrefab.GrabObject();
+					llave.y -= 8;
+					zelda.sala_secreta_M.escudo.animations.play("despawn");
+					zelda.sala_secreta_M.vela.animations.play("despawn");
+					zelda.sala_secreta_M.npc.animations.play("despawn");
+					zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+						zelda.sala_secreta_M.llave.destroy();
+						zelda.sala_secreta_M.escudo.destroy();
+						zelda.sala_secreta_M.npc.destroy();
+						zelda.sala_secreta_M.vela.destroy();
+					});
+					zelda.sala_secreta_M.precio1.destroy();
+					zelda.sala_secreta_M.precio2.destroy();
+					zelda.sala_secreta_M.precio3.destroy();
+					zelda.sala_secreta_M.rupia.destroy();
+					zelda.sala_secreta_M.X.destroy();
+					if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
+					else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
+					zelda.Inventory.GetObject(3);
+					zelda.Inventory.rupies -= 100;
+				}
 			});
+			
+			//overlap con la vela
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.vela, function(link,vela){
-				zelda.LinkPrefab.GrabObject();
-				vela.y -= 8;
-				zelda.sala_secreta_M.escudo.animations.play("despawn");
-				zelda.sala_secreta_M.llave.animations.play("despawn");
-				zelda.sala_secreta_M.npc.animations.play("despawn");
-				zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-					zelda.sala_secreta_M.llave.destroy();
-					zelda.sala_secreta_M.escudo.destroy();
-					zelda.sala_secreta_M.npc.destroy();
-					zelda.sala_secreta_M.vela.destroy();
-				});
-                zelda.sala_secreta_M.precio1.destroy();
-                zelda.sala_secreta_M.precio2.destroy();
-                zelda.sala_secreta_M.precio3.destroy();
-                zelda.sala_secreta_M.rupia.destroy();
-                zelda.sala_secreta_M.X.destroy();
-				if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
-				else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
-				zelda.Inventory.GetObject(9);
+				if(zelda.Inventory.rupies>=60){
+					zelda.LinkPrefab.GrabObject();
+					vela.y -= 8;
+					zelda.sala_secreta_M.escudo.animations.play("despawn");
+					zelda.sala_secreta_M.llave.animations.play("despawn");
+					zelda.sala_secreta_M.npc.animations.play("despawn");
+					zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+						zelda.sala_secreta_M.llave.destroy();
+						zelda.sala_secreta_M.escudo.destroy();
+						zelda.sala_secreta_M.npc.destroy();
+						zelda.sala_secreta_M.vela.destroy();
+					});
+					zelda.sala_secreta_M.precio1.destroy();
+					zelda.sala_secreta_M.precio2.destroy();
+					zelda.sala_secreta_M.precio3.destroy();
+					zelda.sala_secreta_M.rupia.destroy();
+					zelda.sala_secreta_M.X.destroy();
+					if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
+					else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
+					zelda.Inventory.GetObject(9);
+					zelda.Inventory.rupies -= 60;
+				}
 			});
             
             //FUNCIONAMIENTO DE LOS TEXTOS

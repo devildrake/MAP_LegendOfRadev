@@ -152,65 +152,79 @@ zelda.sala_secreta_L = {
 		this.game.physics.arcade.collide(this.link.LinkCollider, this.fire2);
 		
 		if(!this.roomDone){
+			//overlap con el escudo
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(link, escudo){
-				zelda.LinkPrefab.GrabObject();
-				escudo.y -= 8;
-				zelda.sala_secreta_L.comida.animations.play("despawn");
-				zelda.sala_secreta_L.corazon.animations.play("despawn");
-				zelda.sala_secreta_L.npc.animations.play("despawn");
-				zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-					zelda.sala_secreta_L.comida.destroy();
-					zelda.sala_secreta_L.escudo.destroy();
-					zelda.sala_secreta_L.corazon.destroy();
-					zelda.sala_secreta_L.npc.destroy();
-				});
-                zelda.sala_secreta_L.precio1.destroy();
-                zelda.sala_secreta_L.precio2.destroy();
-                zelda.sala_secreta_L.precio3.destroy();
-                zelda.sala_secreta_L.rupia.destroy();
-                zelda.sala_secreta_L.X.destroy();
-				zelda.sala_secreta_L.roomDone = true;
-				zelda.Inventory.GetObject(12);
+				if(zelda.Inventory.rupies>=90){
+					zelda.LinkPrefab.GrabObject();
+					escudo.y -= 8;
+					zelda.sala_secreta_L.comida.animations.play("despawn");
+					zelda.sala_secreta_L.corazon.animations.play("despawn");
+					zelda.sala_secreta_L.npc.animations.play("despawn");
+					zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+						zelda.sala_secreta_L.comida.destroy();
+						zelda.sala_secreta_L.escudo.destroy();
+						zelda.sala_secreta_L.corazon.destroy();
+						zelda.sala_secreta_L.npc.destroy();
+					});
+					zelda.sala_secreta_L.precio1.destroy();
+					zelda.sala_secreta_L.precio2.destroy();
+					zelda.sala_secreta_L.precio3.destroy();
+					zelda.sala_secreta_L.rupia.destroy();
+					zelda.sala_secreta_L.X.destroy();
+					zelda.sala_secreta_L.roomDone = true;
+					zelda.Inventory.GetObject(12);
+					zelda.Inventory.rupies -= 90;
+				}
 			});
+			
+			//overlap con la comida
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.comida, function(link, comida){
-				zelda.LinkPrefab.GrabObject();
-				comida.y -= 8;
-				zelda.sala_secreta_L.escudo.animations.play("despawn");
-				zelda.sala_secreta_L.corazon.animations.play("despawn");
-				zelda.sala_secreta_L.npc.animations.play("despawn");
-				zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-					zelda.sala_secreta_L.comida.destroy();
-					zelda.sala_secreta_L.escudo.destroy();
-					zelda.sala_secreta_L.corazon.destroy();
-					zelda.sala_secreta_L.npc.destroy();
-				});
-                zelda.sala_secreta_L.precio1.destroy();
-                zelda.sala_secreta_L.precio2.destroy();
-                zelda.sala_secreta_L.precio3.destroy();
-                zelda.sala_secreta_L.rupia.destroy();
-                zelda.sala_secreta_L.X.destroy();
-				zelda.sala_secreta_L.roomDone = true;
-				zelda.Inventory.GetObject(14);
+				if(zelda.Inventory.rupies>=100){
+					zelda.LinkPrefab.GrabObject();
+					comida.y -= 8;
+					zelda.sala_secreta_L.escudo.animations.play("despawn");
+					zelda.sala_secreta_L.corazon.animations.play("despawn");
+					zelda.sala_secreta_L.npc.animations.play("despawn");
+					zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+						zelda.sala_secreta_L.comida.destroy();
+						zelda.sala_secreta_L.escudo.destroy();
+						zelda.sala_secreta_L.corazon.destroy();
+						zelda.sala_secreta_L.npc.destroy();
+					});
+					zelda.sala_secreta_L.precio1.destroy();
+					zelda.sala_secreta_L.precio2.destroy();
+					zelda.sala_secreta_L.precio3.destroy();
+					zelda.sala_secreta_L.rupia.destroy();
+					zelda.sala_secreta_L.X.destroy();
+					zelda.sala_secreta_L.roomDone = true;
+					zelda.Inventory.GetObject(14);
+					zelda.Inventory.rupies -= 100;
+				}
 			});
+			
+			//overlap con el corazon
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.corazon, function(link, corazon){
-				zelda.LinkPrefab.GrabObject();
-				corazon.y -= 8;
-				zelda.sala_secreta_L.comida.animations.play("despawn");
-				zelda.sala_secreta_L.escudo.animations.play("despawn");
-				zelda.sala_secreta_L.npc.animations.play("despawn");
-				zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-					zelda.sala_secreta_L.comida.destroy();
-					zelda.sala_secreta_L.escudo.destroy();
-					zelda.sala_secreta_L.corazon.destroy();
-					zelda.sala_secreta_L.npc.destroy();
-				});
-                zelda.sala_secreta_L.precio1.destroy();
-                zelda.sala_secreta_L.precio2.destroy();
-                zelda.sala_secreta_L.precio3.destroy();
-                zelda.sala_secreta_L.rupia.destroy();
-                zelda.sala_secreta_L.X.destroy();
-				zelda.sala_secreta_L.roomDone = true;
-				zelda.Inventory.GetObject(0);
+				if(zelda.Inventory.rupies>=10){
+					zelda.LinkPrefab.GrabObject();
+					corazon.y -= 8;
+					zelda.sala_secreta_L.comida.animations.play("despawn");
+					zelda.sala_secreta_L.escudo.animations.play("despawn");
+					zelda.sala_secreta_L.npc.animations.play("despawn");
+					zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+						zelda.sala_secreta_L.comida.destroy();
+						zelda.sala_secreta_L.escudo.destroy();
+						zelda.sala_secreta_L.corazon.destroy();
+						zelda.sala_secreta_L.npc.destroy();
+					});
+					zelda.sala_secreta_L.precio1.destroy();
+					zelda.sala_secreta_L.precio2.destroy();
+					zelda.sala_secreta_L.precio3.destroy();
+					zelda.sala_secreta_L.rupia.destroy();
+					zelda.sala_secreta_L.X.destroy();
+					zelda.sala_secreta_L.roomDone = true;
+					zelda.Inventory.GetObject(0);
+					zelda.Inventory.rupies -= 10;
+				}
 			});
             
             //FUNCIONAMIENTO DE LOS TEXTOS
