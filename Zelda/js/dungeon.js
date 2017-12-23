@@ -51,6 +51,7 @@ zelda.dungeon = {
         //mapa
         this.load.image("minimap","img/Dungeon/Minimapa.png");
         this.load.image("pointMap","img/pointMap.png");
+        this.load.image("pointBoss","img/pointBoss.png");
     },
 
     create:function(){
@@ -148,6 +149,9 @@ zelda.dungeon = {
         this.pointCurrentX=0;
         this.pointCurrentY=0;
         this.point= zelda.game.add.sprite(zelda.game.camera.x+36+12*this.pointCurrentX,zelda.game.camera.y+38+8*this.pointCurrentY, "pointMap");
+        this.pointBoss= zelda.game.add.sprite(0,0, "pointBoss");
+        
+        //zelda.game.camera.x+36+10.7*2,zelda.game.camera.y+38+8.5*-3
         this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
         this.playMusic = true;
         
@@ -752,6 +756,10 @@ zelda.dungeon = {
                             this.inventario.movingCamera=true;
                             zelda.dungeon.point.position.x=zelda.game.camera.x+36+(12*zelda.dungeon.pointCurrentX);
                             zelda.dungeon.point.position.y=zelda.game.camera.y+38+(6*zelda.dungeon.pointCurrentY);
+                            if(zelda.LinkObject.hasCompass){
+                                            zelda.dungeon.pointBoss.position.x=zelda.game.camera.x+36+10.7*2;
+                                            zelda.dungeon.pointBoss.position.y=zelda.game.camera.y+38+8.5*-3;
+                            }
 
         }
         //CUANDO LLEGA a la posición destinada se pone en false setBorders para ajustar los bordes de pantalla a la nueva escena
