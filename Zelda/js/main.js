@@ -74,7 +74,8 @@ zelda.gameOptions = {
             events3:zelda.dungeonEvents.events[2],
             events4:zelda.dungeonEvents.events[3],
             events5:zelda.dungeonEvents.events[4],
-            events6:zelda.dungeonEvents.events[5]
+            events6:zelda.dungeonEvents.events[5],
+            events7:zelda.dungeonEvents.events[6]
             
             
             
@@ -136,6 +137,7 @@ zelda.gameOptions = {
             zelda.dungeonEvents.events[3]=this.obj.events4;
             zelda.dungeonEvents.events[4]=this.obj.events5;
             zelda.dungeonEvents.events[5]=this.obj.events6;
+            zelda.dungeonEvents.events[6]=this.obj.events7;
         }
         
         
