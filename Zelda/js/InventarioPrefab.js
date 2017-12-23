@@ -17,6 +17,15 @@ zelda.InventarioPrefab = function(game,x,y,level){
     zelda.Inventory.mapa=zelda.game.add.sprite(zelda.game.camera.x+10,zelda.game.camera.y+10, "minimap");
     zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
     zelda.Inventory.mapa.position.y=zelda.game.camera.y+5;
+    if(zelda.Inventory.HasSword &&zelda.Inventory.equippedSword=="Bronze"){
+        zelda.Inventory.sword = zelda.game.add.sprite(150+20, 190, "sword", 1);
+        zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+        zelda.Inventory.sword.position.y=zelda.game.camera.y+27;
+        zelda.Inventory.sword.anchor.setTo(.5);
+        zelda.Inventory.sword.scale.setTo(1,-1);
+        //zelda.Inventory.HasSword=false;
+        //zelda.Inventory.equippedSword="";
+    }
     //for para pintar los corazones
     for(var i=0;i< zelda.LinkObject.maxHearts;i++){
             zelda.Inventory.hearts[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
@@ -217,7 +226,7 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
         zelda.Inventory.sword.anchor.setTo(.5);
         zelda.Inventory.sword.scale.setTo(1,-1);
         //zelda.Inventory.HasSword=false;
-        zelda.Inventory.equippedSword="";
+        //zelda.Inventory.equippedSword="";
     }
     //comprobar si el inventario se esta moviendo
     if(zelda.gameOptions.InventoryScroll != 0){
@@ -389,7 +398,7 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
                   zelda.Inventory.texto.y=inventario.position.y+10; 
                 zelda.Inventory.mapa.position.y+=4;
                   if(zelda.Inventory.ObjectB!="nothing"){
-                zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
+                    zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
                      zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
                      zelda.Inventory.PintObj.position.x=zelda.Inventory.PosObjBX;
                      zelda.Inventory.PintObj.position.y=inventario.position.y;
