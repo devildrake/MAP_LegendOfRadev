@@ -55,6 +55,7 @@ zelda.dungeon = {
     },
 
     create:function(){
+        zelda.LinkObject.DiedIn="dungeon";
         this.music =  this.game.add.audio("DungeonMusic");
         this.music.loop = true;
         this.music.play();
@@ -127,7 +128,7 @@ zelda.dungeon = {
 		//pintado de las puertas de la dungeon.
         this.linkInstance = new zelda.LinkPrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16,this);
                 //this.SetCamera();
-
+        
 		this.drawDoors();
         
 
@@ -143,7 +144,7 @@ zelda.dungeon = {
         this.game.add.existing(this.triforce);
         
         //guardar en que escena esta por si muere
-        zelda.LinkObject.DiedIn="dungeon";
+        
         
         //iniciar punto en mapa
         this.pointCurrentX=0;

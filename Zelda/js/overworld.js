@@ -110,6 +110,7 @@ zelda.overworld = {
 
     create:function(){
         
+        zelda.LinkObject.DiedIn="overworld";
         this.music = this.add.audio("OverWorldMusic");
         this.music.play();
         this.music.loop = true;
@@ -260,7 +261,7 @@ zelda.overworld = {
         this.linkInstance = new zelda.LinkPrefab(this.game,zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY,this);
 		
         //guardar en que escena esta por si muere
-        zelda.LinkObject.DiedIn="overworld";
+        
 		
 		//evento para quitar la pausa
 		this.game.input.onDown.add(zelda.gameOptions.Unpause);

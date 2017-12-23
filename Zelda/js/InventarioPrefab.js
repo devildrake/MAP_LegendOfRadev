@@ -21,9 +21,12 @@ zelda.InventarioPrefab = function(game,x,y,level){
             zelda.Inventory.PintObj.position.y=zelda.Inventory.PosObjBY;
        }
     //pintar mapa
-    zelda.Inventory.mapa=zelda.game.add.sprite(zelda.game.camera.x+10,zelda.game.camera.y+10, "minimap");
-    zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
-    zelda.Inventory.mapa.position.y=zelda.game.camera.y+5;
+    
+    if(zelda.LinkObject.hasMap == true || zelda.LinkObject.DiedIn!="dungeon"){
+        zelda.Inventory.mapa=zelda.game.add.sprite(zelda.game.camera.x+10,zelda.game.camera.y+10, "minimap");
+        zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
+        zelda.Inventory.mapa.position.y=zelda.game.camera.y+5;
+    }
     if(zelda.Inventory.HasSword &&zelda.Inventory.equippedSword=="Bronze"){
         zelda.Inventory.sword = zelda.game.add.sprite(150+20, 190, "sword", 1);
         zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
@@ -188,8 +191,10 @@ zelda.InventarioPrefab = function(game,x,y,level){
         //y cuando digo aqui no me refiero al for
         zelda.Inventory.texto.x=zelda.game.camera.x+104;
         zelda.Inventory.texto.y=zelda.game.camera.y+10;
-        zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
-        zelda.Inventory.mapa.position.y=zelda.game.camera.y+5;
+        if(zelda.LinkObject.hasMap == true || zelda.LinkObject.DiedIn!="dungeon"){
+            zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
+            zelda.Inventory.mapa.position.y=zelda.game.camera.y+5;
+        }
         
         
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
@@ -262,7 +267,9 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
             inventario.position.y-=4;
             inventario.position.y+=-zelda.game.camera.y;
             inventario.position.x+=-zelda.game.camera.x;
-            zelda.Inventory.mapa.position.y-=4;
+            if(zelda.LinkObject.hasMap == true || zelda.LinkObject.DiedIn!="dungeon"){
+                zelda.Inventory.mapa.position.y-=4;
+            }
             inventario.fixedToCamera = true;
             //console.log(this.inventario.position.y);
            
@@ -337,8 +344,10 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
                 console.log("cerrado");
                 zelda.Inventory.ScrollingInventory = false;
                 zelda.Inventory.selec.destroy();
-                  zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
-                zelda.Inventory.mapa.position.y=zelda.game.camera.y+5; 
+                if(zelda.LinkObject.hasMap == true || zelda.LinkObject.DiedIn!="dungeon"){
+                    zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
+                    zelda.Inventory.mapa.position.y=zelda.game.camera.y+5; 
+                }
                 //"pintar" los objetos junto el inventario q sube y baja, pero los pinta debajo por x motivos
                 for(var i=0;i< zelda.LinkObject.maxHearts;i++){
                     //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
@@ -422,7 +431,9 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
                 
                  zelda.Inventory.texto.x=zelda.game.camera.x+104;
                   zelda.Inventory.texto.y=inventario.position.y+10; 
-                zelda.Inventory.mapa.position.y+=4;
+                if(zelda.LinkObject.hasMap == true || zelda.LinkObject.DiedIn!="dungeon"){
+                    zelda.Inventory.mapa.position.y+=4;
+                }
                   if(zelda.Inventory.ObjectB!="nothing"){
                     zelda.Inventory.PosObjBX=zelda.game.camera.x+124;
                      zelda.Inventory.PosObjBY=zelda.game.camera.y+18;
@@ -435,8 +446,10 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
             if(inventario.position.y>=0){
                 zelda.gameOptions.InventoryScroll=0;
                 console.log("abierto");
-                zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
-                zelda.Inventory.mapa.position.y=zelda.game.camera.y+180;
+                if(zelda.LinkObject.hasMap == true || zelda.LinkObject.DiedIn!="dungeon"){
+                    zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
+                    zelda.Inventory.mapa.position.y=zelda.game.camera.y+180;
+                }
                 if(zelda.Inventory.HasSword){
                     zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
                     zelda.Inventory.sword.position.y=zelda.game.camera.y+202;
