@@ -175,33 +175,33 @@ zelda.dungeon = {
     
     ProjectileBorderColision:function(){
         this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraBot,function(){
-        zelda.overworld.linkInstance.projectile.Alive = false;
-        zelda.overworld.linkInstance.projectile.kill();    
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
         });
         this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraLeft,function(){
-        zelda.overworld.linkInstance.projectile.Alive = false;
-        zelda.overworld.linkInstance.projectile.kill();    
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
         });
         this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraTop,function(){
-        zelda.overworld.linkInstance.projectile.Alive = false;
-        zelda.overworld.linkInstance.projectile.kill();    
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
         });
         this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraRight,function(){
-        zelda.overworld.linkInstance.projectile.Alive = false;
-        zelda.overworld.linkInstance.projectile.kill();    
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
         });
         
         this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraBot,function(){
-        zelda.overworld.linkInstance.boomerang.returning = true;
+        zelda.dungeon.linkInstance.boomerang.returning = true;
         });
         this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraLeft,function(){
-        zelda.overworld.linkInstance.boomerang.returning = true;
+        zelda.dungeon.linkInstance.boomerang.returning = true;
         });
         this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraTop,function(){
-        zelda.overworld.linkInstance.boomerang.returning = true;
+        zelda.dungeon.linkInstance.boomerang.returning = true;
         });
         this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraRight,function(){
-        zelda.overworld.linkInstance.boomerang.returning = true;
+        zelda.dungeon.linkInstance.boomerang.returning = true;
         });
         
     },
