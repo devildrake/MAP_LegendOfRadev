@@ -1328,6 +1328,12 @@ zelda.Inventory={
                         this.PintObj.destroy();
             }
 
+        }else if(zelda.Inventory.ObjectB=="boomerang"){
+            if(zelda.Inventory.scene=="overworld"){
+                zelda.LinkPrefab.throwBoomerang(zelda.overworld.linkInstance);
+            }else{
+                zelda.LinkPrefab.throwBoomerang(zelda.dungeon.linkInstance);
+            }
         }
     
 }

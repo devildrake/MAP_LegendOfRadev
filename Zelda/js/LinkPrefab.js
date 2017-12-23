@@ -49,7 +49,7 @@ zelda.LinkPrefab = function(game,x,y,level){
     this.boomerang.animations.add("Roll",[0,1,2,3,4,5,6,7],15,true);
     this.boomerang.anchor.setTo(0.5);
     this.boomerang.Alive = false;
-    this.boomerang.maxDistance = 30;
+    this.boomerang.maxDistance = 70;
     this.boomerang.destinedPosX = 0;
     this.boomerang.destinedPosY = 0;
     this.boomerang.returning = false;
@@ -514,15 +514,45 @@ zelda.LinkPrefab.prototype.update = function(){
                 
                 if(this.boomerang.Alive){
                     if(this.boomerang.returning){
-                        this.boomerang.body.velocity.x = (this.body.position.x - this.boomerang.body.position.x)/10;
-                        this.boomerang.body.velocity.y = (this.body.position.y - this.boomerang.body.position.y)/10;
+                        this.boomerang.body.velocity.x = (this.body.position.x - this.boomerang.body.position.x);
+                        this.boomerang.body.velocity.y = (this.body.position.y - this.boomerang.body.position.y);
 
-                     this.game.physics.arcade.collide(this,this.boomerang,
+                        var magnitude = (this.body.position.x - this.boomerang.body.position.x) * (this.body.position.x - this.boomerang.body.position.x) + (this.body.position.y - this.boomerang.body.position.y)* (this.body.position.y - this.boomerang.body.position.y);
+                        
+                        magnitude = Math.sqrt(magnitude);
+                        this.boomerang.body.velocity.x = this.boomerang.body.velocity.x/magnitude * 100;
+                        this.boomerang.body.velocity.y = this.boomerang.body.velocity.y/magnitude * 100;
+
+                        
+                     this.game.physics.arcade.overlap(this,this.boomerang,
                         function(link,boomerang){
                          boomerang.Alive = false;
                          boomerang.kill();
-                        
+                        link.body.velocity.setTo(0);
+                         link.LinkCollider.body.velocity.setTo(0);
                         } );
+                    }else{
+                        if(this.boomerang.going=="Up"){
+                            if(this.boomerang.position.y<this.boomerang.destinedPosY){
+                                console.log(this.boomerang.destinedPosY + ", " + this.boomerang.position.y);
+                                this.boomerang.returning = true;
+                            }
+                        }else if(this.boomerang.going=="Down"){
+                            if(this.boomerang.position.y>this.boomerang.destinedPosY){
+                                this.boomerang.returning = true;
+                            }
+                        }else if(this.boomerang.going=="Right"){
+                            if(this.boomerang.position.x>this.boomerang.destinedPosX){
+                                this.boomerang.returning = true;
+                            }
+                        }else if(this.boomerang.going=="Left"){
+                            if(this.boomerang.position.x<this.boomerang.destinedPosX){
+                                this.boomerang.returning = true;
+                            }
+                        }
+                        
+                        
+
                     }
                 }
                 
@@ -678,44 +708,80 @@ zelda.LinkPrefab.createSword = function(obj){
 }
 
 zelda.LinkPrefab.throwBoomerang = function(obj){
+    
+    
+    /*
+    this.animations.add("movingDown", [0,1], 5, true);
+	this.animations.add("movingUp", [2], 5, true);
+	this.animations.add("movingSideWays", [3,4],5,true);
+	this.animations.add("movingDownHurt", [14,0,14,0,15,1,15,1], 20, true);
+	this.animations.add("movingUpHurt", [16,2,16,2], 20, true);
+	this.animations.add("movingSideWaysHurt", [17,3,17,3,18,4,18,4],20,true); 
+    
+    */
+    
     	if(!obj.boomerang.Alive){
-            if(obj.frame ==9||obj.frame==23){
+            console.log("A");
+            
+            if(zelda.LinkObject.lookingDown){
             //DOWN
                 obj.boomerang.frame = 0;
-                obj.boomerang.destinedPosX = obj.position.x;
-                obj.boomerang.destinedPosY = obj.position.y+obj.boomerang.maxDistance;
                 obj.boomerang.reset(obj.position.x+2,obj.position.y+12);
-                
+                obj.boomerang.destinedPosX = obj.body.position.x+2;
+                obj.boomerang.destinedPosY = obj.body.position.y+24+obj.boomerang.maxDistance;
+                obj.boomerang.going = "Down";
+                console.log("B");
 
             }
             // up
-            else if(obj.frame == 10 || obj.frame==24){
+            else if(zelda.LinkObject.lookingUp){
                 obj.boomerang.frame = 0;
-                obj.boomerang.destinedPosX = obj.position.x;
-                obj.boomerang.destinedPosY = obj.position.y-obj.boomerang.maxDistance;
                 obj.boomerang.reset(obj.position.x-2,obj.position.y-12);
+                obj.boomerang.destinedPosX = obj.body.position.x-2;
+                obj.boomerang.destinedPosY = obj.body.position.y-12-obj.boomerang.maxDistance;
+                obj.boomerang.going = "Up";
+            console.log("C");
 
             }
-
-            else if(obj.frame == 11||obj.frame==25){
-                if(zelda.LinkObject.lookingLeft){                    
+            else if(zelda.LinkObject.lookingLeft){                    
                 obj.boomerang.frame = 0;
-                obj.boomerang.destinedPosX = obj.position.x -obj.boomerang.maxDistance;
-                obj.boomerang.destinedPosY = obj.position.y;
                 obj.boomerang.reset(obj.position.x-11,obj.position.y+2);
+                obj.boomerang.destinedPosX = obj.body.position.x-11 -obj.boomerang.maxDistance;
+                obj.boomerang.destinedPosY = obj.body.position.y+2;
+                obj.boomerang.going = "Left";
+
+            console.log("D");
 
                 }
-                else{
+            
+            else{
                 obj.boomerang.frame = 0;
-                obj.boomerang.destinedPosX = obj.position.x +obj.boomerang.maxDistance;
-                obj.boomerang.destinedPosY = obj.position.y;
                 obj.boomerang.reset(obj.position.x+11,obj.position.y+2);
-
-                }
+                obj.boomerang.destinedPosX = obj.body.position.x+22 +obj.boomerang.maxDistance;
+                obj.boomerang.destinedPosY = obj.body.position.y+2;
+                obj.boomerang.going = "Right";
+                console.log("E");
             }
         obj.boomerang.Alive = true;
         obj.boomerang.animations.play("Roll");
         obj.boomerang.returning = false;
+        obj.boomerang.body.velocity.x = (obj.boomerang.destinedPosX - obj.boomerang.body.position.x);
+        obj.boomerang.body.velocity.y = (obj.boomerang.destinedPosY - obj.boomerang.body.position.y);
+            
+            
+                        var magnitude = (obj.boomerang.body.velocity.x) * (obj.boomerang.body.velocity.x) + (obj.boomerang.body.velocity.y)* (obj.boomerang.body.velocity.y);
+                        
+                        magnitude = Math.sqrt(magnitude);
+            
+                obj.boomerang.body.velocity.x = obj.boomerang.body.velocity.x /magnitude * 100;
+                obj.boomerang.body.velocity.y = obj.boomerang.body.velocity.y /magnitude * 100;
+
+                        console.log("F");
+
+        }else{
+            console.log(obj.boomerang.destinedPosX);
+            console.log(obj.boomerang.destinedPosY - obj.boomerang.position.y);
+
         }
 }
 

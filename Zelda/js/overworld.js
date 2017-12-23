@@ -943,6 +943,20 @@ zelda.overworld = {
         zelda.overworld.linkInstance.projectile.Alive = false;
         zelda.overworld.linkInstance.projectile.kill();    
         });
+        
+        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraBot,function(){
+        zelda.overworld.linkInstance.boomerang.returning = true;
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraLeft,function(){
+        zelda.overworld.linkInstance.boomerang.returning = true;
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraTop,function(){
+        zelda.overworld.linkInstance.boomerang.returning = true;
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraRight,function(){
+        zelda.overworld.linkInstance.boomerang.returning = true;
+        });
+        
     },
     
     loadHearts:function(){

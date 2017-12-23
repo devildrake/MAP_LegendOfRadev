@@ -186,11 +186,52 @@ zelda.GelPrefab.prototype.update = function(){
                     }else{
                         this.hurtBySword = false;
                     }
+                
+                    if(this.level.linkInstance.boomerang.Alive){
+                        if(!this.level.linkInstance.boomerang.returning){
+                        this.game.physics.arcade.overlap(this,this.level.linkInstance.boomerang,function(npc,projectile){
+                            projectile.returning =  true;
+
+                            if(!npc.hurt){
+                            npc.lives--;
+                            console.log(npc.lives);
+                                npc.hurtSound.play();
+
+                            }
+                            if(npc.lives==0){
+                                //npc.kill();
+                                //npc.Alive = false;
+
+                                zelda.AIMethods.Die(npc);
+                                console.log(zelda.enemySpawns.zones[npc.currentZone]);
+                            }else{
+                                    npc.previousVelocity = npc.body.velocity;
+                                npc.hurt = true;
+                                npc.calledNotHurt = false;
+
+                                var whereTo = "Right";
+
+                                if(projectile.body.velocity.x<0){
+                                    whereTo = "Left";
+                                }else if(projectile.body.velocity.y<0){
+                                    whereTo = "Up";
+                                }                       
+                                else if(projectile.body.velocity.y>0){
+                                    whereTo = "Down";
+                                }
+
+
+                                npc.previousVelocity = npc.body.velocity;
+                                zelda.AIMethods.GetHurt(npc,whereTo);
+                            }
+                        });
+                    }
+                }
 
                 if(this.level.linkInstance.projectile.Alive){
                         this.game.physics.arcade.overlap(this,this.level.linkInstance.projectile,function(npc,projectile){
-                            npc.level.linkInstance.projectile.kill();
-                            npc.level.linkInstance.projectile.Alive = false;
+                           // npc.level.linkInstance.projectile.kill();
+                           // npc.level.linkInstance.projectile.Alive = false;
 
                             if(!npc.hurt){
                             npc.lives--;
