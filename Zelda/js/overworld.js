@@ -81,6 +81,9 @@ zelda.overworld = {
         this.load.spritesheet("FireSpriteSheet","img/fuego.png",16,16);
         this.load.spritesheet("WallMaster","img/WallMasterSpriteSheet.png",16,16);
         this.load.audio("SecretFound","sounds/Music/FoundASecret.mp3");
+        this.load.image("Compass","img/Compass.png");
+        this.load.image("Map","img/Map.png");
+
         this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
         
         //sprites para bloquear las entradas secretas
@@ -264,6 +267,12 @@ zelda.overworld = {
 
         //this.aquamentus = new zelda.AquamentusPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.aquamentus);
+                
+        
+        //this.compass = new zelda.CompassPrefab(this.game,640,850,this);
+        //this.game.add.existing(this.compass);
+        this.map = new zelda.MapPrefab(this.game,640,850,this);
+        this.game.add.existing(this.map);
         
         this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
         
