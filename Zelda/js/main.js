@@ -100,7 +100,7 @@ zelda.gameOptions = {
         }
         else{
 			zelda.LinkObject.currentHearts=this.obj.Lifes;
-            zelda.LinkObject.maxHearts=this.obj.maxLives:;
+            zelda.LinkObject.maxHearts=this.obj.maxLives;
 			zelda.Inventory.Bombs=this.obj.Bombs;
 			zelda.Inventory.keys=this.obj.keys;
 			zelda.Inventory.rupies=this.obj.rupies;
