@@ -18,6 +18,11 @@ zelda.InventarioPrefab = function(game,x,y,level){
     zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
     zelda.Inventory.mapa.position.y=zelda.game.camera.y+5;
     //for para pintar los corazones
+    for(var i=0;i< zelda.LinkObject.maxHearts;i++){
+            zelda.Inventory.hearts[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
+            zelda.Inventory.hearts[i].position.x=zelda.game.camera.x+175+10*i;
+            zelda.Inventory.hearts[i].position.y=zelda.game.camera.y+15;
+     }
     for(var i=0;i< zelda.LinkObject.currentHearts;i++){
         if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
             zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
@@ -51,11 +56,16 @@ zelda.InventarioPrefab = function(game,x,y,level){
         
     zelda.InventarioPrefab.ScrollInventario(this);
     //quitar corazon cuando pierde uno
-    if(zelda.LinkObject.hurt && zelda.LinkObject.currentHearts!=zelda.LinkObject.maxHearts){        
+    if(zelda.LinkObject.hurt && zelda.LinkObject.currentHearts!=zelda.LinkObject.maxHearts){
+        for(var i=0;i< zelda.LinkObject.maxHearts;i++){
+            //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
+            zelda.Inventory.hearts[i].position.x=zelda.game.camera.x+175+10*i;
+            zelda.Inventory.hearts[i].position.y=zelda.game.camera.y+15;
+        }
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
-            zelda.Inventory.heart[i].kill();
+            zelda.Inventory.heart[i].destroy();
             if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
-                zelda.Inventory.heart[i+1].kill();
+                zelda.Inventory.heart[i+1].destroy();
                 zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
                 zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
                 zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
@@ -74,6 +84,11 @@ zelda.InventarioPrefab = function(game,x,y,level){
     }
     //restablecer corazon cuando recoge uno
     if(zelda.Inventory.healed==true && zelda.LinkObject.currentHearts!=zelda.LinkObject.maxHearts){
+        for(var i=0;i< zelda.LinkObject.maxHearts;i++){
+            //zelda.Inventory.hearts[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
+            zelda.Inventory.hearts[i].position.x=zelda.game.camera.x+175+10*i;
+            zelda.Inventory.hearts[i].position.y=zelda.game.camera.y+15;
+        }
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
             zelda.Inventory.heart[i].kill();
             if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
@@ -101,6 +116,11 @@ zelda.InventarioPrefab = function(game,x,y,level){
     }
     //volver a pintar los corazones si te curas
     if(zelda.Inventory.healed==true && zelda.LinkObject.currentHearts==zelda.LinkObject.maxHearts){
+        for(var i=0;i< zelda.LinkObject.maxHearts;i++){
+            //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
+            zelda.Inventory.hearts[i].position.x=zelda.game.camera.x+175+10*i;
+            zelda.Inventory.hearts[i].position.y=zelda.game.camera.y+15;
+        }
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
             zelda.Inventory.heart[i].kill();
             zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "corazon");
@@ -149,6 +169,11 @@ zelda.InventarioPrefab = function(game,x,y,level){
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
             zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
             zelda.Inventory.heart[i].position.y=zelda.game.camera.y+15;
+        }
+        for(var i=0;i< zelda.LinkObject.maxHearts;i++){
+            //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
+            zelda.Inventory.hearts[i].position.x=zelda.game.camera.x+175+10*i;
+            zelda.Inventory.hearts[i].position.y=zelda.game.camera.y+15;
         }
         //pintar corazones otra vez ahora q la camara se movio
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
@@ -207,6 +232,11 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
             //console.log(this.inventario.position.y);
            
             //"pintar" los objetos junto el inventario q sube y baja, pero los pinta debajo por x motivos
+            for(var i=0;i< zelda.LinkObject.maxHearts;i++){
+                //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
+                zelda.Inventory.hearts[i].position.x=zelda.game.camera.x+175+10*i;
+                zelda.Inventory.hearts[i].position.y=zelda.game.camera.y+15;
+            }
             for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                 if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
                     zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;
@@ -275,6 +305,11 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
                   zelda.Inventory.mapa.position.x=zelda.game.camera.x+10;
                 zelda.Inventory.mapa.position.y=zelda.game.camera.y+5; 
                 //"pintar" los objetos junto el inventario q sube y baja, pero los pinta debajo por x motivos
+                for(var i=0;i< zelda.LinkObject.maxHearts;i++){
+                    //zelda.Inventory.heart[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
+                    zelda.Inventory.hearts[i].position.x=zelda.game.camera.x+175+10*i;
+                    zelda.Inventory.hearts[i].position.y=zelda.game.camera.y+15;
+                }
                 for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                     //mover corazones otra vez
                     if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
@@ -325,6 +360,11 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
             inventario.position.x+=-zelda.game.camera.x;
             inventario.fixedToCamera = true;  
             //mas movimiento de corazones
+            for(var i=0;i< zelda.LinkObject.maxHearts;i++){
+                //zelda.Inventory.hearts[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
+                zelda.Inventory.hearts[i].position.x=zelda.game.camera.x+175+10*i;
+                zelda.Inventory.hearts[i].position.y=zelda.game.camera.y+15;
+            }
             for(var i=0;i< zelda.LinkObject.currentHearts;i++){
                 if(zelda.LinkObject.currentHearts==1 || zelda.LinkObject.currentHearts==2 || zelda.LinkObject.currentHearts==3 || zelda.LinkObject.currentHearts==4 || zelda.LinkObject.currentHearts==5){
                     zelda.Inventory.heart[i].position.x=zelda.game.camera.x+175+10*i;

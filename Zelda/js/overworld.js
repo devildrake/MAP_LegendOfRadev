@@ -40,6 +40,7 @@ zelda.overworld = {
         this.load.image("Heart","img/corazon.png");
         this.load.image("boomerang","img/boomerang_magic.png");
         this.load.image("HalfHeart","img/mediocorazon.png");
+        this.load.image("emptyHeart","img/emptycorazon.png");
         this.load.spritesheet("HeartSpriteSheet","img/HeartSpriteSheet.png",16,16);
         this.load.spritesheet("Tektite","img/TektiteSpriteSheet.png",16,16);
         this.load.spritesheet("Leever","img/LeeverSpriteSheet.png",16,16);

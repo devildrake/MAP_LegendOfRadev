@@ -809,6 +809,7 @@ zelda.Inventory={
        startHUD:function(){
            
             this.heart=[zelda.LinkObject.maxHearts];
+            this.hearts=[zelda.LinkObject.maxHearts];
             this.str  = "X"+zelda.Inventory.rupies+"\n"+"\n"+"X"+zelda.Inventory.keys+"\n"+"X"+zelda.Inventory.bombs+"\n";
             this.strToPrint = "";
             this.strCount = 0;
@@ -1670,7 +1671,7 @@ zelda.game.state.add("dungeon", zelda.dungeon);
 
 
 //Escena que se pinta
-zelda.game.state.start("secret_room_E");
+zelda.game.state.start("main");
 
 //zelda.game.state.start("dungeon");
 

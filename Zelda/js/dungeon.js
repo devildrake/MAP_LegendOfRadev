@@ -25,6 +25,7 @@ zelda.dungeon = {
         this.load.image("potion", "img/pocion_vida.png");
         this.load.image("corazon", "img/corazon.png");
         this.load.image("HalfHeart","img/mediocorazon.png");
+        this.load.image("emptyHeart","img/emptycorazon.png");
         this.load.image("cursor","img/inventario/selector.png");
         this.load.image("inventario", "img/inventario.png");
         this.load.image("corazon", "img/corazon.png");
