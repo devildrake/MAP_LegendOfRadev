@@ -678,7 +678,7 @@ zelda.Inventory={
     
     hasSword: false,
     equippedSword: "Bronze",
-    bombs: 3,
+    bombs: 0,
     keys:0,
     rupies:0,
     ring:false,
