@@ -16,7 +16,12 @@ zelda.AquamentusPrefab = function(game,x,y,type,level,initSpeed,zone,posInArray)
     this.spawned  = false;
     this.calledSpawn = false;
     this.initialSpeed = initSpeed;
-    this.hurtSound = this.game.add.audio("EnemyHurt");
+    this.hurtSound = this.game.add.audio("boss_hit");
+    
+    this.scream1 = this.game.add.audio("BossScream1");
+    this.scream2 = this.game.add.audio("BossScream2");
+    this.scream3 = this.game.add.audio("BossScream3");
+
     
     this.originalPos = new Phaser.Point(x,y);
     
@@ -113,6 +118,21 @@ zelda.AquamentusPrefab.prototype.constructor = zelda.AquamentusPrefab;
 zelda.AquamentusPrefab.prototype.update = function(){
     if(this.spawned){
         if(this.Alive){
+            
+            if(!this.scream1.isPlaying&&!this.scream2.isPlaying&&!this.scream3.isPlaying){
+                var randomVal = zelda.randomDataGen.between(0,400);
+                
+                    if(randomVal==1){
+                        this.scream1.play();
+                    }else if(randomVal==2){
+                        this.scream2.play();
+                    }else if(randomVal==3){
+                        this.scream3.play();
+                    }
+                
+            }
+            
+            
             if(this.lives==0){
             this.heartContainer = new zelda.HeartContainerPrefab(this.game,this.body.position.x,this.body.position.y,this.level);
             this.game.add.existing(this.heartContainer);
@@ -521,6 +541,7 @@ zelda.AquamentusPrefab.prototype.update = function(){
         }
         }
     else{
+        this.scream1.play();
         zelda.AIMethods.Spawning(this,true);
     }
     this.hitBox.body.position.x = this.body.position.x+4;

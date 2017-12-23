@@ -77,6 +77,12 @@ zelda.overworld = {
         this.load.audio("PlaceBomb","sounds/Sfx/place_bomb.mp3");
         this.load.audio("BlowBomb","sounds/Sfx/blow_bomb.mp3");
         this.load.audio("UsePotion","sounds/Sfx/use_potion.wav");
+        this.load.audio("BossScream1","sounds/Sfx/boss_scream1.wav");
+        this.load.audio("BossScream2","sounds/Sfx/boss_scream2.wav");
+        this.load.audio("BossScream3","sounds/Sfx/boss_scream3.wav");
+        this.load.audio("BossHit","sounds/Sfx/boss_hit.wav");
+
+        
         this.load.spritesheet("AquamentusProjectile","img/ProyectilAquamentus.png",16,16);
         this.load.spritesheet("FireSpriteSheet","img/fuego.png",16,16);
         this.load.spritesheet("WallMaster","img/WallMasterSpriteSheet.png",16,16);
