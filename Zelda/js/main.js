@@ -821,6 +821,16 @@ zelda.Inventory={
            // this.texto.font = "Press Start 2P";
            // this.texto.fontSize = 6;
             this.texto.align = "center";
+           if(zelda.Inventory.HasSword && zelda.Inventory.equippedSword=="Bronze"){
+                zelda.Inventory.sword = zelda.game.add.sprite(150+20, 190, "sword", 1);
+                zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+                zelda.Inventory.sword.position.y=zelda.game.camera.y+27;
+                zelda.Inventory.sword.anchor.setTo(.5);
+                zelda.Inventory.sword.scale.setTo(1,-1);
+                //zelda.Inventory.HasSword=false;
+                zelda.Inventory.equippedSword="";
+            }
+           
        },
         
     draw:function(){
