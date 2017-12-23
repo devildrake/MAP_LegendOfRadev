@@ -976,10 +976,19 @@ zelda.Inventory={
         
         
         //pintar corazones
+        for(var i=0;i< zelda.LinkObject.maxHearts;i++){
+            
+            this.hearts[i].position.x=zelda.game.camera.x+175+10*i;
+            this.hearts[i].position.y=zelda.game.camera.y+195;
+            
+            //this.heart[i].fixedToCamera=true;
+            
+        }
         for(var i=0;i< zelda.LinkObject.currentHearts;i++){
             //this.heart[i]=zelda.game.add.sprite(-zelda.game.camera.x+50*i,zelda.game.camera.y+100, "corazon");
             this.heart[i].position.x=zelda.game.camera.x+175+10*i;
             this.heart[i].position.y=zelda.game.camera.y+195;
+            
             //this.heart[i].fixedToCamera=true;
             
         }
