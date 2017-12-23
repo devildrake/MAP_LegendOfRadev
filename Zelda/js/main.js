@@ -36,16 +36,17 @@ zelda.gameOptions = {
         console.log("guardado");
         // package everything you need into an object.
         var saveObject = {
-	       Lives: zelda.LinkObject.currentHearts,
-	       FileName: zelda.Inventory.StrSave,
+	        Lives: zelda.LinkObject.currentHearts,
+            maxLives: zelda.LinkObject.maxHearts,
+	        FileName: zelda.Inventory.StrSave,
             Bombs: zelda.Inventory.bombs,
             keys:zelda.Inventory.keys,
             rupies:zelda.Inventory.rupies,
-            arco:0,
+            arco:zelda.Inventory.objects[2],
             vela:zelda.Inventory.objects[3],
             potion:zelda.Inventory.objects[4],
             hasSword:false,
-            boomerang:0,
+            boomerang:zelda.Inventory.objects[0],
             Deaths:zelda.Inventory.Deaths,
             SecretA1Done:zelda.sala_secreta_A.roomDone1,
             SecretA2Done:zelda.sala_secreta_A.roomDone2,
@@ -65,7 +66,17 @@ zelda.gameOptions = {
             SwordRoomDone:zelda.sala_espada.roomDone,
             //hay que modificar esas last positions antes de hacer el save
             LinkPositionX:zelda.LinkObject.lastPositionX,
-            LinkPositionY:zelda.LinkObject.lastPositionY
+            LinkPositionY:zelda.LinkObject.lastPositionY,
+            hasMap:zelda.LinkObject.hasMap,
+            hasCompass:zelda.LinkObject.hasCompass,
+            events1:zelda.dungeonEvents.events[0],
+            events2:zelda.dungeonEvents.events[1],
+            events3:zelda.dungeonEvents.events[2],
+            events4:zelda.dungeonEvents.events[3],
+            events5:zelda.dungeonEvents.events[4],
+            events6:zelda.dungeonEvents.events[5]
+            
+            
             
             
             };
@@ -89,6 +100,7 @@ zelda.gameOptions = {
         }
         else{
 			zelda.LinkObject.currentHearts=this.obj.Lifes;
+            zelda.LinkObject.maxHearts=this.obj.maxLives:;
 			zelda.Inventory.Bombs=this.obj.Bombs;
 			zelda.Inventory.keys=this.obj.keys;
 			zelda.Inventory.rupies=this.obj.rupies;
@@ -116,6 +128,14 @@ zelda.gameOptions = {
 			zelda.sala_espada.roomDone=this.obj.SwordRoomDone;
 			zelda.LinkObject.lastPositionX=this.obj.LinkPositionX;
 			zelda.LinkObject.lastPositionY=this.obj.LinkPositionY;
+            zelda.LinkObject.hasMap=this.obj.hasMap;
+            zelda.LinkObject.hasCompass=this.obj.hasCompass;
+            zelda.dungeonEvents.events[0]=this.obj.events1;
+            zelda.dungeonEvents.events[1]=this.obj.events2;
+            zelda.dungeonEvents.events[2]=this.obj.events3;
+            zelda.dungeonEvents.events[3]=this.obj.events4;
+            zelda.dungeonEvents.events[4]=this.obj.events5;
+            zelda.dungeonEvents.events[5]=this.obj.events6;
         }
         
         
