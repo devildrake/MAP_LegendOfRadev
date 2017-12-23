@@ -114,6 +114,8 @@ zelda.AquamentusPrefab.prototype.update = function(){
     if(this.spawned){
         if(this.Alive){
             if(this.lives==0){
+            this.heartContainer = new zelda.HeartContainerPrefab(this.game,this.body.position.x,this.body.position.y,this.level);
+            this.game.add.existing(this.heartContainer);
             zelda.AIMethods.Die(this);
             }
             if(!zelda.Inventory.InvON&&!zelda.Inventory.ScrollingInventory){

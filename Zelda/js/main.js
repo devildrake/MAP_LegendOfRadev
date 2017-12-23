@@ -197,6 +197,19 @@ zelda.LinkObject = {
     },
 }
 
+zelda.dungeonEvents = {
+    //events[0], llave en la sala 8 al clearear
+    //events[1], llave en la sala 14 al matar al stalfos de la derecha
+    //events[2], boomerang en la sala 21 al clearear
+    //events[3], llave en la sala 22
+    //events[4], llave en la sala 26 al clearear
+    //events[5], llave en la sala 37 al clearear
+    //events[6], llave en la sala 39 al clearear
+
+    
+    events: [false,false,false,false,false,false,false]
+}
+
 zelda.dungeonEnemySpawns = {
     
     zones: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],

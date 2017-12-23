@@ -30,11 +30,7 @@ zelda.LinkPrefab = function(game,x,y,level){
 	}else{
 		this.LinkCollider = game.add.sprite(zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY,"LinkCollider");
 	}
-    
 
-    //console.log(this.praticlesA[0]);
-    //console.log(this.particlesA[0]);
-    
     
 	this.LinkCollider.anchor.setTo(0.5,0);
 	this.LinkCollider.scale.setTo(1);
@@ -185,7 +181,13 @@ zelda.LinkPrefab.prototype.update = function(){
     
     if(this.debugPosKey.isDown&&this.debugPosKey.downDuration(1)){
         console.log(this.level.linkInstance.position);
+        
+        if(this.level==zelda.dungeon)
         console.log("Current zone = " + zelda.LinkObject.currentDungeonZone);
+        else
+                    console.log("Current zone = " + zelda.LinkObject.currentZone);
+
+            
     }
     
     if(this.level == zelda.dungeon){
@@ -720,9 +722,7 @@ zelda.LinkPrefab.throwBoomerang = function(obj){
     
     */
     
-    	if(!obj.boomerang.Alive){
-            console.log("A");
-            
+    	if(!obj.boomerang.Alive){            
             if(zelda.LinkObject.lookingDown){
             //DOWN
                 obj.boomerang.frame = 0;
@@ -730,8 +730,6 @@ zelda.LinkPrefab.throwBoomerang = function(obj){
                 obj.boomerang.destinedPosX = obj.body.position.x+2;
                 obj.boomerang.destinedPosY = obj.body.position.y+24+obj.boomerang.maxDistance;
                 obj.boomerang.going = "Down";
-                console.log("B");
-
             }
             // up
             else if(zelda.LinkObject.lookingUp){
@@ -740,8 +738,6 @@ zelda.LinkPrefab.throwBoomerang = function(obj){
                 obj.boomerang.destinedPosX = obj.body.position.x-2;
                 obj.boomerang.destinedPosY = obj.body.position.y-12-obj.boomerang.maxDistance;
                 obj.boomerang.going = "Up";
-            console.log("C");
-
             }
             else if(zelda.LinkObject.lookingLeft){                    
                 obj.boomerang.frame = 0;
@@ -749,8 +745,6 @@ zelda.LinkPrefab.throwBoomerang = function(obj){
                 obj.boomerang.destinedPosX = obj.body.position.x-11 -obj.boomerang.maxDistance;
                 obj.boomerang.destinedPosY = obj.body.position.y+2;
                 obj.boomerang.going = "Left";
-
-            console.log("D");
 
                 }
             
@@ -760,7 +754,6 @@ zelda.LinkPrefab.throwBoomerang = function(obj){
                 obj.boomerang.destinedPosX = obj.body.position.x+22 +obj.boomerang.maxDistance;
                 obj.boomerang.destinedPosY = obj.body.position.y+2;
                 obj.boomerang.going = "Right";
-                console.log("E");
             }
         obj.boomerang.Alive = true;
         obj.boomerang.animations.play("Roll");
@@ -776,11 +769,9 @@ zelda.LinkPrefab.throwBoomerang = function(obj){
                 obj.boomerang.body.velocity.x = obj.boomerang.body.velocity.x /magnitude * 100;
                 obj.boomerang.body.velocity.y = obj.boomerang.body.velocity.y /magnitude * 100;
 
-                        console.log("F");
 
         }else{
-            console.log(obj.boomerang.destinedPosX);
-            console.log(obj.boomerang.destinedPosY - obj.boomerang.position.y);
+
 
         }
 }

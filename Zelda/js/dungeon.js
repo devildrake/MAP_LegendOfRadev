@@ -1,5 +1,5 @@
 var zelda = zelda || {}
-
+    
 zelda.dungeon = {
 	init:function(){
 		this.game.world.setBounds(0,-47,6*16*16,66*16+16*3);
@@ -151,6 +151,26 @@ zelda.dungeon = {
         this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
         this.playMusic = true;
         
+        if(!zelda.LinkObject.hasCompass){
+            this.compass = new zelda.CompassPrefab(this.game,968,616,this);
+            this.game.add.existing(this.compass);
+        }
+        
+        if(!zelda.LinkObject.hasMap){
+            this.map = new zelda.MapPrefab(this.game,712,440,this);
+            this.game.add.existing(this.map);
+        }
+        
+        if(!zelda.dungeonEvents.events[3]){
+            this.key = new zelda.KeyPrefab(this.game,1192, 485,this);
+            this.game.add.existing(this.key);
+            this.keys.add(this.key);
+        }
+
+        
+
+        
+        
     },
     
     ProjectileBorderColision:function(){
@@ -187,6 +207,87 @@ zelda.dungeon = {
     },
     
     update:function(){
+        
+        //console.log(this.checkAliveEnemies());
+        if(zelda.gameOptions.cameraArrivedPos){
+            if(!zelda.dungeonEvents.events[0]){
+                if(zelda.LinkObject.currentDungeonZone==8){
+                    //console.log(this.checkAliveEnemies());
+                    if(this.checkAliveEnemies()==0){
+                        zelda.dungeonEvents.events[0] = true;
+                        this.key = new zelda.KeyPrefab(this.game,648,54,this);
+                        this.game.add.existing(this.key);
+                        this.keys.add(this.key);
+                    }
+                }
+            }
+            if(!zelda.dungeonEvents.events[1]){
+                if(zelda.LinkObject.currentDungeonZone==14){
+                    if(!zelda.dungeonEnemySpawns.zones[14][2]){
+                        //console.log("spawnAKey");
+                        zelda.dungeonEvents.events[1] = true;
+                        this.key = new zelda.KeyPrefab(this.game,696,292,this);
+                        this.game.add.existing(this.key);
+                        this.keys.add(this.key);
+                    }
+                }
+            }
+            if(!zelda.dungeonEvents.events[2]){
+                if(zelda.LinkObject.currentDungeonZone==21){
+                    //console.log(this.checkAliveEnemies());
+                    if(this.checkAliveEnemies()==0){
+                        zelda.dungeonEvents.events[2] = true;
+                        this.boom = new zelda.boomerangToPickUp(this.game,903,406,this);
+                        this.game.add.existing(this.boom);
+                    }   
+                }
+            }
+                        
+            
+            if(!zelda.dungeonEvents.events[4]){
+                if(zelda.LinkObject.currentDungeonZone==21){
+                    //console.log(this.checkAliveEnemies());
+                    if(this.checkAliveEnemies()==0){
+                        zelda.dungeonEvents.events[4] = true;
+                        this.key = new zelda.KeyPrefab(this.game,648,584,this);
+                        this.game.add.existing(this.key);
+                        this.keys.add(this.key);
+                    }   
+                }
+            }
+            
+            if(!zelda.dungeonEvents.events[5]){
+                if(zelda.LinkObject.currentDungeonZone==21){
+                    //console.log(this.checkAliveEnemies());
+                    if(this.checkAliveEnemies()==0){
+                        zelda.dungeonEvents.events[5] = true;
+                        this.key = new zelda.KeyPrefab(this.game,425,1014,this);
+                        this.game.add.existing(this.key);
+                        this.keys.add(this.key);
+                    }   
+                }
+            }
+            
+                        
+            if(!zelda.dungeonEvents.events[6]){
+                if(zelda.LinkObject.currentDungeonZone==21){
+                    //console.log(this.checkAliveEnemies());
+                    if(this.checkAliveEnemies()==0){
+                        zelda.dungeonEvents.events[6] = true;
+                        this.key = new zelda.KeyPrefab(this.game,985,999,this);
+                        this.game.add.existing(this.key);
+                        this.keys.add(this.key);                        
+                    }   
+                }
+            }
+            
+        
+        
+            
+            
+
+        }
+        
         
         if(this.muteButton.isDown&&this.muteButton.downDuration(1)){
             this.playMusic= !this.playMusic;
@@ -821,6 +922,59 @@ zelda.dungeon = {
                             j+=2;
         }
         }
+    },
+    
+    checkAliveEnemies:function(){
+        var counter = 0;
+        for(var i=0;i<this.stalfoses.children.length;i++){
+            if(this.stalfoses.children[i].Alive){
+                counter++;
+            }
+        }
+        
+        for(var i=0;i<this.goriyas.children.length;i++){
+            if(this.goriyas.children[i].Alive){
+                counter++;
+
+            }
+        }
+        
+        for(var i=0;i<this.gels.children.length;i++){
+            if(this.gels.children[i].Alive){
+                counter++;
+
+            }
+        }
+        
+        for(var i=0;i<this.keeses.children.length;i++){
+            if(this.keeses.children[i].Alive){
+                counter++;
+
+            }
+        }
+        
+        for(var i=0;i<this.wallmasters.children.length;i++){
+            if(this.wallmasters.children[i].Alive){
+                counter++;
+
+            }
+        }
+        
+        for(var i=0;i<this.spikeTraps.children.length;i++){
+            if(this.spikeTraps.children[i].Alive){
+                counter++;
+
+            }
+        }
+        
+        for(var i=0;i<this.Aquamentuses.children.length;i++){
+            if(this.Aquamentuses.children[i].Alive){
+                counter++;
+
+            }
+
+        }
+        return counter;
     },
     
     despawnEnemiesOfPreviousZone:function(){
