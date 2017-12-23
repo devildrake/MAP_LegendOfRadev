@@ -33,6 +33,16 @@ zelda.InventarioPrefab = function(game,x,y,level){
         //zelda.Inventory.HasSword=false;
         //zelda.Inventory.equippedSword="";
     }
+    else if(zelda.Inventory.HasSword &&zelda.Inventory.equippedSword=="Silver"){
+        //zelda.Inventory.sword.destroy();
+        zelda.Inventory.sword = zelda.game.add.sprite(150+20, 190, "sword", 3);
+        zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+        zelda.Inventory.sword.position.y=zelda.game.camera.y+27;
+        zelda.Inventory.sword.anchor.setTo(.5);
+        zelda.Inventory.sword.scale.setTo(1,-1);
+        //zelda.Inventory.HasSword=false;
+        //zelda.Inventory.equippedSword="";
+    }
     //for para pintar los corazones
     for(var i=0;i< zelda.LinkObject.maxHearts;i++){
             zelda.Inventory.hearts[i]=zelda.game.add.sprite(zelda.game.camera.x+50*i,zelda.game.camera.y+20, "emptyHeart");
@@ -228,6 +238,15 @@ zelda.InventarioPrefab.ScrollInventario = function(inventario){
     //para pintar la espada, dont judge me
     if(zelda.Inventory.HasSword &&zelda.Inventory.equippedSword=="Bronze"){
         zelda.Inventory.sword = zelda.game.add.sprite(150+20, 190, "sword", 1);
+        zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
+        zelda.Inventory.sword.position.y=zelda.game.camera.y+27;
+        zelda.Inventory.sword.anchor.setTo(.5);
+        zelda.Inventory.sword.scale.setTo(1,-1);
+        //zelda.Inventory.HasSword=false;
+        //zelda.Inventory.equippedSword="";
+    }
+     else if(zelda.Inventory.HasSword &&zelda.Inventory.equippedSword=="Silver"){
+        zelda.Inventory.sword = zelda.game.add.sprite(150+20, 190, "sword", 3);
         zelda.Inventory.sword.position.x=zelda.game.camera.x+156;
         zelda.Inventory.sword.position.y=zelda.game.camera.y+27;
         zelda.Inventory.sword.anchor.setTo(.5);
