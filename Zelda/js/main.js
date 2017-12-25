@@ -38,6 +38,7 @@ zelda.gameOptions = {
         var saveObject = {
 	        Lives: zelda.LinkObject.currentHearts,
             maxLives: zelda.LinkObject.maxHearts,
+            rank:zelda.Inventory.ranking,
 	        FileName: zelda.Inventory.StrSave,
             Bombs: zelda.Inventory.bombs,
             keys:zelda.Inventory.keys,
@@ -88,6 +89,7 @@ zelda.gameOptions = {
   
     },
     
+   
     load:function(NameFile){
         //inicializa el archivo que quieres cargar
         var load = localStorage.getItem(NameFile);
@@ -102,6 +104,7 @@ zelda.gameOptions = {
         else{
 			zelda.LinkObject.currentHearts=this.obj.Lifes;
             zelda.LinkObject.maxHearts=this.obj.maxLives;
+            zelda.Inventory.ranking=this.obj.rank;
 			zelda.Inventory.Bombs=this.obj.Bombs;
 			zelda.Inventory.keys=this.obj.keys;
 			zelda.Inventory.rupies=this.obj.rupies;
@@ -710,6 +713,7 @@ zelda.Inventory={
 	trozoMapa:false,
     pointCurrentX:0,
     pointCurrentY:0,
+    ranking:0,
      //posiciones
         ArrayPosObjX:[125,145,165,185,200
                           ,125,145,165,185,200],
