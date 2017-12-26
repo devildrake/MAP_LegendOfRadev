@@ -243,12 +243,18 @@ zelda.dungeon = {
 		
 		this.CollisionWithDoors();
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.obstacle1,function(link, obstacle){
-			console.log(obstacle.body.blocked.left);
-			if(obstacle.body.blocked.right){
-				obstacle.x++;
+			if(obstacle.body.touching.right){
+				if(obstacle.x>1*16*16+6*16){
+					obstacle.x--;
+				}else{
+					console.log("OPENNING DOORS");
+					zelda.dungeon.OpenDoors([15,14]);
+				}
 			}
 		});
+				
 		
+
 		//MOVER LA CAMARA PARA DEBUGAR (con el WASD)
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
             zelda.game.camera.y -= 10;
