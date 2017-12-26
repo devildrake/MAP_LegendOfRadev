@@ -156,39 +156,39 @@ zelda.OktorokPrefab.prototype.update = function(){
                 } );
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.cameraBot,function(projectile, a){
-                projectile.Alive = false;
-                projectile.kill();  
+                	projectile.Alive = false;
+                	projectile.kill();  
                 });
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.cameraTop,function(projectile, a){
-                projectile.Alive = false;
-                projectile.kill();  
+                	projectile.Alive = false;
+                	projectile.kill();  
                 });    
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.cameraLeft,function(projectile, a){
-                projectile.Alive = false;
-                projectile.kill();  
+                	projectile.Alive = false;
+                	projectile.kill();  
                 });    
 
                 this.game.physics.arcade.overlap(this.projectile,this.level.cameraRight,function(projectile, a){
-                projectile.Alive = false;
-                projectile.kill();  
+                	projectile.Alive = false;
+                	projectile.kill();  
                 });
 
                 this.game.physics.arcade.overlap(this,this.level.cameraRight,function(npc, a){
-                npc.body.velocity.x = -npc.body.velocity.x;
+                	npc.body.velocity.x = -npc.body.velocity.x;
 
                 });
                 this.game.physics.arcade.overlap(this,this.level.cameraLeft,function(npc, a){
-                npc.body.velocity.x = -npc.body.velocity.x;
+                	npc.body.velocity.x = -npc.body.velocity.x;
 
                 });
                 this.game.physics.arcade.overlap(this,this.level.cameraTop,function(npc, a){
-                npc.body.velocity.y = -npc.body.velocity.y;
+                	npc.body.velocity.y = -npc.body.velocity.y;
 
                 });
                 this.game.physics.arcade.overlap(this,this.level.cameraBot,function(npc, a){
-                npc.body.velocity.y = -npc.body.velocity.y;
+                	npc.body.velocity.y = -npc.body.velocity.y;
 
                 });
 

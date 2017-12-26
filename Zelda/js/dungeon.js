@@ -33,6 +33,7 @@ zelda.dungeon = {
         this.load.image("camaraHorizontal", "img/camara_horizontal_trans.png");
         this.load.image("camaraVertical", "img/camara_vertical_trans.png");
         this.load.image("Triforce","img/Triforce_Piece.png");
+		this.load.image("movable_obstacle", "img/roca_dungeon.png");
         this.load.audio("TriforceSound","sounds/Music/Triforce_Theme.mp3");
         this.load.image("Black","img/Blackout.png");
         this.load.audio("DungeonMusic","sounds/Music/DungeonTheme.mp3");
@@ -90,53 +91,19 @@ zelda.dungeon = {
         
 		this.map.createLayer("Hide");
 		
-        //Inputs, flechas para andar y Space para atacar por ahora
-        /*
-		this.cursors = this.game.input.keyboard.createCursorKeys();
-        this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);        
-        this.sword = this.game.add.sprite(0,0,"Sword");
-        this.sword.anchor.setTo(0.5);
-        this.sword.kill();
-        this.sword.Alive = false;
-        
-        this.game.physics.arcade.enable(this.sword);
-
-        this.projectile = this.game.add.sprite(0,0,"Sword");
-        this.projectile.anchor.setTo(0.5);
-        this.projectile.kill();
-        this.projectile.Alive = false;
-        this.projectile.outOfBoundsKill = true;
-        this.projectile.checkWorldBounds = true;
-        this.projectile.events.onOutOfBounds.add(function notAlive(){this.projectile.Alive = false;}, this);
-        
-        this.game.physics.arcade.enable(this.projectile);
-
-        //Spritesheet de Link, con sus animaciones de movimiento (LAS DE ATAQUE SON FRAMES QUIETOS) al que se aplican las físicas
-        this.Link = this.game.add.sprite(0,0, "Link");
-        this.Link.scale.setTo(1);
-        this.Link.anchor.x = 0.5;
-        this.Link.anchor.y = 0.5;
-		this.Link.animations.add("movingDown", [0,1], 5, true);
-        this.Link.animations.add("movingUp", [2], 5, true);
-        this.Link.animations.add("movingSideWays", [3,4],5,true);
-		this.Link.animations.add("movingDownHurt", [14,15], 5, true);
-        this.Link.animations.add("movingUpHurt", [16], 5, true);
-        this.Link.animations.add("movingSideWaysHurt", [17,18],5,true);        
-        
-        this.game.physics.arcade.enable(this.Link);
-        */
+		//Este es la roca que puedes mover para desbloquear secretos.
+        this.obstacle1 = this.game.add.sprite(1*16*16+7*16, 2*11*16+5*16,"movable_obstacle");
+		this.game.physics.arcade.enable(this.obstacle1);
+		this.obstacle1.body.immovable = true;
 		
 		//pintado de las puertas de la dungeon.
         this.linkInstance = new zelda.LinkPrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16,this);
-                //this.SetCamera();
         
 		this.drawDoors();
-        
 
         //Camara
         this.camera.focusOnXY(this.linkInstance.LinkCollider.x, this.linkInstance.LinkCollider.y);
-                this.SetCamera();
-
+		this.SetCamera();
 
 		//Prefab del inventario
 		this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);   
@@ -184,41 +151,7 @@ zelda.dungeon = {
         
     },
     
-    ProjectileBorderColision:function(){
-        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraBot,function(){
-        zelda.dungeon.linkInstance.projectile.Alive = false;
-        zelda.dungeon.linkInstance.projectile.kill();    
-        });
-        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraLeft,function(){
-        zelda.dungeon.linkInstance.projectile.Alive = false;
-        zelda.dungeon.linkInstance.projectile.kill();    
-        });
-        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraTop,function(){
-        zelda.dungeon.linkInstance.projectile.Alive = false;
-        zelda.dungeon.linkInstance.projectile.kill();    
-        });
-        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraRight,function(){
-        zelda.dungeon.linkInstance.projectile.Alive = false;
-        zelda.dungeon.linkInstance.projectile.kill();    
-        });
-        
-        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraBot,function(){
-        zelda.dungeon.linkInstance.boomerang.returning = true;
-        });
-        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraLeft,function(){
-        zelda.dungeon.linkInstance.boomerang.returning = true;
-        });
-        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraTop,function(){
-        zelda.dungeon.linkInstance.boomerang.returning = true;
-        });
-        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraRight,function(){
-        zelda.dungeon.linkInstance.boomerang.returning = true;
-        });
-        
-    },
-    
-    update:function(){
-        
+    update:function(){		
         //console.log(this.checkAliveEnemies());
         if(zelda.gameOptions.cameraArrivedPos){
             if(!zelda.dungeonEvents.events[0]){
@@ -290,15 +223,8 @@ zelda.dungeon = {
                         this.keys.add(this.key);                        
                     }   
                 }
-            }
-            
-        
-        
-            
-            
-
+			}
         }
-        
         
         if(this.muteButton.isDown&&this.muteButton.downDuration(1)){
             this.playMusic= !this.playMusic;
@@ -306,17 +232,22 @@ zelda.dungeon = {
                 this.music.stop();
 		}
         
-        if(!this.music.isPlaying&&this.playMusic)
-        this.music.play();
+        if(!this.music.isPlaying&&this.playMusic){
+        	this.music.play();
+		}
         
         if(zelda.gameOptions.mustCreateEnemies){
             zelda.gameOptions.mustCreateEnemies = false;
             this.createEnemiesOfCurrentZone();
         }
-		/*if(this.allDoors[1].frame = 1){
-			this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.allDoors[1]);	
-		}*/
+		
 		this.CollisionWithDoors();
+		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.obstacle1,function(link, obstacle){
+			console.log(obstacle.body.blocked.left);
+			if(obstacle.body.blocked.right){
+				obstacle.x++;
+			}
+		});
 		
 		//MOVER LA CAMARA PARA DEBUGAR (con el WASD)
         if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.W)){
@@ -329,8 +260,6 @@ zelda.dungeon = {
         }else if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.A)){
             zelda.game.camera.x -= 10;
         }
-		
-		if(zelda.game.input.keyboard.isDown(Phaser.Keyboard.U))this.camera.follow(this.linkInstance, Phaser.Camera.FOLLOW_PLATFORMER);
         
         this.MoveCamera();
         
@@ -345,7 +274,7 @@ zelda.dungeon = {
         }
         
         
-         this.ObjBKey=zelda.game.input.keyboard.addKey(Phaser.Keyboard.R);
+        this.ObjBKey=zelda.game.input.keyboard.addKey(Phaser.Keyboard.R);
         if( this.ObjBKey.isDown && this.ObjBKey.downDuration(1) && zelda.Inventory.InvON==false){
             //console.log("o");
             zelda.Inventory.scene="dungeon";
@@ -481,6 +410,39 @@ zelda.dungeon = {
                         
         }
     
+    },
+	
+	ProjectileBorderColision:function(){
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraBot,function(){
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraLeft,function(){
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraTop,function(){
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.projectile,this.cameraRight,function(){
+        zelda.dungeon.linkInstance.projectile.Alive = false;
+        zelda.dungeon.linkInstance.projectile.kill();    
+        });
+        
+        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraBot,function(){
+        zelda.dungeon.linkInstance.boomerang.returning = true;
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraLeft,function(){
+        zelda.dungeon.linkInstance.boomerang.returning = true;
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraTop,function(){
+        zelda.dungeon.linkInstance.boomerang.returning = true;
+        });
+        this.game.physics.arcade.overlap(this.linkInstance.boomerang,this.cameraRight,function(){
+        zelda.dungeon.linkInstance.boomerang.returning = true;
+        });
+        
     },
 	
 	//Metodo que encapsula el pintado de las puertas.
@@ -924,7 +886,7 @@ zelda.dungeon = {
         });
         
     },
-        createEnemiesOfCurrentZone:function(){
+    createEnemiesOfCurrentZone:function(){
             zelda.dungeon.enabledSpawns = true;
         if(zelda.dungeon.enabledSpawns){
         var j = 0;
@@ -1055,12 +1017,12 @@ zelda.dungeon = {
         
     },
     
-     loadDeathParticles:function(){
+    loadDeathParticles:function(){
         this.deathParticles = this.add.group();
         this.deathParticles.enableBody = true;
     },
     
-        createDeathParticles:function(posX,posY,level){
+    createDeathParticles:function(posX,posY,level){
         var particles = this.deathParticles.getFirstExists(false);
         if(!particles){
             console.log(this.deathParticles);
