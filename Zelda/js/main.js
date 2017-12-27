@@ -303,7 +303,7 @@ InitZones:function(){
     zelda.dungeonEnemySpawns.posicionesEnemigos[4] = [];
     zelda.dungeonEnemySpawns.posicionesEnemigos[5] = [];
     zelda.dungeonEnemySpawns.posicionesEnemigos[6] = [];
-    zelda.dungeonEnemySpawns.posicionesEnemigos[7] = [473,40,296,40,296,136,473,136];
+    zelda.dungeonEnemySpawns.posicionesEnemigos[7] = [471,40,296,40,296,136,471,136];
     zelda.dungeonEnemySpawns.posicionesEnemigos[8] = [680,40,665,72,616,72];
     zelda.dungeonEnemySpawns.posicionesEnemigos[9] = [];               
     zelda.dungeonEnemySpawns.posicionesEnemigos[10] = [];
@@ -1782,7 +1782,7 @@ zelda.game.state.add("Congratulations", zelda.Congratulations);
 
 
 //Escena que se pinta
-zelda.game.state.start("dungeon");
+zelda.game.state.start("main");
 
 //zelda.game.state.start("dungeon");
 
