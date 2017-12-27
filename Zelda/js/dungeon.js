@@ -80,7 +80,7 @@ zelda.dungeon = {
         this.loadKeys();
         this.loadRupies();
         //this.loadBombs();
-         this.loadDeathParticles();
+        this.loadDeathParticles();
 
         this.loadEnemies();
 		
@@ -95,6 +95,10 @@ zelda.dungeon = {
         this.obstacle1 = this.game.add.sprite(1*16*16+7*16, 2*11*16+5*16,"movable_obstacle");
 		this.game.physics.arcade.enable(this.obstacle1);
 		this.obstacle1.body.immovable = true;
+		
+		this.obstacle2 = this.game.add.sprite(1*16*16+6*16, 0*11*16+5*16,"movable_obstacle");
+		this.game.physics.arcade.enable(this.obstacle2);
+		this.obstacle2.body.immovable = true;
 		
 		//pintado de las puertas de la dungeon.
         this.linkInstance = new zelda.LinkPrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16,this);
@@ -247,9 +251,14 @@ zelda.dungeon = {
 				if(obstacle.x>1*16*16+6*16){
 					obstacle.x--;
 				}else{
-					console.log("OPENNING DOORS");
 					zelda.dungeon.OpenDoors([15,14]);
 				}
+			}
+		});
+		
+		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.obstacle2,function(link, obstacle){
+			if(obstacle.body.touching.up && obstacle.y<0*11*16+6*16){
+				obstacle.y++;
 			}
 		});
 				
