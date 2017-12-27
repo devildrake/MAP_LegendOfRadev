@@ -1779,10 +1779,11 @@ zelda.game.state.add("game_over",zelda.game_over);
 zelda.game.state.add("overworld", zelda.overworld);
 zelda.game.state.add("dungeon", zelda.dungeon);
 zelda.game.state.add("Congratulations", zelda.Congratulations);
+zelda.game.state.add("secret_room_dungeon", zelda.sala_secreta_dungeon);
 
 
 //Escena que se pinta
-zelda.game.state.start("main");
+zelda.game.state.start("dungeon");
 
 //zelda.game.state.start("dungeon");
 

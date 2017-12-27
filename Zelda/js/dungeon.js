@@ -34,6 +34,7 @@ zelda.dungeon = {
         this.load.image("camaraVertical", "img/camara_vertical_trans.png");
         this.load.image("Triforce","img/Triforce_Piece.png");
 		this.load.image("movable_obstacle", "img/roca_dungeon.png");
+		this.load.image("trigger","img/trigger_salas.png");
         this.load.audio("TriforceSound","sounds/Music/Triforce_Theme.mp3");
         this.load.image("Black","img/Blackout.png");
         this.load.audio("DungeonMusic","sounds/Music/DungeonTheme.mp3");
@@ -99,6 +100,10 @@ zelda.dungeon = {
 		this.obstacle2 = this.game.add.sprite(1*16*16+6*16, 0*11*16+5*16,"movable_obstacle");
 		this.game.physics.arcade.enable(this.obstacle2);
 		this.obstacle2.body.immovable = true;
+		
+		//trigger para la entrada de la sala secreta
+		this.trigger = this.game.add.sprite(1*16*16+8*16+5, 0*11*16+5*16+5,"trigger");
+		this.game.physics.arcade.enable(this.trigger);
 		
 		//pintado de las puertas de la dungeon.
         this.linkInstance = new zelda.LinkPrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16,this);
@@ -261,7 +266,11 @@ zelda.dungeon = {
 				obstacle.y++;
 			}
 		});
-				
+			
+		//overlap para la entrada de la sala secreta
+		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger, function(){
+			zelda.game.state.start("secret_room_dungeon");
+		})
 		
 
 		//MOVER LA CAMARA PARA DEBUGAR (con el WASD)
