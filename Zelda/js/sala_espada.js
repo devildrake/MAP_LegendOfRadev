@@ -13,7 +13,7 @@ zelda.sala_espada = {
 	},
     
     preload:function(){
-         this.game.stage.backgroundColor = "#black";
+        this.game.stage.backgroundColor = "#black";
         //----------Tiles del layaut base------------
         this.load.tilemap("sala", "json/Sala_Secreta.json", null, Phaser.Tilemap.TILED_JSON);
         this.load.image("secret_tile", "img/tilesets/secret_tile.png");
