@@ -18,6 +18,8 @@ zelda.dungeon = {
 		this.load.spritesheet("puerta_normal","img/puerta_normal.png",32,32);
 		this.load.spritesheet("puerta_llave","img/puerta_llave.png",32,32);
         this.load.spritesheet("Particles","img/ProjectileParticles.png",16,16);
+		this.load.spritesheet("fuego", "img/spawn_fuego.png",16,16);
+        this.load.spritesheet("npc", "img/spawn_oldwoman.png",16, 16);
         this.load.image("bomba", "img/bomba.png");
         this.load.spritesheet("explosion","img/bombaSpriteSheet.png",16,16);
         this.load.image("area","img/Explosion.png");
@@ -84,12 +86,7 @@ zelda.dungeon = {
         this.loadDeathParticles();
 
         this.loadEnemies();
-		
-		//this.background = this.game.add.sprite(0,0, "Dungeon1NoFloor");
-		//this.game.physics.arcade.enable(this.background);
-		//this.background.body.immovable = true;
 
-        
 		this.map.createLayer("Hide");
 		
 		//Este es la roca que puedes mover para desbloquear secretos.
@@ -154,8 +151,22 @@ zelda.dungeon = {
             this.keys.add(this.key);
         }
 
-        
-
+        //SALA SECRETA DONDE SE CONSIGUE LA ESPADA BLANCA
+		this.fire1 = this.game.add.sprite(5*16,2*11*16+4*16,"fuego",0);
+		this.game.physics.arcade.enable(this.fire1);
+		this.fire1.body.immovable = true;
+		this.fire1.animations.add("idle",[3,4],true);
+		this.fire1.animations.play("idle");
+		
+		this.fire2 = this.game.add.sprite(11*16, 2*11*16+4*16,"fuego",0);
+		this.game.physics.arcade.enable(this.fire2);
+		this.fire2.body.immovable = true;
+		this.fire2.animations.add("idle",[3,4],true);
+		this.fire2.animations.play("idle");
+		//si tienes el trozo de mapa se activa el poder conseguir la espada blanca en la sala secreta.
+		if(zelda.Inventory.trozoMapa){
+			
+		}
         
         
     },
