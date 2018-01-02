@@ -17,6 +17,21 @@ zelda.sala_secreta_dungeon = {
         this.load.image("secret_dungeon_tile", "img/tilesets/secret_dungeon_tile.png");
 		this.load.image("collider_salida", "img/camara_horizontal_trans.png");
 		this.load.image("container","img/HeartContainer.png");
+        
+        this.load.image("inventario", "img/inventario.png");
+        //-----------Inventario
+		
+        this.load.image("bomba", "img/bomba.png");
+        this.load.image("vela", "img/vela.png");
+        this.load.image("potion", "img/pocion_vida.png");
+        this.load.image("corazon", "img/corazon.png");
+        this.load.image("cursor","img/inventario/selector.png");
+        this.load.image("emptyHeart","img/emptycorazon.png");
+        this.load.image("minimap","img/Minimapa.png");
+        this.load.image("pointMap","img/pointMap.png");
+        
+        //this.load.image("arco","img/bow.png");
+        this.load.image("shield","img/escudo.png");
 		
 		//para el prefab de link
 		this.load.spritesheet("Link", "img/Link_SpriteSheet.png",16,16); this.load.image("LinkCollider","img/Link/LinkCollider.png");
@@ -42,6 +57,7 @@ zelda.sala_secreta_dungeon = {
 		this.container.body.immovable = true;
 		
 		this.link = new zelda.LinkPrefab(this.game,4*16-8,0,this);
+        this.inventario = new zelda.InventarioPrefab(this.game,0,0,this);
 	},
 	
 	update:function(){
