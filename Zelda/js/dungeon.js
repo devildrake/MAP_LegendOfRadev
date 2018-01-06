@@ -209,7 +209,7 @@ zelda.dungeon = {
                         
             
             if(!zelda.dungeonEvents.events[4]){
-                if(zelda.LinkObject.currentDungeonZone==21){
+                if(zelda.LinkObject.currentDungeonZone==26){
                     //console.log(this.checkAliveEnemies());
                     if(this.checkAliveEnemies()==0){
                         zelda.dungeonEvents.events[4] = true;
@@ -221,7 +221,7 @@ zelda.dungeon = {
             }
             
             if(!zelda.dungeonEvents.events[5]){
-                if(zelda.LinkObject.currentDungeonZone==21){
+                if(zelda.LinkObject.currentDungeonZone==37){
                     //console.log(this.checkAliveEnemies());
                     if(this.checkAliveEnemies()==0){
                         zelda.dungeonEvents.events[5] = true;
@@ -234,7 +234,7 @@ zelda.dungeon = {
             
                         
             if(!zelda.dungeonEvents.events[6]){
-                if(zelda.LinkObject.currentDungeonZone==21){
+                if(zelda.LinkObject.currentDungeonZone==39){
                     //console.log(this.checkAliveEnemies());
                     if(this.checkAliveEnemies()==0){
                         zelda.dungeonEvents.events[6] = true;
@@ -245,6 +245,9 @@ zelda.dungeon = {
                 }
 			}
         }
+        
+
+
         
         if(this.muteButton.isDown&&this.muteButton.downDuration(1)){
             this.playMusic= !this.playMusic;
@@ -1159,7 +1162,7 @@ zelda.dungeon = {
 
                 var keese = this.keeses.getFirstExists(false);
                 if(!keese){
-                    keese = new zelda.KeesePrefab(this.game,posX,posY,type,level,currentDungeonZone,posInArray);
+                    keese = new zelda.KeesePrefab(this.game,posX,posY,type,level,0,currentDungeonZone,posInArray);
                     this.keeses.add(keese);
                     console.log(keese);
                 }else{

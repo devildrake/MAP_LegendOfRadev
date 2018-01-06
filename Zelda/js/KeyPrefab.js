@@ -18,7 +18,7 @@ zelda.KeyPrefab.prototype.constructor = zelda.KeyPrefab;
 zelda.KeyPrefab.prototype.update = function(){
         this.game.physics.arcade.overlap(this,this.level.linkInstance,
         function(key,linkInstance){
-                        zelda.Inventory.keys+=5;
+                        //zelda.Inventory.keys++;
 				        zelda.Inventory.GetObject(3);
                         zelda.LinkPrefab.grabItemSound.play();
                         key.Alive =false;

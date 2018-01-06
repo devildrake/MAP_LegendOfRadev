@@ -1783,7 +1783,7 @@ zelda.game.state.add("secret_room_dungeon", zelda.sala_secreta_dungeon);
 
 
 //Escena que se pinta
-zelda.game.state.start("dungeon");
+zelda.game.state.start("main");
 
 //zelda.game.state.start("dungeon");
 
