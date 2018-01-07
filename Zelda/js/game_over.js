@@ -102,6 +102,7 @@ zelda.game_over = {
                     //zelda.overworld.game.camera.focusOnXY(zelda.gameOptions.originalCameraPosX,zelda.gameOptions.originalCameraPosY);
                     this.music.stop();
                     zelda.game.state.start("overworld");
+                    
                 }
 
             }
@@ -115,7 +116,7 @@ zelda.game_over = {
             }
             //guardar
             else if(this.selected==3){
-
+                zelda.LinkObject.dying = false;
                 zelda.gameOptions.save();
                 this.music.stop();
                 zelda.game.state.start("main");

@@ -102,7 +102,7 @@ zelda.gameOptions = {
             return null;
         }
         else{
-			zelda.LinkObject.currentHearts=this.obj.Lifes;
+			zelda.LinkObject.currentHearts=this.obj.Lives;
             zelda.LinkObject.maxHearts=this.obj.maxLives;
             zelda.Inventory.ranking=this.obj.rank;
 			zelda.Inventory.Bombs=this.obj.Bombs;
