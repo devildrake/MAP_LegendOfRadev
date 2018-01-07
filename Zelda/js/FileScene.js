@@ -274,7 +274,7 @@ zelda.FileScene = {
                       var load2 = localStorage.getItem("save"+2);
                     //copiamos a una variable local
                    var obj2= JSON.parse(load2 );
-                 this.texto2 = zelda.game.add.text(75,95, obj2.FileName);
+                 this.texto2 = zelda.game.add.text(75,117, obj2.FileName);
                 this.texto2.fill = "white";
                 this.texto2.font = "Press Start 2P";
                 this.texto2.fontSize =7;
@@ -285,7 +285,7 @@ zelda.FileScene = {
                       var load3 = localStorage.getItem("save"+3);
                     //copiamos a una variable local
                    var obj3= JSON.parse(load3 );
-                this.texto3 = zelda.game.add.text(75,95, obj3.FileName);
+                this.texto3 = zelda.game.add.text(75,140, obj3.FileName);
                 this.texto3.fill = "white";
                 this.texto3.font = "Press Start 2P";
                 this.texto3.fontSize =7;
