@@ -117,7 +117,7 @@ zelda.game_over = {
             //guardar
             else if(this.selected==3){
                 zelda.LinkObject.dying = false;
-                zelda.gameOptions.save();
+                zelda.gameOptions.save("save"+zelda.gameOptions.SlotSelec);
                 this.music.stop();
                 zelda.game.state.start("main");
             }

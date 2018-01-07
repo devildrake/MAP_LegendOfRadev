@@ -153,6 +153,7 @@ zelda.FileScene = {
                 }
                 else{
                     //zelda.gameOptions.loadsave=true;
+                    zelda.gameOptions.SlotSelec=this.slotSelected;
                     zelda.gameOptions.load("save"+this.slotSelected);
                     zelda.game.state.start("overworld");    
                     
@@ -178,6 +179,7 @@ zelda.FileScene = {
                 }
                 else{
                     //zelda.gameOptions.loadsave=true;
+                    zelda.gameOptions.SlotSelec=this.slotSelected;
                     zelda.gameOptions.load("save"+this.slotSelected);
                     zelda.game.state.start("overworld");    
                     
@@ -202,6 +204,7 @@ zelda.FileScene = {
                 }
                 else{
                     //zelda.gameOptions.loadsave=true;
+                    zelda.gameOptions.SlotSelec=this.slotSelected;
                     zelda.gameOptions.load("save"+this.slotSelected);
                     zelda.game.state.start("overworld");    
                     
@@ -332,16 +335,17 @@ zelda.FileScene = {
                   this.SfxKeyboard.play();
 
                        
-                    if(this.slotSelected){
+                    if(this.slotSelected==1){
                         zelda.Inventory.StrSave=this.str1;
-                    }else if(this.slotSelected){
+                    }else if(this.slotSelected==2){
                         zelda.Inventory.StrSave=this.str2;
-                    }else if(this.slotSelected){
+                    }else if(this.slotSelected==3){
                         zelda.Inventory.StrSave=this.str3;
                     }
                     var str="save"+this.slotSelected;
+                    zelda.gameOptions.SlotSelec=this.slotSelected;
                     zelda.gameOptions.save(str);
-                zelda.game.state.start("overworld");
+                    zelda.game.state.start("overworld");
                   
             
             }

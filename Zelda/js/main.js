@@ -17,6 +17,7 @@ zelda.gameOptions = {
     chancesToSpawnRupy: 80,
     loadedsave:false,
     StrSave:"Link",
+    SlotSelec:0,
     mustCreateEnemies: true,
     //chancesToSpawnBomb: 100,
 	GoToOverworld:function(){
@@ -105,6 +106,7 @@ zelda.gameOptions = {
 			zelda.LinkObject.currentHearts=this.obj.Lives;
             zelda.LinkObject.maxHearts=this.obj.maxLives;
             zelda.Inventory.ranking=this.obj.rank;
+            zelda.Inventory.FileName=this.obj.FileName,  
 			zelda.Inventory.Bombs=this.obj.Bombs;
 			zelda.Inventory.keys=this.obj.keys;
 			zelda.Inventory.rupies=this.obj.rupies;
