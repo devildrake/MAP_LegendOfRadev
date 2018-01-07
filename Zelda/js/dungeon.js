@@ -173,6 +173,12 @@ zelda.dungeon = {
     
     update:function(){		
         //console.log(this.checkAliveEnemies());
+		
+		//Cuando aquamentus muere la puerta se abre.
+		if(!zelda.dungeonEnemySpawns.zones[16][0]){
+			this.OpenDoors[27];
+		}
+		
         if(zelda.gameOptions.cameraArrivedPos){
             if(!zelda.dungeonEvents.events[0]){
                 if(zelda.LinkObject.currentDungeonZone==8){
@@ -509,7 +515,7 @@ zelda.dungeon = {
 		//7
 		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 4*11*16+16+1,"puerta_normal",1));
 		//8
-		this.allDoors.push(this.game.add.sprite(1*16*16+8*16, 3*11*16+16+1,"puerta_normal",1));
+		this.allDoors.push(this.game.add.sprite(1*16*16+8*16, 3*11*16+16+1,"puerta_llave",0));
 		//9
 		this.allDoors.push(this.game.add.sprite(1*16*16+15*16, 3*11*16+5*16+8,"puerta_normal",1));
 		this.allDoors[9].angle = 90;
@@ -555,7 +561,7 @@ zelda.dungeon = {
 		this.allDoors.push(this.game.add.sprite(4*16*16+16, 2*11*16+5*16+8,"puerta_normal",1));
 		this.allDoors[23].angle = -90;
 		//24
-		this.allDoors.push(this.game.add.sprite(4*16*16+8*16, 2*11*16+16+1,"puerta_normal",1));
+		this.allDoors.push(this.game.add.sprite(4*16*16+8*16, 2*11*16+16+1,"puerta_llave",0));
 		//25
 		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 1*11*16+16+1,"puerta_llave",0));
 		//26
