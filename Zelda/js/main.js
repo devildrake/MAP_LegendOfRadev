@@ -1736,6 +1736,7 @@ zelda.AIMethods = {
     Die: function(npc){
         npc.Alive = false;
         npc.kill();
+        zelda.Inventory.ranking+=5;
         console.log("Eliminando enemigo en zona " +npc.currentZone + " en la posicion " + npc.posInArray);
             if(npc.level==zelda.overworld){
             zelda.overworld.createDeathParticles(npc.body.position.x,npc.body.position.y,zelda.overworld);
