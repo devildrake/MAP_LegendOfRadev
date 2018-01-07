@@ -51,6 +51,7 @@ zelda.dungeon = {
         this.load.image("SpikesTrap","img/SpikesTrap.png");
         this.load.spritesheet("Aquamentus","img/AquamentusSpriteSheet.png",32,32);
         this.load.spritesheet("AquamentusProjectile","img/ProyectilAquamentus.png",16,16);
+		this.load.image("npc","img/oldwoman.png");
         this.t = this.game.load.bitmapFont("zelda_font","font/zelda_font.png","font/zelda_font.fnt");
         //mapa
         this.load.image("minimap","img/Dungeon/Minimapa.png");
@@ -102,6 +103,43 @@ zelda.dungeon = {
 		this.trigger = this.game.add.sprite(1*16*16+8*16+5, 0*11*16+5*16+5,"trigger");
 		this.game.physics.arcade.enable(this.trigger);
 		
+		//SALA SECRETA DONDE SE CONSIGUE LA ESPADA BLANCA
+		this.fire1 = this.game.add.sprite(zelda.secretLayout.fireX1,2*11*16+4*16,"fuego",0);
+		this.game.physics.arcade.enable(this.fire1);
+		this.fire1.body.immovable = true;
+		this.fire1.animations.add("idle",[3,4],6,true);
+		this.fire1.animations.play("idle");
+		
+		this.fire2 = this.game.add.sprite(zelda.secretLayout.fireX2, 2*11*16+4*16,"fuego",0);
+		this.game.physics.arcade.enable(this.fire2);
+		this.fire2.body.immovable = true;
+		this.fire2.animations.add("idle",[3,4],6,true);
+		this.fire2.animations.play("idle");
+		//si tienes el trozo de mapa se activa el poder conseguir la espada blanca en la sala secreta.
+		
+		//-----------ESTO HAY QUE BORRARLO-------------
+		zelda.Inventory.trozoMapa = true;
+		//---------------------------------------------
+		if(zelda.Inventory.trozoMapa){
+			this.npc = this.game.add.sprite(8*16, 2*11*16+4*16, "npc");
+			this.npc.anchor.setTo(.5,0);
+			this.game.physics.arcade.enable(this.npc);
+			this.npc.body.immovable = true;
+			
+			this.text = this.game.add.bitmapText(3*16-8, 2*11*16+3*16-8,"zelda_font","GIVE ME THE BLUE PAPER\nAND TAKE THIS.", 8);
+			this.text.align = "center";
+			
+			this.limit = this.game.add.sprite(-250, 2*11*16+3*16,"camaraHorizontal");
+			this.game.physics.arcade.enable(this.limit);
+			this.limit.body.immovable = true;
+			
+			this.whiteSword = this.game.add.sprite(8*16, 2*11*16+6*16, "Sword", 3);
+			this.whiteSword.anchor.setTo(.5,.5);
+			this.whiteSword.angle = 180;
+			this.game.physics.arcade.enable(this.whiteSword);
+			this.whiteSword.body.immovable = true;
+		}
+		
 		//pintado de las puertas de la dungeon.
         this.linkInstance = new zelda.LinkPrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16,this);
         
@@ -149,26 +187,7 @@ zelda.dungeon = {
             this.key = new zelda.KeyPrefab(this.game,1192, 485,this);
             this.game.add.existing(this.key);
             this.keys.add(this.key);
-        }
-
-        //SALA SECRETA DONDE SE CONSIGUE LA ESPADA BLANCA
-		this.fire1 = this.game.add.sprite(5*16,2*11*16+4*16,"fuego",0);
-		this.game.physics.arcade.enable(this.fire1);
-		this.fire1.body.immovable = true;
-		this.fire1.animations.add("idle",[3,4],true);
-		this.fire1.animations.play("idle");
-		
-		this.fire2 = this.game.add.sprite(11*16, 2*11*16+4*16,"fuego",0);
-		this.game.physics.arcade.enable(this.fire2);
-		this.fire2.body.immovable = true;
-		this.fire2.animations.add("idle",[3,4],true);
-		this.fire2.animations.play("idle");
-		//si tienes el trozo de mapa se activa el poder conseguir la espada blanca en la sala secreta.
-		if(zelda.Inventory.trozoMapa){
-			
-		}
-        
-        
+        }        
     },
     
     update:function(){		
@@ -271,6 +290,23 @@ zelda.dungeon = {
         }
 		
 		this.CollisionWithDoors();
+		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.fire1);
+		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.fire2);
+		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.npc);
+		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.limit);
+		//espada blanca
+		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.whiteSword,function(l,s){
+			zelda.LinkPrefab.GrabObject();
+			zelda.LinkPrefab.getSpecialItemSound.play();
+			s.y -= 9;
+			zelda.dungeon.text.destroy();
+			zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
+					zelda.dungeon.whiteSword.destroy();
+					zelda.dungeon.npc.destroy();
+				});
+			zelda.Inventory.equippedSword = "Silver";
+			zelda.Inventory.trozoMapa = false;
+		});
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.obstacle1,function(link, obstacle){
 			if(obstacle.body.touching.right){
 				if(obstacle.x>1*16*16+6*16){
