@@ -116,10 +116,6 @@ zelda.dungeon = {
 		this.fire2.animations.add("idle",[3,4],6,true);
 		this.fire2.animations.play("idle");
 		//si tienes el trozo de mapa se activa el poder conseguir la espada blanca en la sala secreta.
-		
-		//-----------ESTO HAY QUE BORRARLO-------------
-		zelda.Inventory.trozoMapa = true;
-		//---------------------------------------------
 		if(zelda.Inventory.trozoMapa){
 			this.npc = this.game.add.sprite(8*16, 2*11*16+4*16, "npc");
 			this.npc.anchor.setTo(.5,0);
@@ -140,9 +136,9 @@ zelda.dungeon = {
 			this.whiteSword.body.immovable = true;
 		}
 		
-		//pintado de las puertas de la dungeon.
         this.linkInstance = new zelda.LinkPrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16,this);
         
+		//pintado de las puertas de la dungeon.
 		this.drawDoors();
 
         //Camara
@@ -290,6 +286,8 @@ zelda.dungeon = {
         }
 		
 		this.CollisionWithDoors();
+		
+		//COLISIONES EN LA SALA SECRETA DE LA ESPADA BLANCA
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.fire1);
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.fire2);
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.npc);
@@ -326,6 +324,9 @@ zelda.dungeon = {
 		//overlap para la entrada de la sala secreta
 		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger, function(){
 			zelda.game.state.start("secret_room_dungeon");
+			//TODO Aqui se detecta que estas sobre las escaleras que te llevan a la sala secreta.
+			//		Se tendria que guardar la posicion de link para luego al volver a cargar la dungeon cuando
+			//		se salga de la sala secreta vuelva a aparecer en la salida, igual que en el overworld.
 		})
 		
 
