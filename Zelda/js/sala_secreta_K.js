@@ -89,21 +89,21 @@ zelda.sala_secreta_K = {
 			this.game.physics.arcade.enable(this.npc);
 			this.npc.body.immovable = true;
 			this.npc.animations.currentAnim.onComplete.add(function(){
-				zelda.sala_secreta_K.escudo = zelda.game.add.sprite(zelda.secretLayout.item1X, zelda.secretLayout.itemY, "escudo");
+				//zelda.sala_secreta_K.escudo = zelda.game.add.sprite(zelda.secretLayout.item1X, zelda.secretLayout.itemY, "escudo");
 				zelda.sala_secreta_K.bomba = zelda.game.add.sprite(zelda.secretLayout.item2X, zelda.secretLayout.itemY,"bomba");
 				zelda.sala_secreta_K.bomba.anchor.setTo(.5,0);
 				zelda.sala_secreta_K.flecha = zelda.game.add.sprite(zelda.secretLayout.item3X, zelda.secretLayout.itemY, "flecha",3);
 
-				zelda.game.physics.arcade.enable(zelda.sala_secreta_K.escudo);
+				//zelda.game.physics.arcade.enable(zelda.sala_secreta_K.escudo);
 				zelda.game.physics.arcade.enable(zelda.sala_secreta_K.bomba);
 				zelda.game.physics.arcade.enable(zelda.sala_secreta_K.flecha);
 
-				zelda.sala_secreta_K.escudo.animations.add("despawn",[0,1],6,true);
+				//zelda.sala_secreta_K.escudo.animations.add("despawn",[0,1],6,true);
 				zelda.sala_secreta_K.bomba.animations.add("despawn",[0,1],6,true);
 				zelda.sala_secreta_K.flecha.animations.add("despawn",[3,4],6,true);
                 
                 //PRECIOS DE LOS ITEMS
-                zelda.sala_secreta_K.precio1 = zelda.sala_secreta_K.game.add.bitmapText(zelda.secretLayout.item1X-5, zelda.secretLayout.itemY+18,"zelda_font","130",8);
+                //zelda.sala_secreta_K.precio1 = zelda.sala_secreta_K.game.add.bitmapText(zelda.secretLayout.item1X-5, zelda.secretLayout.itemY+18,"zelda_font","130",8);
                 zelda.sala_secreta_K.precio2 = zelda.sala_secreta_K.game.add.bitmapText(zelda.secretLayout.item2X-8, zelda.secretLayout.itemY+18,"zelda_font","20",8);
                 zelda.sala_secreta_K.precio3 = zelda.sala_secreta_K.game.add.bitmapText(zelda.secretLayout.item3X, zelda.secretLayout.itemY+18,"zelda_font","80",8);
                 zelda.sala_secreta_K.rupia = zelda.sala_secreta_K.game.add.sprite(3*16,zelda.secretLayout.itemY+16+3,"rupia");
@@ -159,7 +159,7 @@ zelda.sala_secreta_K = {
 		this.game.physics.arcade.collide(this.link.LinkCollider, this.fire2);
 		
 		if(!this.roomDone1&&zelda.LinkObject.currentZone==12 || !this.roomDone2&&zelda.LinkObject.currentZone==13){
-			
+			/*
 			//overlap con el escudo
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(link,escudo){
 				if(zelda.Inventory.rupies>=130){
@@ -186,22 +186,23 @@ zelda.sala_secreta_K = {
                     zelda.Inventory.GetObject(1);
 				}
 			});
+			*/
 			
 			//overlap con la bomba
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.bomba, function(link,bomba){
 				if(zelda.Inventory.rupies>=20){
 					zelda.LinkPrefab.GrabObject();
 					bomba.y = bomba.y - 8;
-					zelda.sala_secreta_K.escudo.animations.play("despawn");
+					//zelda.sala_secreta_K.escudo.animations.play("despawn");
 					zelda.sala_secreta_K.flecha.animations.play("despawn");
 					zelda.sala_secreta_K.npc.animations.play("despawn");
 					zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-						zelda.sala_secreta_K.escudo.destroy();
+						//zelda.sala_secreta_K.escudo.destroy();
 						zelda.sala_secreta_K.flecha.destroy();
 						zelda.sala_secreta_K.bomba.destroy();
 						zelda.sala_secreta_K.npc.destroy();
 					});
-					zelda.sala_secreta_K.precio1.destroy();
+					//zelda.sala_secreta_K.precio1.destroy();
 					zelda.sala_secreta_K.precio2.destroy();
 					zelda.sala_secreta_K.precio3.destroy();
 					zelda.sala_secreta_K.rupia.destroy();
@@ -219,15 +220,15 @@ zelda.sala_secreta_K = {
 					zelda.LinkPrefab.GrabObject();
 					flecha.y = flecha.y - 8;
 					zelda.sala_secreta_K.bomba.animations.play("despawn");
-					zelda.sala_secreta_K.escudo.animations.play("despawn");
+					//zelda.sala_secreta_K.escudo.animations.play("despawn");
 					zelda.sala_secreta_K.npc.animations.play("despawn");
 					zelda.game.time.events.add(Phaser.Timer.SECOND, function(){
-						zelda.sala_secreta_K.escudo.destroy();
+						//zelda.sala_secreta_K.escudo.destroy();
 						zelda.sala_secreta_K.flecha.destroy();
 						zelda.sala_secreta_K.bomba.destroy();
 						zelda.sala_secreta_K.npc.destroy();
 					});
-					zelda.sala_secreta_K.precio1.destroy();
+					//zelda.sala_secreta_K.precio1.destroy();
 					zelda.sala_secreta_K.precio2.destroy();
 					zelda.sala_secreta_K.precio3.destroy();
 					zelda.sala_secreta_K.rupia.destroy();
