@@ -740,7 +740,7 @@ zelda.overworld = {
                 //console.log(zelda.gameOptions.lastCameraPosX);
                 //console.log(zelda.gameOptions.lastCameraPosY);
                         //zelda.overworld.createEnemiesOfCurrentZone();
-                zelda.Inventory.pointCurrentX+=1;
+                zelda.Inventory.pointCurrentX+=0.70;
             }
         });
         this.game.physics.arcade.collide(this.linkInstance.LinkCollider,this.cameraLeft,function(){
@@ -764,7 +764,7 @@ zelda.overworld = {
             //console.log(zelda.gameOptions.lastCameraPosX);
             //console.log(zelda.gameOptions.lastCameraPosY);
             //zelda.overworld.createEnemiesOfCurrentZone();
-               zelda.Inventory.pointCurrentX-=1;
+               zelda.Inventory.pointCurrentX-=0.70;
             }
         });
         

@@ -187,6 +187,7 @@ zelda.sala_secreta_K = {
 					else if(zelda.LinkObject.currentZone == 13) zelda.sala_secreta_K.roomDone2 = true;
 					zelda.Inventory.GetObject(12);
 					zelda.inventory.rupies -= 130;
+                    zelda.Inventory.GetObject(1);
 				}
 			});
 			
