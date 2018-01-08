@@ -94,12 +94,16 @@ zelda.game_over = {
                     zelda.LinkObject.dying = false;
                     this.music.stop();
                     zelda.game.state.start("dungeon");
+                    zelda.LinkObject.currentDungeonZone = 6*6+2;
                     
                 }
                 else if(zelda.LinkObject.DiedIn=="overworld"){
 
                     zelda.LinkObject.currentHearts = zelda.LinkObject.maxHearts;
                     zelda.LinkObject.dying = false;
+                    zelda.LinkObject.lastPositionX= 2*16*16+8*16;
+                    zelda.LinkObject.lastPositiony= 4*11*16 + 8*16;
+                    zelda.LinkObject.currentZone = 7*4+2;
                     
                 
                     //zelda.overworld.game.camera.focusOnXY(zelda.gameOptions.originalCameraPosX,zelda.gameOptions.originalCameraPosY);
