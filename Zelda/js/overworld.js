@@ -934,7 +934,7 @@ zelda.overworld = {
                 zelda.overworld.music.stop();
                 //zelda.game.state.start("secret_room_A");
                 var posToSpawnSprite = zelda.overworld.trigger_A_2.body.position;
-                zelda.LinkPrefab.stairWayDown(posToSpawnSprite,"secret_room_A");
+                zelda.LinkPrefab.stairWayDown(posToSpawnSprite,"secret_room_M");
           }
 		});
 		

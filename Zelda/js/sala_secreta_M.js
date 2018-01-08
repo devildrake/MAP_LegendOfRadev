@@ -3,6 +3,7 @@ var zelda = zelda || {}
 zelda.sala_secreta_M = {
 	roomDone1:false,
 	roomDone2:false,
+	roomDone3:false,
 	
     init:function(){
 		this.game.world.setBounds(0,-47,zelda.gameOptions.gameWidth,zelda.gameOptions.gameHeight);
@@ -84,7 +85,7 @@ zelda.sala_secreta_M = {
         zelda.LinkObject.currentZone = 22;
         //------------------------------
         
-		if(!this.roomDone1&&zelda.LinkObject.currentZone==22 || !this.roomDone2&&zelda.LinkObject.currentZone==17){
+		if(!this.roomDone1&&zelda.LinkObject.currentZone==22 || !this.roomDone2&&zelda.LinkObject.currentZone==17 || !this.roomDone3&&zelda.LinkObject.currentZone==34){
             zelda.Inventory.ScrollingInventory = true;
 			//npc
 			this.npc = this.game.add.sprite(zelda.secretLayout.npcX, zelda.secretLayout.npcY, "npc");
@@ -166,7 +167,7 @@ zelda.sala_secreta_M = {
 		
         
         
-		if(!this.roomDone1&&zelda.LinkObject.currentZone==22 || !this.roomDone2&&zelda.LinkObject.currentZone==17){
+		if(!this.roomDone1&&zelda.LinkObject.currentZone==22 || !this.roomDone2&&zelda.LinkObject.currentZone==17 || !this.roomDone3&&zelda.LinkObject.currentZone==34){
 			//overlap con el escudo
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.escudo, function(link, escudo){
 				if(zelda.Inventory.rupies>=160){
@@ -188,6 +189,7 @@ zelda.sala_secreta_M = {
 					zelda.sala_secreta_M.X.destroy();
 					if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
 					else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
+					else if(zelda.LinkObject.currentZone==34) zelda.sala_secreta_M.roomDone3 = true;
 					zelda.Inventory.GetObject(12);
 					zelda.Inventory.rupies-=160;
                     zelda.Inventory.GetObject(1);
@@ -215,6 +217,7 @@ zelda.sala_secreta_M = {
 					zelda.sala_secreta_M.X.destroy();
 					if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
 					else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
+					else if(zelda.LinkObject.currentZone==34) zelda.sala_secreta_M.roomDone3 = true;
 					zelda.Inventory.GetObject(3);
 					zelda.Inventory.rupies -= 100;
                     zelda.Inventory.GetObject(1);
@@ -242,6 +245,7 @@ zelda.sala_secreta_M = {
 					zelda.sala_secreta_M.X.destroy();
 					if(zelda.LinkObject.currentZone==22) zelda.sala_secreta_M.roomDone1 = true;
 					else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
+					else if(zelda.LinkObject.currentZone==34) zelda.sala_secreta_M.roomDone3 = true;
 					zelda.Inventory.GetObject(9);
 					zelda.Inventory.rupies -= 60;
                     zelda.Inventory.GetObject(1);
