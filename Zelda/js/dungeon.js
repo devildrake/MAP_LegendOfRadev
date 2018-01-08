@@ -637,7 +637,7 @@ zelda.dungeon = {
 		this.allDoors.push(this.game.add.sprite(1*16*16+15*16, 0*11*16+5*16+8,"puerta_normal",1));
 		this.allDoors[30].angle = 90;
 		//31
-		this.allDoors.push(this.game.add.sprite(2*16*16+16, 0*11*16+5*16+8,"puerta_llave",0));
+		this.allDoors.push(this.game.add.sprite(2*16*16+16, 0*11*16+5*16+8,"puerta_llave",1));
 		this.allDoors[31].angle = -90;
 		//32
 		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 0*11*16+10*16, "puerta_normal",1));
