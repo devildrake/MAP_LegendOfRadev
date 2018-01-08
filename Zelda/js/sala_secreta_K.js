@@ -77,10 +77,6 @@ zelda.sala_secreta_K = {
 		},this);
 		this.game.physics.arcade.enable(this.fire2);
 		this.fire2.body.immovable = true;
-		
-		//---ESTOY HAY QUE BORRARLO---
-		zelda.LinkObject.currentZone = 12;
-		//----------------------------
         
 		if(!this.roomDone1&&zelda.LinkObject.currentZone==12 || !this.roomDone2&&zelda.LinkObject.currentZone==13){
 			zelda.Inventory.ScrollingInventory = true;
@@ -244,7 +240,7 @@ zelda.sala_secreta_K = {
 			});
 			
 			//FUNCIONAMIENTO DE LOS TEXTOS
-			if(this.strToPrint.length != this.str.length && this.textTimer>this.textUpdateTime){
+			if(this.strToPrint.length != this.str.length && this.textTimer>zelda.secretLayout.textSpeed){
 				this.strToPrint += this.str[this.strCount];
 				this.texto.setText(this.strToPrint);
 				this.strCount++;
