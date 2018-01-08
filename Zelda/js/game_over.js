@@ -47,6 +47,9 @@ zelda.game_over = {
         zelda.LinkObject.currentHearts=zelda.LinkObject.maxHearts;
         this.muteButton = this.game.input.keyboard.addKey(Phaser.Keyboard.M); 
         this.playMusic = true;
+        
+        zelda.Inventory.ranking-=zelda.Inventory.ranking*0.1;
+        
     },
     
     update:function(){

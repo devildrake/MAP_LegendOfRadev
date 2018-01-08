@@ -682,8 +682,10 @@ zelda.dungeon = {
 					if(!enemies){
 						if(d.key == "puerta_llave"){
 							if(zelda.Inventory.keys > 0){
-								zelda.Inventory.keys--;
+								zelda.Inventory.keys-=2;
 								d.frame = 1;
+                                zelda.Inventory.GetObject(3);
+                                
 							}
 						}
 					}
