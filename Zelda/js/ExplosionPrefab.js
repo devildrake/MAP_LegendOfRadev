@@ -7,6 +7,8 @@ zelda.ExplosionPrefab = function(game,x,y,level,type){
 
     
     this.scale.setTo(1);
+    this.position.x+=8;
+    this.position.y+=8;
     this.anchor.setTo(.5);
 	this.game.physics.arcade.enable(this);
     this.level = level;

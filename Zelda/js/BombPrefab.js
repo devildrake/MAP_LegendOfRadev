@@ -21,13 +21,14 @@ zelda.BombPrefab.prototype.constructor = zelda.BombPrefab;
 
 zelda.BombPrefab.prototype.update = function(){
             this.game.physics.arcade.overlap(this,this.level.linkInstance,
-        function(rupy,linkInstance){
+        function(bomb,linkInstance){
                 if(zelda.Inventory.bombs!=999){
                     
-                        zelda.Inventory.bombs+=1;
+                        //zelda.Inventory.bombs+=1;
                         zelda.Inventory.GetObject(2);
-                        zelda.LinkPrefab.GrabObject();
+                        //zelda.LinkPrefab.GrabObject();
                         bomb.kill();
+                    zelda.LinkPrefab.grabItemSound.play();
                         
                 }
                 

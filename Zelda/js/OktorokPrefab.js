@@ -342,7 +342,7 @@ zelda.OktorokPrefab.prototype.update = function(){
                                 npc.hurtSound.play();
 
                             }
-                            if(npc.lives==0){
+                            if(npc.lives<=0){
                                 //npc.kill();
                                 //npc.Alive = false;
 

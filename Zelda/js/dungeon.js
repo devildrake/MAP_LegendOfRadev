@@ -1126,7 +1126,7 @@ zelda.dungeon = {
         }else{
             particles.frame = 0;
             particles.Alive = true;
-            particles.reset(posX,posY);
+            particles.reset(posX+8,posY+8);
         }
     },
     
