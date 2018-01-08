@@ -74,6 +74,7 @@ zelda.sala_secreta_dungeon = {
 	update:function(){
 		this.game.physics.arcade.collide(this.link.LinkCollider,this.salida,function(){
 			//volver a la dungeon
+            zelda.gameOptions.mustCreateEnemies=true;
 			zelda.game.state.start("dungeon");
 		});
 		

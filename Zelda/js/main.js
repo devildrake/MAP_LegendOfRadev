@@ -182,7 +182,7 @@ zelda.LinkObject = {
     lastPositionY: 4*11*16 + 8*16,
     
     dying: false,
-    
+    inDungeon: false,
     //Tiene 4 bools para saber a donde esta y estaba mirando para el tema orientación
     lookingUp: false,
     lookingDown: false,

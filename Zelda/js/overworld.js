@@ -109,7 +109,7 @@ zelda.overworld = {
     },
 
     create:function(){
-        
+        zelda.LinkObject.inDungeon = false;
         zelda.LinkObject.DiedIn="overworld";
         this.music = this.add.audio("OverWorldMusic");
         this.music.play();

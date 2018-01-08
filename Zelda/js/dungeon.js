@@ -136,8 +136,12 @@ zelda.dungeon = {
 			this.whiteSword.body.immovable = true;
 		}
 		
+        if(!zelda.LinkObject.inDungeon){
         this.linkInstance = new zelda.LinkPrefab(this.game,2*16*16 + 8*16 ,5*11*16 + 7*16,this);
-        
+        zelda.LinkObject.inDungeon = true;
+        }else{
+            this.linkInstance = new zelda.LinkPrefab(this.game,zelda.LinkObject.lastPositionX,zelda.LinkObject.lastPositionY,this);
+        }
 		//pintado de las puertas de la dungeon.
 		this.drawDoors();
 
@@ -318,12 +322,19 @@ zelda.dungeon = {
 		this.game.physics.arcade.collide(this.linkInstance.LinkCollider, this.obstacle2,function(link, obstacle){
 			if(obstacle.body.touching.up && obstacle.y<0*11*16+6*16){
 				obstacle.y++;
+			}else if(obstacle.body.touching.right&&obstacle.x>1*16*16+6*16-16){
+				obstacle.x--;
 			}
 		});
-			
+    
 		//overlap para la entrada de la sala secreta
-		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger, function(){
+		this.game.physics.arcade.overlap(this.linkInstance.LinkCollider, this.trigger, function(link,trigger){
 			zelda.game.state.start("secret_room_dungeon");
+            zelda.LinkObject.lastPositionX = trigger.position.x-16;
+            zelda.LinkObject.lastPositionY = trigger.position.y;
+            //console.log(trigger);
+            
+            
 			//TODO Aqui se detecta que estas sobre las escaleras que te llevan a la sala secreta.
 			//		Se tendria que guardar la posicion de link para luego al volver a cargar la dungeon cuando
 			//		se salga de la sala secreta vuelva a aparecer en la salida, igual que en el overworld.
@@ -665,11 +676,12 @@ zelda.dungeon = {
 					for(var i=0;i<zelda.dungeonEnemySpawns.zones[zelda.LinkObject.currentDungeonZone].length;i++){
 						if(zelda.dungeonEnemySpawns.zones[zelda.LinkObject.currentDungeonZone][i]){
 							enemies = true;
+                            console.log("There are enemies");
 						}
 					}
 					if(!enemies){
 						if(d.key == "puerta_llave"){
-							if(zelda.Inventory.keys < 0){
+							if(zelda.Inventory.keys > 0){
 								zelda.Inventory.keys--;
 								d.frame = 1;
 							}

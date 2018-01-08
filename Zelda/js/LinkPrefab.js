@@ -626,16 +626,27 @@ zelda.LinkPrefab.prototype.update = function(){
                 this.playedDeathMusicOnce = true;
             }else{
                 //CAMBIO DE ESCENA
-                if(this.level==zelda.overworld)
-                zelda.LinkObject.currentZone = 30;
-                else zelda.LinkObject.currentDungeonZone = 38;
+                if(this.level==zelda.overworld){
+                                        console.log("Died in overworld");
+
+                    zelda.LinkObject.currentZone = 30;
+                        zelda.LinkObject.lastPositionX = 2*16*16+8*16;
+                        zelda.LinkObject.lastPositionY = 4*11*16 + 8*16;
+                }
+                else {
+                    console.log("Died in dungeon");
+                    zelda.LinkObject.currentDungeonZone = 38;
+                    
+                        zelda.LinkObject.lastPositionX = 2*16*16 + 8*16;
+                        zelda.LinkObject.lastPositionY = 992;
+                }
                 zelda.game.state.start("game_over");
 
             }
         }       
         
         
-        console.log(zelda.LinkPrefab.dieMusic);
+        //console.log(zelda.LinkPrefab.dieMusic);
         this.level.music.stop();
         this.LinkCollider.body.velocity.setTo(0);
         this.animations.play("Die");
