@@ -536,10 +536,10 @@ InitZones:function(){
     zelda.enemySpawns.posicionesEnemigos[11] = [1055,326,1156,308,1214,328,1242,350,1092,362]; //Oktorok Naranja - Oktorok Azul - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
     zelda.enemySpawns.posicionesEnemigos[12] = [1311,323,1379,294,1397,308,1376,376,1407,361,1464,358]; //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - //Tektite Azul - 
     zelda.enemySpawns.posicionesEnemigos[13] = [1570,380,1588,380,1598,399,1620,410,1648,387,1679,399]; //Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - Cerdo naranja - 
-    zelda.enemySpawns.posicionesEnemigos[14] = [154,524,219,504];                     //Oktorok naranja - Bichomar
-    zelda.enemySpawns.posicionesEnemigos[15] = [313,470,367,504,385,462,413,504,463,480];      //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[14] = [154,524,219,470];                     //Oktorok naranja - Bichomar
+    zelda.enemySpawns.posicionesEnemigos[15] = [318,470,376,504,385,462,413,504,463,480];      //BichoMar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
     zelda.enemySpawns.posicionesEnemigos[16] = [575,495,607,495,659,470,705,522];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
-    zelda.enemySpawns.posicionesEnemigos[17] = [787,496,809,521,899,505,939,526];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
+    zelda.enemySpawns.posicionesEnemigos[17] = [787,496,812,521,899,505,939,526];           //Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
     zelda.enemySpawns.posicionesEnemigos[18] = [1156,496,1201,496,1242,503,1156,529,1202,540];           //Volador naranja - Volador naranja - Volador naranja - Volador naranja - BichoMar
     zelda.enemySpawns.posicionesEnemigos[19] = [1351,540,1456,476,1424,474,1457,492,1501,540];           //Bichomar - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja - Oktorok Naranja
     zelda.enemySpawns.posicionesEnemigos[20] = [1682,532,1724,558];                     //Cerdo Naranja - Cerdo Azul
