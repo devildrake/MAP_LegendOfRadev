@@ -20,9 +20,7 @@ zelda.DeathParticlesPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 
 zelda.DeathParticlesPrefab.prototype.constructor = zelda.DeathParticlesPrefab;
 
-zelda.DeathParticlesPrefab.prototype.update = function(){
-    console.log("DeathParticlesUpdate");
-    
+zelda.DeathParticlesPrefab.prototype.update = function(){    
     if(this.Alive){
         this.animations.play("ParticlesGo");
         if(this.frame==5){
