@@ -16,6 +16,7 @@ zelda.HeartContainerPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 zelda.HeartContainerPrefab.prototype.constructor = zelda.HeartContainerPrefab;
 
 zelda.HeartContainerPrefab.prototype.update = function(){
+    //console.log(this.level.linkInstance);
     if(this.Alive){
     this.game.physics.arcade.overlap(this,this.level.linkInstance,
         function(heartContainer,linkInstance){
@@ -71,6 +72,12 @@ zelda.HeartContainerPrefab.prototype.update = function(){
         heartContainer.kill();
         zelda.LinkPrefab.grabItemSound.play();
         this.Alive = false;
+        
+        if(heartContainer.level!=zelda.overworld&&heartContainer.level!=zelda.dungeon){
+            //console.log(heartContainer.level);
+            heartContainer.level.roomDone=true;
+        }
+        
         } );
     }
     

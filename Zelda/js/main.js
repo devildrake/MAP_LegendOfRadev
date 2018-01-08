@@ -173,6 +173,7 @@ zelda.secretLayout = {
 //las animaciones tambien formaran parte de este objeto y así poder usarlo siempre que quisieramos
 //Pero al parecer no es posible tener un sprite dentro de un objeto o por lo menosno lo se hacer
 zelda.LinkObject = {
+    currentLevel:null,
     maxHearts: 3,
     currentHearts: 3,
     currentZone: 7*4+2,
@@ -1435,11 +1436,19 @@ zelda.Inventory={
             }
 
         }else if(zelda.Inventory.ObjectB=="boomerang"){
-            if(zelda.Inventory.scene=="overworld"){
-                zelda.LinkPrefab.throwBoomerang(zelda.overworld.linkInstance);
-            }else{
-                zelda.LinkPrefab.throwBoomerang(zelda.dungeon.linkInstance);
-            }
+            //if(zelda.Inventory.scene=="overworld"){
+              //  zelda.LinkPrefab.throwBoomerang(zelda.overworld.linkInstance);
+            //}else if(zelda.Inventory.scene=="dungeon"){
+             //   zelda.LinkPrefab.throwBoomerang(zelda.dungeon.linkInstance);
+                                //console.log(zelda.sala_secreta_dungeon.linkInstance);
+
+            //}else{
+             //   zelda.LinkPrefab.throwBoomerang(zelda.sala_secreta_dungeon.linkInstance);
+                //console.log(zelda.sala_secreta_dungeon.linkInstance);
+            //}
+            zelda.LinkPrefab.throwBoomerang(zelda.LinkObject.currentLevel.linkInstance);
+            
+            
         }
     
 }

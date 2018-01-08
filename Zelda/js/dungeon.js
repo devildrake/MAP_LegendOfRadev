@@ -188,6 +188,8 @@ zelda.dungeon = {
             this.game.add.existing(this.key);
             this.keys.add(this.key);
         }        
+                zelda.LinkObject.currentLevel = this;
+
     },
     
     update:function(){		
@@ -332,6 +334,8 @@ zelda.dungeon = {
 			zelda.game.state.start("secret_room_dungeon");
             zelda.LinkObject.lastPositionX = trigger.position.x-16;
             zelda.LinkObject.lastPositionY = trigger.position.y;
+            zelda.dungeon.music.stop();
+
             //console.log(trigger);
             
             

@@ -243,7 +243,7 @@ zelda.overworld = {
         this.loadHearts();
         this.loadRupies();
         this.loadBombs();
-        this.createHeart(620,840,this,1);
+        //this.createHeart(620,840,this,1);
         this.loadDeathParticles();
         this.loadEnemies();
         
@@ -277,8 +277,8 @@ zelda.overworld = {
         //this.aquamentus = new zelda.AquamentusPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.aquamentus);
               
-        this.heartContainer = new zelda.HeartContainerPrefab(this.game,640,850,this);
-        this.game.add.existing(this.heartContainer);
+        //this.heartContainer = new zelda.HeartContainerPrefab(this.game,640,850,this);
+        //this.game.add.existing(this.heartContainer);
                 
         
         //this.compass = new zelda.CompassPrefab(this.game,640,850,this);
@@ -290,6 +290,7 @@ zelda.overworld = {
         
          //iniciar punto en mapa
         this.point= zelda.game.add.sprite(zelda.game.camera.x+36+12*zelda.Inventory.pointCurrentX,zelda.game.camera.y+38+8*zelda.Inventory.pointCurrentY, "pointMap");
+        zelda.LinkObject.currentLevel = this;
     },
     
     update:function(){   

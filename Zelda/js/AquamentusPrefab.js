@@ -407,7 +407,7 @@ zelda.AquamentusPrefab.prototype.update = function(){
                             this.game.physics.arcade.overlap(this.hitBox,this.level.linkInstance.sword,function(npc,linkSword){
                                 if(!npc.parentObject.hurt){
                                     npc.parentObject.lives--;
-                                    npc.parentObject.hurtSound.play();
+                                    //npc.parentObject.hurtSound.play();
                                 }
                                 console.log(npc.parentObject.lives);
                                 if(npc.parentObject.lives==0){
@@ -442,20 +442,20 @@ zelda.AquamentusPrefab.prototype.update = function(){
                         this.game.physics.arcade.overlap(this.hitBox,this.level.linkInstance.boomerang,function(npc,projectile){
                             projectile.returning =  true;
 
-                            if(!npc.hurt){
-                            npc.lives--;
-                            console.log(npc.lives);
-                                npc.hurtSound.play();
+                            if(!npc.parentObject.hurt){
+                            npc.parentObject.lives--;
+                            console.log(npc.parentObject);
+                                //npc.hurtSound.play();
 
                             }
-                            if(npc.lives==0){
+                            if(npc.parentObject.lives<=0){
                                 //npc.kill();
                                 //npc.Alive = false;
 
                                 zelda.AIMethods.Die(npc);
                                 console.log(zelda.enemySpawns.zones[npc.currentZone]);
                             }else{
-                                    npc.previousVelocity = npc.body.velocity;
+                                npc.previousVelocity = npc.body.velocity;
                                 npc.hurt = true;
                                 npc.calledNotHurt = false;
 
@@ -485,7 +485,7 @@ zelda.AquamentusPrefab.prototype.update = function(){
 
                                 if(!npc.hurt){
                                 npc.parentObject.lives--;
-                                npc.parentObject.hurtSound.play();
+                                //npc.parentObject.hurtSound.play();
                                 }
                                 console.log(npc.parentObject.lives);
                                 if(npc.parentObject.lives==0){

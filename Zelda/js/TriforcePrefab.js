@@ -54,9 +54,11 @@ zelda.TriforcePrefab.prototype.update = function(){
              function(blackoutRight,blackoutLeft){
             blackoutLeft.level.triforce.over = true;
             console.log(blackoutLeft.level.triforce.over);
-            
+            zelda.game.state.start("Congratulations");
         
             });
+    
+    
 }
 
 zelda.TriforcePrefab.MoveBlacks = function(triforce){
