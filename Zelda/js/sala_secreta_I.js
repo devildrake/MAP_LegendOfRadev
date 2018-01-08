@@ -156,6 +156,7 @@ zelda.sala_secreta_I = {
 				else if(zelda.LinkObject.currentZone == 20)zelda.sala_secreta_I.roomDone2 = true;
 				else if(zelda.LinkObject.currentZone == 32)zelda.sala_secreta_I.roomDone3 = true;
 				zelda.Inventory.rupies+=100;
+                zelda.Inventory.GetObject(1);
 			});
 			
 			if(this.strToPrint.length != this.str.length && this.textTimer>zelda.secretLayout.textSpeed){

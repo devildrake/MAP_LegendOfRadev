@@ -177,6 +177,7 @@ zelda.sala_secreta_L = {
 					zelda.sala_secreta_L.roomDone = true;
 					zelda.Inventory.GetObject(12);
 					zelda.Inventory.rupies -= 90;
+                    zelda.Inventory.GetObject(1);
 				}
 			});
 			
@@ -202,6 +203,7 @@ zelda.sala_secreta_L = {
 					zelda.sala_secreta_L.roomDone = true;
 					zelda.Inventory.GetObject(14);
 					zelda.Inventory.rupies -= 100;
+                    zelda.Inventory.GetObject(1);
 				}
 			});
 			
@@ -227,6 +229,7 @@ zelda.sala_secreta_L = {
 					zelda.sala_secreta_L.roomDone = true;
 					zelda.Inventory.GetObject(0);
 					zelda.Inventory.rupies -= 10;
+                    zelda.Inventory.GetObject(1);
 				}
 			});
             

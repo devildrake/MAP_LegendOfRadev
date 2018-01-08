@@ -190,6 +190,7 @@ zelda.sala_secreta_M = {
 					else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
 					zelda.Inventory.GetObject(12);
 					zelda.Inventory.rupies-=160;
+                    zelda.Inventory.GetObject(1);
 				}
 			});
 			
@@ -216,6 +217,7 @@ zelda.sala_secreta_M = {
 					else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
 					zelda.Inventory.GetObject(3);
 					zelda.Inventory.rupies -= 100;
+                    zelda.Inventory.GetObject(1);
 				}
 			});
 			
@@ -242,6 +244,7 @@ zelda.sala_secreta_M = {
 					else if(zelda.LinkObject.currentZone==17) zelda.sala_secreta_M.roomDone2 = true;
 					zelda.Inventory.GetObject(9);
 					zelda.Inventory.rupies -= 60;
+                    zelda.Inventory.GetObject(1);
 				}
 			});
             

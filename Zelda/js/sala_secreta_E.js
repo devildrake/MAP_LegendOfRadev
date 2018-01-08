@@ -177,6 +177,7 @@ zelda.sala_secreta_E = {
 					zelda.sala_secreta_E.X.destroy();
 					zelda.Inventory.GetObject(10);
 					zelda.Inventory.rupies -= 68;
+                    zelda.Inventory.GetObject(1);
 				}
 			});
 			
@@ -201,6 +202,7 @@ zelda.sala_secreta_E = {
 					zelda.sala_secreta_E.roomDone = true;
 					zelda.Inventory.GetObject(13);
 					zelda.Inventory.rupies -= 40;
+                    zelda.Inventory.GetObject(1);
 				}
 			});
 			this.game.physics.arcade.overlap(this.link.LinkCollider, this.papel, function(link, papel){

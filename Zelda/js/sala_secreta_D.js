@@ -141,6 +141,7 @@ zelda.sala_secreta_D = {
 		if(!this.roomDone1&&zelda.LinkObject.currentZone == 29 || !this.roomDone2&&zelda.LinkObject.currentZone==24){
 			
 			zelda.Inventory.rupies -= 10;
+            zelda.Inventory.GetObject(1);
 			if(zelda.Inventory.rupies<0) zelda.Inventory.rupies = 0;
 			
 			if(this.strToPrint.length != this.str.length && this.textTimer>zelda.secretLayout.textSpeed){
@@ -156,6 +157,7 @@ zelda.sala_secreta_D = {
 				else if(zelda.LinkObject.currentZone == 24)zelda.sala_secreta_D.roomDone2 = true;
 				zelda.Inventory.ScrollingInventory = false;
 				zelda.Inventory.rupies -= 10;
+                zelda.Inventory.GetObject(1);
 				if(zelda.Inventory.rupies<0) zelda.Inventory.rupies = 0;
 			}
 			this.textTimer += zelda.game.time.elapsed;

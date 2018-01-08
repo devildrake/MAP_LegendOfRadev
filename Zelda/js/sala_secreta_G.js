@@ -149,6 +149,7 @@ zelda.sala_secreta_G = {
 				//console.log("10");
 				zelda.sala_secreta_G.roomDone = true;
 				zelda.Inventory.rupies += 10;
+                zelda.Inventory.GetObject(1);
 			});
 			
 			if(this.strToPrint.length != this.str.length && this.textTimer>zelda.secretLayout.textSpeed){

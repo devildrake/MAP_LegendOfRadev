@@ -154,6 +154,7 @@ zelda.sala_secreta_H = {
 				zelda.sala_secreta_H.numeros.setText("30");
 				zelda.sala_secreta_H.roomDone = true;
 				zelda.Inventory.rupies += 30;
+                zelda.Inventory.GetObject(1);
 			});
 			
 			if(this.strToPrint.length != this.str.length && this.textTimer>zelda.secretLayout.textSpeed){
