@@ -111,7 +111,7 @@ zelda.sala_secreta_M = {
                 
                 //PRECIOS DE LOS ITEMS
                 zelda.sala_secreta_M.precio1 = zelda.sala_secreta_M.game.add.bitmapText(zelda.secretLayout.item1X-5, zelda.secretLayout.itemY+18,"zelda_font","130",8);
-                zelda.sala_secreta_M.precio2 = zelda.sala_secreta_M.game.add.bitmapText(zelda.secretLayout.item2X-8, zelda.secretLayout.itemY+18,"zelda_font","20",8);
+                zelda.sala_secreta_M.precio2 = zelda.sala_secreta_M.game.add.bitmapText(zelda.secretLayout.item2X-8, zelda.secretLayout.itemY+18,"zelda_font","100",8);
                 zelda.sala_secreta_M.precio3 = zelda.sala_secreta_M.game.add.bitmapText(zelda.secretLayout.item3X, zelda.secretLayout.itemY+18,"zelda_font","80",8);
                 zelda.sala_secreta_M.rupia = zelda.sala_secreta_M.game.add.sprite(3*16,zelda.secretLayout.itemY+16+3,"rupia");
                 zelda.sala_secreta_M.rupia.anchor.setTo(0,.5);
