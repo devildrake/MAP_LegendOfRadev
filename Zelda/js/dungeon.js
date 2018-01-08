@@ -1,6 +1,8 @@
 var zelda = zelda || {}
     
 zelda.dungeon = {
+	keepDoorState:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+	once:false,
 	init:function(){
 		this.game.world.setBounds(0,-47,6*16*16,66*16+16*3);
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -543,6 +545,9 @@ zelda.dungeon = {
 	
 	//Metodo que encapsula el pintado de las puertas.
 	drawDoors:function(){
+		//0 -> cerrado
+		//1 -> abierto
+		
 		this.allDoors = [];
 		//0
 		this.allDoors.push(this.game.add.sprite(2*16*16-16, 5*11*16+5*16+8,"puerta_normal",1));
@@ -638,35 +643,55 @@ zelda.dungeon = {
 		this.allDoors.push(this.game.add.sprite(2*16*16+8*16, 0*11*16+10*16, "puerta_normal",1));
 		this.allDoors[32].angle = 180;
 		
+		if(!this.once){
+			this.once = true;
+			for(var i = 0; i<this.allDoors.length; i++){
+				if(this.allDoors[i].frame == 1){
+					this.keepDoorState[i] = true;
+				}else{
+					this.keepDoorState[i] = false;
+				}
+			}
+		}
+		
 		//muevo el ancla a todas las puertas y les activo las fisicas
 		for(var i = 0; i<this.allDoors.length; i++){
 			this.allDoors[i].anchor.setTo(.5);
 			this.game.physics.arcade.enable(this.allDoors[i]);
 			this.allDoors[i].body.immovable = true;
+			if(this.keepDoorState[i]){
+				this.allDoors[i].frame = 1;
+			}else{
+				this.allDoors[i].frame = 0;
+			}
 		}
 	},
 	
 	OpenAllDoors:function(){
 		for(var i = 0; i<this.allDoors.length; i++){
 			this.allDoors[i].frame = 1;
+			this.keepDoorState[i] = true;
 		}	
 	},
 	
 	CloseAllDoors:function(){
 		for(var i = 0; i<this.allDoors.length; i++){
 			this.allDoors[i].frame = 0;
+			this.keepDoorState[i] = false;
 		}
 	},
 	
 	OpenDoors:function(doors){
 		for(var i = 0; i<doors.length; i++){
 			this.allDoors[doors[i]].frame = 1;
+			this.keepDoorState[doors[i]] = true;
 		}
 	},
 	
 	CloseDoors:function(doors){
 		for(var i = 0; i<doors.length; i++){
 			this.allDoors[doors[i]].frame = 0;
+			this.keepDoorState[doors[i]] = false;
 		}
 	},
 	
@@ -694,6 +719,14 @@ zelda.dungeon = {
 						}
 					}
 				});
+				
+				for(var i = 0; i<this.allDoors.length; i++){
+					if(this.allDoors[i].frame == 0){
+						this.keepDoorState[i] = false;
+					}else{
+						this.keepDoorState[i] = true;
+					}
+				}
 			}
 		}
 	},
