@@ -82,7 +82,7 @@ zelda.sala_secreta_M = {
 		this.fire2.body.immovable = true;
         
 		//---ESTOY HAY QUE ELIMINARLO---
-        zelda.LinkObject.currentZone = 22;
+        //zelda.LinkObject.currentZone = 22;
         //------------------------------
         
 		if(!this.roomDone1&&zelda.LinkObject.currentZone==22 || !this.roomDone2&&zelda.LinkObject.currentZone==17 || !this.roomDone3&&zelda.LinkObject.currentZone==34){
