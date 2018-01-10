@@ -109,6 +109,13 @@ zelda.overworld = {
     },
 
     create:function(){
+        
+        zelda.Inventory.rupies=132;
+        zelda.Inventory.bombs = 2;
+        zelda.Inventory.keys = 2;
+        
+        
+        
         zelda.LinkObject.inDungeon = false;
         zelda.LinkObject.DiedIn="overworld";
         this.music = this.add.audio("OverWorldMusic");
@@ -277,8 +284,8 @@ zelda.overworld = {
         //this.aquamentus = new zelda.AquamentusPrefab(this.game,640,850,1,this,1);
         //this.game.add.existing(this.aquamentus);
               
-        //this.heartContainer = new zelda.HeartContainerPrefab(this.game,640,850,this);
-        //this.game.add.existing(this.heartContainer);
+        this.heartContainer = new zelda.HeartContainerPrefab(this.game,640,850,this);
+        this.game.add.existing(this.heartContainer);
                 
         
         //this.compass = new zelda.CompassPrefab(this.game,640,850,this);

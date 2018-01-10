@@ -704,7 +704,7 @@ zelda.dungeon = {
 					var enemies = false;
 					for(var i=0;i<zelda.dungeonEnemySpawns.zones[zelda.LinkObject.currentDungeonZone].length;i++){
 						if(zelda.dungeonEnemySpawns.zones[zelda.LinkObject.currentDungeonZone][i]){
-							enemies = true;
+							//enemies = true;
                             console.log("There are enemies");
 						}
 					}

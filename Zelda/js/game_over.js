@@ -20,7 +20,8 @@ zelda.game_over = {
     },
     
     create:function(){
-        zelda.gameOptions.InitZones();
+        zelda.enemySpawns.InitZones();
+        zelda.dungeonEnemySpawns.InitZones();
         this.music = this.game.add.audio("music",true);
         this.background = this.game.add.sprite(0,0, "radev");
 		this.background.scale.setTo(0.4);
